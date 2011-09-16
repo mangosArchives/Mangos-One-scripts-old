@@ -367,7 +367,10 @@ void npc_escortAI::MovementInform(uint32 uiMoveType, uint32 uiPointId)
     {
         debug_log("SD2: EscortAI has returned to original position before combat");
 
-        m_creature->SetWalk(!m_bIsRunning);
+        if (m_bIsRunning && m_creature->HasSplineFlag(SPLINEFLAG_WALKMODE))
+            m_creature->RemoveSplineFlag(SPLINEFLAG_WALKMODE);
+        else if (!m_bIsRunning && !m_creature->HasSplineFlag(SPLINEFLAG_WALKMODE))
+            m_creature->AddSplineFlag(SPLINEFLAG_WALKMODE);
         RemoveEscortState(STATE_ESCORT_RETURNING);
     }
     else if (uiPointId == POINT_HOME)
@@ -464,14 +467,14 @@ void npc_escortAI::SetRun(bool bRun)
     if (bRun)
     {
         if (!m_bIsRunning)
-            m_creature->SetWalk(false);
+            m_creature->RemoveSplineFlag(SPLINEFLAG_WALKMODE);
         else
             debug_log("SD2: EscortAI attempt to set run mode, but is already running.");
     }
     else
     {
         if (m_bIsRunning)
-            m_creature->SetWalk(true);
+            m_creature->AddSplineFlag(SPLINEFLAG_WALKMODE);
         else
             debug_log("SD2: EscortAI attempt to set walk mode, but is already walking.");
     }
@@ -531,7 +534,10 @@ void npc_escortAI::Start(bool bRun, const Player* pPlayer, const Quest* pQuest, 
     CurrentWP = WaypointList.begin();
 
     //Set initial speed
-    m_creature->SetWalk(!m_bIsRunning);
+    if (m_bIsRunning && m_creature->HasSplineFlag(SPLINEFLAG_WALKMODE))
+        m_creature->RemoveSplineFlag(SPLINEFLAG_WALKMODE);
+    else if (!m_bIsRunning && !m_creature->HasSplineFlag(SPLINEFLAG_WALKMODE))
+        m_creature->AddSplineFlag(SPLINEFLAG_WALKMODE);
 
     AddEscortState(STATE_ESCORT_ESCORTING);
 
