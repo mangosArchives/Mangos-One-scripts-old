@@ -107,10 +107,10 @@ struct MANGOS_DLL_DECL mob_stolen_soulAI : public ScriptedAI
                     DoCastSpellIfCan(m_creature->getVictim(), SPELL_MOONFIRE);
                     m_uiSpellTimer = 10000;
                     break;
-                case CLASS_DEATH_KNIGHT:
-                    DoCastSpellIfCan(m_creature->getVictim(), SPELL_PLAGUE_STRIKE);
-                    m_uiSpellTimer = 10000;
-                    break;
+//                case CLASS_DEATH_KNIGHT:
+//                    DoCastSpellIfCan(m_creature->getVictim(), SPELL_PLAGUE_STRIKE);
+//                    m_uiSpellTimer = 10000;
+//                    break;
             }
         }
         else

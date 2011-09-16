@@ -89,10 +89,10 @@ struct MANGOS_DLL_DECL npc_shadowfang_prisonerAI : public npc_escortAI
                 else
                     DoScriptText(EMOTE_UNLOCK_DOOR_AD, m_creature);
                 break;
-            case 12:
-                if (m_uiNpcEntry != NPC_ASH)
-                    m_creature->HandleEmote(EMOTE_ONESHOT_USESTANDING);
-                break;
+//            case 12:
+//                if (m_uiNpcEntry != NPC_ASH)
+//                    m_creature->HandleEmote(EMOTE_ONESHOT_USESTANDING);
+//                break;
             case 13:
                 if (m_uiNpcEntry == NPC_ASH)
                     DoScriptText(SAY_POST_DOOR_AS, m_creature);
@@ -216,7 +216,7 @@ struct MANGOS_DLL_DECL mob_arugal_voidwalkerAI : public ScriptedAI
 
     void Reset()
     {
-        m_creature->SetWalk(true);
+        m_creature->AddSplineFlag(SPLINEFLAG_WALKMODE);
         m_uiDarkOffering = urand(4400, 12500);
         m_bWPDone = true;
 

@@ -27,8 +27,6 @@ enum
     GO_DOOR_ANUBARAK_1          = 192396,
     GO_DOOR_ANUBARAK_2          = 192397,
     GO_DOOR_ANUBARAK_3          = 192398,
-
-    ACHIEV_START_ANUB_ID        = 20381,
 };
 
 static const uint32 aWatchers[] = {NPC_GASHRA, NPC_NARJIL, NPC_SILTHIK};

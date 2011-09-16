@@ -175,7 +175,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
     void JustReachedHome()
     {
         // in case evade in phase 2, see comments for hack where phase 2 is set
-        m_creature->SetLevitate(false);
+        m_creature->SetHover(false);
         m_creature->SetByteFlag(UNIT_FIELD_BYTES_1, 3, 0);
 
         if (m_pInstance)
@@ -320,8 +320,9 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
                     DoScriptText(SAY_PHASE_2_TRANS, m_creature);
 
                     // sort of a hack, it is unclear how this really work but the values appear to be valid
+
                     m_creature->SetByteValue(UNIT_FIELD_BYTES_1, 3, UNIT_BYTE1_FLAG_ALWAYS_STAND | UNIT_BYTE1_FLAG_UNK_2);
-                    m_creature->SetLevitate(true);
+                    m_creature->SetHover(true);
 
                     if (m_pPointData)
                         m_creature->GetMotionMaster()->MovePoint(m_pPointData->uiLocId, m_pPointData->fX, m_pPointData->fY, m_pPointData->fZ);
@@ -344,7 +345,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
 
                     // undo flying
                     m_creature->SetByteValue(UNIT_FIELD_BYTES_1, 3, 0);
-                    m_creature->SetLevitate(false);
+                    m_creature->SetHover(false);
 
                     SetCombatMovement(true);
                     m_creature->GetMotionMaster()->MoveChase(m_creature->getVictim());
@@ -446,7 +447,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
             return;
 
         // All and only the Onyxia Deep Breath Spells have these visuals
-        if (pSpell->SpellVisual[0] == SPELL_VISUAL_BREATH_A || pSpell->SpellVisual[0] == SPELL_VISUAL_BREATH_B)
+        if (pSpell->SpellVisual == SPELL_VISUAL_BREATH_A || pSpell->SpellVisual == SPELL_VISUAL_BREATH_B)
             m_pInstance->SetData(TYPE_ONYXIA, DATA_PLAYER_TOASTED);
     }
 };

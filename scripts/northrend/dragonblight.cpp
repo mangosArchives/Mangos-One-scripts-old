@@ -101,7 +101,7 @@ bool GossipSelect_npc_alexstrasza_wr_gate(Player* pPlayer, Creature* pCreature, 
     if (uiAction == GOSSIP_ACTION_INFO_DEF+1)
     {
         pPlayer->CLOSE_GOSSIP_MENU();
-        pPlayer->SendMovieStart(MOVIE_ID_GATES);
+//        pPlayer->SendMovieStart(MOVIE_ID_GATES);
     }
 
     return true;

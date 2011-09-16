@@ -11,6 +11,11 @@
 #include "sc_grid_searchers.h"
 #include "sc_instance.h"
 
+enum backports
+{
+    UNIT_VIRTUAL_ITEM_SLOT_ID = UNIT_VIRTUAL_ITEM_SLOT_DISPLAY
+};
+
 #ifdef WIN32
 #  include <windows.h>
     BOOL APIENTRY DllMain(HANDLE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
