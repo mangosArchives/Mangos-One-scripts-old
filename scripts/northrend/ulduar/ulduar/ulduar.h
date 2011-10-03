@@ -103,37 +103,36 @@ enum
 
     // Loot chests
     // Kologarn
-    GO_CACHE_OF_LIVING_STONE    = 195046,
-    GO_CACHE_OF_LIVING_STONE_H  = 195047,
+    GO_CACHE_OF_LIVING_STONE_10 = 195046,
+    GO_CACHE_OF_LIVING_STONE_25 = 195047,
 
     // Hodir
-    GO_CACHE_OF_WINTER          = 194307,
-    GO_CACHE_OF_WINTER_H        = 194308,
-    GO_CACHE_OF_RARE_WINTER     = 194200,
-    GO_CACHE_OF_RARE_WINTER_H   = 194201,
+    GO_CACHE_OF_WINTER_10       = 194307,
+    GO_CACHE_OF_WINTER_25       = 194308,
+    GO_CACHE_OF_RARE_WINTER_10  = 194200,
+    GO_CACHE_OF_RARE_WINTER_25  = 194201,
 
     // Mimiron
-    GO_CACHE_OF_INOV            = 194789,
-    GO_CACHE_OF_INOV_H          = 194956,
-    GO_CACHE_OF_INOV_HARD       = 194957,
-    GO_CACHE_OF_INOV_HARD_H     = 194958,
+    GO_CACHE_OF_INOV_10         = 194789,
+    GO_CACHE_OF_INOV_25         = 194956,
+    GO_CACHE_OF_INOV_10_H       = 194957,
+    GO_CACHE_OF_INOV_25_H       = 194958,
 
     // Thorim
-    GO_CACHE_OF_STORMS          = 194312,
-    GO_CACHE_OF_STORMS_H        = 194314,
-    GO_CACHE_OF_RARE_STORMS     = 194313,
-    GO_CACHE_OF_RARE_STORMS_H   = 194315,
+    GO_CACHE_OF_STORMS_10       = 194312,
+    GO_CACHE_OF_STORMS_25       = 194315,
+    GO_CACHE_OF_STORMS_10_H     = 194313,
+    GO_CACHE_OF_STORMS_25_H     = 194314,
 
     // Alagon
-    GO_GIFT_OF_OBSERVER_H       = 194821,
-    GO_GIFT_OF_OBSERVER         = 194822,
-    GO_GIFT_OF_OBSERVER_HH      = 194823,                   // Purpose Unknown
+    GO_GIFT_OF_OBSERVER_10      = 194821,
+    GO_GIFT_OF_OBSERVER_25      = 194822,
 
     // Doors and other Objects
     // The siege
     GO_SHIELD_WALL              = 194416,                   // Gate before Leviathan
-    GO_LEVIATHAN_GATE           = 194630,                   // Gate after Leviathan -> this should be used before the boss enter the arena
-    // There should be another gate after the Leviathan here which should be used during the Leviathan encounter
+    GO_LIGHTNING_FIELD          = 194559,                   // Lightning gate after the Leviathan. It closes after the boss enters the arena
+    GO_LEVIATHAN_GATE           = 194630,                   // Gate after Leviathan -> this will be broken when the boss enters the arena
     GO_XT002_GATE               = 194631,                   // Gate before Xt002
     GO_BROKEN_HARPOON           = 194565,                   // Broken harpoon from Razorscale
 
@@ -177,7 +176,6 @@ enum
     GO_RUNED_STONE_DOOR         = 194557,                   // Door after the runic colossus
     GO_THORIM_STONE_DOOR        = 194558,                   // Door after the ancient rune giant
     GO_LIGHTNING_DOOR           = 194905,                   // Arena exit door
-    GO_LIGHTNING_FIELD          = 194559,                   // For the platform animation
     GO_DOOR_LEVER               = 194264,                   // In front of the door
 
     // Descent to madness

@@ -159,6 +159,14 @@ UPDATE creature_template SET ScriptName='spell_dummy_npc' WHERE entry IN (
 
 UPDATE gameobject_template SET ScriptName='spell_dummy_go' WHERE entry IN (181616,186949);
 
+/* WORLD MAP SCRIPTS */
+DELETE FROM world_template WHERE map IN (0, 1, 530, 571);
+INSERT INTO world_template VALUES
+(0, 'world_map_eastern_kingdoms'),
+(1, 'world_map_kalimdor'),
+(530, 'world_map_outland'),
+(571, 'world_map_northrend');
+
 /*  */
 /* ZONE */
 /* */
@@ -809,6 +817,8 @@ UPDATE creature_template SET ScriptName='npc_bunthen_plainswind' WHERE entry=117
 UPDATE creature_template SET ScriptName='npc_clintar_dw_spirit' WHERE entry=22916;
 UPDATE creature_template SET ScriptName='npc_great_bear_spirit' WHERE entry=11956;
 UPDATE creature_template SET ScriptName='npc_silva_filnaveth' WHERE entry=11800;
+UPDATE creature_template SET ScriptName='npc_keeper_remulos' WHERE entry=11832;
+UPDATE creature_template SET ScriptName='boss_eranikus' WHERE entry=15491;
 
 /* MULGORE */
 UPDATE creature_template SET ScriptName='npc_kyle_the_frenzied' WHERE entry=23616;
@@ -990,7 +1000,6 @@ UPDATE gameobject_template SET ScriptName='go_crystal_prison' WHERE entry=185126
 
 /* SHATTRATH */
 UPDATE creature_template SET ScriptName='npc_dirty_larry' WHERE entry=19720;
-UPDATE creature_template SET ScriptName='npc_ishanah' WHERE entry=18538;
 UPDATE creature_template SET ScriptName='npc_khadgar' WHERE entry=18166;
 UPDATE creature_template SET ScriptName='npc_khadgars_servant' WHERE entry=19685;
 UPDATE creature_template SET ScriptName='npc_raliq_the_drunk' WHERE entry=18585;

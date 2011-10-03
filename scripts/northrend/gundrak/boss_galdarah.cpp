@@ -61,7 +61,7 @@ enum
     SPELL_IMPALING_CHARGE      = 54956,
     SPELL_IMPALING_CHARGE_H    = 59827,
     SPELL_STOMP                = 55292,
-    SPELL_STOMP_H              = 59826,
+    SPELL_STOMP_H              = 59829,
 };
 
 /*######
@@ -137,7 +137,7 @@ struct MANGOS_DLL_DECL boss_galdarahAI : public ScriptedAI
         if (pSummoned->GetEntry() == NPC_RHINO_SPIRIT)
         {
             if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 1))
-                pSummoned->CastSpell(pTarget, m_bIsRegularMode ? SPELL_STAMPEDE_RHINO : SPELL_STAMPEDE_RHINO_H, false);
+                pSummoned->CastSpell(pTarget, m_bIsRegularMode ? SPELL_STAMPEDE_RHINO : SPELL_STAMPEDE_RHINO_H, false, NULL, NULL, m_creature->GetObjectGuid());
         }
     }
 
@@ -234,8 +234,10 @@ struct MANGOS_DLL_DECL boss_galdarahAI : public ScriptedAI
             if (m_uiSpecialAbilityTimer < uiDiff)
             {
                 Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 1);
+                if (!pTarget)
+                    pTarget = m_creature->getVictim();
 
-                if (DoCastSpellIfCan(pTarget ? pTarget : m_creature->getVictim(), m_bIsRegularMode ? SPELL_IMPALING_CHARGE : SPELL_IMPALING_CHARGE_H) == CAST_OK)
+                if (DoCastSpellIfCan(pTarget, m_bIsRegularMode ? SPELL_IMPALING_CHARGE : SPELL_IMPALING_CHARGE_H) == CAST_OK)
                 {
                     DoScriptText(EMOTE_IMPALED, m_creature, pTarget);
                     m_uiSpecialAbilityTimer = 12000;
