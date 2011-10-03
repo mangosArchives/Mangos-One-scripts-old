@@ -128,7 +128,7 @@ struct MANGOS_DLL_DECL boss_svalaAI : public ScriptedAI
 
     void Aggro(Unit* pWho)
     {
-        m_creature->SetHover(false);
+        m_creature->SetLevitate(false);
         DoScriptText(SAY_AGGRO, m_creature);
     }
 
@@ -182,7 +182,7 @@ struct MANGOS_DLL_DECL boss_svalaAI : public ScriptedAI
         float fX, fZ, fY;
         m_creature->GetRespawnCoord(fX, fY, fZ);
 
-        m_creature->SetHover(true);
+        m_creature->SetLevitate(true);
         m_creature->GetMotionMaster()->MovePoint(0, fX, fY, fZ + 5.0f);
     }
 

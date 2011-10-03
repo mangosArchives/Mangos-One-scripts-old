@@ -171,7 +171,7 @@ struct MANGOS_DLL_DECL npc_highborne_lamenterAI : public ScriptedAI
         {
             if (EventMove_Timer < diff)
             {
-                m_creature->SetHover(true);
+                m_creature->SetLevitate(true);
                 m_creature->MonsterMoveWithSpeed(m_creature->GetPositionX(),m_creature->GetPositionY(),HIGHBORNE_LOC_Y_NEW,3.f);
                 EventMove = false;
             }else EventMove_Timer -= diff;

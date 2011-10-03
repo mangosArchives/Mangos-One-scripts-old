@@ -135,10 +135,10 @@ struct MANGOS_DLL_DECL boss_nefarianAI : public ScriptedAI
         DoScriptText(SAY_AGGRO, m_creature);
 
         // Remove flying in case Nefarian aggroes before his combat point was reached
-        if (m_creature->isHover())
+        if (m_creature->IsLevitating())
         {
             m_creature->SetByteValue(UNIT_FIELD_BYTES_1, 3, 0);
-            m_creature->SetHover(false);
+            m_creature->SetLevitate(false);
         }
 
         DoCastSpellIfCan(m_creature, SPELL_SHADOWFLAME_INITIAL);
