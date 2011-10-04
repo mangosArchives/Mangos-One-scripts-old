@@ -64,10 +64,10 @@ struct MANGOS_DLL_DECL npc_beast_combat_stalkerAI : public Scripted_NoMovementAI
         m_bFirstWormDied = false;
         m_uiPhase = PHASE_GORMOK;
 
-        if (m_creature->GetMap()->GetDifficulty() == RAID_DIFFICULTY_10MAN_NORMAL || m_creature->GetMap()->GetDifficulty() == RAID_DIFFICULTY_25MAN_NORMAL)
-            m_uiBerserkTimer    = 15*MINUTE*IN_MILLISECONDS;
-        else
-            m_uiBerserkTimer    = 9*MINUTE*IN_MILLISECONDS;
+        //if (m_creature->GetMap()->GetDifficulty() == RAID_DIFFICULTY_10MAN_NORMAL || m_creature->GetMap()->GetDifficulty() == RAID_DIFFICULTY_25MAN_NORMAL)
+        //    m_uiBerserkTimer    = 15*MINUTE*IN_MILLISECONDS;
+        //else
+        //    m_uiBerserkTimer    = 9*MINUTE*IN_MILLISECONDS;
     }
 
     void MoveInLineOfSight(Unit* pWho) {}
@@ -116,8 +116,8 @@ struct MANGOS_DLL_DECL npc_beast_combat_stalkerAI : public Scripted_NoMovementAI
         pSummoned->GetMotionMaster()->MovePoint(m_uiPhase, aMovePositions[m_uiPhase][0], aMovePositions[m_uiPhase][1], aMovePositions[m_uiPhase][2]);
 
         // Next beasts are summoned only for heroic modes
-        if (m_creature->GetMap()->GetDifficulty() == RAID_DIFFICULTY_10MAN_HEROIC || m_creature->GetMap()->GetDifficulty() == RAID_DIFFICULTY_25MAN_HEROIC)
-            m_uiNextBeastTimer = 150*IN_MILLISECONDS;       // 2 min 30
+        //if (m_creature->GetMap()->GetDifficulty() == RAID_DIFFICULTY_10MAN_HEROIC || m_creature->GetMap()->GetDifficulty() == RAID_DIFFICULTY_25MAN_HEROIC)
+        //    m_uiNextBeastTimer = 150*IN_MILLISECONDS;       // 2 min 30
 
         m_uiAttackDelayTimer = 15000;                       // TODO, must be checked.
     }

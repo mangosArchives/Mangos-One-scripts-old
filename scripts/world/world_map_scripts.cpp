@@ -113,21 +113,6 @@ InstanceData* GetInstanceData_world_map_outland(Map* pMap)
     return new world_map_outland(pMap);
 }
 
-/* *********************************************************
- *                     NORTHREND
- */
-struct MANGOS_DLL_DECL world_map_northrend : public ScriptedMap
-{
-    world_map_northrend(Map* pMap) : ScriptedMap(pMap) {}
-
-    void SetData(uint32 uiType, uint32 uiData) {}
-};
-
-InstanceData* GetInstanceData_world_map_northrend(Map* pMap)
-{
-    return new world_map_northrend(pMap);
-}
-
 void AddSC_world_map_scripts()
 {
     Script* pNewScript;
@@ -145,10 +130,5 @@ void AddSC_world_map_scripts()
     pNewScript = new Script;
     pNewScript->Name = "world_map_outland";
     pNewScript->GetInstanceData = &GetInstanceData_world_map_outland;
-    pNewScript->RegisterSelf();
-
-    pNewScript = new Script;
-    pNewScript->Name = "world_map_northrend";
-    pNewScript->GetInstanceData = &GetInstanceData_world_map_northrend;
     pNewScript->RegisterSelf();
 }

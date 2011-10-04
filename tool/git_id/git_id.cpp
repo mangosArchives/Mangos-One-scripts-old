@@ -54,8 +54,8 @@
 #define NUM_DATABASES 2
 
 char remotes[NUM_REMOTES][MAX_REMOTE] = {
-    "git@github.com:scriptdev2/scriptdev2.git",
-    "git://github.com/scriptdev2/scriptdev2.git"                       // used for fetch if present
+    "git@github.com:mangos-one/scriptdev2.git",
+    "git://github.com/mangos-one/scriptdev2.git"                       // used for fetch if present
 };
 
 char remote_branch[MAX_REMOTE] = "master";
@@ -92,7 +92,7 @@ bool db_sql_rev_parent[NUM_DATABASES] = {
 #define SQL_REV_PREFIX "r"
 #define SQL_REV_SCAN   SQL_REV_PREFIX "%d"
 #define SQL_REV_PRINT  SQL_REV_PREFIX "%04d"
-#define GIT_REV_PREFIX ""
+#define GIT_REV_PREFIX "s"
 #define GIT_REV_PRINT  GIT_REV_PREFIX "%04d"
 #define GIT_REV_FORMAT "[" GIT_REV_PRINT "]"
 
