@@ -52,9 +52,26 @@ enum
     GO_RUNE_THERI               = 176954,                   // Golemagg
     GO_RUNE_KORO                = 176951,                   // Sulfuron
 
+    MAX_MOLTEN_RUNES            = 7,
     MAX_MAJORDOMO_ADDS          = 8,
     FACTION_MAJORDOMO_FRIENDLY  = 1080,
     SAY_MAJORDOMO_SPAWN         = -1409004,
+};
+
+struct sRuneEncounters
+{
+    uint32 m_uiRuneEntry, m_uiType;
+};
+
+static const sRuneEncounters m_aMoltenCoreRunes[MAX_MOLTEN_RUNES] =
+{
+    {GO_RUNE_KRESS, TYPE_MAGMADAR},
+    {GO_RUNE_MOHN,  TYPE_GEHENNAS},
+    {GO_RUNE_BLAZ,  TYPE_GARR},
+    {GO_RUNE_MAZJ,  TYPE_SHAZZRAH},
+    {GO_RUNE_ZETH,  TYPE_GEDDON},
+    {GO_RUNE_THERI, TYPE_GOLEMAGG},
+    {GO_RUNE_KORO,  TYPE_SULFURON}
 };
 
 struct sSpawnLocation

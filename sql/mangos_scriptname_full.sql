@@ -810,6 +810,7 @@ UPDATE creature_template SET ScriptName='boss_ragnaros' WHERE entry=11502;
 UPDATE creature_template SET ScriptName='mob_firesworn' WHERE entry=12099;
 UPDATE creature_template SET ScriptName='mob_core_rager' WHERE entry=11672;
 UPDATE creature_template SET ScriptName='mob_flamewaker_priest' WHERE entry=11662;
+UPDATE gameobject_template SET ScriptName='go_molten_core_rune' WHERE entry IN (176951, 176952, 176953, 176954, 176955, 176956, 176957);
 
 /* MOONGLADE */
 UPDATE creature_template SET ScriptName='npc_bunthen_plainswind' WHERE entry=11798;

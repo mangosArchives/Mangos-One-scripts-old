@@ -105,44 +105,31 @@ void instance_molten_core::SetData(uint32 uiType, uint32 uiData)
             break;
         case TYPE_MAGMADAR:
             m_auiEncounter[uiType] = uiData;
-            if (uiData == DONE)
-                DoUseDoorOrButton(GO_RUNE_KRESS);
             break;
         case TYPE_GEHENNAS:
             m_auiEncounter[uiType] = uiData;
             if (uiData == DONE)
-            {
-                DoUseDoorOrButton(GO_RUNE_MOHN);
                 m_luiFlamewakerGUIDs.clear();
-            }
             if (uiData == FAIL)
                 DoHandleAdds(m_luiFlamewakerGUIDs);
             break;
         case TYPE_GARR:
             m_auiEncounter[uiType] = uiData;
             if (uiData == DONE)
-            {
-                DoUseDoorOrButton(GO_RUNE_BLAZ);
                 m_luiFireswornGUIDs.clear();
-            }
             if (uiData == FAIL)
                 DoHandleAdds(m_luiFireswornGUIDs);
             break;
         case TYPE_SHAZZRAH:
             m_auiEncounter[uiType] = uiData;
-            if (uiData == DONE)
-                DoUseDoorOrButton(GO_RUNE_MAZJ);
             break;
         case TYPE_GEDDON:
             m_auiEncounter[uiType] = uiData;
-            if (uiData == DONE)
-                DoUseDoorOrButton(GO_RUNE_ZETH);
             break;
         case TYPE_GOLEMAGG:
             m_auiEncounter[uiType] = uiData;
             if (uiData == DONE)
             {
-                DoUseDoorOrButton(GO_RUNE_THERI);
                 DoHandleAdds(m_luiRagerGUIDs, false);
                 m_luiRagerGUIDs.clear();
             }
@@ -152,10 +139,7 @@ void instance_molten_core::SetData(uint32 uiType, uint32 uiData)
         case TYPE_SULFURON:
             m_auiEncounter[uiType] = uiData;
             if (uiData == DONE)
-            {
-                DoUseDoorOrButton(GO_RUNE_KORO);
                 m_luiPriestGUIDs.clear();
-            }
             if (uiData == FAIL)
                 DoHandleAdds(m_luiPriestGUIDs);
             break;
@@ -170,10 +154,10 @@ void instance_molten_core::SetData(uint32 uiType, uint32 uiData)
     }
 
     // Check if Majordomo can be summoned
-    if (uiData == DONE)
+    if (uiData == SPECIAL)
         DoSpawnMajordomoIfCan(false);
 
-    if (uiData == DONE)
+    if (uiData == DONE || uiData == SPECIAL)
     {
         OUT_SAVE_INST_DATA;
 
@@ -212,7 +196,7 @@ void instance_molten_core::DoSpawnMajordomoIfCan(bool bByPlayerEnter)
     // Check if all rune bosses are done
     for(uint8 i = TYPE_MAGMADAR; i < TYPE_MAJORDOMO; ++i)
     {
-        if (m_auiEncounter[i] != DONE)
+        if (m_auiEncounter[i] != SPECIAL)
             return;
     }
 
