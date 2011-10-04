@@ -17,7 +17,7 @@
 /* ScriptData
 SDName: GO_Scripts
 SD%Complete: 100
-SDComment: Quest support: 4296, 5088, 5097, 5098, 5381, 6481, 10990, 10991, 10992, 12557, 14092/14076. Field_Repair_Bot->Teaches spell 22704. Barov_journal->Teaches spell 26089
+SDComment: Quest support: 4296, 5088, 5097, 5098, 5381, 6481, 10990, 10991, 10992, Field_Repair_Bot->Teaches spell 22704. Barov_journal->Teaches spell 26089
 SDCategory: Game Objects
 EndScriptData */
 
@@ -27,18 +27,13 @@ go_barov_journal
 go_ethereum_prison
 go_ethereum_stasis
 go_field_repair_bot_74A
-go_mysterious_snow_mound
 go_orb_of_command
 go_resonite_cask
 go_sacred_fire_of_life
 go_shrine_of_the_birds
 go_tablet_of_madness
 go_tablet_of_the_seven
-go_tele_to_dalaran_crystal
-go_tele_to_violet_stand
 go_andorhal_tower
-go_scourge_enclosure
-go_lab_work_reagents
 go_hand_of_iruxos_crystal
 EndContentData */
 
@@ -217,36 +212,6 @@ bool GOUse_go_jump_a_tron(Player* pPlayer, GameObject* pGo)
 }
 
 /*######
-## go_mysterious_snow_mound
-######*/
-
-enum
-{
-    SPELL_SUMMON_DEEP_JORMUNGAR     = 66510,
-    SPELL_SUMMON_MOLE_MACHINE       = 66492,
-    SPELL_SUMMON_MARAUDER           = 66491,
-};
-
-bool GOUse_go_mysterious_snow_mound(Player* pPlayer, GameObject* pGo)
-{
-    if (urand(0,1))
-    {
-        pPlayer->CastSpell(pPlayer, SPELL_SUMMON_DEEP_JORMUNGAR, true);
-    }
-    else
-    {
-        // This is basically wrong, but added for support.
-        // Mole machine would summon, along with unkonwn GO (a GO trap?) and then
-        // the npc would summon with base of that location.
-        pPlayer->CastSpell(pPlayer, SPELL_SUMMON_MOLE_MACHINE, true);
-        pPlayer->CastSpell(pPlayer, SPELL_SUMMON_MARAUDER, true);
-    }
-
-    pGo->SetLootState(GO_JUST_DEACTIVATED);
-    return true;
-}
-
-/*######
 ## go_orb_of_command
 ######*/
 
@@ -372,37 +337,6 @@ bool GOUse_go_tablet_of_the_seven(Player* pPlayer, GameObject* pGo)
     return true;
 }
 
-/*######
-## go_tele_to_dalaran_crystal
-######*/
-
-enum
-{
-    QUEST_LEARN_LEAVE_RETURN = 12790,
-    QUEST_TELE_CRYSTAL_FLAG  = 12845
-};
-
-bool GOUse_go_tele_to_dalaran_crystal(Player* pPlayer, GameObject* pGo)
-{
-    if (pPlayer->GetQuestRewardStatus(QUEST_TELE_CRYSTAL_FLAG))
-        return false;
-
-    //TODO: must send error message (what kind of message? On-screen?)
-    return true;
-}
-
-/*######
-## go_tele_to_violet_stand
-######*/
-
-bool GOUse_go_tele_to_violet_stand(Player* pPlayer, GameObject* pGo)
-{
-    if (pPlayer->GetQuestRewardStatus(QUEST_LEARN_LEAVE_RETURN) || pPlayer->GetQuestStatus(QUEST_LEARN_LEAVE_RETURN) == QUEST_STATUS_INCOMPLETE)
-        return false;
-
-    return true;
-}
-
 enum
 {
     NPC_ZELEMAR_THE_WRATHFULL = 17830,
@@ -455,71 +389,6 @@ bool GOUse_go_andorhal_tower(Player* pPlayer, GameObject* pGo)
             pPlayer->KilledMonsterCredit(uiKillCredit);
     }
     return true;
-}
-
-/*######
-## go_scourge_enclosure
-######*/
-
-enum
-{
-    SPELL_GYMER_LOCK_EXPLOSION      = 55529,
-    NPC_GYMER_LOCK_DUMMY            = 29928
-
-};
-
-bool GOUse_go_scourge_enclosure(Player* pPlayer, GameObject* pGo)
-{
-    std::list<Creature*> m_lResearchersList;
-    GetCreatureListWithEntryInGrid(m_lResearchersList, pGo, NPC_GYMER_LOCK_DUMMY, 15.0f);
-    if (!m_lResearchersList.empty())
-    {
-        for(std::list<Creature*>::iterator itr = m_lResearchersList.begin(); itr != m_lResearchersList.end(); ++itr)
-        {
-            (*itr)->CastSpell((*itr),SPELL_GYMER_LOCK_EXPLOSION,true);
-        }
-    }
-    pPlayer->KilledMonsterCredit(NPC_GYMER_LOCK_DUMMY);
-    return true;
-}
-
-/*######
-## go_lab_work_reagents
-######*/
-
-enum
-{
-    QUEST_LAB_WORK                          = 12557,
-
-    SPELL_WIRHERED_BATWING_KILL_CREDIT      = 51226,
-    SPELL_MUDDY_MIRE_MAGGOT_KILL_CREDIT     = 51227,
-    SPELL_AMBERSEED_KILL_CREDIT             = 51228,
-    SPELL_CHILLED_SERPENT_MUCUS_KILL_CREDIT = 51229,
-
-    GO_AMBERSEED                            = 190459,
-    GO_CHILLED_SERPENT_MUCUS                = 190462,
-    GO_WITHERED_BATWING                     = 190473,
-    GO_MUDDY_MIRE_MAGGOTS                   = 190478,
-};
-
-bool GOUse_go_lab_work_reagents(Player* pPlayer, GameObject* pGo)
-{
-    if (pPlayer->GetQuestStatus(QUEST_LAB_WORK) == QUEST_STATUS_INCOMPLETE)
-    {
-        uint32 uiCreditSpellId = 0;
-        switch (pGo->GetEntry())
-        {
-            case GO_AMBERSEED:              uiCreditSpellId = SPELL_AMBERSEED_KILL_CREDIT; break;
-            case GO_CHILLED_SERPENT_MUCUS:  uiCreditSpellId = SPELL_CHILLED_SERPENT_MUCUS_KILL_CREDIT; break;
-            case GO_WITHERED_BATWING:       uiCreditSpellId = SPELL_WIRHERED_BATWING_KILL_CREDIT; break;
-            case GO_MUDDY_MIRE_MAGGOTS:     uiCreditSpellId = SPELL_MUDDY_MIRE_MAGGOT_KILL_CREDIT; break;
-        }
-
-        if (uiCreditSpellId)
-            pPlayer->CastSpell(pPlayer, uiCreditSpellId, true);
-    }
-
-    return false;
 }
 
 /*######
@@ -586,11 +455,6 @@ void AddSC_go_scripts()
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;
-    pNewScript->Name = "go_mysterious_snow_mound";
-    pNewScript->pGOUse =          &GOUse_go_mysterious_snow_mound;
-    pNewScript->RegisterSelf();
-
-    pNewScript = new Script;
     pNewScript->Name = "go_orb_of_command";
     pNewScript->pGOUse =          &GOUse_go_orb_of_command;
     pNewScript->RegisterSelf();
@@ -621,16 +485,6 @@ void AddSC_go_scripts()
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;
-    pNewScript->Name = "go_tele_to_dalaran_crystal";
-    pNewScript->pGOUse =          &GOUse_go_tele_to_dalaran_crystal;
-    pNewScript->RegisterSelf();
-
-    pNewScript = new Script;
-    pNewScript->Name = "go_tele_to_violet_stand";
-    pNewScript->pGOUse =          &GOUse_go_tele_to_violet_stand;
-    pNewScript->RegisterSelf();
-
-    pNewScript = new Script;
     pNewScript->Name = "go_blood_filled_orb";
     pNewScript->pGOUse =          &GOUse_go_blood_filled_orb;
     pNewScript->RegisterSelf();
@@ -638,16 +492,6 @@ void AddSC_go_scripts()
     pNewScript = new Script;
     pNewScript->Name = "go_andorhal_tower";
     pNewScript->pGOUse =          &GOUse_go_andorhal_tower;
-    pNewScript->RegisterSelf();
-
-    pNewScript = new Script;
-    pNewScript->Name = "go_scourge_enclosure";
-    pNewScript->pGOUse =          &GOUse_go_scourge_enclosure;
-    pNewScript->RegisterSelf();
-
-    pNewScript = new Script;
-    pNewScript->Name = "go_lab_work_reagents";
-    pNewScript->pGOUse =          &GOUse_go_lab_work_reagents;
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;
