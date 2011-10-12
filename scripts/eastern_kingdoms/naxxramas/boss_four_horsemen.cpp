@@ -17,7 +17,7 @@
 /* ScriptData
 SDName: Boss_Four_Horsemen
 SD%Complete: 75
-SDComment: Lady Blaumeux, Thane Korthazz, Sir Zeliek, Baron Rivendare
+SDComment: Lady Blaumeux, Thane Korthazz, Sir Zeliek, Alexandros Mograine
 SDCategory: Naxxramas
 EndScriptData */
 
@@ -48,17 +48,17 @@ enum
     SPELL_SHADOW_BOLT       = 57374,
     SPELL_SHADOW_BOLT_H     = 57464,
 
-    //baron rivendare
-    SAY_RIVE_AGGRO1         = -1533065,
-    SAY_RIVE_AGGRO2         = -1533066,
-    SAY_RIVE_AGGRO3         = -1533067,
-    SAY_RIVE_SLAY1          = -1533068,
-    SAY_RIVE_SLAY2          = -1533069,
-    SAY_RIVE_SPECIAL        = -1533070,
-    SAY_RIVE_TAUNT1         = -1533071,
-    SAY_RIVE_TAUNT2         = -1533072,
-    SAY_RIVE_TAUNT3         = -1533073,
-    SAY_RIVE_DEATH          = -1533074,
+    //alexandros mograine
+    SAY_MORG_AGGRO1         = -1533065,
+    SAY_MORG_AGGRO2         = -1533066,
+    SAY_MORG_AGGRO3         = -1533067,
+    SAY_MORG_SLAY1          = -1533068,
+    SAY_MORG_SLAY2          = -1533069,
+    SAY_MORG_SPECIAL        = -1533070,
+    SAY_MORG_TAUNT1         = -1533071,
+    SAY_MORG_TAUNT2         = -1533072,
+    SAY_MORG_TAUNT3         = -1533073,
+    SAY_MORG_DEATH          = -1533074,
 
     SPELL_MARK_OF_RIVENDARE = 28834,
     SPELL_UNHOLY_SHADOW     = 28882,
@@ -178,9 +178,9 @@ CreatureAI* GetAI_boss_lady_blaumeux(Creature* pCreature)
     return new boss_lady_blaumeuxAI(pCreature);
 }
 
-struct MANGOS_DLL_DECL boss_rivendare_naxxAI : public ScriptedAI
+struct MANGOS_DLL_DECL boss_alexandros_mograineAI : public ScriptedAI
 {
-    boss_rivendare_naxxAI(Creature* pCreature) : ScriptedAI(pCreature) {Reset();}
+    boss_alexandros_mograineAI(Creature* pCreature) : ScriptedAI(pCreature) {Reset();}
 
     void Reset()
     {
@@ -190,20 +190,20 @@ struct MANGOS_DLL_DECL boss_rivendare_naxxAI : public ScriptedAI
     {
         switch(urand(0, 2))
         {
-            case 0: DoScriptText(SAY_RIVE_AGGRO1, m_creature); break;
-            case 1: DoScriptText(SAY_RIVE_AGGRO2, m_creature); break;
-            case 2: DoScriptText(SAY_RIVE_AGGRO3, m_creature); break;
+            case 0: DoScriptText(SAY_MORG_AGGRO1, m_creature); break;
+            case 1: DoScriptText(SAY_MORG_AGGRO2, m_creature); break;
+            case 2: DoScriptText(SAY_MORG_AGGRO3, m_creature); break;
         }
     }
 
     void KilledUnit(Unit* Victim)
     {
-        DoScriptText(urand(0, 1) ? SAY_RIVE_SLAY1 : SAY_RIVE_SLAY2, m_creature);
+        DoScriptText(urand(0, 1) ? SAY_MORG_SLAY1 : SAY_MORG_SLAY2, m_creature);
     }
 
     void JustDied(Unit* Killer)
     {
-        DoScriptText(SAY_RIVE_DEATH, m_creature);
+        DoScriptText(SAY_MORG_DEATH, m_creature);
     }
 
     void UpdateAI(const uint32 uiDiff)
@@ -215,9 +215,9 @@ struct MANGOS_DLL_DECL boss_rivendare_naxxAI : public ScriptedAI
     }
 };
 
-CreatureAI* GetAI_boss_rivendare_naxx(Creature* pCreature)
+CreatureAI* GetAI_boss_alexandros_mograine(Creature* pCreature)
 {
-    return new boss_rivendare_naxxAI(pCreature);
+    return new boss_alexandros_mograineAI(pCreature);
 }
 
 struct MANGOS_DLL_DECL boss_thane_korthazzAI : public ScriptedAI
@@ -387,8 +387,8 @@ void AddSC_boss_four_horsemen()
     NewScript->RegisterSelf();
 
     NewScript = new Script;
-    NewScript->Name = "boss_rivendare_naxx";
-    NewScript->GetAI = &GetAI_boss_rivendare_naxx;
+    NewScript->Name = "boss_alexandros_mograine";
+    NewScript->GetAI = &GetAI_boss_alexandros_mograine;
     NewScript->RegisterSelf();
 
     NewScript = new Script;
