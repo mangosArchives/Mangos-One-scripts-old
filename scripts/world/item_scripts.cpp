@@ -100,20 +100,33 @@ bool ItemUse_item_gor_dreks_ointment(Player* pPlayer, Item* pItem, const SpellCa
 
 void AddSC_item_scripts()
 {
-    Script *newscript;
+        pPlayer->SendEquipError(EQUIP_ERR_NONE, pItem, NULL);
 
-    newscript = new Script;
-    newscript->Name = "item_arcane_charges";
-    newscript->pItemUse = &ItemUse_item_arcane_charges;
-    newscript->RegisterSelf();
+        if (const SpellEntry* pSpellInfo = GetSpellStore()->LookupEntry(SPELL_PETROV_BOMB))
+            Spell::SendCastResult(pPlayer, pSpellInfo, 1, SPELL_FAILED_NOT_HERE);
 
-    newscript = new Script;
-    newscript->Name = "item_flying_machine";
-    newscript->pItemUse = &ItemUse_item_flying_machine;
-    newscript->RegisterSelf();
+        return true;
+    }
 
-    newscript = new Script;
-    newscript->Name = "item_gor_dreks_ointment";
-    newscript->pItemUse = &ItemUse_item_gor_dreks_ointment;
-    newscript->RegisterSelf();
+    return false;
+}
+
+void AddSC_item_scripts()
+{
+    Script* pNewScript;
+
+    pNewScript = new Script;
+    pNewScript->Name = "item_arcane_charges";
+    pNewScript->pItemUse = &ItemUse_item_arcane_charges;
+    pNewScript->RegisterSelf();
+
+    pNewScript = new Script;
+    pNewScript->Name = "item_flying_machine";
+    pNewScript->pItemUse = &ItemUse_item_flying_machine;
+    pNewScript->RegisterSelf();
+
+    pNewScript = new Script;
+    pNewScript->Name = "item_gor_dreks_ointment";
+    pNewScript->pItemUse = &ItemUse_item_gor_dreks_ointment;
+    pNewScript->RegisterSelf();
 }
