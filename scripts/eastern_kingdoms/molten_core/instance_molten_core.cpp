@@ -61,13 +61,6 @@ void instance_molten_core::OnCreatureCreate(Creature* pCreature)
         case NPC_MAJORDOMO:
             m_mNpcEntryGuidStore[pCreature->GetEntry()] = pCreature->GetObjectGuid();
             break;
-
-        // Push adds to lists in order to handle respawn
-        case NPC_FLAMEWAKER_PROTECTOR:  m_luiProtectorGUIDs.push_back(pCreature->GetObjectGuid());    break;
-        case NPC_FLAMEWAKER:            m_luiFlamewakerGUIDs.push_back(pCreature->GetObjectGuid());   break;
-        case NPC_FIRESWORN:             m_luiFireswornGUIDs.push_back(pCreature->GetObjectGuid());    break;
-        case NPC_FLAMEWAKER_PRIEST:     m_luiPriestGUIDs.push_back(pCreature->GetObjectGuid());       break;
-        case NPC_CORE_RAGER:            m_luiRagerGUIDs.push_back(pCreature->GetObjectGuid());        break;
     }
 }
 
@@ -100,25 +93,15 @@ void instance_molten_core::SetData(uint32 uiType, uint32 uiData)
     {
         case TYPE_LUCIFRON:
             m_auiEncounter[uiType] = uiData;
-            if (uiData == FAIL)
-                DoHandleAdds(m_luiProtectorGUIDs);
             break;
         case TYPE_MAGMADAR:
             m_auiEncounter[uiType] = uiData;
             break;
         case TYPE_GEHENNAS:
             m_auiEncounter[uiType] = uiData;
-            if (uiData == DONE)
-                m_luiFlamewakerGUIDs.clear();
-            if (uiData == FAIL)
-                DoHandleAdds(m_luiFlamewakerGUIDs);
             break;
         case TYPE_GARR:
             m_auiEncounter[uiType] = uiData;
-            if (uiData == DONE)
-                m_luiFireswornGUIDs.clear();
-            if (uiData == FAIL)
-                DoHandleAdds(m_luiFireswornGUIDs);
             break;
         case TYPE_SHAZZRAH:
             m_auiEncounter[uiType] = uiData;
@@ -128,20 +111,9 @@ void instance_molten_core::SetData(uint32 uiType, uint32 uiData)
             break;
         case TYPE_GOLEMAGG:
             m_auiEncounter[uiType] = uiData;
-            if (uiData == DONE)
-            {
-                DoHandleAdds(m_luiRagerGUIDs, false);
-                m_luiRagerGUIDs.clear();
-            }
-            if (uiData == FAIL)
-                DoHandleAdds(m_luiRagerGUIDs);
             break;
         case TYPE_SULFURON:
             m_auiEncounter[uiType] = uiData;
-            if (uiData == DONE)
-                m_luiPriestGUIDs.clear();
-            if (uiData == FAIL)
-                DoHandleAdds(m_luiPriestGUIDs);
             break;
         case TYPE_MAJORDOMO:
             m_auiEncounter[uiType] = uiData;
@@ -222,25 +194,6 @@ void instance_molten_core::DoSpawnMajordomoIfCan(bool bByPlayerEnter)
 
             for (uint8 i = 0; i < MAX_MAJORDOMO_ADDS; ++i)
                 pMajordomo->SummonCreature(m_aBosspawnLocs[i].m_uiEntry, m_aBosspawnLocs[i].m_fX, m_aBosspawnLocs[i].m_fY, m_aBosspawnLocs[i].m_fZ, m_aBosspawnLocs[i].m_fO, TEMPSUMMON_MANUAL_DESPAWN, DAY*IN_MILLISECONDS);
-        }
-    }
-}
-
-void instance_molten_core::DoHandleAdds(GUIDList &luiAddsGUIDs, bool bRespawn /*=true*/)
-{
-    if (luiAddsGUIDs.empty())
-        return;
-
-    for (GUIDList::const_iterator itr = luiAddsGUIDs.begin(); itr != luiAddsGUIDs.end(); ++itr)
-    {
-        if (Creature* pAdd = instance->GetCreature(*itr))
-        {
-            // Respawn dead mobs (or corpses)
-            if (bRespawn && !pAdd->isAlive())
-                pAdd->Respawn();
-            // Kill adds
-            else if (!bRespawn)
-                pAdd->DealDamage(pAdd, pAdd->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
         }
     }
 }
