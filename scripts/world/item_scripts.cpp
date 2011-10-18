@@ -100,19 +100,6 @@ bool ItemUse_item_gor_dreks_ointment(Player* pPlayer, Item* pItem, const SpellCa
 
 void AddSC_item_scripts()
 {
-        pPlayer->SendEquipError(EQUIP_ERR_NONE, pItem, NULL);
-
-        if (const SpellEntry* pSpellInfo = GetSpellStore()->LookupEntry(SPELL_PETROV_BOMB))
-            Spell::SendCastResult(pPlayer, pSpellInfo, 1, SPELL_FAILED_NOT_HERE);
-
-        return true;
-    }
-
-    return false;
-}
-
-void AddSC_item_scripts()
-{
     Script* pNewScript;
 
     pNewScript = new Script;
