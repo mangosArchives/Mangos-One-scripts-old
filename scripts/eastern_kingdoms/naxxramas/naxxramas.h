@@ -46,17 +46,6 @@ enum
     TYPE_SAPPHIRON              = 13,
     TYPE_KELTHUZAD              = 14,
 
-    TYPE_UNDYING_FAILED         = 15,                       // Achievements Undying and Immortal, needs to be saved to database
-
-    MAX_SPECIAL_ACHIEV_CRITS    = 6,
-
-    TYPE_ACHIEV_SAFETY_DANCE    = 0,
-    TYPE_ACHIEV_KNOCK_YOU_OUT   = 1,
-    TYPE_ACHIEV_HUNDRED_CLUB    = 2,
-    TYPE_ACHIEV_SHOCKING        = 3,
-    TYPE_ACHIEV_SPORE_LOSER     = 4,
-    TYPE_ACHIEV_GET_ENOUGH      = 5,
-
     NPC_ANUB_REKHAN             = 15956,
     NPC_FAERLINA                = 15953,
 
@@ -148,32 +137,6 @@ enum
     AREATRIGGER_KELTHUZAD       = 4112,
     AREATRIGGER_GOTHIK          = 4116,
     AREATRIGGER_THADDIUS_DOOR   = 4113,
-
-    // Achievement related
-    ACHIEV_CRIT_SAFETY_DANCE_N  = 7264,                     // Heigan, achievs 1996, 2139
-    ACHIEV_CRIT_SAFETY_DANCE_H  = 7548,
-    ACHIEV_CRIT_KNOCK_YOU_OUT_N = 7265,                     // Faerlina, achievs 1997, 2140
-    ACHIEV_CRIT_KNOCK_YOU_OUT_H = 7549,
-    ACHIEV_CRIT_HUNDRED_CLUB_N  = 7567,                     // Sapphiron, achievs 2146, 2147
-    ACHIEV_CRIT_HUNDRED_CLUB_H  = 7568,
-    ACHIEV_CRIT_SHOCKING_N      = 7604,                     // Thaddius, achievs 2178, 2179
-    ACHIEV_CRIT_SHOCKING_H      = 7605,
-    ACHIEV_CRIT_SPORE_LOSER_N   = 7612,                     // Loatheb, achievs 2182, 2183
-    ACHIEV_CRIT_SPORE_LOSER_H   = 7613,
-    ACHIEV_CRIT_GET_ENOUGH_N    = 7614,                     // Kel'Thuzad, achievs 2184, 2185
-    ACHIEV_CRIT_GET_ENOUGH_H    = 7615,
-
-    // 'The Immortal'(25m) or 'Undying'(10m) - (achievs 2186, 2187)
-    ACHIEV_CRIT_IMMORTAL_KEL    = 7616,
-    ACHIEV_CRIT_IMMOORTAL_LOA   = 13236,
-    ACHIEV_CRIT_IMMOORTAL_THAD  = 13235,
-    ACHIEV_CRIT_IMMOORTAL_MAEX  = 13234,
-    ACHIEV_CRIT_IMMOORTAL_HORSE = 13233,
-    ACHIEV_CRIT_UNDYING_KEL     = 7617,
-    ACHIEV_CRIT_UNDYING_HORSE   = 13237,
-    ACHIEV_CRIT_UNDYING_MAEX    = 13238,
-    ACHIEV_CRIT_UNDYING_LOA     = 13239,
-    ACHIEV_CRIT_UNDYING_THAD    = 13240,
 };
 
 struct GothTrigger
@@ -195,14 +158,10 @@ class MANGOS_DLL_DECL instance_naxxramas : public ScriptedInstance
         void OnCreatureCreate(Creature* pCreature);
         void OnObjectCreate(GameObject* pGo);
 
-        void OnPlayerDeath(Player* pPlayer);
         void OnCreatureDeath(Creature* pCreature);
 
         void SetData(uint32 uiType, uint32 uiData);
         uint32 GetData(uint32 uiType);
-
-        void SetSpecialAchievementCriteria(uint32 uiType, bool bIsMet);
-        bool CheckAchievementCriteriaMeet(uint32 uiCriteriaId, Player const* pSource, Unit const* pTarget, uint32 uiMiscValue1 /* = 0*/);
 
         const char* Save() { return m_strInstData.c_str(); }
         void Load(const char* chrIn);
@@ -225,7 +184,6 @@ class MANGOS_DLL_DECL instance_naxxramas : public ScriptedInstance
 
     protected:
         uint32 m_auiEncounter[MAX_ENCOUNTER];
-        bool m_abAchievCriteria[MAX_SPECIAL_ACHIEV_CRITS];
         std::string m_strInstData;
 
         GUIDList m_lThadTeslaCoilList;

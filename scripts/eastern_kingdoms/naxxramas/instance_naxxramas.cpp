@@ -48,9 +48,6 @@ void instance_naxxramas::Initialize()
 {
     memset(&m_auiEncounter, 0, sizeof(m_auiEncounter));
 
-    for (uint8 i = 0; i < MAX_SPECIAL_ACHIEV_CRITS; ++i)
-        m_abAchievCriteria[i] = false;
-
     m_dialogueHelper.InitializeDialogueHelper(this, true);
 }
 
@@ -203,15 +200,6 @@ void instance_naxxramas::OnObjectCreate(GameObject* pGo)
     m_mGoEntryGuidStore[pGo->GetEntry()] = pGo->GetObjectGuid();
 }
 
-void instance_naxxramas::OnPlayerDeath(Player* pPlayer)
-{
-    if (IsEncounterInProgress())
-        SetData(TYPE_UNDYING_FAILED, DONE);
-
-    if (GetData(TYPE_HEIGAN) == IN_PROGRESS)
-        SetSpecialAchievementCriteria(TYPE_ACHIEV_SAFETY_DANCE, false);
-}
-
 void instance_naxxramas::OnCreatureDeath(Creature* pCreature)
 {
     if (pCreature->GetEntry() == NPC_MR_BIGGLESWORTH && m_auiEncounter[TYPE_KELTHUZAD] != DONE)
@@ -245,8 +233,6 @@ void instance_naxxramas::SetData(uint32 uiType, uint32 uiData)
             break;
         case TYPE_FAERLINA:
             DoUseDoorOrButton(GO_ARAC_FAER_WEB);
-            if (uiData == IN_PROGRESS)
-                SetSpecialAchievementCriteria(TYPE_ACHIEV_KNOCK_YOU_OUT, true);
             if (uiData == DONE)
             {
                 DoUseDoorOrButton(GO_ARAC_FAER_DOOR);
@@ -285,17 +271,12 @@ void instance_naxxramas::SetData(uint32 uiType, uint32 uiData)
         case TYPE_HEIGAN:
             m_auiEncounter[uiType] = uiData;
             DoUseDoorOrButton(GO_PLAG_HEIG_ENTRY_DOOR);
-            // uncomment when eruption is implemented
-            //if (uiData == IN_PROGRESS)
-            //    SetSpecialAchievementCriteria(TYPE_ACHIEV_SAFETY_DANCE, true);
             if (uiData == DONE)
                 DoUseDoorOrButton(GO_PLAG_HEIG_EXIT_DOOR);
             break;
         case TYPE_LOATHEB:
             m_auiEncounter[uiType] = uiData;
             DoUseDoorOrButton(GO_PLAG_LOAT_DOOR);
-            if (uiData == IN_PROGRESS)
-                SetSpecialAchievementCriteria(TYPE_ACHIEV_SPORE_LOSER, true);
             if (uiData == DONE)
             {
                 DoUseDoorOrButton(GO_PLAG_EYE_RAMP);
@@ -365,9 +346,6 @@ void instance_naxxramas::SetData(uint32 uiType, uint32 uiData)
             m_auiEncounter[uiType] = uiData;
             if (uiData != SPECIAL)
                 DoUseDoorOrButton(GO_CONS_THAD_DOOR, uiData);
-            // Uncomment when this achievement is implemented
-            //if (uiData == IN_PROGRESS)
-            //    SetSpecialAchievementCriteria(TYPE_ACHIEV_SHOCKING, true);
             if (uiData == DONE)
             {
                 DoUseDoorOrButton(GO_CONS_EYE_RAMP);
@@ -377,9 +355,6 @@ void instance_naxxramas::SetData(uint32 uiType, uint32 uiData)
             break;
         case TYPE_SAPPHIRON:
             m_auiEncounter[uiType] = uiData;
-            // Uncomment when achiev check implemented
-            //if (uiData == IN_PROGRESS)
-            //    SetSpecialAchievementCriteria(TYPE_ACHIEV_HUNDRED_CLUB, true);
             if (uiData == DONE)
             {
                 DoUseDoorOrButton(GO_KELTHUZAD_WATERFALL_DOOR);
@@ -389,11 +364,6 @@ void instance_naxxramas::SetData(uint32 uiType, uint32 uiData)
         case TYPE_KELTHUZAD:
             m_auiEncounter[uiType] = uiData;
             DoUseDoorOrButton(GO_KELTHUZAD_EXIT_DOOR);
-            if (uiData == IN_PROGRESS)
-                SetSpecialAchievementCriteria(TYPE_ACHIEV_GET_ENOUGH, false);
-            break;
-        case TYPE_UNDYING_FAILED:
-            m_auiEncounter[uiType] = uiData;
             break;
     }
 
@@ -446,59 +416,6 @@ uint32 instance_naxxramas::GetData(uint32 uiType)
         return m_auiEncounter[uiType];
 
     return 0;
-}
-
-void instance_naxxramas::SetSpecialAchievementCriteria(uint32 uiType, bool bIsMet)
-{
-    if (uiType < MAX_SPECIAL_ACHIEV_CRITS)
-        m_abAchievCriteria[uiType] = bIsMet;
-}
-
-bool instance_naxxramas::CheckAchievementCriteriaMeet(uint32 uiCriteriaId, Player const* pSource, Unit const* pTarget, uint32 uiMiscValue1 /* = 0*/)
-{
-    switch (uiCriteriaId)
-    {
-        case ACHIEV_CRIT_SAFETY_DANCE_N:
-        case ACHIEV_CRIT_SAFETY_DANCE_H:
-            return m_abAchievCriteria[TYPE_ACHIEV_SAFETY_DANCE];
-        case ACHIEV_CRIT_KNOCK_YOU_OUT_N:
-        case ACHIEV_CRIT_KNOCK_YOU_OUT_H:
-            return m_abAchievCriteria[TYPE_ACHIEV_KNOCK_YOU_OUT];
-        case ACHIEV_CRIT_HUNDRED_CLUB_N:
-        case ACHIEV_CRIT_HUNDRED_CLUB_H:
-            return m_abAchievCriteria[TYPE_ACHIEV_HUNDRED_CLUB];
-        case ACHIEV_CRIT_SHOCKING_N:
-        case ACHIEV_CRIT_SHOCKING_H:
-            return m_abAchievCriteria[TYPE_ACHIEV_SHOCKING];
-        case ACHIEV_CRIT_SPORE_LOSER_N:
-        case ACHIEV_CRIT_SPORE_LOSER_H:
-            return m_abAchievCriteria[TYPE_ACHIEV_SPORE_LOSER];
-        case ACHIEV_CRIT_GET_ENOUGH_N:
-        case ACHIEV_CRIT_GET_ENOUGH_H:
-            return m_abAchievCriteria[TYPE_ACHIEV_GET_ENOUGH];
-        // 'The Immortal'(25m) or 'Undying'(10m) - (achievs 2186, 2187)
-        case ACHIEV_CRIT_IMMORTAL_KEL:
-        case ACHIEV_CRIT_IMMOORTAL_LOA:
-        case ACHIEV_CRIT_IMMOORTAL_THAD:
-        case ACHIEV_CRIT_IMMOORTAL_MAEX:
-        case ACHIEV_CRIT_IMMOORTAL_HORSE:
-        case ACHIEV_CRIT_UNDYING_KEL:
-        case ACHIEV_CRIT_UNDYING_HORSE:
-        case ACHIEV_CRIT_UNDYING_MAEX:
-        case ACHIEV_CRIT_UNDYING_LOA:
-        case ACHIEV_CRIT_UNDYING_THAD:
-        {
-            // First, check if all bosses are killed (except the last encounter)
-            uint8 uiEncounterDone = 0;
-            for (uint8 i = 0; i < TYPE_KELTHUZAD; ++i)
-                if (m_auiEncounter[i] == DONE)
-                    ++uiEncounterDone;
-
-            return uiEncounterDone >= 14 && GetData(TYPE_UNDYING_FAILED) != DONE;
-        }
-        default:
-            return false;
-    }
 }
 
 void instance_naxxramas::Update(uint32 uiDiff)

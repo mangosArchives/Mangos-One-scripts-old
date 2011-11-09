@@ -136,10 +136,6 @@ struct MANGOS_DLL_DECL boss_faerlinaAI : public ScriptedAI
                 bIsFrenzyRemove = true;
             }
 
-            // Achievement 'Momma said Knock you out': If we removed OR delayed the frenzy, the criteria is failed
-            if ((bIsFrenzyRemove || m_uiEnrageTimer < 30000) && m_pInstance)
-                m_pInstance->SetSpecialAchievementCriteria(TYPE_ACHIEV_KNOCK_YOU_OUT, false);
-
             // In any case we prevent Frenzy and Poison Bolt Volley for Widow's Embrace Duration (30s)
             // We do this be setting the timers to at least bigger than 30s
             m_uiEnrageTimer = std::max(m_uiEnrageTimer, (uint32)30000);
