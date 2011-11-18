@@ -313,7 +313,7 @@
     <ClCompile Include="..\scripts\eastern_kingdoms\molten_core\boss_sulfuron_harbinger.cpp" />
     <ClCompile Include="..\scripts\eastern_kingdoms\molten_core\instance_molten_core.cpp" />
     <ClCompile Include="..\scripts\eastern_kingdoms\molten_core\molten_core.cpp" />
-	<ClCompile Include="..\scripts\eastern_kingdoms\naxxramas\boss_anubrekhan.cpp" />
+    <ClCompile Include="..\scripts\eastern_kingdoms\naxxramas\boss_anubrekhan.cpp" />
     <ClCompile Include="..\scripts\eastern_kingdoms\naxxramas\boss_faerlina.cpp" />
     <ClCompile Include="..\scripts\eastern_kingdoms\naxxramas\boss_four_horsemen.cpp" />
     <ClCompile Include="..\scripts\eastern_kingdoms\naxxramas\boss_gluth.cpp" />
@@ -422,6 +422,7 @@
     <ClCompile Include="..\scripts\kalimdor\thunder_bluff.cpp" />
     <ClCompile Include="..\scripts\kalimdor\ungoro_crater.cpp" />
     <ClCompile Include="..\scripts\kalimdor\winterspring.cpp" />
+    <ClCompile Include="..\scripts\kalimdor\blackfathom_deeps\instance_blackfathom_deeps.cpp" />
     <ClCompile Include="..\scripts\kalimdor\caverns_of_time\dark_portal\boss_aeonus.cpp" />
     <ClCompile Include="..\scripts\kalimdor\caverns_of_time\dark_portal\boss_chrono_lord_deja.cpp" />
     <ClCompile Include="..\scripts\kalimdor\caverns_of_time\dark_portal\boss_temporus.cpp" />
