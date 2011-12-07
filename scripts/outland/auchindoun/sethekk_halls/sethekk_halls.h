@@ -14,12 +14,6 @@ enum
     TYPE_IKISS                  = 2,
 
     GO_IKISS_DOOR               = 177203,
-
-    ACHIEV_CRITA_TURKEY_TIME    = 11142,
-    ITEM_PILGRIMS_HAT           = 46723,
-    ITEM_PILGRIMS_DRESS         = 44785,
-    ITEM_PILGRIMS_ROBE          = 46824,
-    ITEM_PILGRIMS_ATTIRE        = 46800,
 };
 
 class MANGOS_DLL_DECL instance_sethekk_halls : public ScriptedInstance
@@ -33,8 +27,6 @@ class MANGOS_DLL_DECL instance_sethekk_halls : public ScriptedInstance
 
         void SetData(uint32 uiType, uint32 uiData);
         uint32 GetData(uint32 uiType);
-
-        bool CheckAchievementCriteriaMeet(uint32 uiCriteriaId, Player const* pSource, Unit const* pTarget, uint32 uiMiscValue1 /* = 0*/);
 
         const char* Save() { return m_strInstData.c_str(); }
         void Load(const char* chrIn);

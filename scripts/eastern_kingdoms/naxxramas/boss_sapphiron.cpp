@@ -25,8 +25,6 @@ EndScriptData */
  * Bugged spells:   28560 (needs maxTarget = 1, Summon of 16474 implementation, TODO, 30s duration)
  *                  28526 (needs ScriptEffect to cast 28522 onto random target)
  *
- * Achievement-criteria check needs implementation
- *
  * Frost-Breath ability: the dummy spell 30101 is self cast, so it won't take the needed delay of ~7s until it reaches its target
  *                       As Sapphiron is displayed visually in hight (hovering), and the spell is cast with target=self-location
  *                       which is still on the ground, the client shows a nice slow falling of the visual animation
@@ -59,7 +57,6 @@ enum
     SPELL_CHILL_H               = 55699,
     SPELL_SUMMON_BLIZZARD       = 28560,
     SPELL_BESERK                = 26662,
-    SPELL_ACHIEVEMENT_CHECK     = 60539,                    // unused
 
     NPC_YOU_KNOW_WHO            = 16474,
 };
