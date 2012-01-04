@@ -26,7 +26,6 @@ go_cat_figurine (the "trap" version of GO, two different exist)
 go_barov_journal
 go_ethereum_prison
 go_ethereum_stasis
-go_orb_of_command
 go_resonite_cask
 go_sacred_fire_of_life
 go_shrine_of_the_birds
@@ -192,23 +191,6 @@ bool GOUse_go_jump_a_tron(Player* pPlayer, GameObject* pGo)
     return false;
 }
 
-/*######
-## go_orb_of_command
-######*/
-
-enum
-{
-    QUEST_BLACKHANDS_COMMAND = 7761,
-    SPELL_TELEPORT_TO_BWL    = 23460
-};
-
-bool GOUse_go_orb_of_command(Player* pPlayer, GameObject* pGo)
-{
-    if (pPlayer->GetQuestRewardStatus(QUEST_BLACKHANDS_COMMAND))
-        pPlayer->CastSpell(pPlayer, SPELL_TELEPORT_TO_BWL, true);
-
-    return true;
-}
 
 /*######
 ## go_resonite_cask
@@ -428,11 +410,6 @@ void AddSC_go_scripts()
     pNewScript = new Script;
     pNewScript->Name = "go_jump_a_tron";
     pNewScript->pGOUse =          &GOUse_go_jump_a_tron;
-    pNewScript->RegisterSelf();
-
-    pNewScript = new Script;
-    pNewScript->Name = "go_orb_of_command";
-    pNewScript->pGOUse =          &GOUse_go_orb_of_command;
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;
