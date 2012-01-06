@@ -14,6 +14,7 @@ enum
     TYPE_IKISS                  = 2,
 
     GO_IKISS_DOOR               = 177203,
+    GO_IKISS_CHEST              = 187372,
 };
 
 class MANGOS_DLL_DECL instance_sethekk_halls : public ScriptedInstance
