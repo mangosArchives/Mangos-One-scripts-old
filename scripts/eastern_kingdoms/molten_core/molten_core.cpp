@@ -28,7 +28,7 @@ EndContentData */
 #include "molten_core.h"
 
 /*######
-## go_service_gate
+## go_molten_core_rune
 ######*/
 
 bool GOUse_go_molten_core_rune(Player* pPlayer, GameObject* pGo)
