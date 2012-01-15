@@ -76,7 +76,7 @@ struct MANGOS_DLL_DECL npc_draenei_survivorAI : public ScriptedAI
 
         m_creature->CastSpell(m_creature, SPELL_IRRIDATION, true);
 
-        m_creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PVP_ATTACKABLE);
+        m_creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PVP);
         m_creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IN_COMBAT);
         m_creature->SetHealth(int(m_creature->GetMaxHealth()*.1));
         m_creature->SetStandState(UNIT_STAND_STATE_SLEEP);
@@ -105,7 +105,7 @@ struct MANGOS_DLL_DECL npc_draenei_survivorAI : public ScriptedAI
     {
         if (pSpell->Id == 28880)
         {
-            m_creature->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PVP_ATTACKABLE);
+            m_creature->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PVP);
             m_creature->SetStandState(UNIT_STAND_STATE_STAND);
 
             m_creature->CastSpell(m_creature, SPELL_STUNNED, true);
