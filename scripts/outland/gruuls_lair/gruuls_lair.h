@@ -13,7 +13,7 @@ enum
     TYPE_MAULGAR_EVENT              = 1,
     TYPE_GRUUL_EVENT                = 2,
 
-    GO_PORT_GRONN_1                 = 183817,               // 184468 not in use
+    GO_PORT_GRONN_1                 = 184468,
     GO_PORT_GRONN_2                 = 184662,
 
     // NPC GUIDs
