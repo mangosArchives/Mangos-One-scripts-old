@@ -17,7 +17,7 @@
 /* ScriptData
 SDName: GO_Scripts
 SD%Complete: 100
-SDComment: Quest support: 4296, 5088, 5097, 5098, 5381, 6481, 10990, 10991, 10992, Barov_journal->Teaches spell 26089
+SDComment: Quest support: 5088, 5097, 5098, 5381, 6481, 10990, 10991, 10992, Barov_journal->Teaches spell 26089
 SDCategory: Game Objects
 EndScriptData */
 
@@ -30,7 +30,6 @@ go_resonite_cask
 go_sacred_fire_of_life
 go_shrine_of_the_birds
 go_tablet_of_madness
-go_tablet_of_the_seven
 go_andorhal_tower
 go_hand_of_iruxos_crystal
 EndContentData */
@@ -284,22 +283,6 @@ bool GOUse_go_tablet_of_madness(Player* pPlayer, GameObject* pGo)
     return true;
 }
 
-/*######
-## go_tablet_of_the_seven - OBSOLETE
-######*/
-
-//TODO: use gossip option ("Transcript the Tablet") instead, if Mangos adds support.
-bool GOUse_go_tablet_of_the_seven(Player* pPlayer, GameObject* pGo)
-{
-    if (pGo->GetGoType() != GAMEOBJECT_TYPE_QUESTGIVER)
-        return true;
-
-    if (pPlayer->GetQuestStatus(4296) == QUEST_STATUS_INCOMPLETE)
-        pPlayer->CastSpell(pPlayer, 15065, false);
-
-    return true;
-}
-
 enum
 {
     NPC_ZELEMAR_THE_WRATHFULL = 17830,
@@ -430,11 +413,6 @@ void AddSC_go_scripts()
     pNewScript = new Script;
     pNewScript->Name = "go_tablet_of_madness";
     pNewScript->pGOUse =          &GOUse_go_tablet_of_madness;
-    pNewScript->RegisterSelf();
-
-    pNewScript = new Script;
-    pNewScript->Name = "go_tablet_of_the_seven";
-    pNewScript->pGOUse =          &GOUse_go_tablet_of_the_seven;
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;
