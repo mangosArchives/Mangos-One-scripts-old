@@ -317,7 +317,6 @@ UPDATE creature_template SET ScriptName='npc_fallen_hero_of_horde' WHERE entry=7
 
 /* BLOODMYST ISLE */
 UPDATE creature_template SET ScriptName='mob_webbed_creature' WHERE entry=17680;
-UPDATE creature_template SET ScriptName='npc_captured_sunhawk_agent' WHERE entry=17824;
 
 /* BURNING STEPPES */
 UPDATE creature_template SET ScriptName='npc_ragged_john' WHERE entry=9563;
