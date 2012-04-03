@@ -430,6 +430,7 @@ UPDATE creature_template SET ScriptName='npc_narm_faulk' WHERE entry=6177;
 
 
 /* DUROTAR */
+UPDATE creature_template SET ScriptName='npc_lazy_peon' WHERE entry=10556;
 
 
 /* DUSKWOOD */
