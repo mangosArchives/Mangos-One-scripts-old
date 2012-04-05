@@ -29,7 +29,6 @@ go_ethereum_stasis
 go_resonite_cask
 go_sacred_fire_of_life
 go_shrine_of_the_birds
-go_tablet_of_madness
 go_andorhal_tower
 go_hand_of_iruxos_crystal
 EndContentData */
@@ -265,24 +264,6 @@ bool GOUse_go_shrine_of_the_birds(Player* pPlayer, GameObject* pGo)
     return false;
 }
 
-/*######
-## go_tablet_of_madness
-######*/
-
-enum
-{
-    SPELL_ALCHEMY_GURUBASHI_MOJO_MADNESS = 24266,
-    SPELL_LEARN_GURUBASHI_MOJO_MADNESS   = 24267
-};
-
-bool GOUse_go_tablet_of_madness(Player* pPlayer, GameObject* pGo)
-{
-    if (pPlayer->HasSkill(SKILL_ALCHEMY) && pPlayer->GetSkillValue(SKILL_ALCHEMY) >= 300 && !pPlayer->HasSpell(SPELL_ALCHEMY_GURUBASHI_MOJO_MADNESS))
-        pPlayer->CastSpell(pPlayer, SPELL_LEARN_GURUBASHI_MOJO_MADNESS, false);
-
-    return true;
-}
-
 enum
 {
     NPC_ZELEMAR_THE_WRATHFULL = 17830,
@@ -408,11 +389,6 @@ void AddSC_go_scripts()
     pNewScript = new Script;
     pNewScript->Name = "go_shrine_of_the_birds";
     pNewScript->pGOUse =          &GOUse_go_shrine_of_the_birds;
-    pNewScript->RegisterSelf();
-
-    pNewScript = new Script;
-    pNewScript->Name = "go_tablet_of_madness";
-    pNewScript->pGOUse =          &GOUse_go_tablet_of_madness;
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;

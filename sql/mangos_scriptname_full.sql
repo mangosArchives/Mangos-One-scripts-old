@@ -60,7 +60,6 @@ UPDATE gameobject_template SET ScriptName='go_jump_a_tron' WHERE entry=183146;
 UPDATE gameobject_template SET ScriptName='go_resonite_cask' WHERE entry=178145;
 UPDATE gameobject_template SET ScriptName='go_sacred_fire_of_life' WHERE entry=175944;
 UPDATE gameobject_template SET ScriptName='go_shrine_of_the_birds' WHERE entry IN (185547,185553,185551);
-UPDATE gameobject_template SET ScriptName='go_tablet_of_madness' WHERE entry=180368;
 UPDATE gameobject_template SET ScriptName='go_blood_filled_orb' WHERE entry=182024;
 UPDATE gameobject_template SET ScriptName='go_andorhal_tower' WHERE entry IN (176094,176095,176096,176097);
 UPDATE gameobject_template SET ScriptName='go_veil_skith_cage' WHERE entry IN (185202,185203,185204,185205);
