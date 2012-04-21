@@ -175,7 +175,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
     void JustReachedHome()
     {
         // in case evade in phase 2, see comments for hack where phase 2 is set
-        m_creature->SetHover(false);
+        m_creature->SetLevitate(false);
         m_creature->SetByteFlag(UNIT_FIELD_BYTES_1, 3, 0);
 
         if (m_pInstance)
@@ -322,7 +322,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
                     // sort of a hack, it is unclear how this really work but the values appear to be valid
 
                     m_creature->SetByteValue(UNIT_FIELD_BYTES_1, 3, UNIT_BYTE1_FLAG_ALWAYS_STAND | UNIT_BYTE1_FLAG_UNK_2);
-                    m_creature->SetHover(true);
+                    m_creature->SetLevitate(true);
 
                     if (m_pPointData)
                         m_creature->GetMotionMaster()->MovePoint(m_pPointData->uiLocId, m_pPointData->fX, m_pPointData->fY, m_pPointData->fZ);
@@ -345,7 +345,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
 
                     // undo flying
                     m_creature->SetByteValue(UNIT_FIELD_BYTES_1, 3, 0);
-                    m_creature->SetHover(false);
+                    m_creature->SetLevitate(false);
 
                     SetCombatMovement(true);
                     m_creature->GetMotionMaster()->MoveChase(m_creature->getVictim());
