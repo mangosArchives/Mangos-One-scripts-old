@@ -153,6 +153,12 @@ enum
     // quest 9849, item 24501
     SPELL_THROW_GORDAWG_BOULDER         = 32001,
     NPC_MINION_OF_GUROK                 = 18181,
+
+    // npcs that are only interactable while dead
+    SPELL_SHROUD_OF_DEATH               = 10848,
+    SPELL_SPIRIT_PARTICLES              = 17327,
+    NPC_FRANCLORN_FORGEWRIGHT           = 8888,
+    NPC_GAERIYAN                        = 9299,
 };
 
 bool EffectAuraDummy_spell_aura_dummy_npc(const Aura* pAura, bool bApply)
@@ -245,6 +251,21 @@ bool EffectAuraDummy_spell_aura_dummy_npc(const Aura* pAura, bool bApply)
                 pTarget->AI()->AttackStart(pCreature);
                 return true;
             }
+
+            return false;
+        }
+        case SPELL_SHROUD_OF_DEATH:
+        case SPELL_SPIRIT_PARTICLES:
+        {
+            Creature* pCreature = (Creature*)pAura->GetTarget();
+
+            if (!pCreature || (pCreature->GetEntry() != NPC_FRANCLORN_FORGEWRIGHT && pCreature->GetEntry() != NPC_GAERIYAN)
+                return false;
+
+            if (bApply)
+                pCreature->m_AuraFlags |= UNIT_AURAFLAG_ALIVE_INVISIBLE;
+            else
+                pCreature->m_AuraFlags |= ~UNIT_AURAFLAG_ALIVE_INVISIBLE;
 
             return false;
         }

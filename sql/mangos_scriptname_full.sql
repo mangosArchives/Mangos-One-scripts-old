@@ -133,9 +133,9 @@ UPDATE creature_template SET ScriptName='npc_sayge' WHERE entry=14822;
 /* SPELL */
 UPDATE creature_template SET ScriptName='spell_dummy_npc' WHERE entry IN (
 -- eastern kingdoms
-1200,
+1200,8888,
 -- kalimdor
-12296,12298,
+9299,12296,12298,
 -- outland
 16880,16518,16847,17157,17326,17654,18879,22105,24918,25084,25085);
 
