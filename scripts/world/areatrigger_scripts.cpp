@@ -17,7 +17,7 @@
 /* ScriptData
 SDName: Areatrigger_Scripts
 SD%Complete: 100
-SDComment: Quest support: 6681, 10589/10604
+SDComment: Quest support: 4291, 6681, 10589/10604
 SDCategory: Areatrigger
 EndScriptData */
 
@@ -26,6 +26,7 @@ at_coilfang_waterfall           4591
 at_legion_teleporter            4560 Teleporter TO Invasion Point: Cataclysm
 at_ravenholdt
 at_childrens_week_spot          3546,3547,3548,3552,3549,3550
+at_scent_larkorwi               1726,1727,1728,1729,1730,1731,1732,1733,1734,1735,1736,1737,1738,1739,1740
 EndContentData */
 
 #include "precompiled.h"
@@ -124,6 +125,27 @@ bool AreaTrigger_at_ravenholdt(Player* pPlayer, AreaTriggerEntry const* pAt)
     return false;
 }
 
+/*######
+## at_scent_larkorwi
+######*/
+
+enum
+{
+    QUEST_SCENT_OF_LARKORWI     = 4291,
+    NPC_LARKORWI_MATE           = 9683
+};
+
+bool AreaTrigger_at_scent_larkorwi(Player* pPlayer, AreaTriggerEntry const* pAt)
+{
+    if (pPlayer->isAlive() && !pPlayer->isGameMaster() && pPlayer->GetQuestStatus(QUEST_SCENT_OF_LARKORWI) == QUEST_STATUS_INCOMPLETE)
+    {
+        if (!GetClosestCreatureWithEntry(pPlayer, NPC_LARKORWI_MATE, 25.0f, false, false))
+            pPlayer->SummonCreature(NPC_LARKORWI_MATE, pAt->x, pAt->y, pAt->z, 3.3f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 2*MINUTE*IN_MILLISECONDS);
+    }
+
+    return false;
+}
+
 void AddSC_areatrigger_scripts()
 {
     Script* pNewScript;
@@ -146,5 +168,10 @@ void AddSC_areatrigger_scripts()
     pNewScript = new Script;
     pNewScript->Name = "at_ravenholdt";
     pNewScript->pAreaTrigger = &AreaTrigger_at_ravenholdt;
+    pNewScript->RegisterSelf();
+
+    pNewScript = new Script;
+    pNewScript->Name = "at_scent_larkorwi";
+    pNewScript->pAreaTrigger = &AreaTrigger_at_scent_larkorwi;
     pNewScript->RegisterSelf();
 }

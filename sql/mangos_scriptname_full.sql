@@ -13,26 +13,43 @@ INSERT INTO scripted_areatrigger VALUES
 (4113,'at_naxxramas');
 DELETE FROM scripted_areatrigger WHERE entry IN (3546, 3547, 3548, 3549, 3550, 3552);
 INSERT INTO scripted_areatrigger VALUES
-(3546, 'at_childrens_week_spot'), -- Darnassian bank
-(3547, 'at_childrens_week_spot'), -- Undercity - thone room
-(3548, 'at_childrens_week_spot'), -- Stonewrought Dam
-(3549, 'at_childrens_week_spot'), -- The Mor'shan Rampart
-(3550, 'at_childrens_week_spot'), -- Ratchet Docks
-(3552, 'at_childrens_week_spot'); -- Westfall Lighthouse
-DELETE FROM scripted_areatrigger WHERE entry IN (2026, 2046);
+(3546,'at_childrens_week_spot'), -- Darnassian bank
+(3547,'at_childrens_week_spot'), -- Undercity - thone room
+(3548,'at_childrens_week_spot'), -- Stonewrought Dam
+(3549,'at_childrens_week_spot'), -- The Mor'shan Rampart
+(3550,'at_childrens_week_spot'), -- Ratchet Docks
+(3552,'at_childrens_week_spot'); -- Westfall Lighthouse
+DELETE FROM scripted_areatrigger WHERE entry IN (2026,2046);
 INSERT INTO scripted_areatrigger VALUES
 (2026, 'at_blackrock_spire'),
 (2046, 'at_blackrock_spire');
 DELETE FROM scripted_areatrigger WHERE entry IN (3958, 3960);
 INSERT INTO scripted_areatrigger VALUES
-(3958, 'at_zulgurub'),
-(3960, 'at_zulgurub');
+(3958,'at_zulgurub'),
+(3960,'at_zulgurub');
 DELETE FROM scripted_areatrigger WHERE entry=3626;
-INSERT INTO scripted_areatrigger VALUES (3626, 'at_vaelastrasz');
+INSERT INTO scripted_areatrigger VALUES (3626,'at_vaelastrasz');
 DELETE FROM scripted_areatrigger WHERE entry=4937;
-INSERT INTO scripted_areatrigger VALUES (4937, 'at_sunwell_plateau');
+INSERT INTO scripted_areatrigger VALUES (4937,'at_sunwell_plateau');
 DELETE FROM scripted_areatrigger WHERE entry=4524;
 INSERT INTO scripted_areatrigger VALUES (4524,'at_shattered_halls');
+DELETE FROM scripted_areatrigger WHERE entry BETWEEN 1726 AND 1740;
+INSERT INTO scripted_areatrigger VALUES
+(1726,'at_scent_larkorwi'),
+(1727,'at_scent_larkorwi'),
+(1728,'at_scent_larkorwi'),
+(1729,'at_scent_larkorwi'),
+(1730,'at_scent_larkorwi'),
+(1731,'at_scent_larkorwi'),
+(1732,'at_scent_larkorwi'),
+(1733,'at_scent_larkorwi'),
+(1734,'at_scent_larkorwi'),
+(1735,'at_scent_larkorwi'),
+(1736,'at_scent_larkorwi'),
+(1737,'at_scent_larkorwi'),
+(1738,'at_scent_larkorwi'),
+(1739,'at_scent_larkorwi'),
+(1740,'at_scent_larkorwi');
 
 
 /* BATTLEGROUNDS */
