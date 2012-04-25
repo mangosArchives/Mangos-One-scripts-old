@@ -130,6 +130,7 @@ UPDATE creature_template SET ScriptName='npc_sayge' WHERE entry=14822;
 -- disabled, but can be used for custom
 -- UPDATE creature_template SET ScriptName='' WHERE npcflag!=npcflag|65536 AND ScriptName='npc_innkeeper';
 -- UPDATE creature_template SET ScriptName='npc_innkeeper' WHERE npcflag=npcflag|65536;
+UPDATE creature_template SET ScriptName='npc_redemption_target' WHERE entry IN (6172,6177,17542,17768);
 
 /* SPELL */
 UPDATE creature_template SET ScriptName='spell_dummy_npc' WHERE entry IN (
@@ -444,7 +445,6 @@ UPDATE creature_template SET ScriptName='npc_melizza_brimbuzzle' WHERE entry=122
 UPDATE instance_template SET ScriptName='instance_dire_maul' WHERE map=429;
 
 /* DUN MOROGH */
-UPDATE creature_template SET ScriptName='npc_narm_faulk' WHERE entry=6177;
 
 
 /* DUROTAR */
@@ -470,7 +470,6 @@ UPDATE creature_template SET ScriptName='npc_darrowshire_spirit' WHERE entry=110
 UPDATE creature_template SET ScriptName='npc_tirion_fordring' WHERE entry=1855;
 
 /* ELWYNN FOREST */
-UPDATE creature_template SET ScriptName='npc_henze_faulk' WHERE entry=6172;
 
 /* EVERSONG WOODS */
 UPDATE creature_template SET ScriptName='npc_kelerun_bloodmourn' WHERE entry=17807;
@@ -823,7 +822,6 @@ UPDATE creature_template SET ScriptName='npc_anachronos_the_ancient' WHERE entry
 UPDATE gameobject_template SET ScriptName='go_crystalline_tear' WHERE entry=180633;
 
 /* SILVERMOON */
-UPDATE creature_template SET ScriptName='npc_blood_knight_stillblade' WHERE entry=17768;
 
 /* SILVERPINE FOREST */
 UPDATE creature_template SET ScriptName='npc_deathstalker_erland' WHERE entry=1978;
