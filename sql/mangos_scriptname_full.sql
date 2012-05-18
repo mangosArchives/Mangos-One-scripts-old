@@ -7,11 +7,11 @@ DELETE FROM scripted_areatrigger WHERE entry=4560;
 INSERT INTO scripted_areatrigger VALUES (4560,'at_legion_teleporter');
 DELETE FROM scripted_areatrigger WHERE entry=3066;
 INSERT INTO scripted_areatrigger VALUES (3066,'at_ravenholdt');
-DELETE FROM scripted_areatrigger WHERE entry IN (4112, 4113);
+DELETE FROM scripted_areatrigger WHERE entry IN (4112,4113);
 INSERT INTO scripted_areatrigger VALUES
 (4112,'at_naxxramas'),
 (4113,'at_naxxramas');
-DELETE FROM scripted_areatrigger WHERE entry IN (3546, 3547, 3548, 3549, 3550, 3552);
+DELETE FROM scripted_areatrigger WHERE entry IN (3546,3547,3548,3549,3550,3552);
 INSERT INTO scripted_areatrigger VALUES
 (3546,'at_childrens_week_spot'), -- Darnassian bank
 (3547,'at_childrens_week_spot'), -- Undercity - thone room
@@ -21,9 +21,9 @@ INSERT INTO scripted_areatrigger VALUES
 (3552,'at_childrens_week_spot'); -- Westfall Lighthouse
 DELETE FROM scripted_areatrigger WHERE entry IN (2026,2046);
 INSERT INTO scripted_areatrigger VALUES
-(2026, 'at_blackrock_spire'),
-(2046, 'at_blackrock_spire');
-DELETE FROM scripted_areatrigger WHERE entry IN (3958, 3960);
+(2026,'at_blackrock_spire'),
+(2046,'at_blackrock_spire');
+DELETE FROM scripted_areatrigger WHERE entry IN (3958,3960);
 INSERT INTO scripted_areatrigger VALUES
 (3958,'at_zulgurub'),
 (3960,'at_zulgurub');
@@ -50,6 +50,10 @@ INSERT INTO scripted_areatrigger VALUES
 (1738,'at_scent_larkorwi'),
 (1739,'at_scent_larkorwi'),
 (1740,'at_scent_larkorwi');
+DELETE FROM scripted_areatrigger WHERE entry in (4288,4485);
+INSERT INTO scripted_areatrigger VALUES
+(4288,'at_dark_portal'),
+(4485,'at_dark_portal');
 
 
 /* BATTLEGROUNDS */
@@ -370,8 +374,9 @@ UPDATE creature_template SET ScriptName='boss_chrono_lord_deja' WHERE entry=1787
 UPDATE creature_template SET ScriptName='boss_aeonus' WHERE entry=17881;
 UPDATE creature_template SET ScriptName='boss_temporus' WHERE entry=17880;
 UPDATE instance_template SET ScriptName='instance_dark_portal' WHERE map=269;
-UPDATE creature_template SET ScriptName='npc_medivh_bm' WHERE entry=15608;
+UPDATE creature_template SET ScriptName='npc_medivh_black_morass' WHERE entry=15608;
 UPDATE creature_template SET ScriptName='npc_time_rift' WHERE entry=17838;
+UPDATE creature_template SET ScriptName='npc_time_rift_channeler' WHERE entry IN (21104,17839,21697,21698);
 
 /*  */
 /* COILFANG RESERVOIR */
