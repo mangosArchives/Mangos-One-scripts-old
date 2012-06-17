@@ -471,7 +471,6 @@ INSERT INTO scripted_areatrigger VALUES
 /* EASTERN PLAGUELANDS */
 UPDATE creature_template SET ScriptName='mobs_ghoul_flayer' WHERE entry IN (8530,8531,8532);
 UPDATE creature_template SET ScriptName='npc_darrowshire_spirit' WHERE entry=11064;
-UPDATE creature_template SET ScriptName='npc_tirion_fordring' WHERE entry=1855;
 
 /* ELWYNN FOREST */
 
@@ -571,7 +570,6 @@ UPDATE creature_template SET ScriptName='npc_00x09hl' WHERE entry=7806;
 UPDATE creature_template SET ScriptName='npc_rinji' WHERE entry=7780;
 
 /* IRONFORGE */
-UPDATE creature_template SET ScriptName='npc_royal_historian_archesonus' WHERE entry=8879;
 
 /* ISLE OF QUEL'DANAS */
 UPDATE creature_template SET ScriptName='npc_converted_sentry' WHERE entry=24981;
