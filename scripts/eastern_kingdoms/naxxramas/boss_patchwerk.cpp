@@ -35,7 +35,6 @@ enum
     EMOTE_GENERIC_ENRAGED   = -1000003,
 
     SPELL_HATEFULSTRIKE   = 28308,
-    SPELL_HATEFULSTRIKE_H = 59192,
     SPELL_ENRAGE          = 28131,
     SPELL_BERSERK         = 26662,
     SPELL_SLIMEBOLT       = 32309
@@ -46,12 +45,10 @@ struct MANGOS_DLL_DECL boss_patchwerkAI : public ScriptedAI
     boss_patchwerkAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     uint32 m_uiHatefulStrikeTimer;
     uint32 m_uiBerserkTimer;
@@ -103,7 +100,7 @@ struct MANGOS_DLL_DECL boss_patchwerkAI : public ScriptedAI
         // The ability is used on highest HP target choosen of the top 2 (3 heroic) targets on threat list being in melee range
         Unit* pTarget = NULL;
         uint32 uiHighestHP = 0;
-        uint32 uiTargets = m_bIsRegularMode ? 1 : 2;
+        uint32 uiTargets = 2;
 
         ThreatList const& tList = m_creature->getThreatManager().getThreatList();
         if (tList.size() > 1)                               // Check if more than two targets, and start loop with second-most aggro
@@ -133,7 +130,7 @@ struct MANGOS_DLL_DECL boss_patchwerkAI : public ScriptedAI
         if (!pTarget)
             pTarget = m_creature->getVictim();
 
-        DoCastSpellIfCan(pTarget, m_bIsRegularMode ? SPELL_HATEFULSTRIKE : SPELL_HATEFULSTRIKE_H);
+        DoCastSpellIfCan(pTarget, SPELL_HATEFULSTRIKE);
     }
 
     void UpdateAI(const uint32 uiDiff)

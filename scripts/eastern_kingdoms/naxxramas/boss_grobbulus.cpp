@@ -39,7 +39,6 @@ enum
     SPELL_MUTATING_INJECTION        = 28169,
     SPELL_POISON_CLOUD              = 28240,
     SPELL_SLIME_SPRAY               = 28157,
-    SPELL_SLIME_SPRAY_H             = 54364,
     SPELL_BERSERK                   = 26662,
 
     NPC_FALLOUT_SLIME               = 16290
@@ -50,13 +49,10 @@ struct MANGOS_DLL_DECL boss_grobbulusAI : public ScriptedAI
     boss_grobbulusAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
-
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     uint32 m_uiInjectionTimer;
     uint32 m_uiPoisonCloudTimer;
@@ -70,7 +66,7 @@ struct MANGOS_DLL_DECL boss_grobbulusAI : public ScriptedAI
         m_uiInjectionTimer = 12*IN_MILLISECONDS;
         m_uiPoisonCloudTimer = urand (20*IN_MILLISECONDS, 25*IN_MILLISECONDS);
         m_uiSlimeSprayTimer = urand(20*IN_MILLISECONDS, 30*IN_MILLISECONDS);
-        m_uiBerserkTimeSecs = m_bIsRegularMode ? 12*MINUTE : 9*MINUTE;
+        m_uiBerserkTimeSecs = 12*MINUTE;
         m_uiBerserkTimer = m_uiBerserkTimeSecs*IN_MILLISECONDS;
         m_uiSlimeStreamTimer = 5*IN_MILLISECONDS;           // The first few secs it is ok to be out of range
     }
@@ -127,7 +123,7 @@ struct MANGOS_DLL_DECL boss_grobbulusAI : public ScriptedAI
 
     void SpellHitTarget(Unit* pTarget, const SpellEntry* pSpell)
     {
-        if ((pSpell->Id == SPELL_SLIME_SPRAY || pSpell->Id == SPELL_SLIME_SPRAY_H) && pTarget->GetTypeId() == TYPEID_PLAYER)
+        if ((pSpell->Id == SPELL_SLIME_SPRAY) && pTarget->GetTypeId() == TYPEID_PLAYER)
             m_creature->SummonCreature(NPC_FALLOUT_SLIME, pTarget->GetPositionX(), pTarget->GetPositionY(), pTarget->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 10*IN_MILLISECONDS);
     }
 
@@ -169,7 +165,7 @@ struct MANGOS_DLL_DECL boss_grobbulusAI : public ScriptedAI
         // SlimeSpray
         if (m_uiSlimeSprayTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_SLIME_SPRAY : SPELL_SLIME_SPRAY_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_SLIME_SPRAY) == CAST_OK)
             {
                 m_uiSlimeSprayTimer = urand(30*IN_MILLISECONDS, 60*IN_MILLISECONDS);
                 DoScriptText(EMOTE_SPRAY_SLIME, m_creature);
@@ -182,13 +178,7 @@ struct MANGOS_DLL_DECL boss_grobbulusAI : public ScriptedAI
         if (m_uiInjectionTimer < uiDiff)
         {
             if (DoCastMutagenInjection())
-            {
-                // Timer dependend on time of encounter  - on enrage time between 5-8s, heroic 2-5s (TODO no reliable source for heroic)
-                if (m_bIsRegularMode)
-                    m_uiInjectionTimer = urand(10*IN_MILLISECONDS, 13*IN_MILLISECONDS) -  5 * (m_uiBerserkTimeSecs*IN_MILLISECONDS - m_uiBerserkTimer) / m_uiBerserkTimeSecs;
-                else
-                    m_uiInjectionTimer = urand(10*IN_MILLISECONDS, 13*IN_MILLISECONDS) -  8 * (m_uiBerserkTimeSecs*IN_MILLISECONDS - m_uiBerserkTimer) / m_uiBerserkTimeSecs;
-            }
+                m_uiInjectionTimer = urand(10*IN_MILLISECONDS, 13*IN_MILLISECONDS) -  5 * (m_uiBerserkTimeSecs*IN_MILLISECONDS - m_uiBerserkTimer) / m_uiBerserkTimeSecs;
         }
         else
             m_uiInjectionTimer -= uiDiff;

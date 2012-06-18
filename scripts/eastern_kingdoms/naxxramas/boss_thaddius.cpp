@@ -66,19 +66,14 @@ enum
     SPELL_THADIUS_LIGHTNING_VISUAL  = 28136,
     SPELL_BALL_LIGHTNING            = 28299,
     SPELL_CHAIN_LIGHTNING           = 28167,
-    SPELL_CHAIN_LIGHTNING_H         = 54531,
     SPELL_POLARITY_SHIFT            = 28089,
     SPELL_BESERK                    = 27680,
-    SPELL_CLEAR_CHARGES             = 63133,                // TODO NYI, cast on death, most likely to remove remaining buffs
 
     // Stalagg & Feugen Spells
-    //SPELL_WARSTOMP                  = 28125,              // Not used in Wotlk Version
+    SPELL_WARSTOMP                  = 28125,
     SPELL_MAGNETIC_PULL_A           = 28338,
-    SPELL_MAGNETIC_PULL_B           = 54517,                // used by Feugen (wotlk)
     SPELL_STATIC_FIELD              = 28135,
-    SPELL_STATIC_FIELD_H            = 54528,
-    SPELL_POWERSURGE_H              = 28134,
-    SPELL_POWERSURGE                = 54529,
+    SPELL_POWERSURGE                = 28134,
 
     // Tesla Spells
     SPELL_FEUGEN_CHAIN              = 28111,
@@ -99,13 +94,10 @@ struct MANGOS_DLL_DECL boss_thaddiusAI : public Scripted_NoMovementAI
     boss_thaddiusAI(Creature* pCreature) : Scripted_NoMovementAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
-
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     uint32 m_uiPolarityShiftTimer;
     uint32 m_uiChainLightningTimer;
@@ -218,7 +210,7 @@ struct MANGOS_DLL_DECL boss_thaddiusAI : public Scripted_NoMovementAI
         if (m_uiChainLightningTimer < uiDiff)
         {
             Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0);
-            if (pTarget && DoCastSpellIfCan(pTarget, m_bIsRegularMode ? SPELL_CHAIN_LIGHTNING : SPELL_CHAIN_LIGHTNING_H) == CAST_OK)
+            if (pTarget && DoCastSpellIfCan(pTarget, SPELL_CHAIN_LIGHTNING) == CAST_OK)
                 m_uiChainLightningTimer = 15*IN_MILLISECONDS;
         }
         else
@@ -416,19 +408,16 @@ struct MANGOS_DLL_DECL boss_thaddiusAddsAI : public ScriptedAI
     boss_thaddiusAddsAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
-
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     bool m_bFakeDeath;
     bool m_bBothDead;
 
     uint32 m_uiHoldTimer;
-    //uint32 m_uiWarStompTimer;
+    uint32 m_uiWarStompTimer;
     uint32 m_uiReviveTimer;
 
     void Reset()
@@ -438,7 +427,7 @@ struct MANGOS_DLL_DECL boss_thaddiusAddsAI : public ScriptedAI
 
         m_uiReviveTimer = 5*IN_MILLISECONDS;
         m_uiHoldTimer = 2*IN_MILLISECONDS;
-        //m_uiWarStompTimer = urand(8*IN_MILLISECONDS, 10*IN_MILLISECONDS);
+        m_uiWarStompTimer = urand(8*IN_MILLISECONDS, 10*IN_MILLISECONDS);
 
         // We might Reset while faking death, so undo this
         m_creature->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
@@ -591,14 +580,13 @@ struct MANGOS_DLL_DECL boss_thaddiusAddsAI : public ScriptedAI
                 m_uiHoldTimer -= uiDiff;
         }
 
-        /*  Doesn't happen in wotlk version any more
         if (m_uiWarStompTimer < uiDiff)
         {
             if (DoCastSpellIfCan(m_creature, SPELL_WARSTOMP) == CAST_OK)
                 m_uiWarStompTimer = urand(8*IN_MILLISECONDS, 10*IN_MILLISECONDS);
         }
         else
-            m_uiWarStompTimer -= uiDiff;*/
+            m_uiWarStompTimer -= uiDiff;
 
         UpdateAddAI(uiDiff);                    // For Add Specific Abilities
 
@@ -677,7 +665,7 @@ struct MANGOS_DLL_DECL boss_stalaggAI : public boss_thaddiusAddsAI
     {
         if (m_uiPowerSurgeTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_POWERSURGE : SPELL_POWERSURGE_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_POWERSURGE) == CAST_OK)
                 m_uiPowerSurgeTimer = urand(10*IN_MILLISECONDS, 15*IN_MILLISECONDS);
         }
         else
@@ -731,7 +719,7 @@ struct MANGOS_DLL_DECL boss_feugenAI : public boss_thaddiusAddsAI
     {
         if (m_uiStaticFieldTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_STATIC_FIELD : SPELL_STATIC_FIELD_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_STATIC_FIELD) == CAST_OK)
                 m_uiStaticFieldTimer = urand(10*IN_MILLISECONDS, 15*IN_MILLISECONDS);
         }
         else

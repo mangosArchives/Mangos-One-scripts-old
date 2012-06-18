@@ -30,13 +30,11 @@ enum
     EMOTE_BOSS_GENERIC_ENRAGED      = -1000006,
     EMOTE_DECIMATE                  = -1533152,
 
-    SPELL_MORTALWOUND               = 54378,                // old vanilla spell was 25646,
+    SPELL_MORTALWOUND               = 25646,
     SPELL_DECIMATE                  = 28374,
-    SPELL_DECIMATE_H                = 54426,
     SPELL_ENRAGE                    = 28371,
-    SPELL_ENRAGE_H                  = 54427,
     SPELL_BERSERK                   = 26662,
-    //SPELL_TERRIFYING_ROAR         = 29685,                // no longer used in 3.x.x
+    SPELL_TERRIFYING_ROAR           = 29685,
     //SPELL_SUMMON_ZOMBIE_CHOW      = 28216,                // removed from dbc: triggers 28217 every 6 secs
     //SPELL_CALL_ALL_ZOMBIE_CHOW    = 29681,                // removed from dbc: triggers 29682
     //SPELL_ZOMBIE_CHOW_SEARCH      = 28235,                // removed from dbc: triggers 28236 every 3 secs
@@ -58,16 +56,15 @@ struct MANGOS_DLL_DECL boss_gluthAI : public ScriptedAI
     boss_gluthAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     uint32 m_uiMortalWoundTimer;
     uint32 m_uiDecimateTimer;
     uint32 m_uiEnrageTimer;
+    uint32 m_uiRoarTimer;
     uint32 m_uiSummonTimer;
     uint32 m_uiZombieSearchTimer;
 
@@ -80,10 +77,11 @@ struct MANGOS_DLL_DECL boss_gluthAI : public ScriptedAI
         m_uiMortalWoundTimer  = 10000;
         m_uiDecimateTimer     = 110000;
         m_uiEnrageTimer       = 25000;
-        m_uiSummonTimer       = 15000;
+        m_uiSummonTimer       = 6000;
+        m_uiRoarTimer         = 15000;
         m_uiZombieSearchTimer = 3000;
 
-        m_uiBerserkTimer     = MINUTE*8*IN_MILLISECONDS;
+        m_uiBerserkTimer      = MINUTE*8*IN_MILLISECONDS;
     }
 
     void JustDied(Unit* pKiller)
@@ -177,7 +175,7 @@ struct MANGOS_DLL_DECL boss_gluthAI : public ScriptedAI
         // Decimate
         if (m_uiDecimateTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_DECIMATE : SPELL_DECIMATE_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_DECIMATE) == CAST_OK)
             {
                 DoScriptText(EMOTE_DECIMATE, m_creature);
                 DoCallAllZombieChow();
@@ -190,7 +188,7 @@ struct MANGOS_DLL_DECL boss_gluthAI : public ScriptedAI
         // Enrage
         if (m_uiEnrageTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_ENRAGE : SPELL_ENRAGE_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_ENRAGE) == CAST_OK)
             {
                 DoScriptText(EMOTE_BOSS_GENERIC_ENRAGED, m_creature);
                 m_uiEnrageTimer = urand(20000, 30000);
@@ -199,19 +197,25 @@ struct MANGOS_DLL_DECL boss_gluthAI : public ScriptedAI
         else
             m_uiEnrageTimer -= uiDiff;
 
+        // Terrifying Roar
+        if (m_uiRoarTimer < uiDiff)
+        {
+            if (DoCastSpellIfCan(m_creature, SPELL_TERRIFYING_ROAR) == CAST_OK)
+                m_uiRoarTimer = 20000;
+        }
+        else
+            m_uiRoarTimer -= uiDiff;
+
         // Summon
         if (m_uiSummonTimer < uiDiff)
         {
             uint8 uiPos1 = urand(0, MAX_ZOMBIE_LOCATIONS - 1);
             m_creature->SummonCreature(NPC_ZOMBIE_CHOW, aZombieSummonLoc[uiPos1][0], aZombieSummonLoc[uiPos1][1], aZombieSummonLoc[uiPos1][2], 0.0f, TEMPSUMMON_DEAD_DESPAWN, 0);
 
-            if (!m_bIsRegularMode)
-            {
-                uint8 uiPos2 = (uiPos1 + urand(1, MAX_ZOMBIE_LOCATIONS - 1)) % MAX_ZOMBIE_LOCATIONS;
-                m_creature->SummonCreature(NPC_ZOMBIE_CHOW, aZombieSummonLoc[uiPos2][0], aZombieSummonLoc[uiPos2][1], aZombieSummonLoc[uiPos2][2], 0.0f, TEMPSUMMON_DEAD_DESPAWN, 0);
-            }
+            uint8 uiPos2 = (uiPos1 + urand(1, MAX_ZOMBIE_LOCATIONS - 1)) % MAX_ZOMBIE_LOCATIONS;
+            m_creature->SummonCreature(NPC_ZOMBIE_CHOW, aZombieSummonLoc[uiPos2][0], aZombieSummonLoc[uiPos2][1], aZombieSummonLoc[uiPos2][2], 0.0f, TEMPSUMMON_DEAD_DESPAWN, 0);
 
-            m_uiSummonTimer = 10000;
+            m_uiSummonTimer = 6000;
         }
         else
             m_uiSummonTimer -= uiDiff;
