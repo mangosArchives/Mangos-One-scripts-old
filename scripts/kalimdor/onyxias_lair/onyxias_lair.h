@@ -11,7 +11,6 @@ enum
 
     // Special data fields for Onyxia
     DATA_LIFTOFF                = 4,
-    DATA_PLAYER_TOASTED         = 5,
 
     NPC_ONYXIA_WHELP            = 11262,
     NPC_ONYXIA_TRIGGER          = 12758,

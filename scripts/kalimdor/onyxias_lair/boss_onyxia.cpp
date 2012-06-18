@@ -33,15 +33,11 @@ enum
     EMOTE_BREATH                = -1249004,
 
     SPELL_WINGBUFFET            = 18500,
-    SPELL_WINGBUFFET_H          = 69293,
     SPELL_FLAMEBREATH           = 18435,
-    SPELL_FLAMEBREATH_H         = 68970,
-    SPELL_CLEAVE                = 68868,
-    SPELL_TAILSWEEP             = 68867,
-    SPELL_TAILSWEEP_H           = 69286,
+    SPELL_CLEAVE                = 19983,
+    SPELL_TAILSWEEP             = 15847,
     SPELL_KNOCK_AWAY            = 19633,
     SPELL_FIREBALL              = 18392,
-    SPELL_FIREBALL_H            = 68926,
 
     //Not much choise about these. We have to make own defintion on the direction/start-end point
     SPELL_BREATH_NORTH_TO_SOUTH = 17086,                    // 20x in "array"
@@ -55,16 +51,12 @@ enum
     SPELL_BREATH_SW_TO_NE       = 18596,                    // 12x in "array"
     SPELL_BREATH_NE_TO_SW       = 18617,                    // 12x in "array"
 
-    SPELL_VISUAL_BREATH_A       = 4880,                     // Only and all of the above Breath spells (and their triggered spells) have these visuals
-    SPELL_VISUAL_BREATH_B       = 4919,
-
     //SPELL_BREATH                = 21131,                  // 8x in "array", different initial cast than the other arrays
 
     SPELL_BELLOWINGROAR         = 18431,
     SPELL_HEATED_GROUND         = 22191,                    // TODO
 
     SPELL_SUMMONWHELP           = 17646,                    // TODO this spell is only a summon spell, but would need a spell to activate the eggs
-    SPELL_SUMMON_LAIR_GUARD     = 68968,
 
     MAX_WHELPS_PER_PACK         = 40,
 
@@ -99,7 +91,6 @@ static const float afSpawnLocations[3][3]=
 {
     {-30.127f, -254.463f, -89.440f},                        // whelps
     {-30.817f, -177.106f, -89.258f},                        // whelps
-    {-126.57f, -214.609f, -71.446f}                         // guardians
 };
 
 struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
@@ -107,12 +98,10 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
     boss_onyxiaAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_onyxias_lair*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         m_uiMaxBreathPositions = sizeof(aMoveData)/sizeof(OnyxiaMove);
         Reset();
     }
 
-    bool m_bIsRegularMode;
     instance_onyxias_lair* m_pInstance;
 
     uint8 m_uiPhase;
@@ -131,7 +120,6 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
     uint32 m_uiSummonWhelpsTimer;
     uint32 m_uiBellowingRoarTimer;
     uint32 m_uiWhelpTimer;
-    uint32 m_uiSummonGuardTimer;
 
     uint8 m_uiSummonCount;
 
@@ -157,7 +145,6 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
         m_uiSummonWhelpsTimer = 15000;
         m_uiBellowingRoarTimer = 2000;                      // Immediately after landing
         m_uiWhelpTimer = 1000;
-        m_uiSummonGuardTimer = 15000;
 
         m_uiSummonCount = 0;
 
@@ -280,7 +267,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
             {
                 if (m_uiFlameBreathTimer < uiDiff)
                 {
-                    if (DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_FLAMEBREATH : SPELL_FLAMEBREATH_H) == CAST_OK)
+                    if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_FLAMEBREATH) == CAST_OK)
                         m_uiFlameBreathTimer = urand(10000, 20000);
                 }
                 else
@@ -288,7 +275,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
 
                 if (m_uiTailSweepTimer < uiDiff)
                 {
-                    if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_TAILSWEEP : SPELL_TAILSWEEP_H) == CAST_OK)
+                    if (DoCastSpellIfCan(m_creature, SPELL_TAILSWEEP) == CAST_OK)
                         m_uiTailSweepTimer = urand(15000, 20000);
                 }
                 else
@@ -304,7 +291,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
 
                 if (m_uiWingBuffetTimer < uiDiff)
                 {
-                    if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_WINGBUFFET : SPELL_WINGBUFFET_H) == CAST_OK)
+                    if (DoCastSpellIfCan(m_creature, SPELL_WINGBUFFET) == CAST_OK)
                         m_uiWingBuffetTimer = urand(15000, 30000);
                 }
                 else
@@ -389,7 +376,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
                 {
                     if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
                     {
-                        if (DoCastSpellIfCan(pTarget, m_bIsRegularMode ? SPELL_FIREBALL : SPELL_FIREBALL_H) == CAST_OK)
+                        if (DoCastSpellIfCan(pTarget, SPELL_FIREBALL) == CAST_OK)
                             m_uiFireballTimer = 8000;
                     }
                 }
@@ -424,31 +411,9 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
                         m_uiSummonWhelpsTimer -= uiDiff;
                 }
 
-                if (m_uiSummonGuardTimer < uiDiff)
-                {
-                    if (!m_creature->IsNonMeleeSpellCasted(false))
-                    {
-                        m_creature->CastSpell(afSpawnLocations[2][0], afSpawnLocations[2][1], afSpawnLocations[2][2], SPELL_SUMMON_LAIR_GUARD, true);
-                        m_uiSummonGuardTimer = 30000;
-                    }
-                }
-                else
-                    m_uiSummonGuardTimer -= uiDiff;
-
                 break;
             }
         }
-    }
-
-    void SpellHitTarget(Unit* pTarget, const SpellEntry* pSpell)
-    {
-        // Check if players are hit by Onyxia's Deep Breath
-        if (pTarget->GetTypeId() != TYPEID_PLAYER || !m_pInstance)
-            return;
-
-        // All and only the Onyxia Deep Breath Spells have these visuals
-        if (pSpell->SpellVisual == SPELL_VISUAL_BREATH_A || pSpell->SpellVisual == SPELL_VISUAL_BREATH_B)
-            m_pInstance->SetData(TYPE_ONYXIA, DATA_PLAYER_TOASTED);
     }
 };
 
