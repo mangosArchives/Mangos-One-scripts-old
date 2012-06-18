@@ -41,9 +41,7 @@ enum
     EMOTE_CORPSE_SCARABS        = -1533155,
 
     SPELL_IMPALE                = 28783,                    //May be wrong spell id. Causes more dmg than I expect
-    SPELL_IMPALE_H              = 56090,
     SPELL_LOCUSTSWARM           = 28785,                    //This is a self buff that triggers the dmg debuff
-    SPELL_LOCUSTSWARM_H         = 54021,
 
     //spellId invalid
     //SPELL_SUMMONGUARD         = 29508,                    //Summons 1 crypt guard at targeted location - spell doesn't exist in 3.x.x
@@ -72,7 +70,6 @@ struct MANGOS_DLL_DECL boss_anubrekhanAI : public ScriptedAI
         m_introDialogue(aIntroDialogue)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         m_introDialogue.InitializeDialogueHelper(m_pInstance);
         m_bHasTaunted = false;
         Reset();
@@ -80,7 +77,6 @@ struct MANGOS_DLL_DECL boss_anubrekhanAI : public ScriptedAI
 
     instance_naxxramas* m_pInstance;
     DialogueHelper m_introDialogue;
-    bool m_bIsRegularMode;
 
     uint32 m_uiImpaleTimer;
     uint32 m_uiLocustSwarmTimer;
@@ -91,7 +87,7 @@ struct MANGOS_DLL_DECL boss_anubrekhanAI : public ScriptedAI
     {
         m_uiImpaleTimer      = 15000;
         m_uiLocustSwarmTimer = 90000;
-        m_uiSummonTimer      = m_bIsRegularMode ? 20000 : 0;     // spawn a guardian only after 20 seconds in normal mode; in heroic there are already 2 Guards spawned
+        m_uiSummonTimer      = 0;
     }
 
     void KilledUnit(Unit* pVictim)
@@ -176,10 +172,10 @@ struct MANGOS_DLL_DECL boss_anubrekhanAI : public ScriptedAI
         {
             // Cast Impale on a random target
             // Do NOT cast it when we are afflicted by locust swarm
-            if (!m_creature->HasAura(SPELL_LOCUSTSWARM) && !m_creature->HasAura(SPELL_LOCUSTSWARM_H))
+            if (!m_creature->HasAura(SPELL_LOCUSTSWARM))
             {
                 if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
-                    DoCastSpellIfCan(pTarget, m_bIsRegularMode ? SPELL_IMPALE : SPELL_IMPALE_H);
+                    DoCastSpellIfCan(pTarget, SPELL_IMPALE);
             }
 
             m_uiImpaleTimer = 15000;
@@ -190,7 +186,7 @@ struct MANGOS_DLL_DECL boss_anubrekhanAI : public ScriptedAI
         // Locust Swarm
         if (m_uiLocustSwarmTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_LOCUSTSWARM :SPELL_LOCUSTSWARM_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_LOCUSTSWARM) == CAST_OK)
             {
                 DoScriptText(EMOTE_INSECT_SWARM, m_creature);
 

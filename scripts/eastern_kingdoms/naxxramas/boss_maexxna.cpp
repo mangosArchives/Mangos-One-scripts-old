@@ -35,16 +35,9 @@ enum
     SPELL_WEBWRAP_2             = 28673,                    // purpose unknown
 
     SPELL_WEBSPRAY              = 29484,
-    SPELL_WEBSPRAY_H            = 54125,
-
     SPELL_POISONSHOCK           = 28741,
-    SPELL_POISONSHOCK_H         = 54122,
-
     SPELL_NECROTICPOISON        = 28776,
-    SPELL_NECROTICPOISON_H      = 54121,
-
-    SPELL_FRENZY                = 54123,
-    SPELL_FRENZY_H              = 54124,
+    SPELL_FRENZY                = 28747,
 
     //SPELL_SUMMON_SPIDERLING_1 = 29434,                    // removed from dbc. Summons 10 spiderlings
     //SPELL_SUMMON_SPIDERLING_2 = 30076,                    // removed from dbc. Summons 3 spiderlings
@@ -81,7 +74,7 @@ struct MANGOS_DLL_DECL npc_web_wrapAI : public ScriptedAI
 
     void SetVictim(Unit* pVictim)
     {
-        if (pVictim)
+        if (pVictim && pVictim->GetTypeId() == TYPEID_PLAYER)
         {
             // Vanilla spell 28618, 28619, 28620, 28621 had effect SPELL_EFFECT_PLAYER_PULL with EffectMiscValue = 200, 300, 400 and 500
             // All these spells trigger 28622 after 1 or 2 seconds
@@ -99,11 +92,12 @@ struct MANGOS_DLL_DECL npc_web_wrapAI : public ScriptedAI
             else if (fDist < 75.0f)
                 uiEffectMiscValue = 400;
 
-            // Note: normally we should use the Knockback effect to handle this, but because this doesn't behave as expected we'll just use Jump Movement
-            //pVictim->KnockBackFrom(m_creature, -fDist, uiEffectMiscValue * 0.1f);
+            // This doesn't give the expected result in all cases
+            ((Player*)pVictim)->KnockBackFrom(m_creature, -fDist, uiEffectMiscValue * 0.033f);
 
-            float fSpeed = fDist * (uiEffectMiscValue * 0.01f);
-            pVictim->GetMotionMaster()->MoveJump(m_creature->GetPositionX(), m_creature->GetPositionY(), m_creature->GetPositionZ(), fSpeed, 0.0f);
+            // Jump movement not supported on 2.4.3
+            //float fSpeed = fDist * (uiEffectMiscValue * 0.01f);
+            //pVictim->GetMotionMaster()->MoveJump(m_creature->GetPositionX(), m_creature->GetPositionY(), m_creature->GetPositionZ(), fSpeed, 0.0f);
 
             m_victimGuid = pVictim->GetObjectGuid();
             m_uiWebWrapTimer = uiEffectMiscValue == 200 ? 1000 : 2000;
@@ -145,12 +139,10 @@ struct MANGOS_DLL_DECL boss_maexxnaAI : public ScriptedAI
     boss_maexxnaAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     uint32 m_uiWebWrapTimer;
     uint32 m_uiWebSprayTimer;
@@ -213,12 +205,8 @@ struct MANGOS_DLL_DECL boss_maexxnaAI : public ScriptedAI
         uint8 uiPos1 = urand(0, MAX_WEB_WRAP_POSITIONS - 1);
         m_creature->SummonCreature(NPC_WEB_WRAP, aWebWrapLoc[uiPos1][0], aWebWrapLoc[uiPos1][1], aWebWrapLoc[uiPos1][2], 0, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 60000);
 
-        // Summon a second web wrap on heroic
-        if (!m_bIsRegularMode)
-        {
-            uint8 uiPos2 = (uiPos1 + urand(1, MAX_WEB_WRAP_POSITIONS - 1)) % MAX_WEB_WRAP_POSITIONS;
-            m_creature->SummonCreature(NPC_WEB_WRAP, aWebWrapLoc[uiPos2][0], aWebWrapLoc[uiPos2][1], aWebWrapLoc[uiPos2][2], 0, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 60000);
-        }
+        uint8 uiPos2 = (uiPos1 + urand(1, MAX_WEB_WRAP_POSITIONS - 1)) % MAX_WEB_WRAP_POSITIONS;
+        m_creature->SummonCreature(NPC_WEB_WRAP, aWebWrapLoc[uiPos2][0], aWebWrapLoc[uiPos2][1], aWebWrapLoc[uiPos2][2], 0, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 60000);
 
         return true;
     }
@@ -249,7 +237,7 @@ struct MANGOS_DLL_DECL boss_maexxnaAI : public ScriptedAI
         // Web Spray
         if (m_uiWebSprayTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_WEBSPRAY : SPELL_WEBSPRAY_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_WEBSPRAY) == CAST_OK)
             {
                 DoScriptText(EMOTE_SPRAY, m_creature);
                 m_uiWebSprayTimer = 40000;
@@ -261,7 +249,7 @@ struct MANGOS_DLL_DECL boss_maexxnaAI : public ScriptedAI
         // Poison Shock
         if (m_uiPoisonShockTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_POISONSHOCK : SPELL_POISONSHOCK_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_POISONSHOCK) == CAST_OK)
                 m_uiPoisonShockTimer = urand(10000, 20000);
         }
         else
@@ -270,7 +258,7 @@ struct MANGOS_DLL_DECL boss_maexxnaAI : public ScriptedAI
         // Necrotic Poison
         if (m_uiNecroticPoisonTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_NECROTICPOISON : SPELL_NECROTICPOISON_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_NECROTICPOISON) == CAST_OK)
                 m_uiNecroticPoisonTimer = urand(20000, 30000);
         }
         else
@@ -289,7 +277,7 @@ struct MANGOS_DLL_DECL boss_maexxnaAI : public ScriptedAI
         // Enrage if not already enraged and below 30%
         if (!m_bEnraged && m_creature->GetHealthPercent() < 30.0f)
         {
-            if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_FRENZY : SPELL_FRENZY_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_FRENZY) == CAST_OK)
             {
                 DoScriptText(EMOTE_BOSS_GENERIC_FRENZY, m_creature);
                 m_bEnraged = true;

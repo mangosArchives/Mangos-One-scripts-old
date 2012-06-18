@@ -40,13 +40,9 @@ enum
     // SOUND_RANDOM_AGGRO       = 8955,                     // soundId containing the 4 aggro sounds, we not using this
 
     SPELL_POSIONBOLT_VOLLEY     = 28796,
-    SPELL_POSIONBOLT_VOLLEY_H   = 54098,
     SPELL_ENRAGE                = 28798,
-    SPELL_ENRAGE_H              = 54100,
     SPELL_RAIN_OF_FIRE          = 28794,
-    SPELL_RAIN_OF_FIRE_H        = 54099,
     SPELL_WIDOWS_EMBRACE        = 28732,
-    SPELL_WIDOWS_EMBRACE_H      = 54097,
 };
 
 struct MANGOS_DLL_DECL boss_faerlinaAI : public ScriptedAI
@@ -54,13 +50,11 @@ struct MANGOS_DLL_DECL boss_faerlinaAI : public ScriptedAI
     boss_faerlinaAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         m_bHasTaunted = false;
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     uint32 m_uiPoisonBoltVolleyTimer;
     uint32 m_uiRainOfFireTimer;
@@ -123,15 +117,15 @@ struct MANGOS_DLL_DECL boss_faerlinaAI : public ScriptedAI
     void SpellHit(Unit* pCaster, const SpellEntry* pSpellEntry)
     {
         // Check if we hit with Widow's Embrave
-        if (pSpellEntry->Id == SPELL_WIDOWS_EMBRACE || pSpellEntry->Id == SPELL_WIDOWS_EMBRACE_H)
+        if (pSpellEntry->Id == SPELL_WIDOWS_EMBRACE)
         {
             bool bIsFrenzyRemove = false;
 
             // If we remove the Frenzy, the Enrage Timer is reseted to 60s
-            if (m_creature->HasAura(m_bIsRegularMode ? SPELL_ENRAGE : SPELL_ENRAGE_H))
+            if (m_creature->HasAura(SPELL_ENRAGE))
             {
                 m_uiEnrageTimer = 60000;
-                m_creature->RemoveAurasDueToSpell(m_bIsRegularMode ? SPELL_ENRAGE : SPELL_ENRAGE_H);
+                m_creature->RemoveAurasDueToSpell(SPELL_ENRAGE);
 
                 bIsFrenzyRemove = true;
             }
@@ -151,7 +145,7 @@ struct MANGOS_DLL_DECL boss_faerlinaAI : public ScriptedAI
         // Poison Bolt Volley
         if (m_uiPoisonBoltVolleyTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_POSIONBOLT_VOLLEY : SPELL_POSIONBOLT_VOLLEY_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_POSIONBOLT_VOLLEY) == CAST_OK)
                 m_uiPoisonBoltVolleyTimer = 11000;
         }
         else
@@ -162,7 +156,7 @@ struct MANGOS_DLL_DECL boss_faerlinaAI : public ScriptedAI
         {
             if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
             {
-                if (DoCastSpellIfCan(pTarget, m_bIsRegularMode ? SPELL_RAIN_OF_FIRE : SPELL_RAIN_OF_FIRE_H) == CAST_OK)
+                if (DoCastSpellIfCan(pTarget, SPELL_RAIN_OF_FIRE) == CAST_OK)
                     m_uiRainOfFireTimer = 16000;
             }
         }
@@ -172,7 +166,7 @@ struct MANGOS_DLL_DECL boss_faerlinaAI : public ScriptedAI
         // Enrage Timer
         if (m_uiEnrageTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_ENRAGE : SPELL_ENRAGE_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_ENRAGE) == CAST_OK)
             {
                 DoScriptText(EMOTE_BOSS_GENERIC_FRENZY, m_creature);
                 m_uiEnrageTimer = 60000;
