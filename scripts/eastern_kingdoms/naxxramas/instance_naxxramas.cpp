@@ -121,7 +121,7 @@ void instance_naxxramas::OnObjectCreate(GameObject* pGo)
             if (m_auiEncounter[TYPE_NOTH] == DONE)
                 pGo->SetGoState(GO_STATE_ACTIVE);
             break;
-        case GO_PLAG_HEIG_EXIT_DOOR:
+        case GO_PLAG_HEIG_EXIT_HALLWAY:
             if (m_auiEncounter[TYPE_HEIGAN] == DONE)
                 pGo->SetGoState(GO_STATE_ACTIVE);
             break;
@@ -301,7 +301,7 @@ void instance_naxxramas::SetData(uint32 uiType, uint32 uiData)
             m_auiEncounter[uiType] = uiData;
             DoUseDoorOrButton(GO_PLAG_HEIG_ENTRY_DOOR);
             if (uiData == DONE)
-                DoUseDoorOrButton(GO_PLAG_HEIG_EXIT_DOOR);
+                DoUseDoorOrButton(GO_PLAG_HEIG_EXIT_HALLWAY);
             break;
         case TYPE_LOATHEB:
             m_auiEncounter[uiType] = uiData;

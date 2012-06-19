@@ -30,13 +30,12 @@ enum
     EMOTE_AURA_WANE         = -1533144,
     EMOTE_AURA_FADING       = -1533145,
 
-    SPELL_DEATHBLOOM        = 29865,
-    SPELL_DEATHBLOOM_H      = 55053,
+    SPELL_CORRUPTED_MIND    = 29201,            // this triggers the following spells on targets (based on class): 29185, 29194, 29196, 29198
+    SPELL_POISON_AURA       = 29865,
     SPELL_INEVITABLE_DOOM   = 29204,
-    SPELL_INEVITABLE_DOOM_H = 55052,
-    SPELL_NECROTIC_AURA     = 55593,
     SPELL_SUMMON_SPORE      = 29234,
-    SPELL_BERSERK           = 26662,
+    SPELL_REMOVE_CURSE      = 30281,
+    //SPELL_BERSERK         = 26662,
 
     NPC_SPORE               = 16286
 };
@@ -46,28 +45,28 @@ struct MANGOS_DLL_DECL boss_loathebAI : public ScriptedAI
     boss_loathebAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
-    uint32 m_uiDeathbloomTimer;
-    uint32 m_uiNecroticAuraTimer;
+    uint32 m_uiPoisonAuraTimer;
+    uint32 m_uiCorruptedMindTimer;
     uint32 m_uiInevitableDoomTimer;
+    uint32 m_uiRemoveCurseTimer;
     uint32 m_uiSummonTimer;
-    uint32 m_uiBerserkTimer;
-    uint8  m_uiNecroticAuraCount;                           // Used for emotes, 5min check
+    //uint32 m_uiBerserkTimer;
+    uint8 m_uiCorruptedMindCount;
 
     void Reset()
     {
-        m_uiDeathbloomTimer = 5000;
-        m_uiNecroticAuraTimer = 12000;
+        m_uiPoisonAuraTimer = 5000;
+        m_uiCorruptedMindTimer = 4000;
+        m_uiRemoveCurseTimer = 2000;
         m_uiInevitableDoomTimer = MINUTE*2*IN_MILLISECONDS;
         m_uiSummonTimer = urand(10000, 15000);              // first seen in vid after approx 12s
-        m_uiBerserkTimer = MINUTE*12*IN_MILLISECONDS;       // only in heroic, after 12min
-        m_uiNecroticAuraCount = 0;
+        //m_uiBerserkTimer = MINUTE*12*IN_MILLISECONDS;     // not used
+        m_uiCorruptedMindCount = 0;
     }
 
     void Aggro(Unit* pWho)
@@ -102,68 +101,62 @@ struct MANGOS_DLL_DECL boss_loathebAI : public ScriptedAI
         if (!m_creature->SelectHostileTarget() || !m_creature->getVictim())
             return;
 
-        // Berserk (only heroic)
-        if (!m_bIsRegularMode)
+        /* Berserk - not used
+        if (m_uiBerserkTimer < uiDiff)
         {
-            if (m_uiBerserkTimer < uiDiff)
-            {
-                DoCastSpellIfCan(m_creature, SPELL_BERSERK);
-                m_uiBerserkTimer = 300000;
-            }
-            else
-                m_uiBerserkTimer -= uiDiff;
+            DoCastSpellIfCan(m_creature, SPELL_BERSERK);
+            m_uiBerserkTimer = 300000;
         }
+        else
+            m_uiBerserkTimer -= uiDiff;*/
 
         // Inevitable Doom
         if (m_uiInevitableDoomTimer < uiDiff)
         {
-            DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_INEVITABLE_DOOM : SPELL_INEVITABLE_DOOM_H);
-            m_uiInevitableDoomTimer = (m_uiNecroticAuraCount <= 40) ? 30000 : 15000;
+            if (DoCastSpellIfCan(m_creature, SPELL_INEVITABLE_DOOM) == CAST_OK)
+                m_uiInevitableDoomTimer = (m_uiCorruptedMindCount <= 5) ? 30000 : 15000;
         }
         else
             m_uiInevitableDoomTimer -= uiDiff;
 
-        // Necrotic Aura
-        if (m_uiNecroticAuraTimer < uiDiff)
+        // Corrupted Mind
+        if (m_uiCorruptedMindTimer < uiDiff)
         {
-            switch (m_uiNecroticAuraCount % 3)
+            if (DoCastSpellIfCan(m_creature, SPELL_CORRUPTED_MIND) == CAST_OK)
             {
-                case 0:
-                    DoCastSpellIfCan(m_creature, SPELL_NECROTIC_AURA);
-                    DoScriptText(EMOTE_AURA_BLOCKING, m_creature);
-                    m_uiNecroticAuraTimer = 14000;
-                    break;
-                case 1:
-                    DoScriptText(EMOTE_AURA_WANE, m_creature);
-                    m_uiNecroticAuraTimer = 3000;
-                    break;
-                case 2:
-                    DoScriptText(EMOTE_AURA_FADING, m_creature);
-                    m_uiNecroticAuraTimer = 3000;
-                    break;
+                ++m_uiCorruptedMindCount;
+                m_uiCorruptedMindTimer = 60000;
             }
-            ++m_uiNecroticAuraCount;
         }
         else
-            m_uiNecroticAuraTimer -= uiDiff;
+            m_uiCorruptedMindTimer -= uiDiff;
 
         // Summon
         if (m_uiSummonTimer < uiDiff)
         {
-            DoCastSpellIfCan(m_creature, SPELL_SUMMON_SPORE);
-            m_uiSummonTimer = m_bIsRegularMode ? 36000 : 18000;
+            if (DoCastSpellIfCan(m_creature, SPELL_SUMMON_SPORE) == CAST_OK)
+                m_uiSummonTimer = 13000;
         }
         else
             m_uiSummonTimer -= uiDiff;
 
-        // Deathbloom
-        if (m_uiDeathbloomTimer < uiDiff)
+        // Poison Aura
+        if (m_uiPoisonAuraTimer < uiDiff)
         {
-            DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_DEATHBLOOM : SPELL_DEATHBLOOM_H);
-            m_uiDeathbloomTimer = 30000;
+            if (DoCastSpellIfCan(m_creature, SPELL_POISON_AURA) == CAST_OK)
+                m_uiPoisonAuraTimer = 12000;
         }
         else
-            m_uiDeathbloomTimer -= uiDiff;
+            m_uiPoisonAuraTimer -= uiDiff;
+
+        // Remove Curse
+        if (m_uiRemoveCurseTimer < uiDiff)
+        {
+            if (DoCastSpellIfCan(m_creature, SPELL_REMOVE_CURSE) == CAST_OK)
+                m_uiRemoveCurseTimer = 30000;
+        }
+        else
+            m_uiRemoveCurseTimer -= uiDiff;
 
         DoMeleeAttackIfReady();
     }

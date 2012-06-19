@@ -48,9 +48,7 @@ enum
     SPELL_BLINK_4                       = 29211,
 
     SPELL_CRIPPLE                       = 29212,
-    SPELL_CRIPPLE_H                     = 54814,
     SPELL_CURSE_PLAGUEBRINGER           = 29213,
-    SPELL_CURSE_PLAGUEBRINGER_H         = 54835,
 
     SPELL_BERSERK                       = 26662,            // guesswork, but very common berserk spell in naxx
 
@@ -89,12 +87,10 @@ struct MANGOS_DLL_DECL boss_nothAI : public ScriptedAI
     boss_nothAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     uint8 m_uiPhase;
     uint8 m_uiPhaseSub;
@@ -155,7 +151,7 @@ struct MANGOS_DLL_DECL boss_nothAI : public ScriptedAI
     void SpellHit(Unit* pCaster, const SpellEntry* pSpell)
     {
         if (pCaster == m_creature && pSpell->Effect[EFFECT_INDEX_0] == SPELL_EFFECT_LEAP)
-            DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_CRIPPLE : SPELL_CRIPPLE_H);
+            DoCastSpellIfCan(m_creature, SPELL_CRIPPLE);
     }
 
     void UpdateAI(const uint32 uiDiff)
@@ -189,28 +185,25 @@ struct MANGOS_DLL_DECL boss_nothAI : public ScriptedAI
                     m_uiPhaseTimer -= uiDiff;
             }
 
-            if (!m_bIsRegularMode)                          // Blink is used only in 25man
+            if (m_uiBlinkTimer < uiDiff)
             {
-                if (m_uiBlinkTimer < uiDiff)
+                static uint32 const auiSpellBlink[4] =
                 {
-                    static uint32 const auiSpellBlink[4] =
-                    {
-                        SPELL_BLINK_1, SPELL_BLINK_2, SPELL_BLINK_3, SPELL_BLINK_4
-                    };
+                    SPELL_BLINK_1, SPELL_BLINK_2, SPELL_BLINK_3, SPELL_BLINK_4
+                };
 
-                    if (DoCastSpellIfCan(m_creature, auiSpellBlink[urand(0, 3)]) == CAST_OK)
-                    {
-                        DoResetThreat();
-                        m_uiBlinkTimer = 25000;
-                    }
+                if (DoCastSpellIfCan(m_creature, auiSpellBlink[urand(0, 3)]) == CAST_OK)
+                {
+                    DoResetThreat();
+                    m_uiBlinkTimer = 25000;
                 }
-                else
-                    m_uiBlinkTimer -= uiDiff;
             }
+            else
+                m_uiBlinkTimer -= uiDiff;
 
             if (m_uiCurseTimer < uiDiff)
             {
-                DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_CURSE_PLAGUEBRINGER : SPELL_CURSE_PLAGUEBRINGER_H);
+                DoCastSpellIfCan(m_creature, SPELL_CURSE_PLAGUEBRINGER);
                 m_uiCurseTimer = 28000;
             }
             else
@@ -221,7 +214,8 @@ struct MANGOS_DLL_DECL boss_nothAI : public ScriptedAI
                 DoScriptText(SAY_SUMMON, m_creature);
                 DoScriptText(EMOTE_WARRIOR, m_creature);
 
-                if (m_bIsRegularMode)
+                // It's not very clear how many warriors it should summon, so we'll just leave it as random for now
+                if (urand(0, 1))
                 {
                     static uint32 const auiSpellSummonPlaguedWarrior[3] =
                     {
@@ -288,14 +282,14 @@ struct MANGOS_DLL_DECL boss_nothAI : public ScriptedAI
                 {
                     case PHASE_SKELETON_1:
                     {
-                        for (uint8 i = 0; i < (m_bIsRegularMode ? 2 : 4); ++i)
+                        for (uint8 i = 0; i < 4; ++i)
                             DoCastSpellIfCan(m_creature, auiSpellSummonPlaguedChampion[urand(0,9)], CAST_TRIGGERED);
 
                         break;
                     }
                     case PHASE_SKELETON_2:
                     {
-                        for (uint8 i = 0; i < (m_bIsRegularMode ? 1 : 2); ++i)
+                        for (uint8 i = 0; i < 2; ++i)
                         {
                             DoCastSpellIfCan(m_creature, auiSpellSummonPlaguedChampion[urand(0,9)], CAST_TRIGGERED);
                             DoCastSpellIfCan(m_creature, auiSpellSummonPlaguedGuardian[urand(0,3)], CAST_TRIGGERED);
@@ -304,7 +298,7 @@ struct MANGOS_DLL_DECL boss_nothAI : public ScriptedAI
                     }
                     case PHASE_SKELETON_3:
                     {
-                        for (uint8 i = 0; i < (m_bIsRegularMode ? 2 : 4); ++i)
+                        for (uint8 i = 0; i < 4; ++i)
                             DoCastSpellIfCan(m_creature, auiSpellSummonPlaguedGuardian[urand(0,3)], CAST_TRIGGERED);
 
                         break;
