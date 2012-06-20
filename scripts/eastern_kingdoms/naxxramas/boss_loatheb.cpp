@@ -26,9 +26,9 @@ EndScriptData */
 
 enum
 {
-    EMOTE_AURA_BLOCKING     = -1533143,
-    EMOTE_AURA_WANE         = -1533144,
-    EMOTE_AURA_FADING       = -1533145,
+    //EMOTE_AURA_BLOCKING   = -1533143,
+    //EMOTE_AURA_WANE       = -1533144,
+    //EMOTE_AURA_FADING     = -1533145,
 
     SPELL_CORRUPTED_MIND    = 29201,            // this triggers the following spells on targets (based on class): 29185, 29194, 29196, 29198
     SPELL_POISON_AURA       = 29865,

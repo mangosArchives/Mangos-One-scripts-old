@@ -16,7 +16,7 @@
 
 /* ScriptData
 SDName: Boss_Four_Horsemen
-SD%Complete: 75
+SD%Complete: 80
 SDComment: Lady Blaumeux, Thane Korthazz, Sir Zeliek, Alexandros Mograine; Berserk NYI.
 SDCategory: Naxxramas
 EndScriptData */
@@ -32,7 +32,7 @@ enum
     SAY_BLAU_SPECIAL        = -1533048,
     SAY_BLAU_SLAY           = -1533049,
     SAY_BLAU_DEATH          = -1533050,
-    EMOTE_UNYIELDING_PAIN   = -1533156,
+    //EMOTE_UNYIELDING_PAIN = -1533156,
 
     //alexandros mograine
     SAY_MORG_AGGRO1         = -1533065,
@@ -54,88 +54,59 @@ enum
     SAY_ZELI_SPECIAL        = -1533062,
     SAY_ZELI_SLAY           = -1533063,
     SAY_ZELI_DEATH          = -1533064,
-    EMOTE_CONDEMATION       = -1533157,
+    //EMOTE_CONDEMATION     = -1533157,
 
     // ***** Spells *****
     // all horsemen
-    //SPELL_SHIELDWALL      = 29061,            // not used in 3.x.x
+    SPELL_SHIELDWALL        = 29061,
     SPELL_BESERK            = 26662,
     // Note: Berserk should be applied once 100 marks are casted.
-    // Also spell 59450, which is missing from DBC, is required for the achiev
 
     // lady blaumeux
     SPELL_MARK_OF_BLAUMEUX  = 28833,
     SPELL_VOID_ZONE         = 28863,
-    SPELL_VOID_ZONE_H       = 57463,
-    SPELL_SHADOW_BOLT       = 57374,
-    SPELL_SHADOW_BOLT_H     = 57464,
-    SPELL_UNYILDING_PAIN    = 57381,
+    SPELL_SPIRIT_BLAUMEUX   = 28931,
 
-    // baron rivendare
-    SPELL_MARK_OF_RIVENDARE = 28834,
-    SPELL_UNHOLY_SHADOW     = 28882,
-    SPELL_UNHOLY_SHADOW_H   = 57369,
+    // highlord mograine
+    SPELL_MARK_OF_MOGRAINE  = 28834,
+    SPELL_RIGHTEOUS_FIRE    = 28882,
+    SPELL_SPIRIT_MOGRAINE   = 28928,
 
     // thane korthazz
     SPELL_MARK_OF_KORTHAZZ  = 28832,
     SPELL_METEOR            = 28884,
-    SPELL_METEOR_H          = 57467,
+    SPELL_SPIRIT_KORTHAZZ   = 28932,
 
     // sir zeliek
     SPELL_MARK_OF_ZELIEK    = 28835,
     SPELL_HOLY_WRATH        = 28883,
-    SPELL_HOLY_WRATH_H      = 57466,
-    SPELL_HOLY_BOLT         = 57376,
-    SPELL_HOLY_BOLT_H       = 57465,
-    SPELL_CONDEMNATION      = 57377,
-
-    // horseman spirits (not used in 3.x.x)
-    //NPC_SPIRIT_OF_BLAUMEUX = 16776,
-    //NPC_SPIRIT_OF_MOGRAINE = 16775,
-    //NPC_SPIRIT_OF_KORTHAZZ = 16778,
-    //NPC_SPIRIT_OF_ZELIREK  = 16777
-};
-
-static const float aHorseMenMoveCoords[4][3] =
-{
-    {2469.4f, -2947.6f,  241.28f},         // lady blaumeux
-    {2583.9f, -2971.67f, 241.35f},         // baron rivendare
-    {2542.9f, -3015.0f,  241.35f},         // thane korthazz
-    {2517.8f, -2896.6f,  241.28f},         // sir zeliek
+    SPELL_SPIRIT_ZELIEK     = 28934,
 };
 
 struct MANGOS_DLL_DECL boss_lady_blaumeuxAI : public ScriptedAI
 {
     boss_lady_blaumeuxAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         m_pInstance = (ScriptedInstance*)pCreature->GetInstanceData();
         Reset();
     }
 
     ScriptedInstance* m_pInstance;
-    bool m_bIsRegularMode;
 
-    bool m_bIsCornerMovement;
     uint32 m_uiMarkTimer;
     uint32 m_uiVoidZoneTimer;
-    uint32 m_uiShadowBoltTimer;
+    float m_fHealthCheck;
 
     void Reset()
     {
         m_uiMarkTimer       = 20000;
         m_uiVoidZoneTimer   = 15000;
-        m_uiShadowBoltTimer = 10000;
-        m_bIsCornerMovement = true;
+        m_fHealthCheck      = 50.0f;
     }
 
     void Aggro(Unit* pWho)
     {
         DoScriptText(SAY_BLAU_AGGRO, m_creature);
-
-        SetCombatMovement(false);
-        m_creature->SetWalk(false);
-        m_creature->GetMotionMaster()->MovePoint(1, aHorseMenMoveCoords[0][0], aHorseMenMoveCoords[0][1], aHorseMenMoveCoords[0][2]);
 
         if (m_pInstance)
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, IN_PROGRESS);
@@ -149,6 +120,7 @@ struct MANGOS_DLL_DECL boss_lady_blaumeuxAI : public ScriptedAI
     void JustDied(Unit* pKiller)
     {
         DoScriptText(SAY_BLAU_DEATH, m_creature);
+        DoCastSpellIfCan(m_creature, SPELL_SPIRIT_BLAUMEUX, CAST_TRIGGERED);
 
         if (m_pInstance)
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, SPECIAL);
@@ -160,25 +132,16 @@ struct MANGOS_DLL_DECL boss_lady_blaumeuxAI : public ScriptedAI
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, FAIL);
     }
 
-    void MovementInform(uint32 uiMotionType, uint32 uiPointId)
-    {
-        if (uiMotionType != POINT_MOTION_TYPE || !uiPointId)
-            return;
-
-        // Stop moving when it reaches the corner
-        m_bIsCornerMovement = false;
-        m_creature->GetMotionMaster()->Clear();
-        m_creature->GetMotionMaster()->MoveIdle();
-    }
-
     void UpdateAI(const uint32 uiDiff)
     {
         if (!m_creature->SelectHostileTarget() || !m_creature->getVictim())
             return;
 
-        // Don't attack while moving
-        if (m_bIsCornerMovement)
-            return;
+        if (m_creature->GetHealthPercent() <= m_fHealthCheck)
+        {
+            if (DoCastSpellIfCan(m_creature, SPELL_SHIELDWALL) == CAST_OK)
+                m_fHealthCheck -= 30.0f;
+        }
 
         if (m_uiMarkTimer < uiDiff)
         {
@@ -190,26 +153,11 @@ struct MANGOS_DLL_DECL boss_lady_blaumeuxAI : public ScriptedAI
 
         if (m_uiVoidZoneTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_VOID_ZONE : SPELL_VOID_ZONE_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_VOID_ZONE) == CAST_OK)
                 m_uiVoidZoneTimer = 15000;
         }
         else
             m_uiVoidZoneTimer -= uiDiff;
-
-        if (m_uiShadowBoltTimer < uiDiff)
-        {
-            // If we can find a target in range of 45.0f, then cast Shadowbolt
-            if (m_creature->IsWithinDist(m_creature->getVictim(), 45.0f))
-                DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_SHADOW_BOLT : SPELL_SHADOW_BOLT_H);
-            else
-            {
-                DoCastSpellIfCan(m_creature, SPELL_UNYILDING_PAIN);
-                DoScriptText(EMOTE_UNYIELDING_PAIN, m_creature);
-            }
-            m_uiShadowBoltTimer = urand(2000, 3000);
-        }
-        else
-            m_uiShadowBoltTimer -= uiDiff;
 
         DoMeleeAttackIfReady();
     }
@@ -224,23 +172,21 @@ struct MANGOS_DLL_DECL boss_alexandros_mograineAI : public ScriptedAI
 {
     boss_alexandros_mograineAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         m_pInstance = (ScriptedInstance*)pCreature->GetInstanceData();
         Reset();
     }
 
     ScriptedInstance* m_pInstance;
-    bool m_bIsRegularMode;
 
-    bool m_bIsCornerMovement;
     uint32 m_uiMarkTimer;
-    uint32 m_uiUnholyShadowTimer;
+    uint32 m_uiRighteousFireTimer;
+    float m_fHealthCheck;
 
     void Reset()
     {
-        m_uiMarkTimer         = 20000;
-        m_uiUnholyShadowTimer = 15000;
-        m_bIsCornerMovement   = true;
+        m_uiMarkTimer          = 20000;
+        m_uiRighteousFireTimer = 15000;
+        m_fHealthCheck         = 50.0f;
     }
 
     void Aggro(Unit* pWho)
@@ -251,10 +197,6 @@ struct MANGOS_DLL_DECL boss_alexandros_mograineAI : public ScriptedAI
             case 1: DoScriptText(SAY_MORG_AGGRO2, m_creature); break;
             case 2: DoScriptText(SAY_MORG_AGGRO3, m_creature); break;
         }
-
-        SetCombatMovement(false);
-        m_creature->SetWalk(false);
-        m_creature->GetMotionMaster()->MovePoint(1, aHorseMenMoveCoords[1][0], aHorseMenMoveCoords[1][1], aHorseMenMoveCoords[1][2]);
 
         if (m_pInstance)
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, IN_PROGRESS);
@@ -268,6 +210,7 @@ struct MANGOS_DLL_DECL boss_alexandros_mograineAI : public ScriptedAI
     void JustDied(Unit* pKiller)
     {
         DoScriptText(SAY_MORG_DEATH, m_creature);
+        DoCastSpellIfCan(m_creature, SPELL_SPIRIT_MOGRAINE, CAST_TRIGGERED);
 
         if (m_pInstance)
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, SPECIAL);
@@ -279,43 +222,32 @@ struct MANGOS_DLL_DECL boss_alexandros_mograineAI : public ScriptedAI
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, FAIL);
     }
 
-    void MovementInform(uint32 uiMotionType, uint32 uiPointId)
-    {
-        if (uiMotionType != POINT_MOTION_TYPE || !uiPointId)
-            return;
-
-        // Start moving when it reaches the corner
-        SetCombatMovement(true);
-        m_bIsCornerMovement = false;
-        m_creature->GetMotionMaster()->Clear();
-        if (m_creature->getVictim())
-            m_creature->GetMotionMaster()->MoveChase(m_creature->getVictim());
-    }
-
     void UpdateAI(const uint32 uiDiff)
     {
         if (!m_creature->SelectHostileTarget() || !m_creature->getVictim())
             return;
 
-        // Don't attack while moving
-        if (m_bIsCornerMovement)
-            return;
+        if (m_creature->GetHealthPercent() <= m_fHealthCheck)
+        {
+            if (DoCastSpellIfCan(m_creature, SPELL_SHIELDWALL) == CAST_OK)
+                m_fHealthCheck -= 30.0f;
+        }
 
         if (m_uiMarkTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature, SPELL_MARK_OF_RIVENDARE) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature, SPELL_MARK_OF_MOGRAINE) == CAST_OK)
                 m_uiMarkTimer = 12000;
         }
         else
             m_uiMarkTimer -= uiDiff;
 
-        if (m_uiUnholyShadowTimer < uiDiff)
+        if (m_uiRighteousFireTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_UNHOLY_SHADOW : SPELL_UNHOLY_SHADOW_H) == CAST_OK)
-                m_uiUnholyShadowTimer = 15000;
+            if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_RIGHTEOUS_FIRE) == CAST_OK)
+                m_uiRighteousFireTimer = 15000;
         }
         else
-            m_uiUnholyShadowTimer -= uiDiff;
+            m_uiRighteousFireTimer -= uiDiff;
 
         DoMeleeAttackIfReady();
     }
@@ -330,32 +262,26 @@ struct MANGOS_DLL_DECL boss_thane_korthazzAI : public ScriptedAI
 {
     boss_thane_korthazzAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         m_pInstance = (ScriptedInstance*)pCreature->GetInstanceData();
         Reset();
     }
 
     ScriptedInstance* m_pInstance;
-    bool m_bIsRegularMode;
 
-    bool m_bIsCornerMovement;
     uint32 m_uiMarkTimer;
     uint32 m_uiMeteorTimer;
+    float m_fHealthCheck;
 
     void Reset()
     {
         m_uiMarkTimer       = 20000;
         m_uiMeteorTimer     = 30000;
-        m_bIsCornerMovement = true;
+        m_fHealthCheck      = 50.0f;
     }
 
     void Aggro(Unit* pWho)
     {
         DoScriptText(SAY_KORT_AGGRO, m_creature);
-
-        SetCombatMovement(false);
-        m_creature->SetWalk(false);
-        m_creature->GetMotionMaster()->MovePoint(1, aHorseMenMoveCoords[2][0], aHorseMenMoveCoords[2][1], aHorseMenMoveCoords[2][2]);
 
         if (m_pInstance)
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, IN_PROGRESS);
@@ -369,6 +295,7 @@ struct MANGOS_DLL_DECL boss_thane_korthazzAI : public ScriptedAI
     void JustDied(Unit* pKiller)
     {
         DoScriptText(SAY_KORT_DEATH, m_creature);
+        DoCastSpellIfCan(m_creature, SPELL_SPIRIT_KORTHAZZ, CAST_TRIGGERED);
 
         if (m_pInstance)
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, SPECIAL);
@@ -380,27 +307,16 @@ struct MANGOS_DLL_DECL boss_thane_korthazzAI : public ScriptedAI
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, FAIL);
     }
 
-    void MovementInform(uint32 uiMotionType, uint32 uiPointId)
-    {
-        if (uiMotionType != POINT_MOTION_TYPE || !uiPointId)
-            return;
-
-        // Start moving when it reaches the corner
-        SetCombatMovement(true);
-        m_bIsCornerMovement = false;
-        m_creature->GetMotionMaster()->Clear();
-        if (m_creature->getVictim())
-            m_creature->GetMotionMaster()->MoveChase(m_creature->getVictim());
-    }
-
     void UpdateAI(const uint32 uiDiff)
     {
         if (!m_creature->SelectHostileTarget() || !m_creature->getVictim())
             return;
 
-        // Don't attack while moving
-        if (m_bIsCornerMovement)
-            return;
+        if (m_creature->GetHealthPercent() <= m_fHealthCheck)
+        {
+            if (DoCastSpellIfCan(m_creature, SPELL_SHIELDWALL) == CAST_OK)
+                m_fHealthCheck -= 30.0f;
+        }
 
         if (m_uiMarkTimer < uiDiff)
         {
@@ -412,7 +328,7 @@ struct MANGOS_DLL_DECL boss_thane_korthazzAI : public ScriptedAI
 
         if (m_uiMeteorTimer < uiDiff)
         {
-            if (DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_METEOR : SPELL_METEOR_H) == CAST_OK)
+            if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_METEOR) == CAST_OK)
                 m_uiMeteorTimer = 20000;
         }
         else
@@ -431,34 +347,26 @@ struct MANGOS_DLL_DECL boss_sir_zeliekAI : public ScriptedAI
 {
     boss_sir_zeliekAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         m_pInstance = (ScriptedInstance*)pCreature->GetInstanceData();
         Reset();
     }
 
     ScriptedInstance* m_pInstance;
-    bool m_bIsRegularMode;
 
-    bool m_bIsCornerMovement;
     uint32 m_uiMarkTimer;
     uint32 m_uiHolyWrathTimer;
-    uint32 m_uiHolyBoltTimer;
+    float m_fHealthCheck;
 
     void Reset()
     {
         m_uiMarkTimer       = 20000;
         m_uiHolyWrathTimer  = 12000;
-        m_uiHolyBoltTimer   = 10000;
-        m_bIsCornerMovement = true;
+        m_fHealthCheck      = 50.0f;
     }
 
     void Aggro(Unit* pWho)
     {
         DoScriptText(SAY_ZELI_AGGRO, m_creature);
-
-        SetCombatMovement(false);
-        m_creature->SetWalk(false);
-        m_creature->GetMotionMaster()->MovePoint(1, aHorseMenMoveCoords[3][0], aHorseMenMoveCoords[3][1], aHorseMenMoveCoords[3][2]);
 
         if (m_pInstance)
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, IN_PROGRESS);
@@ -472,6 +380,7 @@ struct MANGOS_DLL_DECL boss_sir_zeliekAI : public ScriptedAI
     void JustDied(Unit* pKiller)
     {
         DoScriptText(SAY_ZELI_DEATH, m_creature);
+        DoCastSpellIfCan(m_creature, SPELL_SPIRIT_ZELIEK, CAST_TRIGGERED);
 
         if (m_pInstance)
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, SPECIAL);
@@ -483,25 +392,16 @@ struct MANGOS_DLL_DECL boss_sir_zeliekAI : public ScriptedAI
             m_pInstance->SetData(TYPE_FOUR_HORSEMEN, FAIL);
     }
 
-    void MovementInform(uint32 uiMotionType, uint32 uiPointId)
-    {
-        if (uiMotionType != POINT_MOTION_TYPE || !uiPointId)
-            return;
-
-        // Stop moving when it reaches the corner
-        m_bIsCornerMovement = false;
-        m_creature->GetMotionMaster()->Clear();
-        m_creature->GetMotionMaster()->MoveIdle();
-    }
-
     void UpdateAI(const uint32 uiDiff)
     {
         if (!m_creature->SelectHostileTarget() || !m_creature->getVictim())
             return;
 
-        // Don't attack while moving
-        if (m_bIsCornerMovement)
-            return;
+        if (m_creature->GetHealthPercent() <= m_fHealthCheck)
+        {
+            if (DoCastSpellIfCan(m_creature, SPELL_SHIELDWALL) == CAST_OK)
+                m_fHealthCheck -= 30.0f;
+        }
 
         if (m_uiMarkTimer < uiDiff)
         {
@@ -513,29 +413,11 @@ struct MANGOS_DLL_DECL boss_sir_zeliekAI : public ScriptedAI
 
         if (m_uiHolyWrathTimer < uiDiff)
         {
-            if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
-            {
-                if (DoCastSpellIfCan(pTarget, SPELL_HOLY_WRATH) == CAST_OK)
-                    m_uiHolyWrathTimer = 15000;
-            }
+            if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_HOLY_WRATH) == CAST_OK)
+                m_uiHolyWrathTimer = 15000;
         }
         else
             m_uiHolyWrathTimer -= uiDiff;
-
-        if (m_uiHolyBoltTimer < uiDiff)
-        {
-            // If we can find a target in range of 45.0f, then cast Holy Bolt
-            if (m_creature->IsWithinDist(m_creature->getVictim(), 45.0f))
-                DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_HOLY_BOLT : SPELL_HOLY_BOLT_H);
-            else
-            {
-                DoCastSpellIfCan(m_creature, SPELL_CONDEMNATION);
-                DoScriptText(EMOTE_CONDEMATION, m_creature);
-            }
-            m_uiHolyBoltTimer = urand(2000, 3000);
-        }
-        else
-            m_uiHolyBoltTimer -= uiDiff;
 
         DoMeleeAttackIfReady();
     }

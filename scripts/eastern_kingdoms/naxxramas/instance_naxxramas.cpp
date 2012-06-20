@@ -75,6 +75,10 @@ void instance_naxxramas::OnCreatureCreate(Creature* pCreature)
         case NPC_THANE:
         case NPC_BLAUMEUX:
         case NPC_MOGRAINE:
+        case NPC_SPIRIT_OF_BLAUMEUX:
+        case NPC_SPIRIT_OF_MOGRAINE:
+        case NPC_SPIRIT_OF_KORTHAZZ:
+        case NPC_SPIRIT_OF_ZELIREK:
         case NPC_GOTHIK:
         case NPC_KELTHUZAD:
         case NPC_THE_LICHKING:
@@ -142,7 +146,6 @@ void instance_naxxramas::OnObjectCreate(GameObject* pGo)
                 pGo->SetGoState(GO_STATE_ACTIVE);
             break;
         case GO_CHEST_HORSEMEN_NORM:
-        case GO_CHEST_HORSEMEN_HERO:
             break;
 
         // Construct Quarter
@@ -364,11 +367,21 @@ void instance_naxxramas::SetData(uint32 uiType, uint32 uiData)
             DoUseDoorOrButton(GO_MILI_HORSEMEN_DOOR);
             if (uiData == DONE)
             {
+                // Despawn spirits
+                if (Creature* pSpirit = GetSingleCreatureFromStorage(NPC_SPIRIT_OF_BLAUMEUX))
+                    pSpirit->ForcedDespawn();
+                if (Creature* pSpirit = GetSingleCreatureFromStorage(NPC_SPIRIT_OF_MOGRAINE))
+                    pSpirit->ForcedDespawn();
+                if (Creature* pSpirit = GetSingleCreatureFromStorage(NPC_SPIRIT_OF_KORTHAZZ))
+                    pSpirit->ForcedDespawn();
+                if (Creature* pSpirit = GetSingleCreatureFromStorage(NPC_SPIRIT_OF_ZELIREK))
+                    pSpirit->ForcedDespawn();
+
                 DoUseDoorOrButton(GO_MILI_EYE_RAMP);
                 DoUseDoorOrButton(GO_MILI_EYE_BOSS);
                 DoRespawnGameObject(GO_MILI_PORTAL, 30*MINUTE);
                 DoToggleGameObjectFlags(GO_MILI_PORTAL, GO_FLAG_NO_INTERACT, false);
-                DoRespawnGameObject(instance->IsRegularDifficulty() ? GO_CHEST_HORSEMEN_NORM : GO_CHEST_HORSEMEN_HERO, 30*MINUTE);
+                DoRespawnGameObject(GO_CHEST_HORSEMEN_NORM, 30*MINUTE);
                 m_uiTauntTimer = 5000;
             }
             break;

@@ -74,6 +74,11 @@ enum
     NPC_THANE                   = 16064,
     NPC_BLAUMEUX                = 16065,
 
+    NPC_SPIRIT_OF_MOGRAINE      = 16775,
+    NPC_SPIRIT_OF_BLAUMEUX      = 16776,
+    NPC_SPIRIT_OF_ZELIREK       = 16777,
+    NPC_SPIRIT_OF_KORTHAZZ      = 16778,
+
     NPC_KELTHUZAD               = 15990,
     NPC_THE_LICHKING            = 16980,
     NPC_MR_BIGGLESWORTH         = 16998,
@@ -120,7 +125,6 @@ enum
     GO_MILI_HORSEMEN_DOOR       = 181119,                   //encounter door
 
     GO_CHEST_HORSEMEN_NORM      = 181366,                   //four horsemen event, DoRespawnGameObject() when event == DONE
-    GO_CHEST_HORSEMEN_HERO      = 193426,
 
     // Construct Quarter
     GO_CONS_PATH_EXIT_DOOR      = 181123,
