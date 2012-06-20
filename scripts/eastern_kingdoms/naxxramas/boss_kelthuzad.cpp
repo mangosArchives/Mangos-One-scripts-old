@@ -57,9 +57,7 @@ enum
 
     //spells to be casted
     SPELL_FROST_BOLT                    = 28478,
-    SPELL_FROST_BOLT_H                  = 55802,
     SPELL_FROST_BOLT_NOVA               = 28479,
-    SPELL_FROST_BOLT_NOVA_H             = 55807,
 
     SPELL_CHAINS_OF_KELTHUZAD           = 28408,            // 3.x, heroic only
     SPELL_CHAINS_OF_KELTHUZAD_TARGET    = 28410,
@@ -91,14 +89,12 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
     boss_kelthuzadAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
 
-        m_uiGuardiansCountMax = m_bIsRegularMode ? 2 : 4;
+        m_uiGuardiansCountMax = 4;
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     uint32 m_uiGuardiansCount;
     uint32 m_uiGuardiansCountMax;
@@ -440,7 +436,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
         {
             if (m_uiFrostBoltTimer < uiDiff)
             {
-                if (DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_FROST_BOLT : SPELL_FROST_BOLT_H) == CAST_OK)
+                if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_FROST_BOLT) == CAST_OK)
                     m_uiFrostBoltTimer = urand(1000, 60000);
             }
             else
@@ -448,7 +444,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
 
             if (m_uiFrostBoltNovaTimer < uiDiff)
             {
-                if (DoCastSpellIfCan(m_creature->getVictim(), m_bIsRegularMode ? SPELL_FROST_BOLT_NOVA : SPELL_FROST_BOLT_NOVA_H) == CAST_OK)
+                if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_FROST_BOLT_NOVA) == CAST_OK)
                     m_uiFrostBoltNovaTimer = 15000;
             }
             else
@@ -499,20 +495,17 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
             else
                 m_uiFrostBlastTimer -= uiDiff;
 
-            if (!m_bIsRegularMode)
+            if (m_uiChainsTimer < uiDiff)
             {
-                if (m_uiChainsTimer < uiDiff)
+                if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_CHAINS_OF_KELTHUZAD) == CAST_OK)
                 {
-                    if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_CHAINS_OF_KELTHUZAD) == CAST_OK)
-                    {
-                        DoScriptText(urand(0, 1) ? SAY_CHAIN1 : SAY_CHAIN2, m_creature);
+                    DoScriptText(urand(0, 1) ? SAY_CHAIN1 : SAY_CHAIN2, m_creature);
 
-                        m_uiChainsTimer = urand(30000, 60000);
-                    }
+                    m_uiChainsTimer = urand(30000, 60000);
                 }
-                else
-                    m_uiChainsTimer -= uiDiff;
             }
+            else
+                m_uiChainsTimer -= uiDiff;
 
             if (m_uiPhase == PHASE_NORMAL)
             {
@@ -539,6 +532,12 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
                     {
                         if (Creature* pLichKing = m_pInstance->GetSingleCreatureFromStorage(NPC_THE_LICHKING))
                             DoScriptText(SAY_ANSWER_REQUEST, pLichKing);
+
+                        m_pInstance->DoUseDoorOrButton(GO_KELTHUZAD_WINDOW_1);
+                        m_pInstance->DoUseDoorOrButton(GO_KELTHUZAD_WINDOW_2);
+                        m_pInstance->DoUseDoorOrButton(GO_KELTHUZAD_WINDOW_3);
+                        m_pInstance->DoUseDoorOrButton(GO_KELTHUZAD_WINDOW_4);
+
                         m_uiLichKingAnswerTimer = 0;
                     }
                     else

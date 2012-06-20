@@ -136,6 +136,10 @@ enum
     // Frostwyrm Lair
     GO_KELTHUZAD_WATERFALL_DOOR = 181225,                   // exit, open after sapphiron is dead
     GO_KELTHUZAD_EXIT_DOOR      = 181228,
+    GO_KELTHUZAD_WINDOW_1       = 181402,
+    GO_KELTHUZAD_WINDOW_2       = 181403,
+    GO_KELTHUZAD_WINDOW_3       = 181404,
+    GO_KELTHUZAD_WINDOW_4       = 181405,
 
     // Eyes
     GO_ARAC_EYE_RAMP            = 181212,
@@ -158,6 +162,7 @@ enum
     AREATRIGGER_KELTHUZAD       = 4112,
     AREATRIGGER_GOTHIK          = 4116,
     AREATRIGGER_THADDIUS_DOOR   = 4113,
+    AREATRIGGER_FROSTWYRM_TELE  = 4156,
 };
 
 struct GothTrigger

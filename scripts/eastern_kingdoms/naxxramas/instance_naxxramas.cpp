@@ -27,16 +27,16 @@ EndScriptData */
 static const DialogueEntry aNaxxDialogue[] =
 {
     {NPC_KELTHUZAD,         0,                  10000},
-    {SAY_SAPP_DIALOG1,      NPC_KELTHUZAD,      8000},
-    {SAY_SAPP_DIALOG2_LICH, NPC_THE_LICHKING,   14000},
-    {SAY_SAPP_DIALOG3,      NPC_KELTHUZAD,      10000},
-    {SAY_SAPP_DIALOG4_LICH, NPC_THE_LICHKING,   12000},
+    {SAY_SAPP_DIALOG1,      NPC_KELTHUZAD,      5000},
+    {SAY_SAPP_DIALOG2_LICH, NPC_THE_LICHKING,   17000},
+    {SAY_SAPP_DIALOG3,      NPC_KELTHUZAD,      6000},
+    {SAY_SAPP_DIALOG4_LICH, NPC_THE_LICHKING,   8000},
     {SAY_SAPP_DIALOG5,      NPC_KELTHUZAD,      0},
     {NPC_THANE,             0,                  10000},
     {SAY_KORT_TAUNT1,       NPC_THANE,          5000},
     {SAY_ZELI_TAUNT1,       NPC_ZELIEK,         6000},
     {SAY_BLAU_TAUNT1,       NPC_BLAUMEUX,       6000},
-    {SAY_MORG_TAUNT1,       NPC_MOGRAINE,       6000},
+    {SAY_MORG_TAUNT1,       NPC_MOGRAINE,       7000},
     {SAY_BLAU_TAUNT2,       NPC_BLAUMEUX,       6000},
     {SAY_ZELI_TAUNT2,       NPC_ZELIEK,         5000},
     {SAY_KORT_TAUNT2,       NPC_THANE,          7000},
@@ -176,6 +176,10 @@ void instance_naxxramas::OnObjectCreate(GameObject* pGo)
                 pGo->SetGoState(GO_STATE_ACTIVE);
             break;
         case GO_KELTHUZAD_EXIT_DOOR:
+        case GO_KELTHUZAD_WINDOW_1:
+        case GO_KELTHUZAD_WINDOW_2:
+        case GO_KELTHUZAD_WINDOW_3:
+        case GO_KELTHUZAD_WINDOW_4:
             break;
 
         // Eyes
@@ -429,6 +433,17 @@ void instance_naxxramas::SetData(uint32 uiType, uint32 uiData)
         case TYPE_KELTHUZAD:
             m_auiEncounter[uiType] = uiData;
             DoUseDoorOrButton(GO_KELTHUZAD_EXIT_DOOR);
+            if (uiData == NOT_STARTED)
+            {
+                if (GameObject* pWindow = GetSingleGameObjectFromStorage(GO_KELTHUZAD_WINDOW_1))
+                    pWindow->ResetDoorOrButton();
+                if (GameObject* pWindow = GetSingleGameObjectFromStorage(GO_KELTHUZAD_WINDOW_2))
+                    pWindow->ResetDoorOrButton();
+                if (GameObject* pWindow = GetSingleGameObjectFromStorage(GO_KELTHUZAD_WINDOW_3))
+                    pWindow->ResetDoorOrButton();
+                if (GameObject* pWindow = GetSingleGameObjectFromStorage(GO_KELTHUZAD_WINDOW_4))
+                    pWindow->ResetDoorOrButton();
+            }
             break;
     }
 
@@ -660,6 +675,17 @@ bool AreaTrigger_at_naxxramas(Player* pPlayer, AreaTriggerEntry const* pAt)
                     DoScriptText(SAY_THADDIUS_GREET, pThaddius);
                 }
             }
+        }
+    }
+
+    if (pAt->id == AREATRIGGER_FROSTWYRM_TELE)
+    {
+        if (instance_naxxramas* pInstance = (instance_naxxramas*)pPlayer->GetInstanceData())
+        {
+            // Area trigger handles teleport in DB. Here we only need to check if all the end wing encounters are done
+            if (pInstance->GetData(TYPE_THADDIUS) != DONE || pInstance->GetData(TYPE_LOATHEB) != DONE || pInstance->GetData(TYPE_MAEXXNA) != DONE ||
+                pInstance->GetData(TYPE_FOUR_HORSEMEN) != DONE)
+                return true;
         }
     }
 

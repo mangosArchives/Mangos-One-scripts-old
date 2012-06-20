@@ -43,18 +43,13 @@ enum
     EMOTE_GROUND                = -1533083,
 
     SPELL_CLEAVE                = 19983,
-    SPELL_TAIL_SWEEP            = 55697,
-    SPELL_TAIL_SWEEP_H          = 55696,
+    SPELL_TAIL_SWEEP            = 15847,
     SPELL_ICEBOLT               = 28526,
     SPELL_FROST_BREATH_DUMMY    = 30101,
-    SPELL_FROST_BREATH_A        = 28524,
-    SPELL_FROST_BREATH_B        = 29318,
+    SPELL_FROST_BREATH          = 28524,            // triggers 29318
     SPELL_FROST_AURA            = 28531,
-    SPELL_FROST_AURA_H          = 55799,
     SPELL_LIFE_DRAIN            = 28542,
-    SPELL_LIFE_DRAIN_H          = 55665,
     SPELL_CHILL                 = 28547,
-    SPELL_CHILL_H               = 55699,
     SPELL_SUMMON_BLIZZARD       = 28560,
     SPELL_BESERK                = 26662,
 
@@ -77,12 +72,10 @@ struct MANGOS_DLL_DECL boss_sapphironAI : public ScriptedAI
     boss_sapphironAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_naxxramas*)pCreature->GetInstanceData();
-        m_bIsRegularMode = pCreature->GetMap()->IsRegularDifficulty();
         Reset();
     }
 
     instance_naxxramas* m_pInstance;
-    bool m_bIsRegularMode;
 
     uint32 m_uiCleaveTimer;
     uint32 m_uiTailSweepTimer;
@@ -118,7 +111,7 @@ struct MANGOS_DLL_DECL boss_sapphironAI : public ScriptedAI
 
     void Aggro(Unit* pWho)
     {
-        DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_FROST_AURA : SPELL_FROST_AURA_H);
+        DoCastSpellIfCan(m_creature, SPELL_FROST_AURA);
 
         if (m_pInstance)
             m_pInstance->SetData(TYPE_SAPPHIRON, IN_PROGRESS);
@@ -178,7 +171,7 @@ struct MANGOS_DLL_DECL boss_sapphironAI : public ScriptedAI
 
                 if (m_uiTailSweepTimer < uiDiff)
                 {
-                    if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_TAIL_SWEEP : SPELL_TAIL_SWEEP_H) == CAST_OK)
+                    if (DoCastSpellIfCan(m_creature, SPELL_TAIL_SWEEP) == CAST_OK)
                         m_uiTailSweepTimer = urand(7000, 10000);
                 }
                 else
@@ -186,7 +179,7 @@ struct MANGOS_DLL_DECL boss_sapphironAI : public ScriptedAI
 
                 if (m_uiLifeDrainTimer < uiDiff)
                 {
-                    if (DoCastSpellIfCan(m_creature, m_bIsRegularMode ? SPELL_LIFE_DRAIN : SPELL_LIFE_DRAIN_H) == CAST_OK)
+                    if (DoCastSpellIfCan(m_creature, SPELL_LIFE_DRAIN) == CAST_OK)
                         m_uiLifeDrainTimer = 23000;
                 }
                 else
@@ -223,15 +216,18 @@ struct MANGOS_DLL_DECL boss_sapphironAI : public ScriptedAI
             case PHASE_LIFT_OFF:
                 break;
             case PHASE_AIR_BOLTS:
-                // WOTLK Changed, originally was 5
-                if (m_uiIceboltCount == (uint32)(m_bIsRegularMode ? 2 : 3))
+                if (m_uiIceboltCount == 5)
                 {
                     if (m_uiFrostBreathTimer < uiDiff)
                     {
-                        m_Phase = PHASE_AIR_BREATH;
-                        DoScriptText(EMOTE_BREATH, m_creature);
-                        DoCastSpellIfCan(m_creature, SPELL_FROST_BREATH_DUMMY);
-                        m_uiFrostBreathTimer = 7000;
+                        if (DoCastSpellIfCan(m_creature, SPELL_FROST_BREATH) == CAST_OK)
+                        {
+                            DoCastSpellIfCan(m_creature, SPELL_FROST_BREATH_DUMMY, CAST_TRIGGERED);
+                            DoScriptText(EMOTE_BREATH, m_creature);
+                            m_Phase = PHASE_AIR_BREATH;
+                            m_uiFrostBreathTimer = 5000;
+                            m_uiLandTimer = 11000;
+                        }
                     }
                     else
                         m_uiFrostBreathTimer -= uiDiff;
@@ -251,20 +247,6 @@ struct MANGOS_DLL_DECL boss_sapphironAI : public ScriptedAI
 
                 break;
             case PHASE_AIR_BREATH:
-                if (m_uiFrostBreathTimer)
-                {
-                    if (m_uiFrostBreathTimer <= uiDiff)
-                    {
-                        DoCastSpellIfCan(m_creature, SPELL_FROST_BREATH_A, CAST_TRIGGERED);
-                        DoCastSpellIfCan(m_creature, SPELL_FROST_BREATH_B, CAST_TRIGGERED);
-                        m_uiFrostBreathTimer = 0;
-
-                        m_uiLandTimer = 4000;
-                    }
-                    else
-                        m_uiFrostBreathTimer -= uiDiff;
-                }
-
                 if (m_uiLandTimer)
                 {
                     if (m_uiLandTimer <= uiDiff)

@@ -7,10 +7,11 @@ DELETE FROM scripted_areatrigger WHERE entry=4560;
 INSERT INTO scripted_areatrigger VALUES (4560,'at_legion_teleporter');
 DELETE FROM scripted_areatrigger WHERE entry=3066;
 INSERT INTO scripted_areatrigger VALUES (3066,'at_ravenholdt');
-DELETE FROM scripted_areatrigger WHERE entry IN (4112,4113);
+DELETE FROM scripted_areatrigger WHERE entry IN (4112,4113,4156);
 INSERT INTO scripted_areatrigger VALUES
 (4112,'at_naxxramas'),
-(4113,'at_naxxramas');
+(4113,'at_naxxramas'),
+(4156,'at_naxxramas');
 DELETE FROM scripted_areatrigger WHERE entry IN (3546,3547,3548,3549,3550,3552);
 INSERT INTO scripted_areatrigger VALUES
 (3546,'at_childrens_week_spot'), -- Darnassian bank
