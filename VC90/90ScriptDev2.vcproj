@@ -2215,6 +2215,10 @@
 					RelativePath="..\scripts\world\world_map_scripts.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\scripts\world\world_map_scripts.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
