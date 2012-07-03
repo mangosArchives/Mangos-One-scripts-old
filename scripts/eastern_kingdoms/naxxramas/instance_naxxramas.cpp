@@ -521,7 +521,7 @@ void instance_naxxramas::SetGothTriggers()
     if (!pGoth)
         return;
 
-    for(GUIDList::const_iterator itr = m_lGothTriggerList.begin(); itr != m_lGothTriggerList.end(); ++itr)
+    for(GuidList::const_iterator itr = m_lGothTriggerList.begin(); itr != m_lGothTriggerList.end(); ++itr)
     {
         if (Creature* pTrigger = instance->GetCreature(*itr))
         {
@@ -589,7 +589,7 @@ void instance_naxxramas::DoTriggerHeiganTraps(Creature* pHeigan, uint32 uiAreaIn
     if (uiAreaIndex >= MAX_HEIGAN_TRAP_AREAS)
         return;
 
-    for (GUIDList::const_iterator itr = m_alHeiganTrapGuids[uiAreaIndex].begin(); itr != m_alHeiganTrapGuids[uiAreaIndex].end(); ++itr)
+    for (GuidList::const_iterator itr = m_alHeiganTrapGuids[uiAreaIndex].begin(); itr != m_alHeiganTrapGuids[uiAreaIndex].end(); ++itr)
     {
         if (GameObject* pTrap = instance->GetGameObject(*itr))
             pTrap->Use(pHeigan);
