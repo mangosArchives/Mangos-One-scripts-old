@@ -98,7 +98,7 @@ struct MANGOS_DLL_DECL boss_onyxiaAI : public ScriptedAI
     boss_onyxiaAI(Creature* pCreature) : ScriptedAI(pCreature)
     {
         m_pInstance = (instance_onyxias_lair*)pCreature->GetInstanceData();
-        m_uiMaxBreathPositions = sizeof(aMoveData)/sizeof(OnyxiaMove);
+        m_uiMaxBreathPositions = countof(aMoveData);
         Reset();
     }
 
