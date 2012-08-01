@@ -591,7 +591,7 @@ INSERT INTO script_texts (entry,content_default,sound,type,language,emote,commen
 (-1000573,'Send them on! I\'m not afraid of some scrawny beasts!',0,0,0,0,'SAY_MIRAN_2'),
 (-1000574,'Ah, here at last! It\'s going to feel so good to get rid of these barrels.',0,0,0,0,'SAY_MIRAN_3'),
 
-(-1000579,'Insolent fool! You thought to steal Zelemar\'s blood? You shall pay with your own!',0,1,0,0,'Zelemar the Wrathful - Aggro'),
+(-1000579,'REUSE ME',0,0,0,0,'REUSE ME'),
 
 (-1000582,'Help! Please, You must help me!',0,0,0,0,'Galen - periodic say'),
 (-1000583,'Let us leave this place.',0,0,0,0,'Galen - quest accepted'),
