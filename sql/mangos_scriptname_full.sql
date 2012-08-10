@@ -347,6 +347,7 @@ UPDATE creature_template SET ScriptName='mob_webbed_creature' WHERE entry=17680;
 
 /* BURNING STEPPES */
 UPDATE creature_template SET ScriptName='npc_ragged_john' WHERE entry=9563;
+UPDATE creature_template SET ScriptName='npc_grark_lorkrub' WHERE entry=9520;
 
 /*  */
 /* CAVERNS OF TIME */
