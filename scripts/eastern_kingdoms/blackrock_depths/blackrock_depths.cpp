@@ -855,7 +855,8 @@ struct MANGOS_DLL_DECL npc_marshal_windsorAI : public npc_escortAI
                     DoScriptText(SAY_WINDSOR_EQUIPMENT_1, m_creature, pPlayer);
                 break;
             case 15:
-                m_creature->HandleEmoteCommand(EMOTE_ONESHOT_USESTANDING);
+                // ToDo: fix this emote!
+                //m_creature->HandleEmoteCommand(EMOTE_ONESHOT_USESTANDING);
                 break;
             case 16:
                 if (m_pInstance)
@@ -865,7 +866,8 @@ struct MANGOS_DLL_DECL npc_marshal_windsorAI : public npc_escortAI
                 DoScriptText(SAY_WINDSOR_EQUIPMENT_2, m_creature);
                 break;
             case 19:
-                m_creature->HandleEmoteCommand(EMOTE_ONESHOT_USESTANDING);
+                // ToDo: fix this emote!
+                //m_creature->HandleEmoteCommand(EMOTE_ONESHOT_USESTANDING);
                 break;
             case 20:
                 if (m_pInstance)
