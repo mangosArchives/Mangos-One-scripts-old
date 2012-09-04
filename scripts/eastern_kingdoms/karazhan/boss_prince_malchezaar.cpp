@@ -613,14 +613,20 @@ struct MANGOS_DLL_DECL boss_malchezaarAI : public ScriptedAI
             //Check for base attack
             if (m_creature->isAttackReady())
             {
-                m_creature->AttackerStateUpdate(m_creature->getVictim());
-                m_creature->resetAttackTimer();
+                if (m_creature->getVictim()->isAlive())
+                {
+                    m_creature->AttackerStateUpdate(m_creature->getVictim());
+                    m_creature->resetAttackTimer();
+                }
             }
             //Check for offhand attack
             if (m_creature->isAttackReady(OFF_ATTACK))
             {
-                m_creature->AttackerStateUpdate(m_creature->getVictim(), OFF_ATTACK);
-                m_creature->resetAttackTimer(OFF_ATTACK);
+                if (m_creature->getVictim()->isAlive())
+                {
+                    m_creature->AttackerStateUpdate(m_creature->getVictim(), OFF_ATTACK);
+                    m_creature->resetAttackTimer(OFF_ATTACK);
+                }
             }
         }
     }
