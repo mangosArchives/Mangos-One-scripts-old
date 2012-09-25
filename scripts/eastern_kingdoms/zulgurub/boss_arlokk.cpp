@@ -189,7 +189,7 @@ struct MANGOS_DLL_DECL boss_arlokkAI : public ScriptedAI
                 if (DoCastSpellIfCan(m_creature, SPELL_GOUGE) == CAST_OK)
                 {
                     if (m_creature->getThreatManager().getThreat(m_creature->getVictim()))
-                        m_creature->getThreatManager().modifyThreatPercent(m_creature->getVictim(),-80);
+                        m_creature->getThreatManager().modifyThreatPercent(m_creature->getVictim(), -80);
 
                     m_uiGougeTimer = urand(17000, 27000);
                 }

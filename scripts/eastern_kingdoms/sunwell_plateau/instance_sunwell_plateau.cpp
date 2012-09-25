@@ -58,7 +58,7 @@ void instance_sunwell_plateau::Initialize()
 
 bool instance_sunwell_plateau::IsEncounterInProgress() const
 {
-    for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+    for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
     {
         if (m_auiEncounter[i] == IN_PROGRESS)
             return true;
@@ -83,7 +83,7 @@ void instance_sunwell_plateau::OnPlayerEnter(Player* pPlayer)
 
 void instance_sunwell_plateau::OnCreatureCreate(Creature* pCreature)
 {
-    switch(pCreature->GetEntry())
+    switch (pCreature->GetEntry())
     {
         case NPC_KALECGOS_DRAGON:
         case NPC_KALECGOS_HUMAN:
@@ -128,7 +128,7 @@ void instance_sunwell_plateau::OnCreatureDeath(Creature* pCreature)
 
 void instance_sunwell_plateau::OnObjectCreate(GameObject* pGo)
 {
-    switch(pGo->GetEntry())
+    switch (pGo->GetEntry())
     {
         case GO_FORCEFIELD:
         case GO_BOSS_COLLISION_1:
@@ -166,7 +166,7 @@ void instance_sunwell_plateau::OnObjectCreate(GameObject* pGo)
 
 void instance_sunwell_plateau::SetData(uint32 uiType, uint32 uiData)
 {
-    switch(uiType)
+    switch (uiType)
     {
         case TYPE_KALECGOS:
             m_auiEncounter[uiType] = uiData;
@@ -219,7 +219,7 @@ void instance_sunwell_plateau::SetData(uint32 uiType, uint32 uiData)
                 DoUseDoorOrButton(GO_THIRD_GATE);
             }
             else if (uiData == IN_PROGRESS)
-                m_uiMuruBerserkTimer = 10*MINUTE*IN_MILLISECONDS;
+                m_uiMuruBerserkTimer = 10 * MINUTE * IN_MILLISECONDS;
             break;
         case TYPE_KILJAEDEN:
             m_auiEncounter[uiType] = uiData;
@@ -235,7 +235,7 @@ void instance_sunwell_plateau::SetData(uint32 uiType, uint32 uiData)
 
         std::ostringstream saveStream;
         saveStream << m_auiEncounter[0] << " " << m_auiEncounter[1] << " " << m_auiEncounter[2] << " "
-            << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5];
+                   << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5];
 
         m_strInstData = saveStream.str();
 
@@ -280,7 +280,7 @@ void instance_sunwell_plateau::Update(uint32 uiDiff)
             else if (Creature* pMuru = GetSingleCreatureFromStorage(NPC_MURU))
                 pMuru->CastSpell(pMuru, SPELL_MURU_BERSERK, true);
 
-            m_uiMuruBerserkTimer = 10*MINUTE*IN_MILLISECONDS;
+            m_uiMuruBerserkTimer = 10 * MINUTE * IN_MILLISECONDS;
         }
         else
             m_uiMuruBerserkTimer -= uiDiff;
@@ -299,9 +299,9 @@ void instance_sunwell_plateau::Load(const char* in)
 
     std::istringstream loadStream(in);
     loadStream >> m_auiEncounter[0] >> m_auiEncounter[1] >> m_auiEncounter[2] >>
-        m_auiEncounter[3] >> m_auiEncounter[4] >> m_auiEncounter[5];
+               m_auiEncounter[3] >> m_auiEncounter[4] >> m_auiEncounter[5];
 
-    for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+    for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
     {
         if (m_auiEncounter[i] == IN_PROGRESS)
             m_auiEncounter[i] = NOT_STARTED;
@@ -317,7 +317,7 @@ void instance_sunwell_plateau::JustDidDialogueStep(int32 iEntry)
         case NPC_KALECGOS:
             if (Creature* pTrigger = GetSingleCreatureFromStorage(NPC_FLIGHT_TRIGGER_LEFT))
             {
-                if (Creature* pKalec = pTrigger->SummonCreature(NPC_KALECGOS, pTrigger->GetPositionX(), pTrigger->GetPositionY(), pTrigger->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 1*MINUTE*IN_MILLISECONDS))
+                if (Creature* pKalec = pTrigger->SummonCreature(NPC_KALECGOS, pTrigger->GetPositionX(), pTrigger->GetPositionY(), pTrigger->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 1 * MINUTE * IN_MILLISECONDS))
                 {
                     pKalec->SetWalk(false);
                     pKalec->SetLevitate(true);

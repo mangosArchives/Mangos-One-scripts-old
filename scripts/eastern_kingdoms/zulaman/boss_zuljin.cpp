@@ -231,7 +231,7 @@ struct MANGOS_DLL_DECL boss_zuljinAI : public ScriptedAI
 
     void JustSummoned(Creature* pSummoned)
     {
-        switch(pSummoned->GetEntry())
+        switch (pSummoned->GetEntry())
         {
             case NPC_FEATHER_VORTEX:
                 pSummoned->CastSpell(pSummoned, SPELL_CYCLONE_VISUAL, true);
@@ -337,7 +337,7 @@ struct MANGOS_DLL_DECL boss_zuljinAI : public ScriptedAI
         {
             case PHASE_TROLL:
 
-                if(m_uiWhirlwindTimer < uiDiff)
+                if (m_uiWhirlwindTimer < uiDiff)
                 {
                     if (DoCastSpellIfCan(m_creature, SPELL_WHIRLWIND) == CAST_OK)
                         m_uiWhirlwindTimer = urand(15000, 20000);
@@ -345,9 +345,9 @@ struct MANGOS_DLL_DECL boss_zuljinAI : public ScriptedAI
                 else
                     m_uiWhirlwindTimer -= uiDiff;
 
-                if(m_uiGrievousThrowTimer < uiDiff)
+                if (m_uiGrievousThrowTimer < uiDiff)
                 {
-                    if(Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
+                    if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
                     {
                         if (DoCastSpellIfCan(pTarget, SPELL_GRIEVOUS_THROW) == CAST_OK)
                             m_uiGrievousThrowTimer = 10000;
@@ -359,7 +359,7 @@ struct MANGOS_DLL_DECL boss_zuljinAI : public ScriptedAI
                 break;
             case PHASE_BEAR:
 
-                if(m_uiParalysisTimer < uiDiff)
+                if (m_uiParalysisTimer < uiDiff)
                 {
                     if (DoCastSpellIfCan(m_creature, SPELL_CREEPING_PARALYSIS) == CAST_OK)
                         m_uiParalysisTimer = 27000;
@@ -367,7 +367,7 @@ struct MANGOS_DLL_DECL boss_zuljinAI : public ScriptedAI
                 else
                     m_uiParalysisTimer -= uiDiff;
 
-                if(m_uiOverpowerTimer < uiDiff)
+                if (m_uiOverpowerTimer < uiDiff)
                 {
                     if (DoCastSpellIfCan(m_creature->getVictim(), SPELL_OVERPOWER) == CAST_OK)
                         m_uiOverpowerTimer = urand(12000, 16000);
@@ -386,7 +386,7 @@ struct MANGOS_DLL_DECL boss_zuljinAI : public ScriptedAI
                 break;
             case PHASE_DRAGONHAWK:
 
-                if(m_uiFlameWhirlTimer < uiDiff)
+                if (m_uiFlameWhirlTimer < uiDiff)
                 {
                     if (DoCastSpellIfCan(m_creature, SPELL_FLAME_WHIRL) == CAST_OK)
                         m_uiFlameWhirlTimer = 15000;
@@ -394,7 +394,7 @@ struct MANGOS_DLL_DECL boss_zuljinAI : public ScriptedAI
                 else
                     m_uiFlameWhirlTimer -= uiDiff;
 
-                if(m_uiPillarOfFireTimer < uiDiff)
+                if (m_uiPillarOfFireTimer < uiDiff)
                 {
                     if (DoCastSpellIfCan(m_creature, SPELL_SUMMON_PILLAR) == CAST_OK)
                         m_uiPillarOfFireTimer = urand(17000, 22000);
@@ -402,9 +402,9 @@ struct MANGOS_DLL_DECL boss_zuljinAI : public ScriptedAI
                 else
                     m_uiPillarOfFireTimer -= uiDiff;
 
-                if(m_uiFlameBreathTimer < uiDiff)
+                if (m_uiFlameBreathTimer < uiDiff)
                 {
-                    if(Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
+                    if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
                     {
                         if (DoCastSpellIfCan(m_creature, SPELL_FLAME_BREATH) == CAST_OK)
                             m_uiFlameBreathTimer = 15000;

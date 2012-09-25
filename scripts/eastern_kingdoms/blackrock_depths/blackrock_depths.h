@@ -120,45 +120,45 @@ static const uint32 aTombDwarfes[MAX_DWARFS] = {NPC_ANGERREL, NPC_SEETHREL, NPC_
 
 class MANGOS_DLL_DECL instance_blackrock_depths : public ScriptedInstance
 {
-    public:
-        instance_blackrock_depths(Map* pMap);
-        ~instance_blackrock_depths() {}
+public:
+    instance_blackrock_depths(Map* pMap);
+    ~instance_blackrock_depths() {}
 
-        void Initialize();
+    void Initialize();
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnCreatureEnterCombat(Creature* pCreature);
-        void OnCreatureDeath(Creature* pCreature);
-        void OnCreatureEvade(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnCreatureEnterCombat(Creature* pCreature);
+    void OnCreatureDeath(Creature* pCreature);
+    void OnCreatureEvade(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-        void Update(uint32 uiDiff);
+    void Update(uint32 uiDiff);
 
-        // Arena Event
-        void SetArenaCenterCoords(float fX, float fY, float fZ) { m_fArenaCenterX = fX; m_fArenaCenterY = fY; m_fArenaCenterZ = fZ; }
-        void GetArenaCenterCoords(float &fX, float &fY, float &fZ) { fX = m_fArenaCenterX; fY = m_fArenaCenterY; fZ = m_fArenaCenterZ; }
+    // Arena Event
+    void SetArenaCenterCoords(float fX, float fY, float fZ) { m_fArenaCenterX = fX; m_fArenaCenterY = fY; m_fArenaCenterZ = fZ; }
+    void GetArenaCenterCoords(float &fX, float &fY, float &fZ) { fX = m_fArenaCenterX; fY = m_fArenaCenterY; fZ = m_fArenaCenterZ; }
 
-    private:
-        void DoCallNextDwarf();
+private:
+    void DoCallNextDwarf();
 
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        uint32 m_uiBarAleCount;
-        uint8 m_uiCofferDoorsOpened;
+    uint32 m_uiBarAleCount;
+    uint8 m_uiCofferDoorsOpened;
 
-        uint8 m_uiDwarfRound;
-        uint32 m_uiDwarfFightTimer;
+    uint8 m_uiDwarfRound;
+    uint32 m_uiDwarfFightTimer;
 
-        float m_fArenaCenterX, m_fArenaCenterY, m_fArenaCenterZ;
+    float m_fArenaCenterX, m_fArenaCenterY, m_fArenaCenterZ;
 
-        GuidSet m_sVaultNpcGuids;
+    GuidSet m_sVaultNpcGuids;
 };
 
 #endif

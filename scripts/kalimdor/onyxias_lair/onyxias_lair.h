@@ -18,22 +18,22 @@ enum
 
 class MANGOS_DLL_DECL instance_onyxias_lair : public ScriptedInstance
 {
-    public:
-        instance_onyxias_lair(Map* pMap);
-        ~instance_onyxias_lair() {}
+public:
+    instance_onyxias_lair(Map* pMap);
+    ~instance_onyxias_lair() {}
 
-        void Initialize();
+    void Initialize();
 
-        bool IsEncounterInProgress() const;
+    bool IsEncounterInProgress() const;
 
-        void OnCreatureCreate(Creature* pCreature);
+    void OnCreatureCreate(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
+    void SetData(uint32 uiType, uint32 uiData);
 
-    protected:
-        uint32 m_uiEncounter;
+protected:
+    uint32 m_uiEncounter;
 
-        time_t m_tPhaseTwoStart;
+    time_t m_tPhaseTwoStart;
 };
 
 #endif

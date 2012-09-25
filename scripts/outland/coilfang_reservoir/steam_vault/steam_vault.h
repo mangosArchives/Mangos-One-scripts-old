@@ -25,27 +25,27 @@ enum
 
 class MANGOS_DLL_DECL instance_steam_vault : public ScriptedInstance
 {
-    public:
-        instance_steam_vault(Map* pMap);
+public:
+    instance_steam_vault(Map* pMap);
 
-        void Initialize();
+    void Initialize();
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void OnCreatureDeath(Creature* pCreature);
+    void OnCreatureDeath(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-    private:
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+private:
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        GuidList m_lNagaDistillerGuidList;
+    GuidList m_lNagaDistillerGuidList;
 };
 
 #endif

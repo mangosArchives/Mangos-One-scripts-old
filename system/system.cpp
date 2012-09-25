@@ -94,7 +94,8 @@ void SystemMgr::LoadScriptTexts()
 
             m_mTextDataMap[iId] = pTemp;
             ++uiCount;
-        } while (pResult->NextRow());
+        }
+        while (pResult->NextRow());
 
         delete pResult;
 
@@ -156,7 +157,8 @@ void SystemMgr::LoadScriptTextsCustom()
 
             m_mTextDataMap[iId] = pTemp;
             ++uiCount;
-        } while (pResult->NextRow());
+        }
+        while (pResult->NextRow());
 
         delete pResult;
 
@@ -229,7 +231,8 @@ void SystemMgr::LoadScriptWaypoints()
 
             m_mPointMoveMap[uiEntry].push_back(pTemp);
             ++uiNodeCount;
-        } while (pResult->NextRow());
+        }
+        while (pResult->NextRow());
 
         delete pResult;
 

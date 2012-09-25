@@ -80,10 +80,10 @@ enum
 
 static const float afCthunLocations[4][4] =
 {
-    {-8571.0f, 1990.0f, -98.0f, 1.22f},         // flesh tentacles locations
-    {-8525.0f, 1994.0f, -98.0f, 2.12f},
-    {-8562.0f, 2037.0f, -70.0f, 5.05f},         // stomach teleport location
-    {-8545.6f, 1987.7f, -32.9f, 0.0f},          // stomach eject location
+    { -8571.0f, 1990.0f, -98.0f, 1.22f},        // flesh tentacles locations
+    { -8525.0f, 1994.0f, -98.0f, 2.12f},
+    { -8562.0f, 2037.0f, -70.0f, 5.05f},        // stomach teleport location
+    { -8545.6f, 1987.7f, -32.9f, 0.0f},         // stomach eject location
 };
 
 enum CThunPhase
@@ -256,7 +256,7 @@ struct MANGOS_DLL_DECL boss_eye_of_cthunAI : public Scripted_NoMovementAI
 
                 if (m_uiDarkGlareTimer < uiDiff)
                 {
-                        // Cast the rotation spell
+                    // Cast the rotation spell
                     if (DoCastSpellIfCan(m_creature, SPELL_ROTATE_TRIGGER) == CAST_OK)
                     {
                         // Remove the target focus but allow the boss to face the current victim
@@ -312,7 +312,7 @@ struct MANGOS_DLL_DECL boss_eye_of_cthunAI : public Scripted_NoMovementAI
             float fX, fY, fZ;
             for (uint8 i = 0; i < MAX_EYE_TENTACLES; ++i)
             {
-                m_creature->GetNearPoint(m_creature, fX, fY, fZ, 0, 30.0f, M_PI_F/4*i);
+                m_creature->GetNearPoint(m_creature, fX, fY, fZ, 0, 30.0f, M_PI_F / 4 * i);
                 m_creature->SummonCreature(NPC_EYE_TENTACLE, fX, fY, fZ, 0, TEMPSUMMON_DEAD_DESPAWN, 0);
             }
 
@@ -450,7 +450,7 @@ struct MANGOS_DLL_DECL boss_cthunAI : public Scripted_NoMovementAI
     {
         switch (pSummoned->GetEntry())
         {
-            // Handle portal despawn on tentacle kill
+                // Handle portal despawn on tentacle kill
             case NPC_EYE_TENTACLE:
                 if (Creature* pPortal = GetClosestCreatureWithEntry(pSummoned, NPC_TENTACLE_PORTAL, 5.0f))
                     pPortal->ForcedDespawn();
@@ -460,7 +460,7 @@ struct MANGOS_DLL_DECL boss_cthunAI : public Scripted_NoMovementAI
                 if (Creature* pPortal = GetClosestCreatureWithEntry(pSummoned, NPC_GIANT_TENTACLE_PORTAL, 5.0f))
                     pPortal->ForcedDespawn();
                 break;
-            // Handle the stomach tentacles kill
+                // Handle the stomach tentacles kill
             case NPC_FLESH_TENTACLE:
                 ++m_uiFleshTentaclesKilled;
                 if (m_uiFleshTentaclesKilled == MAX_FLESH_TENTACLES)
@@ -645,7 +645,7 @@ struct MANGOS_DLL_DECL boss_cthunAI : public Scripted_NoMovementAI
             float fX, fY, fZ;
             for (uint8 i = 0; i < MAX_EYE_TENTACLES; ++i)
             {
-                m_creature->GetNearPoint(m_creature, fX, fY, fZ, 0, 30.0f, M_PI_F/4*i);
+                m_creature->GetNearPoint(m_creature, fX, fY, fZ, 0, 30.0f, M_PI_F / 4 * i);
                 m_creature->SummonCreature(NPC_EYE_TENTACLE, fX, fY, fZ, 0, TEMPSUMMON_DEAD_DESPAWN, 0);
             }
 
@@ -776,7 +776,7 @@ bool AreaTrigger_at_stomach_cthun(Player* pPlayer, AreaTriggerEntry const* pAt)
 
                 // Teleport back to C'thun and remove the Digestive Acid
                 pPlayer->RemoveAurasDueToSpell(SPELL_DIGESTIVE_ACID);
-                pPlayer->NearTeleportTo(pCthun->GetPositionX(), pCthun->GetPositionY(), pCthun->GetPositionZ() + 15.0f, frand(0, 2*M_PI_F));
+                pPlayer->NearTeleportTo(pCthun->GetPositionX(), pCthun->GetPositionY(), pCthun->GetPositionZ() + 15.0f, frand(0, 2 * M_PI_F));
 
                 // Note: the real knockback spell id should be 26230
                 pPlayer->CastSpell(pPlayer, SPELL_EXIT_STOMACH_KNOCKBACK, true, NULL, NULL, pCthun->GetObjectGuid());

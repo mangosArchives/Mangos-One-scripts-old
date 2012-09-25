@@ -67,7 +67,7 @@ enum
     //PHASE_ON_PLATFORM               = 3
 };
 
-static const uint32 auiRandSpawnEntry[]=
+static const uint32 auiRandSpawnEntry[] =
 {
     NPC_ASH_ELEMENTAL,
     NPC_ASH_ROGUE,
@@ -86,20 +86,20 @@ struct Location
     float m_fX, m_fY, m_fZ, m_fO;
 };
 
-static const Location afSpawnLoc[]=
+static const Location afSpawnLoc[] =
 {
     {498.652740f, 461.728119f, LOC_LOW_Z, 0.0f},
     {498.505003f, 339.619324f, LOC_LOW_Z, 0.0f}
 };
 
-static const Location afAkamaWP[]=
+static const Location afAkamaWP[] =
 {
     //{516.885193, 400.836060, LOC_LOW_Z_SPAWN, 0.0},       //not used yet, he moves to here before start channel
     {482.352448f, 401.162720f, LOC_LOW_Z, 0.0f},
     {469.597443f, 402.264404f, LOC_PLATFORM_Z, 0.0f}
 };
 
-static const Location afBrokenSpawnLoc[]=
+static const Location afBrokenSpawnLoc[] =
 {
     {541.375916f, 401.439575f, LOC_LOW_Z, M_PI_F},          // The place where Akama channels
     {534.130005f, 352.394531f, LOC_LOW_Z, 2.164150f},       // Behind a 'pillar' which is behind the east alcove
@@ -107,7 +107,7 @@ static const Location afBrokenSpawnLoc[]=
     {499.151093f, 461.036438f, LOC_LOW_Z, 4.770888f}        // West Alcove
 };
 
-static const Location afBrokenWP[]=
+static const Location afBrokenWP[] =
 {
     {492.491638f, 400.744690f, LOC_LOW_Z, 3.122336f},
     {494.335724f, 382.221771f, LOC_LOW_Z, 2.676230f},
@@ -202,8 +202,8 @@ struct MANGOS_DLL_DECL boss_shade_of_akamaAI : public ScriptedAI
         if (!urand(0, 2) && (m_uiDeathChannelerCount > 0) && (m_lSorcerersGUIDList.size() < 7))
         {
             if (Creature* pSorcerer = m_creature->SummonCreature(NPC_ASH_SORCERER,
-                afSpawnLoc[uiRand].m_fX, afSpawnLoc[uiRand].m_fY, afSpawnLoc[uiRand].m_fZ, afSpawnLoc[uiRand].m_fO,
-                TEMPSUMMON_DEAD_DESPAWN, 0))
+                                      afSpawnLoc[uiRand].m_fX, afSpawnLoc[uiRand].m_fY, afSpawnLoc[uiRand].m_fZ, afSpawnLoc[uiRand].m_fO,
+                                      TEMPSUMMON_DEAD_DESPAWN, 0))
             {
                 pSorcerer->SetWalk(false);
                 pSorcerer->GetMotionMaster()->MovePoint(0, m_creature->GetPositionX(), m_creature->GetPositionY(), m_creature->GetPositionZ());
@@ -219,8 +219,8 @@ struct MANGOS_DLL_DECL boss_shade_of_akamaAI : public ScriptedAI
             for (uint8 i = 0; i < countof(auiRandSpawnEntry); ++i)
             {
                 if (Creature* pSpawn = m_creature->SummonCreature(auiRandSpawnEntry[i],
-                    afSpawnLoc[uiRand].m_fX, afSpawnLoc[uiRand].m_fY, afSpawnLoc[uiRand].m_fZ, afSpawnLoc[uiRand].m_fO,
-                    TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 25000))
+                                       afSpawnLoc[uiRand].m_fX, afSpawnLoc[uiRand].m_fY, afSpawnLoc[uiRand].m_fZ, afSpawnLoc[uiRand].m_fO,
+                                       TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 25000))
                 {
                     pSpawn->SetWalk(false);
                     pSpawn->GetMotionMaster()->MovePoint(0, LOC_RAND_TO_CENTER_X, LOC_RAND_TO_CENTER_Y, LOC_RAND_TO_CENTER_Z);
@@ -258,7 +258,7 @@ struct MANGOS_DLL_DECL boss_shade_of_akamaAI : public ScriptedAI
     void PrepareChannelers()
     {
         std::list<Creature*> lChannelerList;
-        GetCreatureListWithEntryInGrid(lChannelerList,m_creature, NPC_ASH_CHANNELER, 50.0f);
+        GetCreatureListWithEntryInGrid(lChannelerList, m_creature, NPC_ASH_CHANNELER, 50.0f);
 
         if (!lChannelerList.empty())
         {
@@ -304,8 +304,8 @@ struct MANGOS_DLL_DECL boss_shade_of_akamaAI : public ScriptedAI
                 uint32 uiRand = urand(0, countof(afSpawnLoc) - 1);
 
                 if (Creature* pDefender = m_creature->SummonCreature(NPC_ASH_DEFENDER,
-                    afSpawnLoc[uiRand].m_fX, afSpawnLoc[uiRand].m_fY, afSpawnLoc[uiRand].m_fZ, afSpawnLoc[uiRand].m_fO,
-                    TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 25000))
+                                          afSpawnLoc[uiRand].m_fX, afSpawnLoc[uiRand].m_fY, afSpawnLoc[uiRand].m_fZ, afSpawnLoc[uiRand].m_fO,
+                                          TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 25000))
                 {
                     if (Creature* pAkama = m_pInstance->GetSingleCreatureFromStorage(NPC_AKAMA_SHADE))
                         pDefender->AI()->AttackStart(pAkama);
@@ -353,7 +353,7 @@ struct MANGOS_DLL_DECL boss_shade_of_akamaAI : public ScriptedAI
                     if (pAkama->isAlive())
                     {
                         // 10 % less health every few seconds.
-                        m_creature->DealDamage(pAkama, pAkama->GetMaxHealth()/10, NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
+                        m_creature->DealDamage(pAkama, pAkama->GetMaxHealth() / 10, NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
                         m_uiReduceHealthTimer = 12000;
                     }
                     else
@@ -467,7 +467,7 @@ struct MANGOS_DLL_DECL npc_akamaAI : public ScriptedAI
         if (uiMoveType != POINT_MOTION_TYPE || !m_pInstance)
             return;
 
-        switch(uiPointId)
+        switch (uiPointId)
         {
             case 0:
                 ++m_uiWayPointId;
@@ -556,15 +556,15 @@ struct MANGOS_DLL_DECL npc_akamaAI : public ScriptedAI
             {
                 for (uint8 i = 0; i < 4; ++i)
                 {
-                    float x = afBrokenSpawnLoc[m_uiBrokenSummonIndex].m_fX + (i*5);
-                    float y = afBrokenSpawnLoc[m_uiBrokenSummonIndex].m_fY + (1*5);
+                    float x = afBrokenSpawnLoc[m_uiBrokenSummonIndex].m_fX + (i * 5);
+                    float y = afBrokenSpawnLoc[m_uiBrokenSummonIndex].m_fY + (1 * 5);
                     float z = afBrokenSpawnLoc[m_uiBrokenSummonIndex].m_fZ;
                     float o = afBrokenSpawnLoc[m_uiBrokenSummonIndex].m_fO;
 
                     if (Creature* pBroken = m_creature->SummonCreature(NPC_ASH_BROKEN, x, y, z, o, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 360000))
                     {
-                        float wx = afBrokenWP[m_uiBrokenSummonIndex].m_fX + (i*5);
-                        float wy = afBrokenWP[m_uiBrokenSummonIndex].m_fY + (i*5);
+                        float wx = afBrokenWP[m_uiBrokenSummonIndex].m_fX + (i * 5);
+                        float wy = afBrokenWP[m_uiBrokenSummonIndex].m_fY + (i * 5);
                         float wz = afBrokenWP[m_uiBrokenSummonIndex].m_fZ;
 
                         pBroken->GetMotionMaster()->MovePoint(0, wx, wy, wz);
@@ -585,7 +585,7 @@ struct MANGOS_DLL_DECL npc_akamaAI : public ScriptedAI
         {
             if (m_uiSoulRetrieveTimer <= uiDiff)
             {
-                switch(m_uiEndingTalkCount)
+                switch (m_uiEndingTalkCount)
                 {
                     case 0:
                         m_creature->HandleEmote(EMOTE_ONESHOT_ROAR);

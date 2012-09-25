@@ -41,42 +41,42 @@ enum
     AREATRIGGER_ALTAR       = 3960,
 };
 
-static const float aMandokirDownstairsPos[3] = {-12196.30f, -1948.37f, 130.31f};
+static const float aMandokirDownstairsPos[3] = { -12196.30f, -1948.37f, 130.31f};
 
 class MANGOS_DLL_DECL instance_zulgurub : public ScriptedInstance
 {
-    public:
-        instance_zulgurub(Map* pMap);
-        ~instance_zulgurub() {}
+public:
+    instance_zulgurub(Map* pMap);
+    ~instance_zulgurub() {}
 
-        void Initialize();
-        // IsEncounterInProgress() const { return false; }  // not active in Zul'Gurub
+    void Initialize();
+    // IsEncounterInProgress() const { return false; }  // not active in Zul'Gurub
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-        void DoYellAtTriggerIfCan(uint32 uiTriggerId);
+    void DoYellAtTriggerIfCan(uint32 uiTriggerId);
 
-        Creature* SelectRandomPantherTrigger(bool bIsLeft);
+    Creature* SelectRandomPantherTrigger(bool bIsLeft);
 
-    protected:
-        void DoLowerHakkarHitPoints();
+protected:
+    void DoLowerHakkarHitPoints();
 
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        GuidList m_lRightPantherTriggerGUIDList;
-        GuidList m_lLeftPantherTriggerGUIDList;
-        GuidList m_lSpiderEggGUIDList;
+    GuidList m_lRightPantherTriggerGUIDList;
+    GuidList m_lLeftPantherTriggerGUIDList;
+    GuidList m_lSpiderEggGUIDList;
 
-        bool m_bHasIntroYelled;
-        bool m_bHasAltarYelled;
+    bool m_bHasIntroYelled;
+    bool m_bHasAltarYelled;
 };
 
 #endif

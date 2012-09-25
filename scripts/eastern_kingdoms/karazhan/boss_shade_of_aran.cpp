@@ -124,7 +124,7 @@ struct MANGOS_DLL_DECL boss_aranAI : public ScriptedAI
         m_uiSuperCastTimer      = 35000;
         m_uiManaRecoveryTimer   = 0;
         m_uiManaRecoveryStage   = 0;
-        m_uiBerserkTimer        = 12*MINUTE*IN_MILLISECONDS;
+        m_uiBerserkTimer        = 12 * MINUTE * IN_MILLISECONDS;
 
         m_bElementalsSpawned    = false;
         m_bIsDrinking           = false;
@@ -151,7 +151,7 @@ struct MANGOS_DLL_DECL boss_aranAI : public ScriptedAI
 
     void Aggro(Unit* pWho)
     {
-        switch(urand(0, 2))
+        switch (urand(0, 2))
         {
             case 0: DoScriptText(SAY_AGGRO1, m_creature); break;
             case 1: DoScriptText(SAY_AGGRO2, m_creature); break;
@@ -206,7 +206,7 @@ struct MANGOS_DLL_DECL boss_aranAI : public ScriptedAI
             return;
 
         // Start drinking when below 20% mana
-        if (!m_bIsDrinking && m_creature->getPowerType() == POWER_MANA && (m_creature->GetPower(POWER_MANA)*100 / m_creature->GetMaxPower(POWER_MANA)) < 20)
+        if (!m_bIsDrinking && m_creature->getPowerType() == POWER_MANA && (m_creature->GetPower(POWER_MANA) * 100 / m_creature->GetMaxPower(POWER_MANA)) < 20)
         {
             if (DoCastSpellIfCan(m_creature, SPELL_MASS_POLYMORPH) == CAST_OK)
             {
@@ -307,7 +307,7 @@ struct MANGOS_DLL_DECL boss_aranAI : public ScriptedAI
         {
             CanCastResult spellResult = CAST_OK;
 
-            switch(urand(0, 1))
+            switch (urand(0, 1))
             {
                 case 0:
                     spellResult = DoCastSpellIfCan(m_creature, SPELL_COUNTERSPELL);

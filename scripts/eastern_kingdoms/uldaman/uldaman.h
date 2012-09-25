@@ -35,42 +35,42 @@ enum
 
 class MANGOS_DLL_DECL instance_uldaman : public ScriptedInstance
 {
-    public:
-        instance_uldaman(Map* pMap);
-        ~instance_uldaman() {}
+public:
+    instance_uldaman(Map* pMap);
+    ~instance_uldaman() {}
 
-        void Initialize();
+    void Initialize();
 
-        void OnObjectCreate(GameObject* pGo);
-        void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
 
-        void Update(uint32 uiDiff);
+    void Update(uint32 uiDiff);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        void SetData64(uint32 uiData, uint64 uiGuid);
-        uint32 GetData(uint32 uiType);
-        uint64 GetData64(uint32 uiData);
+    void SetData(uint32 uiType, uint32 uiData);
+    void SetData64(uint32 uiData, uint64 uiGuid);
+    uint32 GetData(uint32 uiType);
+    uint64 GetData64(uint32 uiData);
 
-        void StartEvent(uint32 uiEventId, Player* pPlayer);
+    void StartEvent(uint32 uiEventId, Player* pPlayer);
 
-        void DoResetKeeperEvent();
+    void DoResetKeeperEvent();
 
-        Creature* GetClosestDwarfNotInCombat(Creature* pSearcher, uint32 uiPhase);
+    Creature* GetClosestDwarfNotInCombat(Creature* pSearcher, uint32 uiPhase);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-    protected:
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+protected:
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        ObjectGuid m_playerGuid;
+    ObjectGuid m_playerGuid;
 
-        uint32 m_uiKeeperCooldown;
-        uint32 m_uiStoneKeepersFallen;
+    uint32 m_uiKeeperCooldown;
+    uint32 m_uiStoneKeepersFallen;
 
-        GuidList m_lWardens;
-        std::map<ObjectGuid, bool> m_mKeeperMap;
+    GuidList m_lWardens;
+    std::map<ObjectGuid, bool> m_mKeeperMap;
 };
 
 #endif

@@ -90,7 +90,7 @@ struct OperaSpawns
     float fX, fY, fZ, fO;
 };
 
-static const OperaSpawns aOperaLocOz[MAX_OZ_OPERA_MOBS]=
+static const OperaSpawns aOperaLocOz[MAX_OZ_OPERA_MOBS] =
 {
     {NPC_DOROTHEE,  -10896.65f, -1757.62f, 90.55f, 4.86f},
     {NPC_ROAR,      -10889.53f, -1758.10f, 90.55f, 4.57f},
@@ -101,45 +101,45 @@ static const OperaSpawns aOperaLocOz[MAX_OZ_OPERA_MOBS]=
 static const OperaSpawns aOperaLocWolf = {NPC_GRANDMOTHER, -10892.01f, -1758.01f, 90.55f, 4.73f};
 static const OperaSpawns aOperaLocJul  = {NPC_JULIANNE,    -10893.56f, -1760.43f, 90.55f, 4.55f};
 
-static const float afChroneSpawnLoc[4] = {-10893.11f, -1757.85f, 90.55f, 4.60f};
+static const float afChroneSpawnLoc[4] = { -10893.11f, -1757.85f, 90.55f, 4.60f};
 
 class MANGOS_DLL_DECL instance_karazhan : public ScriptedInstance
 {
-    public:
-        instance_karazhan(Map* pMap);
-        ~instance_karazhan() {}
+public:
+    instance_karazhan(Map* pMap);
+    ~instance_karazhan() {}
 
-        void Initialize();
-        bool IsEncounterInProgress() const;
+    void Initialize();
+    bool IsEncounterInProgress() const;
 
-        void OnPlayerEnter(Player* pPlayer);
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnPlayerEnter(Player* pPlayer);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void OnCreatureDeath(Creature* pCreature);
+    void OnCreatureDeath(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        void DoPrepareOperaStage(Creature* pOrganizer);
+    void DoPrepareOperaStage(Creature* pOrganizer);
 
-        void GetNightbaneGroundTriggers(GuidList &lList) { lList = m_lNightbaneGroundTriggers; }
-        void GetNightbaneAirTriggers(GuidList &lList) { lList = m_lNightbaneAirTriggers; }
+    void GetNightbaneGroundTriggers(GuidList &lList) { lList = m_lNightbaneGroundTriggers; }
+    void GetNightbaneAirTriggers(GuidList &lList) { lList = m_lNightbaneAirTriggers; }
 
-        void Load(const char* chrIn);
-        const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
 
-    private:
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+private:
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        uint32 m_uiOperaEvent;
-        uint32 m_uiOzDeathCount;
+    uint32 m_uiOperaEvent;
+    uint32 m_uiOzDeathCount;
 
-        GuidList m_lOperaTreeGuidList;
-        GuidList m_lOperaHayGuidList;
-        GuidList m_lNightbaneGroundTriggers;
-        GuidList m_lNightbaneAirTriggers;
+    GuidList m_lOperaTreeGuidList;
+    GuidList m_lOperaHayGuidList;
+    GuidList m_lNightbaneGroundTriggers;
+    GuidList m_lNightbaneAirTriggers;
 };
 
 #endif

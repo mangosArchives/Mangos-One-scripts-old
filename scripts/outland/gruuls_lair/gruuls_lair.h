@@ -27,26 +27,26 @@ enum
 
 class MANGOS_DLL_DECL instance_gruuls_lair : public ScriptedInstance
 {
-    public:
-        instance_gruuls_lair(Map *pMap);
+public:
+    instance_gruuls_lair(Map *pMap);
 
-        void Initialize();
-        bool IsEncounterInProgress() const;
+    void Initialize();
+    bool IsEncounterInProgress() const;
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        const char* Save() { return m_strSaveData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strSaveData.c_str(); }
+    void Load(const char* chrIn);
 
-    private:
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strSaveData;
+private:
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strSaveData;
 
-        uint8 m_uiCouncilMembersDied;
+    uint8 m_uiCouncilMembersDied;
 };
 
 #endif

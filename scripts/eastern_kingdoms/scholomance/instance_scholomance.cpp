@@ -61,7 +61,7 @@ void instance_scholomance::OnCreatureCreate(Creature* pCreature)
 
 void instance_scholomance::OnObjectCreate(GameObject* pGo)
 {
-    switch(pGo->GetEntry())
+    switch (pGo->GetEntry())
     {
         case GO_GATE_KIRTONOS:
         case GO_GATE_RAS:
@@ -86,7 +86,7 @@ void instance_scholomance::OnObjectCreate(GameObject* pGo)
 
 void instance_scholomance::SetData(uint32 uiType, uint32 uiData)
 {
-    switch(uiType)
+    switch (uiType)
     {
         case TYPE_KIRTONOS:
             // This door is initially closed by DB-scripts, so only use it in case of FAIL, DONE, or on aggro after wipe
@@ -143,8 +143,8 @@ void instance_scholomance::SetData(uint32 uiType, uint32 uiData)
 
         std::ostringstream saveStream;
         saveStream << m_auiEncounter[0] << " " << m_auiEncounter[1] << " " << m_auiEncounter[2] << " "
-            << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5] << " "
-            << m_auiEncounter[6] << " " << m_auiEncounter[7] << " " << m_auiEncounter[8] << " " << m_auiEncounter[9];
+                   << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5] << " "
+                   << m_auiEncounter[6] << " " << m_auiEncounter[7] << " " << m_auiEncounter[8] << " " << m_auiEncounter[9];
 
         m_strInstData = saveStream.str();
 
@@ -232,7 +232,7 @@ void instance_scholomance::Load(const char* chrIn)
     loadStream >> m_auiEncounter[0] >> m_auiEncounter[1] >> m_auiEncounter[2] >> m_auiEncounter[3] >> m_auiEncounter[4]
                >> m_auiEncounter[5] >> m_auiEncounter[6] >> m_auiEncounter[7] >> m_auiEncounter[8] >> m_auiEncounter[9];
 
-    for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+    for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
         if (m_auiEncounter[i] == IN_PROGRESS)
             m_auiEncounter[i] = NOT_STARTED;
 

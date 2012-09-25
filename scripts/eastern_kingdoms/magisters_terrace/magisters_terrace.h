@@ -42,33 +42,33 @@ enum
     GO_ESCAPE_QUEL_DANAS        = 188173,
 };
 
-static const int32 aDelrissaAddDeath[MAX_DELRISSA_ADDS] = {-1585013, -1585014, -1585015, -1585016};
+static const int32 aDelrissaAddDeath[MAX_DELRISSA_ADDS] = { -1585013, -1585014, -1585015, -1585016};
 
 class MANGOS_DLL_DECL instance_magisters_terrace : public ScriptedInstance
 {
-    public:
-        instance_magisters_terrace(Map* pMap);
+public:
+    instance_magisters_terrace(Map* pMap);
 
-        void Initialize();
+    void Initialize();
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void OnCreatureDeath(Creature* pCreature);
+    void OnCreatureDeath(Creature* pCreature);
 
-        uint32 GetData(uint32 uiType);
-        void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-    private:
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+private:
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        uint32 m_uiDelrissaDeathCount;
+    uint32 m_uiDelrissaDeathCount;
 
-        GuidList m_lFelCrystalGuid;
+    GuidList m_lFelCrystalGuid;
 };
 
 #endif

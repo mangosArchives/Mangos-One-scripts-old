@@ -29,25 +29,25 @@ enum
 
 class MANGOS_DLL_DECL instance_shadow_labyrinth : public ScriptedInstance
 {
-    public:
-        instance_shadow_labyrinth(Map* pMap);
+public:
+    instance_shadow_labyrinth(Map* pMap);
 
-        void Initialize();
+    void Initialize();
 
-        void OnObjectCreate(GameObject* pGo);
-        void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-    private:
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+private:
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        uint32 m_uiFelOverseerCount;
+    uint32 m_uiFelOverseerCount;
 };
 
 #endif

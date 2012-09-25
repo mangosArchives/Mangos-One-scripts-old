@@ -43,7 +43,7 @@ struct MANGOS_DLL_DECL npc_the_scourge_cauldronAI : public ScriptedAI
         m_creature->DealDamage(m_creature, m_creature->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
         //override any database `spawntimesecs` to prevent duplicated summons
         uint32 rTime = m_creature->GetRespawnDelay();
-        if (rTime<600)
+        if (rTime < 600)
             m_creature->SetRespawnDelay(600);
     }
 
@@ -54,7 +54,7 @@ struct MANGOS_DLL_DECL npc_the_scourge_cauldronAI : public ScriptedAI
 
         if (who->GetTypeId() == TYPEID_PLAYER)
         {
-            switch(m_creature->GetAreaId())
+            switch (m_creature->GetAreaId())
             {
                 case 199:                                   //felstone
                     if (((Player*)who)->GetQuestStatus(5216) == QUEST_STATUS_INCOMPLETE ||
@@ -76,7 +76,7 @@ struct MANGOS_DLL_DECL npc_the_scourge_cauldronAI : public ScriptedAI
                     if (((Player*)who)->GetQuestStatus(5225) == QUEST_STATUS_INCOMPLETE ||
                         ((Player*)who)->GetQuestStatus(5235) == QUEST_STATUS_INCOMPLETE)
                     {
-                        m_creature->SummonCreature(11078, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN,600000);
+                        m_creature->SummonCreature(11078, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 600000);
                         DoDie();
                     }
                     break;
@@ -84,7 +84,7 @@ struct MANGOS_DLL_DECL npc_the_scourge_cauldronAI : public ScriptedAI
                     if (((Player*)who)->GetQuestStatus(5222) == QUEST_STATUS_INCOMPLETE ||
                         ((Player*)who)->GetQuestStatus(5233) == QUEST_STATUS_INCOMPLETE)
                     {
-                        m_creature->SummonCreature(11076, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN,600000);
+                        m_creature->SummonCreature(11076, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 600000);
                         DoDie();
                     }
                     break;

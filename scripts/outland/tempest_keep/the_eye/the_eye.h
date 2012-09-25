@@ -38,24 +38,24 @@ static const uint32 aAdvisors[MAX_ADVISORS] = {NPC_CAPERNIAN, NPC_SANGUINAR, NPC
 
 class MANGOS_DLL_DECL instance_the_eye : public ScriptedInstance
 {
-    public:
-        instance_the_eye(Map* pMap);
+public:
+    instance_the_eye(Map* pMap);
 
-        void Initialize();
-        bool IsEncounterInProgress() const;
+    void Initialize();
+    bool IsEncounterInProgress() const;
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        // No Save or Load needed to current knowledge
+    // No Save or Load needed to current knowledge
 
-    private:
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
+private:
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
 
-        uint32 m_uiKaelthasEventPhase;
+    uint32 m_uiKaelthasEventPhase;
 };
 
 #endif

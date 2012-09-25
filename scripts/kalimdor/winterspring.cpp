@@ -171,7 +171,7 @@ struct MANGOS_DLL_DECL npc_ranshallaAI : public npc_escortAI, private DialogueHe
             DoScriptText(SAY_RANSHALLA_ALTAR_1, m_creature);
         else
         {
-            switch(urand(0, 1))
+            switch (urand(0, 1))
             {
                 case 0: DoScriptText(SAY_AFTER_TORCH_1, m_creature); break;
                 case 1: DoScriptText(SAY_AFTER_TORCH_2, m_creature); break;
@@ -201,7 +201,7 @@ struct MANGOS_DLL_DECL npc_ranshallaAI : public npc_escortAI, private DialogueHe
         }
 
         // Yell and set escort to pause
-        switch(urand(0, 2))
+        switch (urand(0, 2))
         {
             case 0: DoScriptText(SAY_REACH_TORCH_1, m_creature); break;
             case 1: DoScriptText(SAY_REACH_TORCH_2, m_creature); break;
@@ -240,7 +240,7 @@ struct MANGOS_DLL_DECL npc_ranshallaAI : public npc_escortAI, private DialogueHe
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch(uiPointId)
+        switch (uiPointId)
         {
             case 3:
                 DoScriptText(SAY_ENTER_OWL_THICKET, m_creature);
@@ -257,23 +257,23 @@ struct MANGOS_DLL_DECL npc_ranshallaAI : public npc_escortAI, private DialogueHe
                 SetEscortPaused(true);
                 break;
             case 41:
+            {
+                // Search for all nearest lights and respawn them
+                std::list<GameObject*> m_lEluneLights;
+                GetGameObjectListWithEntryInGrid(m_lEluneLights, m_creature, GO_ELUNE_LIGHT, 20.0f);
+                for (std::list<GameObject*>::const_iterator itr = m_lEluneLights.begin(); itr != m_lEluneLights.end(); ++itr)
                 {
-                    // Search for all nearest lights and respawn them
-                    std::list<GameObject*> m_lEluneLights;
-                    GetGameObjectListWithEntryInGrid(m_lEluneLights, m_creature, GO_ELUNE_LIGHT, 20.0f);
-                    for (std::list<GameObject*>::const_iterator itr = m_lEluneLights.begin(); itr != m_lEluneLights.end(); ++itr)
-                    {
-                        if ((*itr)->isSpawned())
-                            continue;
+                    if ((*itr)->isSpawned())
+                        continue;
 
-                        (*itr)->SetRespawnTime(115);
-                        (*itr)->Refresh();
-                    }
-
-                    if (GameObject* pAltar = m_creature->GetMap()->GetGameObject(m_altarGuid))
-                        m_creature->SetFacingToObject(pAltar);
-                    break;
+                    (*itr)->SetRespawnTime(115);
+                    (*itr)->Refresh();
                 }
+
+                if (GameObject* pAltar = m_creature->GetMap()->GetGameObject(m_altarGuid))
+                    m_creature->SetFacingToObject(pAltar);
+                break;
+            }
             case 42:
                 // Summon the 2 priestess
                 SetEscortPaused(true);
@@ -291,7 +291,7 @@ struct MANGOS_DLL_DECL npc_ranshallaAI : public npc_escortAI, private DialogueHe
 
     void JustDidDialogueStep(int32 iEntry)
     {
-        switch(iEntry)
+        switch (iEntry)
         {
             case NPC_RANSHALLA:
                 // Start the altar channeling

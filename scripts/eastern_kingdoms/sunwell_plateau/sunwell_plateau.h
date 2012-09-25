@@ -69,36 +69,36 @@ static const float aMadrigosaFlyLoc[3] = {1459.35f, 636.81f, 59.234f};
 
 class MANGOS_DLL_DECL instance_sunwell_plateau : public ScriptedInstance, private DialogueHelper
 {
-    public:
-        instance_sunwell_plateau(Map* pMap);
-        ~instance_sunwell_plateau() {}
+public:
+    instance_sunwell_plateau(Map* pMap);
+    ~instance_sunwell_plateau() {}
 
-        void Initialize();
-        bool IsEncounterInProgress() const;
+    void Initialize();
+    bool IsEncounterInProgress() const;
 
-        void OnPlayerEnter(Player* pPlayer);
-        void OnObjectCreate(GameObject* pGo);
-        void OnCreatureCreate(Creature* pCreature);
-        void OnCreatureDeath(Creature* pCreature);
+    void OnPlayerEnter(Player* pPlayer);
+    void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnCreatureDeath(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        void Update(uint32 uiDiff);
+    void Update(uint32 uiDiff);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-    protected:
-        void JustDidDialogueStep(int32 iEntry);
+protected:
+    void JustDidDialogueStep(int32 iEntry);
 
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        // Misc
-        uint8 m_uiDeceiversKilled;
-        uint32 m_uiSpectralRealmTimer;
-        uint32 m_uiKalecRespawnTimer;
-        uint32 m_uiMuruBerserkTimer;
+    // Misc
+    uint8 m_uiDeceiversKilled;
+    uint32 m_uiSpectralRealmTimer;
+    uint32 m_uiKalecRespawnTimer;
+    uint32 m_uiMuruBerserkTimer;
 };
 #endif

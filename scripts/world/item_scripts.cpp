@@ -68,7 +68,7 @@ bool ItemUse_item_flying_machine(Player* pPlayer, Item* pItem, const SpellCastTa
         if (pPlayer->GetBaseSkillValue(SKILL_RIDING) == 300)
             return false;
 
-    debug_log("SD2: Player attempt to use item %u, but did not meet riding requirement",itemId);
+    debug_log("SD2: Player attempt to use item %u, but did not meet riding requirement", itemId);
     pPlayer->SendEquipError(EQUIP_ERR_CANT_EQUIP_SKILL, pItem, NULL);
     return true;
 }

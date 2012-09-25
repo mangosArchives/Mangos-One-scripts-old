@@ -48,54 +48,54 @@ enum
     WORLD_STATE_OH                  = 2436,
 };
 
-static const float afInstanceLoc[][4]=
+static const float afInstanceLoc[][4] =
 {
     {2104.51f, 91.96f, 53.14f, 0},                  // right orcs outside loc
-    {2192.58f, 238.44f,52.44f, 0},                  // left orcs outside loc
+    {2192.58f, 238.44f, 52.44f, 0},                 // left orcs outside loc
 };
 
 static const float aDrakeSummonLoc[4] = {2128.43f, 71.01f, 64.42f, 1.74f};
 
 class MANGOS_DLL_DECL instance_old_hillsbrad : public ScriptedInstance
 {
-    public:
-        instance_old_hillsbrad(Map* pMap);
-        ~instance_old_hillsbrad() {}
+public:
+    instance_old_hillsbrad(Map* pMap);
+    ~instance_old_hillsbrad() {}
 
-        void Initialize();
+    void Initialize();
 
-        void OnPlayerEnter(Player* pPlayer);
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnPlayerEnter(Player* pPlayer);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void OnCreatureEnterCombat(Creature* pCreature);
-        void OnCreatureEvade(Creature* pCreature);
-        void OnCreatureDeath(Creature* pCreature);
+    void OnCreatureEnterCombat(Creature* pCreature);
+    void OnCreatureEvade(Creature* pCreature);
+    void OnCreatureDeath(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        uint32 GetThrallEventCount() { return m_uiThrallEventCount; }
+    uint32 GetThrallEventCount() { return m_uiThrallEventCount; }
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-        void Update(uint32 uiDiff);
+    void Update(uint32 uiDiff);
 
-    protected:
-        void HandleThrallRelocation();
-        void UpdateLodgeQuestCredit();
+protected:
+    void HandleThrallRelocation();
+    void UpdateLodgeQuestCredit();
 
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        uint32 m_uiBarrelCount;
-        uint32 m_uiThrallEventCount;
-        uint32 m_uiThrallResetTimer;
+    uint32 m_uiBarrelCount;
+    uint32 m_uiThrallEventCount;
+    uint32 m_uiThrallResetTimer;
 
-        GuidList m_lRoaringFlamesList;
-        GuidList m_lLeftPrisonersList;
-        GuidList m_lRightPrisonersList;
+    GuidList m_lRoaringFlamesList;
+    GuidList m_lLeftPrisonersList;
+    GuidList m_lRightPrisonersList;
 };
 
 #endif

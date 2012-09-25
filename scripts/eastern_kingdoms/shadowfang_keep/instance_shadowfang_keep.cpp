@@ -36,7 +36,7 @@ void instance_shadowfang_keep::Initialize()
 
 void instance_shadowfang_keep::OnCreatureCreate(Creature* pCreature)
 {
-    switch(pCreature->GetEntry())
+    switch (pCreature->GetEntry())
     {
         case NPC_ASH:
         case NPC_ADA:
@@ -56,14 +56,14 @@ void instance_shadowfang_keep::OnCreatureCreate(Creature* pCreature)
 
 void instance_shadowfang_keep::OnObjectCreate(GameObject* pGo)
 {
-    switch(pGo->GetEntry())
+    switch (pGo->GetEntry())
     {
         case GO_COURTYARD_DOOR:
             if (m_auiEncounter[0] == DONE)
                 pGo->SetGoState(GO_STATE_ACTIVE);
             break;
-        // For this we ignore voidwalkers, because if the server restarts
-        // They won't be there, but Fenrus is dead so the door can't be opened!
+            // For this we ignore voidwalkers, because if the server restarts
+            // They won't be there, but Fenrus is dead so the door can't be opened!
         case GO_SORCERER_DOOR:
             if (m_auiEncounter[2] == DONE)
                 pGo->SetGoState(GO_STATE_ACTIVE);
@@ -88,14 +88,14 @@ void instance_shadowfang_keep::DoSpeech()
 
     if (pAda && pAda->isAlive() && pAsh && pAsh->isAlive())
     {
-        DoScriptText(SAY_BOSS_DIE_AD,pAda);
-        DoScriptText(SAY_BOSS_DIE_AS,pAsh);
+        DoScriptText(SAY_BOSS_DIE_AD, pAda);
+        DoScriptText(SAY_BOSS_DIE_AS, pAsh);
     }
 }
 
 void instance_shadowfang_keep::SetData(uint32 uiType, uint32 uiData)
 {
-    switch(uiType)
+    switch (uiType)
     {
         case TYPE_FREE_NPC:
             if (uiData == DONE)
@@ -139,7 +139,7 @@ void instance_shadowfang_keep::SetData(uint32 uiType, uint32 uiData)
 
         std::ostringstream saveStream;
         saveStream << m_auiEncounter[0] << " " << m_auiEncounter[1] << " " << m_auiEncounter[2] << " " << m_auiEncounter[3]
-             << " " << m_auiEncounter[4] << " " << m_auiEncounter[5];
+                   << " " << m_auiEncounter[4] << " " << m_auiEncounter[5];
 
         m_strInstData = saveStream.str();
 
@@ -150,7 +150,7 @@ void instance_shadowfang_keep::SetData(uint32 uiType, uint32 uiData)
 
 uint32 instance_shadowfang_keep::GetData(uint32 uiType)
 {
-    switch(uiType)
+    switch (uiType)
     {
         case TYPE_FREE_NPC:   return m_auiEncounter[0];
         case TYPE_RETHILGORE: return m_auiEncounter[1];
@@ -175,9 +175,9 @@ void instance_shadowfang_keep::Load(const char* chrIn)
 
     std::istringstream loadStream(chrIn);
     loadStream >> m_auiEncounter[0] >> m_auiEncounter[1] >> m_auiEncounter[2] >> m_auiEncounter[3]
-        >> m_auiEncounter[4] >> m_auiEncounter[5];
+               >> m_auiEncounter[4] >> m_auiEncounter[5];
 
-    for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+    for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
     {
         if (m_auiEncounter[i] == IN_PROGRESS)
             m_auiEncounter[i] = NOT_STARTED;

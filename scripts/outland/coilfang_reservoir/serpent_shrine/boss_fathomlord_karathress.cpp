@@ -103,7 +103,7 @@ struct MANGOS_DLL_DECL boss_fathomlord_karathressAI : public ScriptedAI
     {
         m_uiCataclysmicBoltTimer    = 10000;
         m_uiSearingNovaTimer        = urand(20000, 30000);
-        m_uiEnrageTimer             = 10*MINUTE*IN_MILLISECONDS;
+        m_uiEnrageTimer             = 10 * MINUTE * IN_MILLISECONDS;
         m_bBlessingOfTides          = false;
     }
 
@@ -133,7 +133,7 @@ struct MANGOS_DLL_DECL boss_fathomlord_karathressAI : public ScriptedAI
 
     void KilledUnit(Unit* pVictim)
     {
-        switch(urand(0, 2))
+        switch (urand(0, 2))
         {
             case 0: DoScriptText(SAY_SLAY1, m_creature); break;
             case 1: DoScriptText(SAY_SLAY2, m_creature); break;
@@ -149,7 +149,7 @@ struct MANGOS_DLL_DECL boss_fathomlord_karathressAI : public ScriptedAI
             m_pInstance->SetData(TYPE_KARATHRESS_EVENT, DONE);
 
         //support for quest 10944
-        m_creature->SummonCreature(NPC_SEER_OLUM, afCoordsOlum[0], afCoordsOlum[1], afCoordsOlum[2], afCoordsOlum[3], TEMPSUMMON_TIMED_DESPAWN, 1*HOUR*IN_MILLISECONDS);
+        m_creature->SummonCreature(NPC_SEER_OLUM, afCoordsOlum[0], afCoordsOlum[1], afCoordsOlum[2], afCoordsOlum[3], TEMPSUMMON_TIMED_DESPAWN, 1 * HOUR * IN_MILLISECONDS);
     }
 
     void JustReachedHome()

@@ -91,7 +91,7 @@ struct MANGOS_DLL_DECL boss_leotheras_the_blindAI : public ScriptedAI
         m_uiSwitchTimer     = 60000;
         m_uiChaosBlastTimer = 0;
         m_uiFinalFormTimer  = 0;
-        m_uiEnrageTimer     = 10*MINUTE*IN_MILLISECONDS;
+        m_uiEnrageTimer     = 10 * MINUTE * IN_MILLISECONDS;
 
         m_bDemonForm        = false;
         m_bIsFinalForm      = false;
@@ -131,7 +131,7 @@ struct MANGOS_DLL_DECL boss_leotheras_the_blindAI : public ScriptedAI
         if (pVictim->GetTypeId() != TYPEID_PLAYER)
             return;
 
-        switch(urand(0, 2))
+        switch (urand(0, 2))
         {
             case 0: DoScriptText(m_bDemonForm ? SAY_DEMON_SLAY1 : SAY_NIGHTELF_SLAY1, m_creature); break;
             case 1: DoScriptText(m_bDemonForm ? SAY_DEMON_SLAY2 : SAY_NIGHTELF_SLAY2, m_creature); break;

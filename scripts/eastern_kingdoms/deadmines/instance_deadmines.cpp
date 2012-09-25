@@ -51,7 +51,7 @@ void instance_deadmines::OnCreatureCreate(Creature* pCreature)
 
 void instance_deadmines::OnObjectCreate(GameObject* pGo)
 {
-    switch(pGo->GetEntry())
+    switch (pGo->GetEntry())
     {
         case GO_FACTORY_DOOR:
             if (m_auiEncounter[TYPE_RHAHKZOR] == DONE)
@@ -87,7 +87,7 @@ void instance_deadmines::OnObjectCreate(GameObject* pGo)
 
 void instance_deadmines::OnCreatureDeath(Creature* pCreature)
 {
-    switch(pCreature->GetEntry())
+    switch (pCreature->GetEntry())
     {
         case NPC_RHAHKZOR: SetData(TYPE_RHAHKZOR, DONE); break;
         case NPC_SNEED:    SetData(TYPE_SNEED, DONE);    break;
@@ -97,7 +97,7 @@ void instance_deadmines::OnCreatureDeath(Creature* pCreature)
 
 void instance_deadmines::SetData(uint32 uiType, uint32 uiData)
 {
-    switch(uiType)
+    switch (uiType)
     {
         case TYPE_RHAHKZOR:
         {

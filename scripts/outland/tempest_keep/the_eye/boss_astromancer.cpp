@@ -133,7 +133,7 @@ struct MANGOS_DLL_DECL boss_high_astromancer_solarianAI : public ScriptedAI
         if (pVictim->GetTypeId() != TYPEID_PLAYER)
             return;
 
-        switch(urand(0, 2))
+        switch (urand(0, 2))
         {
             case 0: DoScriptText(SAY_KILL1, m_creature); break;
             case 1: DoScriptText(SAY_KILL2, m_creature); break;
@@ -184,7 +184,7 @@ struct MANGOS_DLL_DECL boss_high_astromancer_solarianAI : public ScriptedAI
     void DoSummonSpotlight(float fRadius, float fAngle, uint8 uiRandPoint)
     {
         float fX, fY, fZ;
-        m_creature->GetNearPoint(m_creature, fX, fY, fZ, 0, fRadius, fAngle*uiRandPoint);
+        m_creature->GetNearPoint(m_creature, fX, fY, fZ, 0, fRadius, fAngle * uiRandPoint);
         m_creature->SummonCreature(NPC_ASTROMANCER_SOLARIAN_SPOTLIGHT, fX, fY, fZ, 0, TEMPSUMMON_TIMED_DESPAWN, 30000);
     }
 
@@ -220,15 +220,15 @@ struct MANGOS_DLL_DECL boss_high_astromancer_solarianAI : public ScriptedAI
             {
                 if (m_Phase == PHASE_SPLIT)
                 {
-                     // select two different numbers between 0 and 7 so we will get different spawn points for the spotlights
+                    // select two different numbers between 0 and 7 so we will get different spawn points for the spotlights
                     uint8 uiPos1 = urand(0, 7);
                     uint8 uiPos2 = (uiPos1 + urand(1, 7)) % 8;
 
                     // summon 3 spotlights
                     m_vSpotLightsGuidVector.clear();
-                    DoSummonSpotlight(fSpotlightRadius[0], M_PI_F/2, urand(0, 3));
-                    DoSummonSpotlight(fSpotlightRadius[1], M_PI_F/4, uiPos1);
-                    DoSummonSpotlight(fSpotlightRadius[1], M_PI_F/4, uiPos2);
+                    DoSummonSpotlight(fSpotlightRadius[0], M_PI_F / 2, urand(0, 3));
+                    DoSummonSpotlight(fSpotlightRadius[1], M_PI_F / 4, uiPos1);
+                    DoSummonSpotlight(fSpotlightRadius[1], M_PI_F / 4, uiPos2);
 
                     m_creature->SetVisibility(VISIBILITY_OFF);
 

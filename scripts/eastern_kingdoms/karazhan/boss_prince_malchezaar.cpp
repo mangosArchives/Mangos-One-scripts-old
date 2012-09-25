@@ -117,7 +117,7 @@ struct MANGOS_DLL_DECL boss_malchezaarAI : public ScriptedAI
 
     void KilledUnit(Unit* pVictim)
     {
-        switch(urand(0, 2))
+        switch (urand(0, 2))
         {
             case 0: DoScriptText(SAY_SLAY1, m_creature); break;
             case 1: DoScriptText(SAY_SLAY2, m_creature); break;
@@ -229,7 +229,7 @@ struct MANGOS_DLL_DECL boss_malchezaarAI : public ScriptedAI
 
                     // Reset Enfeebled targets if necessary
                     DoHandleEnfeebleHealthReset();
-                    m_uiEnfeebleResetTimer=0;
+                    m_uiEnfeebleResetTimer = 0;
 
                     m_creature->RemoveAurasDueToSpell(SPELL_THRASH_AURA);
                     m_uiShadowNovaTimer = m_uiEnfeebleTimer + 5000;
@@ -317,7 +317,7 @@ struct MANGOS_DLL_DECL boss_malchezaarAI : public ScriptedAI
             if (m_uiEnfeebleResetTimer <= uiDiff)
             {
                 DoHandleEnfeebleHealthReset();
-                m_uiEnfeebleResetTimer=0;
+                m_uiEnfeebleResetTimer = 0;
             }
             else
                 m_uiEnfeebleResetTimer -= uiDiff;

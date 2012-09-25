@@ -31,24 +31,24 @@ enum
 
 class MANGOS_DLL_DECL instance_sethekk_halls : public ScriptedInstance
 {
-    public:
-        instance_sethekk_halls(Map* pMap);
-        ~instance_sethekk_halls() {}
+public:
+    instance_sethekk_halls(Map* pMap);
+    ~instance_sethekk_halls() {}
 
-        void Initialize();
+    void Initialize();
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-    private:
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+private:
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 };
 
 #endif

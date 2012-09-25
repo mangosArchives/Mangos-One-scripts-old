@@ -121,7 +121,7 @@ void instance_serpentshrine_cavern::SetData(uint32 uiType, uint32 uiData)
 
         std::ostringstream saveStream;
         saveStream << m_auiEncounter[0] << " " << m_auiEncounter[1] << " " << m_auiEncounter[2] << " "
-            << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5];
+                   << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5];
 
         m_strInstData = saveStream.str();
 
@@ -142,7 +142,7 @@ void instance_serpentshrine_cavern::Load(const char* chrIn)
 
     std::istringstream loadStream(chrIn);
     loadStream >> m_auiEncounter[0] >> m_auiEncounter[1] >> m_auiEncounter[2] >> m_auiEncounter[3]
-        >> m_auiEncounter[4] >> m_auiEncounter[5];
+               >> m_auiEncounter[4] >> m_auiEncounter[5];
 
     for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
     {
@@ -170,7 +170,7 @@ uint32 instance_serpentshrine_cavern::GetData(uint32 uiType)
         case TYPE_SHIELDGENERATOR4: return m_auiShieldGenerator[3];
 
         case TYPE_VASHJ_PHASE3_CHECK:
-            for(uint8 i = 0; i < MAX_GENERATOR; ++i)
+            for (uint8 i = 0; i < MAX_GENERATOR; ++i)
             {
                 if (m_auiShieldGenerator[i] != DONE)
                     return NOT_STARTED;

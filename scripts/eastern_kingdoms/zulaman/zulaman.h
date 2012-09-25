@@ -150,45 +150,45 @@ struct NalorakkTrashInfo
 
 class MANGOS_DLL_DECL instance_zulaman : public ScriptedInstance
 {
-    public:
-        instance_zulaman(Map* pMap);
+public:
+    instance_zulaman(Map* pMap);
 
-        void Initialize();
-        bool IsEncounterInProgress() const;
+    void Initialize();
+    bool IsEncounterInProgress() const;
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
-        void OnCreatureDeath(Creature* pCreature);
-        void OnCreatureEvade(Creature* pCreature);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
+    void OnCreatureDeath(Creature* pCreature);
+    void OnCreatureEvade(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-        bool IsBearPhaseInProgress() { return m_bIsBearPhaseInProgress; }
-        void SetBearEventProgress(bool bIsInProgress) { m_bIsBearPhaseInProgress = bIsInProgress; }
-        void SendNextBearWave(Unit* pTarget);
+    bool IsBearPhaseInProgress() { return m_bIsBearPhaseInProgress; }
+    void SetBearEventProgress(bool bIsInProgress) { m_bIsBearPhaseInProgress = bIsInProgress; }
+    void SendNextBearWave(Unit* pTarget);
 
-        void Update(uint32 uiDiff);
+    void Update(uint32 uiDiff);
 
-    private:
-        uint8 GetKilledPreBosses();
-        void DoTimeRunSay(RunEventSteps uiData);
-        void DoChestEvent(BossToChestIndex uiIndex);
+private:
+    uint8 GetKilledPreBosses();
+    void DoTimeRunSay(RunEventSteps uiData);
+    void DoChestEvent(BossToChestIndex uiIndex);
 
-        std::string m_strInstData;
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        uint32 m_auiRandVendor[MAX_VENDOR];
-        TimeEventNpcInfo m_aEventNpcInfo[MAX_CHESTS];
+    std::string m_strInstData;
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    uint32 m_auiRandVendor[MAX_VENDOR];
+    TimeEventNpcInfo m_aEventNpcInfo[MAX_CHESTS];
 
-        uint32 m_uiEventTimer;
-        uint32 m_uiGongCount;
+    uint32 m_uiEventTimer;
+    uint32 m_uiGongCount;
 
-        NalorakkTrashInfo m_aNalorakkEvent[MAX_BEAR_WAVES];
-        uint8 m_uiBearEventPhase;
-        bool m_bIsBearPhaseInProgress;
+    NalorakkTrashInfo m_aNalorakkEvent[MAX_BEAR_WAVES];
+    uint8 m_uiBearEventPhase;
+    bool m_bIsBearPhaseInProgress;
 };
 
 #endif

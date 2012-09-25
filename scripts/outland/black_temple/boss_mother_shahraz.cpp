@@ -50,7 +50,7 @@ EndScriptData */
 #define SPELL_TELEPORT_VISUAL   40869
 #define SPELL_BERSERK           45078
 
-uint32 PrismaticAuras[]=
+uint32 PrismaticAuras[] =
 {
     40880,                                                  // Shadow
     40882,                                                  // Fire
@@ -62,10 +62,10 @@ uint32 PrismaticAuras[]=
 
 struct Locations
 {
-    float x,y,z;
+    float x, y, z;
 };
 
-static Locations TeleportPoint[]=
+static Locations TeleportPoint[] =
 {
     {959.996f, 212.576f, 193.843f},
     {932.537f, 231.813f, 193.838f},
@@ -153,7 +153,7 @@ struct MANGOS_DLL_DECL boss_shahrazAI : public ScriptedAI
         float Y = TeleportPoint[random].y;
         float Z = TeleportPoint[random].z;
 
-        for(uint8 i = 0; i < 3; ++i)
+        for (uint8 i = 0; i < 3; ++i)
         {
             Unit* pUnit = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 1);
             if (pUnit && pUnit->isAlive() && (pUnit->GetTypeId() == TYPEID_PLAYER))
@@ -186,7 +186,7 @@ struct MANGOS_DLL_DECL boss_shahrazAI : public ScriptedAI
 
             BeamTimer = 9000;
 
-            switch(CurrentBeam)
+            switch (CurrentBeam)
             {
                 case 0:
                     DoCastSpellIfCan(target, SPELL_BEAM_SINISTER);
@@ -205,10 +205,11 @@ struct MANGOS_DLL_DECL boss_shahrazAI : public ScriptedAI
             uint32 Beam = CurrentBeam;
 
             if (BeamCount > 3)
-                while(CurrentBeam == Beam)
+                while (CurrentBeam == Beam)
                     CurrentBeam = urand(0, 2);
 
-        }else BeamTimer -= diff;
+        }
+        else BeamTimer -= diff;
 
         // Random Prismatic Shield every 15 seconds.
         if (PrismaticShieldTimer < diff)
@@ -217,7 +218,8 @@ struct MANGOS_DLL_DECL boss_shahrazAI : public ScriptedAI
             if (PrismaticAuras[random])
                 DoCastSpellIfCan(m_creature, PrismaticAuras[random]);
             PrismaticShieldTimer = 15000;
-        }else PrismaticShieldTimer -= diff;
+        }
+        else PrismaticShieldTimer -= diff;
 
         // Select 3 random targets (can select same target more than once), teleport to a random location then make them cast explosions until they get away from each other.
         if (FatalAttractionTimer < diff)
@@ -230,14 +232,15 @@ struct MANGOS_DLL_DECL boss_shahrazAI : public ScriptedAI
 
             FatalAttractionExplodeTimer = 2000;
             FatalAttractionTimer = urand(40000, 70000);
-        }else FatalAttractionTimer -= diff;
+        }
+        else FatalAttractionTimer -= diff;
 
         if (FatalAttractionExplodeTimer < diff)
         {
             // Just make them explode three times... they're supposed to keep exploding while they are in range, but it'll take too much code. I'll try to think of an efficient way for it later.
             if (ExplosionCount < 3)
             {
-                for(uint8 i = 0; i < 3; ++i)
+                for (uint8 i = 0; i < 3; ++i)
                 {
                     if (m_targetGuid[i])
                     {
@@ -256,13 +259,15 @@ struct MANGOS_DLL_DECL boss_shahrazAI : public ScriptedAI
                 FatalAttractionExplodeTimer = FatalAttractionTimer + 2000;
                 ExplosionCount = 0;
             }
-        }else FatalAttractionExplodeTimer -= diff;
+        }
+        else FatalAttractionExplodeTimer -= diff;
 
         if (ShriekTimer < diff)
         {
             DoCastSpellIfCan(m_creature->getVictim(), SPELL_SILENCING_SHRIEK);
             ShriekTimer = 30000;
-        }else ShriekTimer -= diff;
+        }
+        else ShriekTimer -= diff;
 
         //Enrage
         if (!m_creature->HasAura(SPELL_BERSERK, EFFECT_INDEX_0))
@@ -271,13 +276,14 @@ struct MANGOS_DLL_DECL boss_shahrazAI : public ScriptedAI
             {
                 DoCastSpellIfCan(m_creature, SPELL_BERSERK);
                 DoScriptText(SAY_ENRAGE, m_creature);
-            }else EnrageTimer -= diff;
+            }
+            else EnrageTimer -= diff;
         }
 
         //Random taunts
         if (RandomYellTimer < diff)
         {
-            switch(urand(0, 2))
+            switch (urand(0, 2))
             {
                 case 0: DoScriptText(SAY_TAUNT1, m_creature); break;
                 case 1: DoScriptText(SAY_TAUNT2, m_creature); break;
@@ -285,7 +291,8 @@ struct MANGOS_DLL_DECL boss_shahrazAI : public ScriptedAI
             }
 
             RandomYellTimer = urand(60000, 150000);
-        }else RandomYellTimer -= diff;
+        }
+        else RandomYellTimer -= diff;
 
         DoMeleeAttackIfReady();
     }

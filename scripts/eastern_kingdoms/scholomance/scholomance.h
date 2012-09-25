@@ -80,36 +80,36 @@ typedef std::map<uint32, GandlingEventData> GandlingEventMap;
 
 class MANGOS_DLL_DECL instance_scholomance : public ScriptedInstance
 {
-    public:
-        instance_scholomance(Map* pMap);
-        ~instance_scholomance() {}
+public:
+    instance_scholomance(Map* pMap);
+    ~instance_scholomance() {}
 
-        void Initialize();
+    void Initialize();
 
-        void OnCreatureEnterCombat(Creature* pCreature);
-        void OnCreatureEvade(Creature* pCreature);
-        void OnCreatureDeath(Creature* pCreature);
+    void OnCreatureEnterCombat(Creature* pCreature);
+    void OnCreatureEvade(Creature* pCreature);
+    void OnCreatureDeath(Creature* pCreature);
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
-        void OnPlayerEnter(Player* pPlayer);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
+    void OnPlayerEnter(Player* pPlayer);
 
-        void HandlePortalEvent(uint32 uiEventId, uint32 uiData);
+    void HandlePortalEvent(uint32 uiEventId, uint32 uiData);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-    private:
-        void DoSpawnGandlingIfCan(bool bByPlayerEnter);
+private:
+    void DoSpawnGandlingIfCan(bool bByPlayerEnter);
 
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        uint32 m_uiGandlingEvent;
-        GandlingEventMap m_mGandlingData;
+    uint32 m_uiGandlingEvent;
+    GandlingEventMap m_mGandlingData;
 };
 
 #endif

@@ -122,13 +122,13 @@ struct MANGOS_DLL_DECL boss_archaedasAI : public ScriptedAI
         {
             if (m_uiAwakeningTimer <= uiDiff)
             {
-                switch(m_uiSubevent)
+                switch (m_uiSubevent)
                 {
                     case 0:
                         DoCastSpellIfCan(m_creature, SPELL_ARCHAEDAS_AWAKEN_VISUAL);
                         break;
                     case 1:
-                        DoScriptText(SAY_AGGRO,m_creature,NULL);
+                        DoScriptText(SAY_AGGRO, m_creature, NULL);
                         m_creature->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                         break;
                     case 2:

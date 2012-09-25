@@ -191,7 +191,7 @@ struct MANGOS_DLL_DECL boss_alexandros_mograineAI : public ScriptedAI
 
     void Aggro(Unit* pWho)
     {
-        switch(urand(0, 2))
+        switch (urand(0, 2))
         {
             case 0: DoScriptText(SAY_MORG_AGGRO1, m_creature); break;
             case 1: DoScriptText(SAY_MORG_AGGRO2, m_creature); break;

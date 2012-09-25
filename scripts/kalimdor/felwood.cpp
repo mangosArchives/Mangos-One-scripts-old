@@ -137,7 +137,7 @@ bool GossipHello_npc_corrupt_saber(Player* pPlayer, Creature* pCreature)
     if (pPlayer->GetQuestStatus(QUEST_CORRUPT_SABER) == QUEST_STATUS_INCOMPLETE)
     {
         if (GetClosestCreatureWithEntry(pCreature, NPC_WINNA, INTERACTION_DISTANCE))
-            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_RELEASE, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
+            pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_RELEASE, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
     }
 
     pPlayer->SEND_GOSSIP_MENU(pPlayer->GetGossipTextId(pCreature), pCreature->GetObjectGuid());
@@ -146,7 +146,7 @@ bool GossipHello_npc_corrupt_saber(Player* pPlayer, Creature* pCreature)
 
 bool GossipSelect_npc_corrupt_saber(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
 {
-    if (uiAction == GOSSIP_ACTION_INFO_DEF+1)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF + 1)
     {
         pPlayer->CLOSE_GOSSIP_MENU();
 
@@ -180,7 +180,7 @@ enum
 
 struct MANGOS_DLL_DECL npc_niby_the_almightyAI : public ScriptedAI
 {
-    npc_niby_the_almightyAI(Creature* pCreature) : ScriptedAI(pCreature){ Reset(); }
+    npc_niby_the_almightyAI(Creature* pCreature) : ScriptedAI(pCreature) { Reset(); }
 
     uint32 m_uiSummonTimer;
     uint8  m_uiSpeech;

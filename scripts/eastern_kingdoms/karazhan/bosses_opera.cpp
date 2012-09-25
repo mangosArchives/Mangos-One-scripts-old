@@ -526,7 +526,7 @@ struct MANGOS_DLL_DECL boss_roarAI : public ScriptedAI
     }
 };
 
-static const float afCycloneSpawnLoc[4] = {-10907.68f, -1778.651f, 90.56018f, 0.61f};
+static const float afCycloneSpawnLoc[4] = { -10907.68f, -1778.651f, 90.56018f, 0.61f};
 
 struct MANGOS_DLL_DECL boss_croneAI : public ScriptedAI
 {
@@ -794,7 +794,7 @@ enum OperaPhase
     PHASE_BOTH          = 2,
 };
 
-static const float afRomuloSpawnLoc[4] = {-10893.62f, -1760.78f, 90.55f, 4.76f};
+static const float afRomuloSpawnLoc[4] = { -10893.62f, -1760.78f, 90.55f, 4.76f};
 
 struct MANGOS_DLL_DECL boss_julianneAI : public ScriptedAI
 {

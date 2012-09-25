@@ -102,37 +102,37 @@ struct MANGOS_DLL_DECL hyjalAI : public ScriptedAI
     // Used to filter who to despawn after mass teleport
     void SpellHitTarget(Unit*, const SpellEntry*);
 
-    public:
+public:
 
-        ScriptedInstance* m_pInstance;
+    ScriptedInstance* m_pInstance;
 
-        ObjectGuid m_aBossGuid[2];
+    ObjectGuid m_aBossGuid[2];
 
-        uint32 m_uiNextWaveTimer;
-        uint32 m_uiWaveCount;
-        uint32 m_uiWaveMoveTimer;
-        uint32 m_uiCheckTimer;
-        uint32 m_uiEnemyCount;
-        uint32 m_uiRetreatTimer;
-        uint32 m_uiBase;
+    uint32 m_uiNextWaveTimer;
+    uint32 m_uiWaveCount;
+    uint32 m_uiWaveMoveTimer;
+    uint32 m_uiCheckTimer;
+    uint32 m_uiEnemyCount;
+    uint32 m_uiRetreatTimer;
+    uint32 m_uiBase;
 
-        bool m_bIsEventInProgress;
-        bool m_bIsFirstBossDead;
-        bool m_bIsSecondBossDead;
-        bool m_bIsSummoningWaves;
-        bool m_bIsRetreating;
-        bool m_bDebugMode;
+    bool m_bIsEventInProgress;
+    bool m_bIsFirstBossDead;
+    bool m_bIsSecondBossDead;
+    bool m_bIsSummoningWaves;
+    bool m_bIsRetreating;
+    bool m_bDebugMode;
 
-        struct sSpells
-        {
-            uint32 m_uiSpellId;
-            uint32 m_uiCooldown;
-            TargetType m_pType;
-        } m_aSpells[MAX_SPELL];
+    struct sSpells
+    {
+        uint32 m_uiSpellId;
+        uint32 m_uiCooldown;
+        TargetType m_pType;
+    } m_aSpells[MAX_SPELL];
 
-    private:
-        uint32 m_uiSpellTimer[MAX_SPELL];
-        GuidList lWaveMobGUIDList;
+private:
+    uint32 m_uiSpellTimer[MAX_SPELL];
+    GuidList lWaveMobGUIDList;
 };
 
 #endif

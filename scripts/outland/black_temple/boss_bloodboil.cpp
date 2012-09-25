@@ -141,7 +141,7 @@ struct MANGOS_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
         std::list<Unit *> targets;
 
         //store the threat list in a different container
-        for (ThreatList::const_iterator itr = tList.begin();itr != tList.end(); ++itr)
+        for (ThreatList::const_iterator itr = tList.begin(); itr != tList.end(); ++itr)
         {
             Unit *target = m_creature->GetMap()->GetUnit((*itr)->getUnitGuid());
 
@@ -197,13 +197,15 @@ struct MANGOS_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
         {
             DoCastSpellIfCan(m_creature->getVictim(), SPELL_ARCING_SMASH);
             ArcingSmashTimer = 10000;
-        }else ArcingSmashTimer -= diff;
+        }
+        else ArcingSmashTimer -= diff;
 
         if (FelAcidTimer < diff)
         {
             DoCastSpellIfCan(m_creature->getVictim(), SPELL_FEL_ACID);
             FelAcidTimer = 25000;
-        }else FelAcidTimer -= diff;
+        }
+        else FelAcidTimer -= diff;
 
         if (!m_creature->HasAura(SPELL_BERSERK, EFFECT_INDEX_0))
         {
@@ -211,7 +213,8 @@ struct MANGOS_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
             {
                 if (DoCastSpellIfCan(m_creature, SPELL_BERSERK) == CAST_OK)
                     DoScriptText(urand(0, 1) ? SAY_ENRAGE1 : SAY_ENRAGE2, m_creature);
-            }else EnrageTimer -= diff;
+            }
+            else EnrageTimer -= diff;
         }
 
         if (Phase1)
@@ -225,20 +228,23 @@ struct MANGOS_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
                     m_creature->AddThreat(target, mt_threat);
 
                 BewilderingStrikeTimer = 20000;
-            }else BewilderingStrikeTimer -= diff;
+            }
+            else BewilderingStrikeTimer -= diff;
 
             if (EjectTimer < diff)
             {
                 DoCastSpellIfCan(m_creature->getVictim(), SPELL_EJECT1);
                 m_creature->getThreatManager().modifyThreatPercent(m_creature->getVictim(), -40);
                 EjectTimer = 15000;
-            }else EjectTimer -= diff;
+            }
+            else EjectTimer -= diff;
 
             if (AcidicWoundTimer < diff)
             {
                 DoCastSpellIfCan(m_creature->getVictim(), SPELL_ACIDIC_WOUND);
                 AcidicWoundTimer = 10000;
-            }else AcidicWoundTimer -= diff;
+            }
+            else AcidicWoundTimer -= diff;
 
             if (BloodboilTimer < diff)
             {
@@ -247,9 +253,10 @@ struct MANGOS_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
                     //CastBloodboil(); // Causes issues on windows, so is commented out.
                     DoCastSpellIfCan(m_creature->getVictim(), SPELL_BLOODBOIL);
                     ++BloodboilCount;
-                    BloodboilTimer = 10000*BloodboilCount;
+                    BloodboilTimer = 10000 * BloodboilCount;
                 }
-            }else BloodboilTimer -= diff;
+            }
+            else BloodboilTimer -= diff;
         }
 
         if (!Phase1)
@@ -258,13 +265,15 @@ struct MANGOS_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
             {
                 DoCastSpellIfCan(m_creature->getVictim(), SPELL_ACID_GEYSER);
                 AcidGeyserTimer = 30000;
-            }else AcidGeyserTimer -= diff;
+            }
+            else AcidGeyserTimer -= diff;
 
             if (EjectTimer < diff)
             {
                 DoCastSpellIfCan(m_creature->getVictim(), SPELL_EJECT2);
                 EjectTimer = 15000;
-            }else EjectTimer -= diff;
+            }
+            else EjectTimer -= diff;
         }
 
         if (PhaseChangeTimer < diff)
@@ -302,7 +311,8 @@ struct MANGOS_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
                     AcidGeyserTimer = 1000;
                     PhaseChangeTimer = 30000;
                 }
-            }else                                           // Encounter is a loop pretty much. Phase 1 -> Phase 2 -> Phase 1 -> Phase 2 till death or enrage
+            }
+            else                                            // Encounter is a loop pretty much. Phase 1 -> Phase 2 -> Phase 1 -> Phase 2 till death or enrage
             {
                 if (m_targetGuid)
                     RevertThreatOnTarget(m_targetGuid);
@@ -317,14 +327,16 @@ struct MANGOS_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
                 EjectTimer += 2000;
                 PhaseChangeTimer = 60000;
             }
-        }else PhaseChangeTimer -= diff;
+        }
+        else PhaseChangeTimer -= diff;
 
         //Enrage
         if (m_uiEnrageTimer < diff)
         {
             DoCast(m_creature, SPELL_ENRAGE);
             m_uiEnrageTimer = 60000;
-        }else m_uiEnrageTimer -= diff;
+        }
+        else m_uiEnrageTimer -= diff;
 
         DoMeleeAttackIfReady();
     }

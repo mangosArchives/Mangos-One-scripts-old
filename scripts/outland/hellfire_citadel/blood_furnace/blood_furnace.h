@@ -53,43 +53,43 @@ struct BroggokEventInfo
 
 class MANGOS_DLL_DECL instance_blood_furnace : public ScriptedInstance
 {
-    public:
-        instance_blood_furnace(Map* pMap);
+public:
+    instance_blood_furnace(Map* pMap);
 
-        void Initialize();
+    void Initialize();
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnObjectCreate(GameObject* pGo);
 
-        void OnCreatureDeath(Creature* pCreature);
-        void OnCreatureEvade(Creature* pCreature);
+    void OnCreatureDeath(Creature* pCreature);
+    void OnCreatureEvade(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        void Update(uint32 uiDiff);
+    void Update(uint32 uiDiff);
 
-        void Load(const char* chrIn);
-        const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
 
-        void GetMovementDistanceForIndex(uint32 uiIndex, float& dx, float& dy);
+    void GetMovementDistanceForIndex(uint32 uiIndex, float& dx, float& dy);
 
-        void GetKelidanAddList(GuidList& lList) { lList = m_lChannelersGuids; m_lChannelersGuids.clear(); }
+    void GetKelidanAddList(GuidList& lList) { lList = m_lChannelersGuids; m_lChannelersGuids.clear(); }
 
-    private:
-        void DoSortBroggokOrcs();
-        void DoNextBroggokEventPhase();
+private:
+    void DoSortBroggokOrcs();
+    void DoNextBroggokEventPhase();
 
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        BroggokEventInfo m_aBroggokEvent[MAX_ORC_WAVES];
+    BroggokEventInfo m_aBroggokEvent[MAX_ORC_WAVES];
 
-        uint32 m_uiBroggokEventTimer;                       // Timer for opening the event cages; only on heroic mode = 30 secs
-        uint32 m_uiBroggokEventPhase;
+    uint32 m_uiBroggokEventTimer;                       // Timer for opening the event cages; only on heroic mode = 30 secs
+    uint32 m_uiBroggokEventPhase;
 
-        GuidList m_luiNascentOrcGuids;
-        GuidList m_lChannelersGuids;
+    GuidList m_luiNascentOrcGuids;
+    GuidList m_lChannelersGuids;
 };
 
 #endif

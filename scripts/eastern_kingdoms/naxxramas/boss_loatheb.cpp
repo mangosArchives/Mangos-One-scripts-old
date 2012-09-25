@@ -63,7 +63,7 @@ struct MANGOS_DLL_DECL boss_loathebAI : public ScriptedAI
         m_uiPoisonAuraTimer = 5000;
         m_uiCorruptedMindTimer = 4000;
         m_uiRemoveCurseTimer = 2000;
-        m_uiInevitableDoomTimer = MINUTE*2*IN_MILLISECONDS;
+        m_uiInevitableDoomTimer = MINUTE * 2 * IN_MILLISECONDS;
         m_uiSummonTimer = urand(10000, 15000);              // first seen in vid after approx 12s
         //m_uiBerserkTimer = MINUTE*12*IN_MILLISECONDS;     // not used
         m_uiCorruptedMindCount = 0;

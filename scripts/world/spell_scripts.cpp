@@ -60,7 +60,7 @@ enum
 
 bool EffectDummyGameObj_spell_dummy_go(Unit* pCaster, uint32 uiSpellId, SpellEffectIndex uiEffIndex, GameObject* pGOTarget)
 {
-    switch(uiSpellId)
+    switch (uiSpellId)
     {
         case SPELL_CAST_FISHING_NET:
         {
@@ -71,7 +71,7 @@ bool EffectDummyGameObj_spell_dummy_go(Unit* pCaster, uint32 uiSpellId, SpellEff
 
                 if (urand(0, 2))
                 {
-                    if (Creature* pMurloc = pCaster->SummonCreature(NPC_ANGRY_MURLOC, pCaster->GetPositionX(), pCaster->GetPositionY()+20.0f, pCaster->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 10000))
+                    if (Creature* pMurloc = pCaster->SummonCreature(NPC_ANGRY_MURLOC, pCaster->GetPositionX(), pCaster->GetPositionY() + 20.0f, pCaster->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 10000))
                         pMurloc->AI()->AttackStart(pCaster);
                 }
                 else
@@ -164,7 +164,7 @@ enum
 
 bool EffectAuraDummy_spell_aura_dummy_npc(const Aura* pAura, bool bApply)
 {
-    switch(pAura->GetId())
+    switch (pAura->GetId())
     {
         case SPELL_HEALING_SALVE:
         {
@@ -193,7 +193,7 @@ bool EffectAuraDummy_spell_aura_dummy_npc(const Aura* pAura, bool bApply)
                 if (pCreature->getStandState() == UNIT_STAND_STATE_KNEEL)
                     pCreature->SetStandState(UNIT_STAND_STATE_STAND);
 
-                pCreature->ForcedDespawn(60*IN_MILLISECONDS);
+                pCreature->ForcedDespawn(60 * IN_MILLISECONDS);
             }
 
             return true;
@@ -277,7 +277,7 @@ bool EffectAuraDummy_spell_aura_dummy_npc(const Aura* pAura, bool bApply)
 
 bool EffectDummyCreature_spell_dummy_npc(Unit* pCaster, uint32 uiSpellId, SpellEffectIndex uiEffIndex, Creature* pCreatureTarget)
 {
-    switch(uiSpellId)
+    switch (uiSpellId)
     {
         case SPELL_ADMINISTER_ANTIDOTE:
         {
@@ -379,7 +379,7 @@ bool EffectDummyCreature_spell_dummy_npc(Unit* pCaster, uint32 uiSpellId, SpellE
         {
             if (uiEffIndex == EFFECT_INDEX_2)
             {
-                switch(urand(0,2))
+                switch (urand(0, 2))
                 {
                     case 0:
                     {
@@ -388,7 +388,7 @@ bool EffectDummyCreature_spell_dummy_npc(Unit* pCaster, uint32 uiSpellId, SpellE
                     }
                     case 1:
                     {
-                        for (int i = 0; i<2; ++i)
+                        for (int i = 0; i < 2; ++i)
                         {
                             if (Creature* pSandGnome = pCaster->SummonCreature(NPC_SAND_GNOME, pCreatureTarget->GetPositionX(), pCreatureTarget->GetPositionY(), pCreatureTarget->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 30000))
                                 pSandGnome->AI()->AttackStart(pCaster);
@@ -397,7 +397,7 @@ bool EffectDummyCreature_spell_dummy_npc(Unit* pCaster, uint32 uiSpellId, SpellE
                     }
                     case 2:
                     {
-                        for (int i = 0; i<2; ++i)
+                        for (int i = 0; i < 2; ++i)
                         {
                             if (Creature* pMatureBoneSifter = pCaster->SummonCreature(NPC_MATURE_BONE_SIFTER, pCreatureTarget->GetPositionX(), pCreatureTarget->GetPositionY(), pCreatureTarget->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 30000))
                                 pMatureBoneSifter->AI()->AttackStart(pCaster);
@@ -413,7 +413,7 @@ bool EffectDummyCreature_spell_dummy_npc(Unit* pCaster, uint32 uiSpellId, SpellE
         {
             if (uiEffIndex == EFFECT_INDEX_0)
             {
-                for(int i = 0; i < 3; ++i)
+                for (int i = 0; i < 3; ++i)
                 {
                     if (irand(i, 2))                        // 2-3 summons
                         pCreatureTarget->SummonCreature(NPC_MINION_OF_GUROK, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_CORPSE_DESPAWN, 5000);

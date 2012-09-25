@@ -188,7 +188,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
     {
         if (m_pInstance)
         {
-            for(GuidSet::const_iterator itr = m_lIntroMobsSet.begin(); itr != m_lIntroMobsSet.end(); ++itr)
+            for (GuidSet::const_iterator itr = m_lIntroMobsSet.begin(); itr != m_lIntroMobsSet.end(); ++itr)
             {
                 if (Creature* pCreature = m_pInstance->instance->GetCreature(*itr))
                     pCreature->ForcedDespawn();
@@ -202,7 +202,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
     {
         if (m_pInstance)
         {
-            for(GuidSet::const_iterator itr = m_lAddsSet.begin(); itr != m_lAddsSet.end(); ++itr)
+            for (GuidSet::const_iterator itr = m_lAddsSet.begin(); itr != m_lAddsSet.end(); ++itr)
             {
                 if (Creature* pCreature = m_pInstance->instance->GetCreature(*itr))
                 {
@@ -220,7 +220,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
 
     float GetLocationAngle(uint32 uiId)
     {
-        switch(uiId)
+        switch (uiId)
         {
             case 1: return M_PI_F - M_F_ANGLE;              // south
             case 2: return M_PI_F / 2 * 3 - M_F_ANGLE;      // east
@@ -239,7 +239,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
         if (!m_pInstance)
             return;
 
-        float fAngle = GetLocationAngle(packId+1);
+        float fAngle = GetLocationAngle(packId + 1);
 
         float fX, fY, fZ;
         m_pInstance->GetChamberCenterCoords(fX, fY, fZ);
@@ -253,7 +253,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
 
         uint32 uiNpcEntry = NPC_SOUL_WEAVER;
 
-        for(uint8 uiI = 0; uiI < 14; ++uiI)
+        for (uint8 uiI = 0; uiI < 14; ++uiI)
         {
             if (uiI > 0)
             {
@@ -292,7 +292,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
 
     void JustSummoned(Creature* pSummoned)
     {
-        switch(pSummoned->GetEntry())
+        switch (pSummoned->GetEntry())
         {
             case NPC_GUARDIAN:
             {
@@ -329,7 +329,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
 
     void SummonedCreatureJustDied(Creature* pSummoned)
     {
-        switch(pSummoned->GetEntry())
+        switch (pSummoned->GetEntry())
         {
             case NPC_GUARDIAN:
             case NPC_SOLDIER_FROZEN:
@@ -385,7 +385,7 @@ struct MANGOS_DLL_DECL boss_kelthuzadAI : public ScriptedAI
 
                     DoScriptText(EMOTE_PHASE2, m_creature);
 
-                    switch(urand(0, 2))
+                    switch (urand(0, 2))
                     {
                         case 0: DoScriptText(SAY_AGGRO1, m_creature); break;
                         case 1: DoScriptText(SAY_AGGRO2, m_creature); break;

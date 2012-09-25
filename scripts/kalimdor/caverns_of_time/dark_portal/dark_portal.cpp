@@ -124,7 +124,7 @@ struct RiftWaveData
     uint32 uiPortalMob[4];                      // spawns for portal waves (in order)
 };
 
-static const RiftWaveData aPortalWaves[]=
+static const RiftWaveData aPortalWaves[] =
 {
     {NPC_ASSASSIN,    NPC_WHELP,        NPC_CHRONOMANCER, 0},
     {NPC_EXECUTIONER, NPC_CHRONOMANCER, NPC_WHELP,        NPC_ASSASSIN},

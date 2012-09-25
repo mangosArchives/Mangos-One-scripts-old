@@ -81,7 +81,7 @@ struct MANGOS_DLL_DECL boss_gluthAI : public ScriptedAI
         m_uiRoarTimer         = 15000;
         m_uiZombieSearchTimer = 3000;
 
-        m_uiBerserkTimer      = MINUTE*8*IN_MILLISECONDS;
+        m_uiBerserkTimer      = MINUTE * 8 * IN_MILLISECONDS;
     }
 
     void JustDied(Unit* pKiller)
@@ -102,7 +102,7 @@ struct MANGOS_DLL_DECL boss_gluthAI : public ScriptedAI
         if (pVictim->GetEntry() == NPC_ZOMBIE_CHOW)
         {
             DoScriptText(EMOTE_ZOMBIE, m_creature);
-            m_creature->SetHealth(m_creature->GetHealth() + m_creature->GetMaxHealth()*0.05f);
+            m_creature->SetHealth(m_creature->GetHealth() + m_creature->GetMaxHealth() * 0.05f);
         }
     }
 
@@ -224,7 +224,7 @@ struct MANGOS_DLL_DECL boss_gluthAI : public ScriptedAI
         if (m_uiBerserkTimer < uiDiff)
         {
             if (DoCastSpellIfCan(m_creature, SPELL_BERSERK) == CAST_OK)
-                m_uiBerserkTimer = MINUTE*5*IN_MILLISECONDS;
+                m_uiBerserkTimer = MINUTE * 5 * IN_MILLISECONDS;
         }
         else
             m_uiBerserkTimer -= uiDiff;

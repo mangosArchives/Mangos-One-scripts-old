@@ -29,14 +29,14 @@ struct Yell
     int32 id;
 };
 
-static Yell RandomTaunt[]=
+static Yell RandomTaunt[] =
 {
-    {-1544000},
-    {-1544001},
-    {-1544002},
-    {-1544003},
-    {-1544004},
-    {-1544005},
+    { -1544000},
+    { -1544001},
+    { -1544002},
+    { -1544003},
+    { -1544004},
+    { -1544005},
 };
 
 enum
@@ -279,7 +279,7 @@ struct MANGOS_DLL_DECL boss_magtheridonAI : public ScriptedAI
 
         // now checking if every clicker has debuff from manticron
         // if not - apply mind exhaustion and delete from clicker's list
-        for(CubeMap::iterator i = m_mCube.begin(); i != m_mCube.end(); ++i)
+        for (CubeMap::iterator i = m_mCube.begin(); i != m_mCube.end(); ++i)
         {
             Player* pClicker = m_creature->GetMap()->GetPlayer(i->second);
 
@@ -368,7 +368,7 @@ struct MANGOS_DLL_DECL boss_magtheridonAI : public ScriptedAI
 
             if (m_uiRandChat_Timer < uiDiff)
             {
-                DoScriptText(RandomTaunt[rand()%6].id, m_creature);
+                DoScriptText(RandomTaunt[rand() % 6].id, m_creature);
                 m_uiRandChat_Timer = 90000;
             }
             else
@@ -460,7 +460,7 @@ struct MANGOS_DLL_DECL boss_magtheridonAI : public ScriptedAI
         {
             if (m_uiPhase3_Timer < uiDiff)
             {
-                switch(m_uiPhase3_Count)
+                switch (m_uiPhase3_Count)
                 {
                     case 0:
                         m_creature->CastSpell(m_creature, SPELL_CAMERA_SHAKE, true);

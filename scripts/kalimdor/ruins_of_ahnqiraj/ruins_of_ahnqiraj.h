@@ -99,43 +99,43 @@ static const SortingParameters aArmySortingParameters[MAX_ARMY_WAVES] =
 
 class MANGOS_DLL_DECL instance_ruins_of_ahnqiraj : public ScriptedInstance
 {
-    public:
-        instance_ruins_of_ahnqiraj(Map* pMap);
-        ~instance_ruins_of_ahnqiraj() {}
+public:
+    instance_ruins_of_ahnqiraj(Map* pMap);
+    ~instance_ruins_of_ahnqiraj() {}
 
-        void Initialize();
+    void Initialize();
 
-        // bool IsEncounterInProgress() const;              // not active in AQ20
+    // bool IsEncounterInProgress() const;              // not active in AQ20
 
-        void OnCreatureCreate(Creature* pCreature);
-        void OnPlayerEnter(Player* pPlayer);
+    void OnCreatureCreate(Creature* pCreature);
+    void OnPlayerEnter(Player* pPlayer);
 
-        void OnCreatureEnterCombat(Creature* pCreature);
-        void OnCreatureEvade(Creature* pCreature);
-        void OnCreatureDeath(Creature* pCreature);
+    void OnCreatureEnterCombat(Creature* pCreature);
+    void OnCreatureEvade(Creature* pCreature);
+    void OnCreatureDeath(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        void GetKaldoreiGuidList(GuidList &lList) { lList = m_lKaldoreiGuidList; }
+    void GetKaldoreiGuidList(GuidList &lList) { lList = m_lKaldoreiGuidList; }
 
-        void Update(uint32 uiDiff);
+    void Update(uint32 uiDiff);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-    private:
-        void DoSapwnAndorovIfCan();
-        void DoSortArmyWaves();
-        void DoSendNextArmyWave();
+private:
+    void DoSapwnAndorovIfCan();
+    void DoSortArmyWaves();
+    void DoSendNextArmyWave();
 
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        GuidList m_lKaldoreiGuidList;
-        GuidSet m_sArmyWavesGuids[MAX_ARMY_WAVES];
+    GuidList m_lKaldoreiGuidList;
+    GuidSet m_sArmyWavesGuids[MAX_ARMY_WAVES];
 
-        uint32 m_uiArmyDelayTimer;
-        uint8 m_uiCurrentArmyWave;
+    uint32 m_uiArmyDelayTimer;
+    uint8 m_uiCurrentArmyWave;
 };
 #endif

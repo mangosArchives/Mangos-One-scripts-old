@@ -98,7 +98,7 @@ struct MANGOS_DLL_DECL boss_gruulAI : public ScriptedAI
 
     void KilledUnit(Unit* pVictim)
     {
-        switch(urand(0, 2))
+        switch (urand(0, 2))
         {
             case 0: DoScriptText(SAY_SLAY1, m_creature); break;
             case 1: DoScriptText(SAY_SLAY2, m_creature); break;
@@ -122,7 +122,7 @@ struct MANGOS_DLL_DECL boss_gruulAI : public ScriptedAI
         {
             if (pTarget->GetTypeId() == TYPEID_PLAYER)
             {
-                switch(urand(0, 1))
+                switch (urand(0, 1))
                 {
                     case 0: pTarget->CastSpell(pTarget, SPELL_MAGNETIC_PULL, true, NULL, NULL, m_creature->GetObjectGuid()); break;
                     case 1: pTarget->CastSpell(pTarget, SPELL_KNOCK_BACK, true, NULL, NULL, m_creature->GetObjectGuid()); break;

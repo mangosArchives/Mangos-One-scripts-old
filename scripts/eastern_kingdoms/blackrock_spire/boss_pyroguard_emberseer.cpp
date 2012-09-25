@@ -94,7 +94,7 @@ struct MANGOS_DLL_DECL boss_pyroguard_emberseerAI : public ScriptedAI
     {
         ++m_uiGrowingStacks;
 
-        if (m_uiGrowingStacks == MAX_GROWING_STACKS*0.5f)
+        if (m_uiGrowingStacks == MAX_GROWING_STACKS * 0.5f)
             DoScriptText(EMOTE_NEAR, m_creature);
         else if (m_uiGrowingStacks == MAX_GROWING_STACKS)
         {

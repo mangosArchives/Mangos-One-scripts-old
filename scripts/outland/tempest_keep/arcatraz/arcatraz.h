@@ -75,34 +75,34 @@ static const float aEntranceMoveLoc[3] = {82.020f, 0.306f, -11.026f};
 
 class MANGOS_DLL_DECL instance_arcatraz : public ScriptedInstance, private DialogueHelper
 {
-    public:
-        instance_arcatraz(Map* pMap);
+public:
+    instance_arcatraz(Map* pMap);
 
-        void Initialize();
+    void Initialize();
 
-        void OnPlayerEnter(Player* pPlayer);
-        void OnObjectCreate(GameObject* pGo);
-        void OnCreatureCreate(Creature* pCreature);
+    void OnPlayerEnter(Player* pPlayer);
+    void OnObjectCreate(GameObject* pGo);
+    void OnCreatureCreate(Creature* pCreature);
 
-        void SetData(uint32 uiType, uint32 uiData);
-        uint32 GetData(uint32 uiType);
+    void SetData(uint32 uiType, uint32 uiData);
+    uint32 GetData(uint32 uiType);
 
-        const char* Save() { return m_strInstData.c_str(); }
-        void Load(const char* chrIn);
+    const char* Save() { return m_strInstData.c_str(); }
+    void Load(const char* chrIn);
 
-        void Update(uint32 uiDiff);
+    void Update(uint32 uiDiff);
 
-    private:
-        void JustDidDialogueStep(int32 iEntry);
+private:
+    void JustDidDialogueStep(int32 iEntry);
 
-        uint32 m_auiEncounter[MAX_ENCOUNTER];
-        std::string m_strInstData;
+    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-        uint32 m_uiResetDelayTimer;
-        uint32 m_uiEntranceEventTimer;
+    uint32 m_uiResetDelayTimer;
+    uint32 m_uiEntranceEventTimer;
 
-        GuidList m_lSkyrissEventMobsGuidList;
-        std::queue<ObjectGuid> m_qIntroEventMobsGuidQueue;
+    GuidList m_lSkyrissEventMobsGuidList;
+    std::queue<ObjectGuid> m_qIntroEventMobsGuidQueue;
 };
 
 #endif

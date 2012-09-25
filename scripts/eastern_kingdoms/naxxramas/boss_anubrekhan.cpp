@@ -59,7 +59,7 @@ static const DialogueEntry aIntroDialogue[] =
     {SAY_TAUNT2,  NPC_ANUB_REKHAN,  11000},
     {SAY_TAUNT3,  NPC_ANUB_REKHAN,  10000},
     {SAY_TAUNT4,  NPC_ANUB_REKHAN,  0},
-    {0,0,0}
+    {0, 0, 0}
 };
 
 static const float aCryptGuardLoc[4] = {3333.5f, -3475.9f, 287.1f, 3.17f};
@@ -104,7 +104,7 @@ struct MANGOS_DLL_DECL boss_anubrekhanAI : public ScriptedAI
 
     void Aggro(Unit* pWho)
     {
-        switch(urand(0, 2))
+        switch (urand(0, 2))
         {
             case 0: DoScriptText(SAY_AGGRO1, m_creature); break;
             case 1: DoScriptText(SAY_AGGRO2, m_creature); break;

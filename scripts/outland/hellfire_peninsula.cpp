@@ -152,7 +152,7 @@ struct MANGOS_DLL_DECL npc_ancestral_wolfAI : public npc_escortAI
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch(uiPointId)
+        switch (uiPointId)
         {
             case 0:
                 DoScriptText(EMOTE_WOLF_LIFT_HEAD, m_creature);
@@ -191,7 +191,7 @@ enum
     NPC_SPAWNER                     = 22260,                //just a dummy, not used
 
     MAX_BUTTRESS                    = 4,
-    TIME_TOTAL                      = MINUTE*10*IN_MILLISECONDS,
+    TIME_TOTAL                      = MINUTE * 10 * IN_MILLISECONDS,
 
     SPELL_SUMMONED_DEMON            = 7741,                 //visual spawn-in for demon
     SPELL_DEMONIAC_VISITATION       = 38708,                //create item
@@ -231,11 +231,11 @@ struct MANGOS_DLL_DECL npc_demoniac_scryerAI : public ScriptedAI
 
         float fAngle = 0.0f;
 
-        switch(m_uiButtressCount)
+        switch (m_uiButtressCount)
         {
             case 1: fAngle = 0.0f; break;
-            case 2: fAngle = M_PI_F+M_PI_F/2; break;
-            case 3: fAngle = M_PI_F/2; break;
+            case 2: fAngle = M_PI_F + M_PI_F / 2; break;
+            case 3: fAngle = M_PI_F / 2; break;
             case 4: fAngle = M_PI_F; break;
         }
 

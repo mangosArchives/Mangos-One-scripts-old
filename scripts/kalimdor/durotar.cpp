@@ -45,7 +45,7 @@ enum
 
 struct MANGOS_DLL_DECL npc_lazy_peonAI : public ScriptedAI
 {
-    npc_lazy_peonAI(Creature* pCreature) : ScriptedAI(pCreature) { Reset (); }
+    npc_lazy_peonAI(Creature* pCreature) : ScriptedAI(pCreature) { Reset(); }
 
     uint32 m_uiResetSleepTimer;
 
