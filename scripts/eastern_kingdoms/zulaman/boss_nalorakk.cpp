@@ -85,7 +85,7 @@ struct MANGOS_DLL_DECL boss_nalorakkAI : public ScriptedAI
         m_uiLaceratingSlashTimer    = 6000;
         m_uiRendFleshTimer          = 6000;
         m_uiDeafeningRoarTimer      = 20000;
-        m_uiBerserkTimer            = 10 * MINUTE * IN_MILLISECONDS;
+        m_uiBerserkTimer            = 10*MINUTE*IN_MILLISECONDS;
         m_bIsInBearForm             = false;
     }
 

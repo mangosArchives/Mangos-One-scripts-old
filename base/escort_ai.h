@@ -46,77 +46,77 @@ enum EscortState
 
 struct MANGOS_DLL_DECL npc_escortAI : public ScriptedAI
 {
-public:
-    explicit npc_escortAI(Creature* pCreature);
-    ~npc_escortAI() {}
+    public:
+        explicit npc_escortAI(Creature* pCreature);
+        ~npc_escortAI() {}
 
-    void GetAIInformation(ChatHandler& reader);
+        void GetAIInformation(ChatHandler& reader);
 
-    virtual void Aggro(Unit*);
+        virtual void Aggro(Unit*);
 
-    virtual void Reset() = 0;
+        virtual void Reset() = 0;
 
-    // CreatureAI functions
-    bool IsVisible(Unit*) const;
+        // CreatureAI functions
+        bool IsVisible(Unit*) const;
 
-    void AttackStart(Unit*);
+        void AttackStart(Unit*);
 
-    void EnterCombat(Unit*);
+        void EnterCombat(Unit*);
 
-    void MoveInLineOfSight(Unit*);
+        void MoveInLineOfSight(Unit*);
 
-    void JustDied(Unit*);
+        void JustDied(Unit*);
 
-    void JustRespawned();
+        void JustRespawned();
 
-    void EnterEvadeMode();
+        void EnterEvadeMode();
 
-    void UpdateAI(const uint32);                        //the "internal" update, calls UpdateEscortAI()
-    virtual void UpdateEscortAI(const uint32);          //used when it's needed to add code in update (abilities, scripted events, etc)
+        void UpdateAI(const uint32);                        //the "internal" update, calls UpdateEscortAI()
+        virtual void UpdateEscortAI(const uint32);          //used when it's needed to add code in update (abilities, scripted events, etc)
 
-    void MovementInform(uint32, uint32);
+        void MovementInform(uint32, uint32);
 
-    // EscortAI functions
-    //void AddWaypoint(uint32 id, float x, float y, float z, uint32 WaitTimeMs = 0);
+        // EscortAI functions
+        //void AddWaypoint(uint32 id, float x, float y, float z, uint32 WaitTimeMs = 0);
 
-    virtual void WaypointReached(uint32 uiPointId) = 0;
-    virtual void WaypointStart(uint32 uiPointId) {}
+        virtual void WaypointReached(uint32 uiPointId) = 0;
+        virtual void WaypointStart(uint32 uiPointId) {}
 
-    void Start(bool bRun = false, const Player* pPlayer = NULL, const Quest* pQuest = NULL, bool bInstantRespawn = false, bool bCanLoopPath = false);
+        void Start(bool bRun = false, const Player* pPlayer = NULL, const Quest* pQuest = NULL, bool bInstantRespawn = false, bool bCanLoopPath = false);
 
-    void SetRun(bool bRun = true);
-    void SetEscortPaused(bool uPaused);
+        void SetRun(bool bRun = true);
+        void SetEscortPaused(bool uPaused);
 
-    bool HasEscortState(uint32 uiEscortState) { return (m_uiEscortState & uiEscortState); }
+        bool HasEscortState(uint32 uiEscortState) { return (m_uiEscortState & uiEscortState); }
 
-    // update current point
-    void SetCurrentWaypoint(uint32 uiPointId);
+        // update current point
+        void SetCurrentWaypoint(uint32 uiPointId);
 
-protected:
-    Player* GetPlayerForEscort() { return m_creature->GetMap()->GetPlayer(m_playerGuid); }
-    virtual void JustStartedEscort() {}
+    protected:
+        Player* GetPlayerForEscort() { return m_creature->GetMap()->GetPlayer(m_playerGuid); }
+        virtual void JustStartedEscort() {}
 
-private:
-    bool AssistPlayerInCombat(Unit* pWho);
-    bool IsPlayerOrGroupInRange();
-    bool MoveToNextWaypoint();
-    void FillPointMovementListForCreature();
+    private:
+        bool AssistPlayerInCombat(Unit* pWho);
+        bool IsPlayerOrGroupInRange();
+        bool MoveToNextWaypoint();
+        void FillPointMovementListForCreature();
 
-    void AddEscortState(uint32 uiEscortState) { m_uiEscortState |= uiEscortState; }
-    void RemoveEscortState(uint32 uiEscortState) { m_uiEscortState &= ~uiEscortState; }
+        void AddEscortState(uint32 uiEscortState) { m_uiEscortState |= uiEscortState; }
+        void RemoveEscortState(uint32 uiEscortState) { m_uiEscortState &= ~uiEscortState; }
 
-    ObjectGuid m_playerGuid;
-    uint32 m_uiWPWaitTimer;
-    uint32 m_uiPlayerCheckTimer;
-    uint32 m_uiEscortState;
+        ObjectGuid m_playerGuid;
+        uint32 m_uiWPWaitTimer;
+        uint32 m_uiPlayerCheckTimer;
+        uint32 m_uiEscortState;
 
-    const Quest* m_pQuestForEscort;                     //generally passed in Start() when regular escort script.
+        const Quest* m_pQuestForEscort;                     //generally passed in Start() when regular escort script.
 
-    std::list<Escort_Waypoint> WaypointList;
-    std::list<Escort_Waypoint>::iterator CurrentWP;
+        std::list<Escort_Waypoint> WaypointList;
+        std::list<Escort_Waypoint>::iterator CurrentWP;
 
-    bool m_bIsRunning;                                  //all creatures are walking by default (has flag SPLINEFLAG_WALKMODE)
-    bool m_bCanInstantRespawn;                          //if creature should respawn instantly after escort over (if not, database respawntime are used)
-    bool m_bCanReturnToStart;                           //if creature can walk same path (loop) without despawn. Not for regular escort quests.
+        bool m_bIsRunning;                                  //all creatures are walking by default (has flag SPLINEFLAG_WALKMODE)
+        bool m_bCanInstantRespawn;                          //if creature should respawn instantly after escort over (if not, database respawntime are used)
+        bool m_bCanReturnToStart;                           //if creature can walk same path (loop) without despawn. Not for regular escort quests.
 };
 #endif

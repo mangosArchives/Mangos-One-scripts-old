@@ -262,7 +262,7 @@ struct MANGOS_DLL_DECL boss_nightbaneAI : public npc_escortAI
                 else
                     m_uiCleavetimer -= uiDiff;
 
-                if (m_creature->GetHealthPercent() < 100 - 25 * m_uiFlightPhase)
+                if (m_creature->GetHealthPercent() < 100 - 25*m_uiFlightPhase)
                 {
                     // Start air phase movement (handled by creature_movement_template)
                     SetCombatMovement(false);

@@ -37,20 +37,20 @@ struct Say
     int32 id;
 };
 
-static Say PeonAttacked[] =
+static Say PeonAttacked[]=
 {
-    { -1540001},
-    { -1540002},
-    { -1540003},
-    { -1540004},
+    {-1540001},
+    {-1540002},
+    {-1540003},
+    {-1540004},
 };
 
-static Say PeonDies[] =
+static Say PeonDies[]=
 {
-    { -1540005},
-    { -1540006},
-    { -1540007},
-    { -1540008},
+    {-1540005},
+    {-1540006},
+    {-1540007},
+    {-1540008},
 };
 
 enum
@@ -166,7 +166,7 @@ struct MANGOS_DLL_DECL boss_grand_warlock_nethekurseAI : public ScriptedAI
 
     void DoTauntPeons()
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_TAUNT_1, m_creature); break;
             case 1: DoScriptText(SAY_TAUNT_2, m_creature); break;
@@ -228,7 +228,7 @@ struct MANGOS_DLL_DECL boss_grand_warlock_nethekurseAI : public ScriptedAI
 
     void Aggro(Unit* pWho)
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_AGGRO_1, m_creature); break;
             case 1: DoScriptText(SAY_AGGRO_2, m_creature); break;

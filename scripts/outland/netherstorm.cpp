@@ -115,7 +115,7 @@ struct MANGOS_DLL_DECL npc_manaforge_control_consoleAI : public ScriptedAI
 
         if (pPlayer)
         {
-            switch (m_creature->GetEntry())
+            switch(m_creature->GetEntry())
             {
                 case NPC_BNAAR_C_CONSOLE:
                     pPlayer->FailQuest(QUEST_SHUTDOWN_BNAAR_ALDOR);
@@ -144,7 +144,7 @@ struct MANGOS_DLL_DECL npc_manaforge_control_consoleAI : public ScriptedAI
     {
         Creature* pAdd = NULL;
 
-        switch (pCreature->GetEntry())
+        switch(pCreature->GetEntry())
         {
             case NPC_BNAAR_C_CONSOLE:
                 if (urand(0, 1))
@@ -201,7 +201,7 @@ struct MANGOS_DLL_DECL npc_manaforge_control_consoleAI : public ScriptedAI
     {
         Creature* pAdd = NULL;
 
-        switch (pCreature->GetEntry())
+        switch(pCreature->GetEntry())
         {
             case NPC_BNAAR_C_CONSOLE:
                 if (pAdd = m_creature->SummonCreature(NPC_SUNFURY_TECH, 2946.52f, 4201.42f, 163.47f, 3.54f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 120000))
@@ -248,7 +248,7 @@ struct MANGOS_DLL_DECL npc_manaforge_control_consoleAI : public ScriptedAI
                 return;
             }
 
-            switch (m_uiPhase)
+            switch(m_uiPhase)
             {
                 case 1:
                     DoScriptText(EMOTE_START, m_creature, pPlayer);
@@ -319,29 +319,29 @@ bool GOUse_go_manaforge_control_console(Player* pPlayer, GameObject* pGo)
 
     Creature* pManaforge = NULL;
 
-    switch (pGo->GetAreaId())
+    switch(pGo->GetAreaId())
     {
         case 3726:                                          // b'naar
             if ((pPlayer->GetQuestStatus(QUEST_SHUTDOWN_BNAAR_ALDOR) == QUEST_STATUS_INCOMPLETE
-                 || pPlayer->GetQuestStatus(QUEST_SHUTDOWN_BNAAR_SCRYERS) == QUEST_STATUS_INCOMPLETE)
+                || pPlayer->GetQuestStatus(QUEST_SHUTDOWN_BNAAR_SCRYERS) == QUEST_STATUS_INCOMPLETE)
                 && pPlayer->HasItemCount(ITEM_BNAAR_ACESS_CRYSTAL, 1))
                 pManaforge = pPlayer->SummonCreature(NPC_BNAAR_C_CONSOLE, 2918.95f, 4189.98f, 161.88f, 0.34f, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 125000);
             break;
         case 3730:                                          // coruu
             if ((pPlayer->GetQuestStatus(QUEST_SHUTDOWN_CORUU_ALDOR) == QUEST_STATUS_INCOMPLETE
-                 || pPlayer->GetQuestStatus(QUEST_SHUTDOWN_CORUU_SCRYERS) == QUEST_STATUS_INCOMPLETE)
+                || pPlayer->GetQuestStatus(QUEST_SHUTDOWN_CORUU_SCRYERS) == QUEST_STATUS_INCOMPLETE)
                 && pPlayer->HasItemCount(ITEM_CORUU_ACESS_CRYSTAL, 1))
                 pManaforge = pPlayer->SummonCreature(NPC_CORUU_C_CONSOLE, 2426.77f, 2750.38f, 133.24f, 2.14f, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 125000);
             break;
         case 3734:                                          // duro
             if ((pPlayer->GetQuestStatus(QUEST_SHUTDOWN_DURO_ALDOR) == QUEST_STATUS_INCOMPLETE
-                 || pPlayer->GetQuestStatus(QUEST_SHUTDOWN_DURO_SCRYERS) == QUEST_STATUS_INCOMPLETE)
+                || pPlayer->GetQuestStatus(QUEST_SHUTDOWN_DURO_SCRYERS) == QUEST_STATUS_INCOMPLETE)
                 && pPlayer->HasItemCount(ITEM_DURO_ACESS_CRYSTAL, 1))
                 pManaforge = pPlayer->SummonCreature(NPC_DURO_C_CONSOLE, 2976.48f, 2183.29f, 163.20f, 1.85f, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 125000);
             break;
         case 3722:                                          // ara
             if ((pPlayer->GetQuestStatus(QUEST_SHUTDOWN_ARA_ALDOR) == QUEST_STATUS_INCOMPLETE
-                 || pPlayer->GetQuestStatus(QUEST_SHUTDOWN_ARA_SCRYERS) == QUEST_STATUS_INCOMPLETE)
+                || pPlayer->GetQuestStatus(QUEST_SHUTDOWN_ARA_SCRYERS) == QUEST_STATUS_INCOMPLETE)
                 && pPlayer->HasItemCount(ITEM_ARA_ACESS_CRYSTAL, 1))
                 pManaforge = pPlayer->SummonCreature(NPC_ARA_C_CONSOLE, 4013.71f, 4028.76f, 192.10f, 1.25f, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 125000);
             break;
@@ -389,7 +389,7 @@ enum
 
 struct MANGOS_DLL_DECL npc_commander_dawnforgeAI : public ScriptedAI
 {
-    npc_commander_dawnforgeAI(Creature* pCreature) : ScriptedAI(pCreature) { Reset(); }
+    npc_commander_dawnforgeAI(Creature* pCreature) : ScriptedAI(pCreature) { Reset (); }
 
     ObjectGuid m_playerGuid;
     ObjectGuid m_ardonisGuid;
@@ -533,7 +533,7 @@ struct MANGOS_DLL_DECL npc_commander_dawnforgeAI : public ScriptedAI
                 m_uiPhaseTimer = 6000;
                 break;
             case 6:
-                switch (m_uiPhaseSubphase)
+                switch(m_uiPhaseSubphase)
                 {
                     case 0:
                         TurnToPathaleonsImage();
@@ -549,7 +549,7 @@ struct MANGOS_DLL_DECL npc_commander_dawnforgeAI : public ScriptedAI
                 }
                 break;
             case 7:
-                switch (m_uiPhaseSubphase)
+                switch(m_uiPhaseSubphase)
                 {
                     case 0:
                         DoScriptText(SAY_PATHALEON_THE_CALCULATOR_IMAGE_2, pPathaleon);
@@ -638,7 +638,7 @@ struct MANGOS_DLL_DECL npc_bessyAI : public npc_escortAI
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 3:
                 m_creature->SummonCreature(NPC_TORMENTED_SOUL, 2449.67f, 2183.11f, 96.85f, 6.20f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
@@ -679,7 +679,7 @@ bool QuestAccept_npc_bessy(Player* pPlayer, Creature* pCreature, const Quest* pQ
 
 CreatureAI* GetAI_npc_bessy(Creature* pCreature)
 {
-    return new npc_bessyAI(pCreature);
+     return new npc_bessyAI(pCreature);
 }
 
 /*######
@@ -734,7 +734,7 @@ struct MANGOS_DLL_DECL npc_maxx_a_million_escortAI : public npc_escortAI
         {
             case 1:
                 // turn 90 degrees , towards doorway.
-                m_creature->SetFacingTo(m_creature->GetOrientation() + (M_PI_F / 2));
+                m_creature->SetFacingTo(m_creature->GetOrientation() + (M_PI_F/2));
                 DoScriptText(SAY_START, m_creature);
                 m_uiSubEventTimer = 3000;
                 m_uiSubEvent = 1;
@@ -787,7 +787,7 @@ struct MANGOS_DLL_DECL npc_maxx_a_million_escortAI : public npc_escortAI
                     switch (m_uiSubEvent)
                     {
                         case 1:                             // Wait time before Say
-                            if (Creature* pAlley = GetClosestCreatureWithEntry(m_creature, NPC_BOT_SPECIALIST_ALLEY, INTERACTION_DISTANCE * 2))
+                            if (Creature* pAlley = GetClosestCreatureWithEntry(m_creature, NPC_BOT_SPECIALIST_ALLEY, INTERACTION_DISTANCE*2))
                             {
                                 m_alleyGuid = pAlley->GetObjectGuid();
                                 DoScriptText(SAY_ALLEY_FAREWELL, pAlley);

@@ -143,7 +143,7 @@ enum
 {
     NPC_FREED_WARRIOR       = 22459,
     QUEST_TAKEN_IN_NIGHT    = 10873
-                              //SPELL_FREE_WEBBED       = 38950
+    //SPELL_FREE_WEBBED       = 38950
 };
 
 const uint32 netherwebVictims[6] =
@@ -203,8 +203,8 @@ enum
     NPC_CABAL_SKIRMISHER    = 21661
 };
 
-static float m_afAmbushB1[] = { -2895.525879f, 5336.431641f, -11.800f};
-static float m_afAmbushB2[] = { -2890.604980f, 5331.938965f, -11.282f};
+static float m_afAmbushB1[]= {-2895.525879f, 5336.431641f, -11.800f};
+static float m_afAmbushB2[]= {-2890.604980f, 5331.938965f, -11.282f};
 
 struct MANGOS_DLL_DECL npc_akunoAI : public npc_escortAI
 {
@@ -219,7 +219,7 @@ struct MANGOS_DLL_DECL npc_akunoAI : public npc_escortAI
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 5:
                 DoScriptText(SAY_AKU_AMBUSH_A, m_creature);
@@ -383,9 +383,9 @@ struct MANGOS_DLL_DECL npc_letollAI : public npc_escortAI
     {
         uint32 uiCount = 0;
 
-        for (std::list<Creature*>::iterator itr = m_lResearchersList.begin(); itr != m_lResearchersList.end(); ++itr)
+        for(std::list<Creature*>::iterator itr = m_lResearchersList.begin(); itr != m_lResearchersList.end(); ++itr)
         {
-            float fAngle = uiCount < MAX_RESEARCHER ? M_PI / MAX_RESEARCHER - (uiCount * 2 * M_PI / MAX_RESEARCHER) : 0.0f;
+            float fAngle = uiCount < MAX_RESEARCHER ? M_PI/MAX_RESEARCHER - (uiCount*2*M_PI/MAX_RESEARCHER) : 0.0f;
 
             if ((*itr)->isAlive() && !(*itr)->isInCombat())
                 (*itr)->GetMotionMaster()->MoveFollow(m_creature, 2.5f, fAngle);
@@ -400,7 +400,7 @@ struct MANGOS_DLL_DECL npc_letollAI : public npc_escortAI
         {
             uint8 uiNum = 1;
 
-            for (std::list<Creature*>::iterator itr = m_lResearchersList.begin(); itr != m_lResearchersList.end(); ++itr)
+            for(std::list<Creature*>::iterator itr = m_lResearchersList.begin(); itr != m_lResearchersList.end(); ++itr)
             {
                 if (uiListNum && uiListNum != uiNum)
                 {
@@ -431,7 +431,7 @@ struct MANGOS_DLL_DECL npc_letollAI : public npc_escortAI
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 0:
                 if (Player* pPlayer = GetPlayerForEscort())
@@ -479,7 +479,7 @@ struct MANGOS_DLL_DECL npc_letollAI : public npc_escortAI
                 {
                     m_uiEventTimer = 7000;
 
-                    switch (m_uiEventCount)
+                    switch(m_uiEventCount)
                     {
                         case 0:
                             DoScriptText(SAY_LE_ALMOST, m_creature);
@@ -636,7 +636,7 @@ struct MANGOS_DLL_DECL npc_mana_bomb_exp_triggerAI : public ScriptedAI
             if (m_uiEventCounter < 10)
                 m_creature->CastSpell(m_creature, SPELL_MANA_BOMB_LIGHTNING, false);
 
-            switch (m_uiEventCounter)
+            switch(m_uiEventCounter)
             {
                 case 5:
                     if (pManaBomb)
@@ -714,10 +714,10 @@ bool GOUse_go_veil_skith_cage(Player* pPlayer, GameObject* pGo)
     {
         std::list<Creature*> lChildrenList;
         GetCreatureListWithEntryInGrid(lChildrenList, pGo, NPC_CAPTIVE_CHILD, INTERACTION_DISTANCE);
-        for (std::list<Creature*>::const_iterator itr = lChildrenList.begin(); itr != lChildrenList.end(); ++itr)
+        for(std::list<Creature*>::const_iterator itr = lChildrenList.begin(); itr != lChildrenList.end(); ++itr)
         {
             pPlayer->KilledMonsterCredit(NPC_CAPTIVE_CHILD, (*itr)->GetObjectGuid());
-            switch (urand(0, 3))
+            switch(urand(0,3))
             {
                 case 0: DoScriptText(SAY_THANKS_1, *itr); break;
                 case 1: DoScriptText(SAY_THANKS_2, *itr); break;
@@ -803,7 +803,7 @@ struct MANGOS_DLL_DECL npc_isla_starmaneAI : public npc_escortAI
     {
         m_creature->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PASSIVE);
         DoScriptText(SAY_ISLA_START, m_creature);
-        if (GameObject* pCage = GetClosestGameObjectWithEntry(m_creature, GO_CAGE, 2 * INTERACTION_DISTANCE))
+        if (GameObject* pCage = GetClosestGameObjectWithEntry(m_creature, GO_CAGE, 2*INTERACTION_DISTANCE))
             pCage->Use(m_creature);
     }
 
@@ -818,7 +818,7 @@ struct MANGOS_DLL_DECL npc_isla_starmaneAI : public npc_escortAI
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 6:
                 DoScriptText(SAY_ISLA_WAITING, m_creature);
@@ -922,7 +922,7 @@ enum
     QUEST_SKYWING                = 10898
 };
 
-static const float aLuangaSpawnCoords[3] = { -3507.203f, 4084.619f, 92.947f};
+static const float aLuangaSpawnCoords[3] = {-3507.203f, 4084.619f, 92.947f};
 
 struct MANGOS_DLL_DECL npc_skywingAI : public npc_escortAI
 {
@@ -935,7 +935,7 @@ struct MANGOS_DLL_DECL npc_skywingAI : public npc_escortAI
         switch (uiPointId)
         {
             case 6:
-                DoScriptText(SAY_SKYWING_TREE_DOWN , m_creature);
+                DoScriptText(SAY_SKYWING_TREE_DOWN ,m_creature);
                 break;
             case 36:
                 DoScriptText(SAY_SKYWING_TREE_UP, m_creature);

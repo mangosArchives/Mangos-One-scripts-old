@@ -31,7 +31,7 @@ EndContentData */
 #include "precompiled.h"
 #include "escort_ai.h"
 
-/*######
+ /*######
 ## npc_00x09hl
 ######*/
 
@@ -57,7 +57,7 @@ struct MANGOS_DLL_DECL npc_00x09hlAI : public npc_escortAI
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 26:
                 DoScriptText(SAY_OOX_AMBUSH, m_creature);
@@ -75,10 +75,10 @@ struct MANGOS_DLL_DECL npc_00x09hlAI : public npc_escortAI
 
     void WaypointStart(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 27:
-                for (uint8 i = 0; i < 3; ++i)
+                for(uint8 i = 0; i < 3; ++i)
                 {
                     float fX, fY, fZ;
                     m_creature->GetRandomPoint(147.927444f, -3851.513428f, 130.893f, 7.0f, fX, fY, fZ);
@@ -87,7 +87,7 @@ struct MANGOS_DLL_DECL npc_00x09hlAI : public npc_escortAI
                 }
                 break;
             case 44:
-                for (uint8 i = 0; i < 3; ++i)
+                for(uint8 i = 0; i < 3; ++i)
                 {
                     float fX, fY, fZ;
                     m_creature->GetRandomPoint(-141.151581f, -4291.213867f, 120.130f, 7.0f, fX, fY, fZ);
@@ -221,14 +221,14 @@ struct MANGOS_DLL_DECL npc_rinjiAI : public npc_escortAI
             m_iSpawnId = 1;
 
         m_creature->SummonCreature(NPC_RANGER,
-                                   m_afAmbushSpawn[m_iSpawnId].m_fX, m_afAmbushSpawn[m_iSpawnId].m_fY, m_afAmbushSpawn[m_iSpawnId].m_fZ, 0.0f,
-                                   TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 60000);
+            m_afAmbushSpawn[m_iSpawnId].m_fX, m_afAmbushSpawn[m_iSpawnId].m_fY, m_afAmbushSpawn[m_iSpawnId].m_fZ, 0.0f,
+            TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 60000);
 
-        for (int i = 0; i < 2; ++i)
+        for(int i = 0; i < 2; ++i)
         {
             m_creature->SummonCreature(NPC_OUTRUNNER,
-                                       m_afAmbushSpawn[m_iSpawnId].m_fX, m_afAmbushSpawn[m_iSpawnId].m_fY, m_afAmbushSpawn[m_iSpawnId].m_fZ, 0.0f,
-                                       TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 60000);
+                m_afAmbushSpawn[m_iSpawnId].m_fX, m_afAmbushSpawn[m_iSpawnId].m_fY, m_afAmbushSpawn[m_iSpawnId].m_fZ, 0.0f,
+                TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 60000);
         }
     }
 
@@ -245,7 +245,7 @@ struct MANGOS_DLL_DECL npc_rinjiAI : public npc_escortAI
         if (!pPlayer)
             return;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 1:
                 DoScriptText(SAY_RIN_FREE, m_creature, pPlayer);
@@ -278,7 +278,7 @@ struct MANGOS_DLL_DECL npc_rinjiAI : public npc_escortAI
 
                     if (Player* pPlayer = GetPlayerForEscort())
                     {
-                        switch (m_uiPostEventCount)
+                        switch(m_uiPostEventCount)
                         {
                             case 1:
                                 DoScriptText(SAY_RIN_PROGRESS_1, m_creature, pPlayer);

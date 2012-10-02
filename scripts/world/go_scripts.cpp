@@ -84,8 +84,8 @@ bool GOUse_go_ethereum_prison(Player* pPlayer, GameObject* pGo)
     uint8 uiRandom = urand(0, countof(uiNpcPrisonEntry) - 1);
 
     if (Creature* pCreature = pPlayer->SummonCreature(uiNpcPrisonEntry[uiRandom],
-                              pGo->GetPositionX(), pGo->GetPositionY(), pGo->GetPositionZ(), pGo->GetAngle(pPlayer),
-                              TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 30000))
+        pGo->GetPositionX(), pGo->GetPositionY(), pGo->GetPositionZ(), pGo->GetAngle(pPlayer),
+        TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 30000))
     {
         if (!pCreature->IsHostileTo(pPlayer))
         {
@@ -93,7 +93,7 @@ bool GOUse_go_ethereum_prison(Player* pPlayer, GameObject* pGo)
 
             if (FactionTemplateEntry const* pFaction = pCreature->getFactionTemplateEntry())
             {
-                switch (pFaction->faction)
+                switch(pFaction->faction)
                 {
                     case FACTION_LC:   uiSpell = SPELL_REP_LC;   break;
                     case FACTION_SHAT: uiSpell = SPELL_REP_SHAT; break;
@@ -104,9 +104,9 @@ bool GOUse_go_ethereum_prison(Player* pPlayer, GameObject* pGo)
                 }
 
                 if (uiSpell)
-                    pCreature->CastSpell(pPlayer, uiSpell, false);
+                    pCreature->CastSpell(pPlayer,uiSpell,false);
                 else
-                    error_log("SD2: go_ethereum_prison summoned creature (entry %u) but faction (%u) are not expected by script.", pCreature->GetEntry(), pCreature->getFaction());
+                    error_log("SD2: go_ethereum_prison summoned creature (entry %u) but faction (%u) are not expected by script.",pCreature->GetEntry(),pCreature->getFaction());
             }
         }
     }
@@ -128,8 +128,8 @@ bool GOUse_go_ethereum_stasis(Player* pPlayer, GameObject* pGo)
     uint8 uiRandom = urand(0, countof(uiNpcStasisEntry) - 1);
 
     pPlayer->SummonCreature(uiNpcStasisEntry[uiRandom],
-                            pGo->GetPositionX(), pGo->GetPositionY(), pGo->GetPositionZ(), pGo->GetAngle(pPlayer),
-                            TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 30000);
+        pGo->GetPositionX(), pGo->GetPositionY(), pGo->GetPositionZ(), pGo->GetAngle(pPlayer),
+        TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 30000);
 
     return false;
 }
@@ -171,10 +171,10 @@ bool GOUse_go_shrine_of_the_birds(Player* pPlayer, GameObject* pGo)
 {
     uint32 uiBirdEntry = 0;
 
-    float fX, fY, fZ;
+    float fX,fY,fZ;
     pGo->GetClosePoint(fX, fY, fZ, pGo->GetObjectBoundingRadius(), INTERACTION_DISTANCE);
 
-    switch (pGo->GetEntry())
+    switch(pGo->GetEntry())
     {
         case GO_SHRINE_HAWK:
             uiBirdEntry = NPC_HAWK_GUARD;
@@ -216,7 +216,7 @@ bool GOUse_go_andorhal_tower(Player* pPlayer, GameObject* pGo)
     if (pPlayer->GetQuestStatus(QUEST_ALL_ALONG_THE_WATCHTOWERS_ALLIANCE) == QUEST_STATUS_INCOMPLETE || pPlayer->GetQuestStatus(QUEST_ALL_ALONG_THE_WATCHTOWERS_HORDE) == QUEST_STATUS_INCOMPLETE)
     {
         uint32 uiKillCredit = 0;
-        switch (pGo->GetEntry())
+        switch(pGo->GetEntry())
         {
             case GO_ANDORHAL_TOWER_1:   uiKillCredit = NPC_ANDORHAL_TOWER_1;   break;
             case GO_ANDORHAL_TOWER_2:   uiKillCredit = NPC_ANDORHAL_TOWER_2;   break;

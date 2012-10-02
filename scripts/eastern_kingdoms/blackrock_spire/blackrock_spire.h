@@ -107,51 +107,51 @@ static const uint32 aStadiumEventNpcs[MAX_STADIUM_WAVES][5] =
 
 class MANGOS_DLL_DECL instance_blackrock_spire : public ScriptedInstance, private DialogueHelper
 {
-public:
-    instance_blackrock_spire(Map* pMap);
-    ~instance_blackrock_spire() {}
+    public:
+        instance_blackrock_spire(Map* pMap);
+        ~instance_blackrock_spire() {}
 
-    void Initialize();
+        void Initialize();
 
-    void OnObjectCreate(GameObject* pGo);
-    void OnCreatureCreate(Creature* pCreature);
-    void OnCreatureDeath(Creature* pCreature);
-    void OnCreatureEvade(Creature* pCreature);
-    void OnCreatureEnterCombat(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnCreatureDeath(Creature* pCreature);
+        void OnCreatureEvade(Creature* pCreature);
+        void OnCreatureEnterCombat(Creature* pCreature);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    void SetData64(uint32 uiType, uint64 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        void SetData64(uint32 uiType, uint64 uiData);
+        uint32 GetData(uint32 uiType);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-    void DoUseEmberseerRunes(bool bReset = false);
-    void DoProcessEmberseerEvent();
+        void DoUseEmberseerRunes(bool bReset = false);
+        void DoProcessEmberseerEvent();
 
-    void DoSortRoomEventMobs();
-    void GetIncarceratorGUIDList(GuidList &lList) { lList = m_lIncarceratorGUIDList; }
-    void GetRookeryEggGUIDList(GuidList &lList) { lList = m_lRookeryEggGUIDList; }
+        void DoSortRoomEventMobs();
+        void GetIncarceratorGUIDList(GuidList &lList) { lList = m_lIncarceratorGUIDList; }
+        void GetRookeryEggGUIDList(GuidList &lList) { lList = m_lRookeryEggGUIDList; }
 
-    void Update(uint32 uiDiff);
+        void Update(uint32 uiDiff);
 
-private:
-    void JustDidDialogueStep(int32 iEntry);
-    void DoSendNextStadiumWave();
+    private:
+        void JustDidDialogueStep(int32 iEntry);
+        void DoSendNextStadiumWave();
 
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    uint32 m_uiStadiumEventTimer;
-    uint8 m_uiStadiumWaves;
-    uint8 m_uiStadiumMobsAlive;
+        uint32 m_uiStadiumEventTimer;
+        uint8 m_uiStadiumWaves;
+        uint8 m_uiStadiumMobsAlive;
 
-    ObjectGuid m_aRoomRuneGuid[MAX_ROOMS];
-    GuidList m_alRoomEventMobGUIDSorted[MAX_ROOMS];
-    GuidList m_lRoomEventMobGUIDList;
-    GuidList m_lIncarceratorGUIDList;
-    GuidList m_lRookeryEggGUIDList;
-    GuidList m_lEmberseerRunesGUIDList;
+        ObjectGuid m_aRoomRuneGuid[MAX_ROOMS];
+        GuidList m_alRoomEventMobGUIDSorted[MAX_ROOMS];
+        GuidList m_lRoomEventMobGUIDList;
+        GuidList m_lIncarceratorGUIDList;
+        GuidList m_lRookeryEggGUIDList;
+        GuidList m_lEmberseerRunesGUIDList;
 };
 
 #endif

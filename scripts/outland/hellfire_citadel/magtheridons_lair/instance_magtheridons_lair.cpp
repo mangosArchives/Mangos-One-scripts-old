@@ -38,7 +38,7 @@ void instance_magtheridons_lair::Initialize()
 
 bool instance_magtheridons_lair::IsEncounterInProgress() const
 {
-    for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+    for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
         if (m_auiEncounter[i] == IN_PROGRESS)
             return true;
 
@@ -47,7 +47,7 @@ bool instance_magtheridons_lair::IsEncounterInProgress() const
 
 void instance_magtheridons_lair::OnCreatureCreate(Creature* pCreature)
 {
-    switch (pCreature->GetEntry())
+    switch(pCreature->GetEntry())
     {
         case NPC_MAGTHERIDON:
             m_mNpcEntryGuidStore[NPC_MAGTHERIDON] = pCreature->GetObjectGuid();
@@ -60,7 +60,7 @@ void instance_magtheridons_lair::OnCreatureCreate(Creature* pCreature)
 
 void instance_magtheridons_lair::OnObjectCreate(GameObject* pGo)
 {
-    switch (pGo->GetEntry())
+    switch(pGo->GetEntry())
     {
         case GO_MANTICRON_CUBE:
             pGo->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_NO_INTERACT);
@@ -82,7 +82,7 @@ void instance_magtheridons_lair::OnObjectCreate(GameObject* pGo)
 
 void instance_magtheridons_lair::SetData(uint32 uiType, uint32 uiData)
 {
-    switch (uiType)
+    switch(uiType)
     {
         case TYPE_MAGTHERIDON_EVENT:
             m_auiEncounter[0] = uiData;
@@ -95,7 +95,7 @@ void instance_magtheridons_lair::SetData(uint32 uiType, uint32 uiData)
             }
             break;
         case TYPE_CHANNELER_EVENT:
-            switch (uiData)
+            switch(uiData)
             {
                 case NOT_STARTED:                           // Reset all channelers once one is reset.
                     if (m_auiEncounter[1] != NOT_STARTED)
@@ -108,7 +108,7 @@ void instance_magtheridons_lair::SetData(uint32 uiType, uint32 uiData)
                             break;
                         }
 
-                        for (GuidSet::const_iterator itr = m_sChannelerGuid.begin(); itr != m_sChannelerGuid.end(); ++itr)
+                        for(GuidSet::const_iterator itr = m_sChannelerGuid.begin(); itr != m_sChannelerGuid.end(); ++itr)
                         {
                             if (Creature* pChanneler = instance->GetCreature(*itr))
                             {
@@ -131,7 +131,7 @@ void instance_magtheridons_lair::SetData(uint32 uiType, uint32 uiData)
                         m_auiEncounter[1] = IN_PROGRESS;
 
                         // Let all five channelers aggro.
-                        for (GuidSet::const_iterator itr = m_sChannelerGuid.begin(); itr != m_sChannelerGuid.end(); ++itr)
+                        for(GuidSet::const_iterator itr = m_sChannelerGuid.begin(); itr != m_sChannelerGuid.end(); ++itr)
                         {
                             Creature* pChanneler = instance->GetCreature(*itr);
 
@@ -150,7 +150,7 @@ void instance_magtheridons_lair::SetData(uint32 uiType, uint32 uiData)
                     }
                     break;
                 case DONE:                                  // Add buff and check if all channelers are dead.
-                    for (GuidSet::iterator itr = m_sChannelerGuid.begin(); itr != m_sChannelerGuid.end(); ++itr)
+                    for(GuidSet::iterator itr = m_sChannelerGuid.begin(); itr != m_sChannelerGuid.end(); ++itr)
                     {
                         Creature* pChanneler = instance->GetCreature(*itr);
 
@@ -168,7 +168,7 @@ void instance_magtheridons_lair::SetData(uint32 uiType, uint32 uiData)
             break;
         case TYPE_HALL_COLLAPSE:
             // IN_PROGRESS - collapse / NOT_STARTED - reset
-            for (GuidSet::const_iterator itr = m_sColumnGuid.begin(); itr != m_sColumnGuid.end(); ++itr)
+            for(GuidSet::const_iterator itr = m_sColumnGuid.begin(); itr != m_sColumnGuid.end(); ++itr)
                 DoUseDoorOrButton(*itr);
             break;
     }
@@ -191,7 +191,7 @@ void instance_magtheridons_lair::AttackNearestTarget(Creature* pCreature)
     Player* target = NULL;
 
     Map::PlayerList const& players = instance->GetPlayers();
-    for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
+    for(Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
     {
         if (Player* i_pl = itr->getSource())
         {
@@ -232,7 +232,7 @@ void instance_magtheridons_lair::Update(uint32 uiDiff)
     {
         if (m_uiRespawnTimer <= uiDiff)
         {
-            for (GuidSet::const_iterator itr = m_sChannelerGuid.begin(); itr != m_sChannelerGuid.end(); ++itr)
+            for(GuidSet::const_iterator itr = m_sChannelerGuid.begin(); itr != m_sChannelerGuid.end(); ++itr)
             {
                 if (Creature* pChanneler = instance->GetCreature(*itr))
                 {

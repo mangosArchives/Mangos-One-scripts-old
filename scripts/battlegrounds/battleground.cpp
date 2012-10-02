@@ -72,7 +72,7 @@ struct MANGOS_DLL_DECL npc_spirit_guideAI : public ScriptedAI
 
         Map::PlayerList const &PlayerList = pMap->GetPlayers();
 
-        for (Map::PlayerList::const_iterator itr = PlayerList.begin(); itr != PlayerList.end(); ++itr)
+        for(Map::PlayerList::const_iterator itr = PlayerList.begin(); itr != PlayerList.end(); ++itr)
         {
             Player* pPlayer = itr->getSource();
             if (!pPlayer || !pPlayer->IsWithinDistInMap(m_creature, 20.0f) || !pPlayer->HasAura(SPELL_WAITING_TO_RESURRECT))
@@ -83,7 +83,7 @@ struct MANGOS_DLL_DECL npc_spirit_guideAI : public ScriptedAI
         }
     }
 
-    void SpellHitTarget(Unit* pUnit, const SpellEntry* pSpellEntry)
+    void SpellHitTarget (Unit* pUnit, const SpellEntry* pSpellEntry)
     {
         if (pSpellEntry->Id == SPELL_SPIRIT_HEAL && pUnit->GetTypeId() == TYPEID_PLAYER
             && pUnit->HasAura(SPELL_WAITING_TO_RESURRECT))

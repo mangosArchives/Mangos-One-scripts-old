@@ -68,36 +68,36 @@ static const float aArchimondeSpawnLoc[4] = {5581.49f, -3445.63f, 1575.1f, 3.905
 
 class MANGOS_DLL_DECL instance_mount_hyjal : public ScriptedInstance
 {
-public:
-    instance_mount_hyjal(Map* pMap);
+    public:
+        instance_mount_hyjal(Map* pMap);
 
-    void Initialize();
-    bool IsEncounterInProgress() const;
+        void Initialize();
+        bool IsEncounterInProgress() const;
 
-    void OnPlayerEnter(Player* pPlayer);
+        void OnPlayerEnter(Player* pPlayer);
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
 
-    void OnCreatureEnterCombat(Creature* pCreature);
-    void OnCreatureEvade(Creature* pCreature);
-    void OnCreatureDeath(Creature* pCreature);
+        void OnCreatureEnterCombat(Creature* pCreature);
+        void OnCreatureEvade(Creature* pCreature);
+        void OnCreatureDeath(Creature* pCreature);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    const char* Save() { return m_strSaveData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strSaveData.c_str(); }
+        void Load(const char* chrIn);
 
-private:
-    void DoSpawnArchimonde();
+    private:
+        void DoSpawnArchimonde();
 
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strSaveData;
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strSaveData;
 
-    GuidList lAncientGemGUIDList;
+        GuidList lAncientGemGUIDList;
 
-    uint32 m_uiTrashCount;
+        uint32 m_uiTrashCount;
 };
 
 #endif

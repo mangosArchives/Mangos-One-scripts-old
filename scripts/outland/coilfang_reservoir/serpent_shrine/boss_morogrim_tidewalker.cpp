@@ -114,7 +114,7 @@ struct MANGOS_DLL_DECL boss_morogrim_tidewalkerAI : public ScriptedAI
 
     void KilledUnit(Unit* pVictim)
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_SLAY1, m_creature); break;
             case 1: DoScriptText(SAY_SLAY2, m_creature); break;
@@ -162,37 +162,35 @@ struct MANGOS_DLL_DECL boss_morogrim_tidewalkerAI : public ScriptedAI
             }
             else
             {
-                DoScriptText(urand(0, 1) ? SAY_SUMMON1 : SAY_SUMMON2, m_creature);
+                DoScriptText(urand(0,1) ? SAY_SUMMON1 : SAY_SUMMON2, m_creature);
 
                 //north
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_A6, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_A7, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_A8, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_A9, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_A10, true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_A6,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_A7,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_A8,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_A9,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_A10,true);
 
                 //south
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_B6, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_B7, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_B8, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_B9, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_MURLOC_B10, true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_B6,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_B7,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_B8,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_B9,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_MURLOC_B10,true);
 
                 DoScriptText(EMOTE_EARTHQUAKE, m_creature);
 
                 m_bEarthquake = false;
                 m_uiEarthquake_Timer = urand(40000, 45000);
             }
-        }
-        else m_uiEarthquake_Timer -= uiDiff;
+        }else m_uiEarthquake_Timer -= uiDiff;
 
         //m_uiTidalWave_Timer
         if (m_uiTidalWave_Timer < uiDiff)
         {
             DoCastSpellIfCan(m_creature->getVictim(), SPELL_TIDAL_WAVE);
             m_uiTidalWave_Timer = 20000;
-        }
-        else m_uiTidalWave_Timer -= uiDiff;
+        }else m_uiTidalWave_Timer -= uiDiff;
 
         if (!m_bPhase2)
         {
@@ -206,22 +204,21 @@ struct MANGOS_DLL_DECL boss_morogrim_tidewalkerAI : public ScriptedAI
 
                     if (pTarget && !pTarget->HasAuraType(SPELL_AURA_MOD_STUN))
                     {
-                        switch (i)
+                        switch(i)
                         {
-                            case 0: pTarget->CastSpell(pTarget, SPELL_WATERY_GRAVE_1, false); break;
-                            case 1: pTarget->CastSpell(pTarget, SPELL_WATERY_GRAVE_2, false); break;
-                            case 2: pTarget->CastSpell(pTarget, SPELL_WATERY_GRAVE_3, false); break;
-                            case 3: pTarget->CastSpell(pTarget, SPELL_WATERY_GRAVE_4, false); break;
+                            case 0: pTarget->CastSpell(pTarget,SPELL_WATERY_GRAVE_1,false); break;
+                            case 1: pTarget->CastSpell(pTarget,SPELL_WATERY_GRAVE_2,false); break;
+                            case 2: pTarget->CastSpell(pTarget,SPELL_WATERY_GRAVE_3,false); break;
+                            case 3: pTarget->CastSpell(pTarget,SPELL_WATERY_GRAVE_4,false); break;
                         }
                     }
                 }
 
-                DoScriptText(urand(0, 1) ? SAY_SUMMON_BUBL1 : SAY_SUMMON_BUBL2, m_creature);
+                DoScriptText(urand(0,1) ? SAY_SUMMON_BUBL1 : SAY_SUMMON_BUBL2, m_creature);
                 DoScriptText(EMOTE_WATERY_GRAVE, m_creature);
 
                 m_uiWateryGrave_Timer = 30000;
-            }
-            else m_uiWateryGrave_Timer -= uiDiff;
+            }else m_uiWateryGrave_Timer -= uiDiff;
 
             //Start Phase2
             if (m_creature->GetHealthPercent() < 25.0f)
@@ -234,14 +231,13 @@ struct MANGOS_DLL_DECL boss_morogrim_tidewalkerAI : public ScriptedAI
             {
                 DoScriptText(EMOTE_WATERY_GLOBULES, m_creature);
 
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_GLOBULE_1, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_GLOBULE_2, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_GLOBULE_3, true);
-                m_creature->CastSpell(m_creature, SPELL_SUMMON_GLOBULE_4, false);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_GLOBULE_1,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_GLOBULE_2,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_GLOBULE_3,true);
+                m_creature->CastSpell(m_creature,SPELL_SUMMON_GLOBULE_4,false);
 
                 m_uiWateryGlobules_Timer = 25000;
-            }
-            else m_uiWateryGlobules_Timer -= uiDiff;
+            }else m_uiWateryGlobules_Timer -= uiDiff;
         }
 
         DoMeleeAttackIfReady();
@@ -285,15 +281,14 @@ struct MANGOS_DLL_DECL mob_water_globuleAI : public ScriptedAI
         {
             if (m_creature->CanReachWithMeleeAttack(m_creature->getVictim()))
             {
-                m_creature->DealDamage(m_creature->getVictim(), 4000 + rand() % 2000, NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_FROST, NULL, false);
+                m_creature->DealDamage(m_creature->getVictim(), 4000+rand()%2000, NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_FROST, NULL, false);
 
                 //despawn
                 m_creature->ForcedDespawn();
                 return;
             }
             m_uiCheck_Timer = 500;
-        }
-        else m_uiCheck_Timer -= uiDiff;
+        }else m_uiCheck_Timer -= uiDiff;
 
         //do NOT deal any melee damage to the target.
     }
@@ -301,11 +296,11 @@ struct MANGOS_DLL_DECL mob_water_globuleAI : public ScriptedAI
 
 CreatureAI* GetAI_boss_morogrim_tidewalker(Creature* pCreature)
 {
-    return new boss_morogrim_tidewalkerAI(pCreature);
+    return new boss_morogrim_tidewalkerAI (pCreature);
 }
 CreatureAI* GetAI_mob_water_globule(Creature* pCreature)
 {
-    return new mob_water_globuleAI(pCreature);
+    return new mob_water_globuleAI (pCreature);
 }
 
 void AddSC_boss_morogrim_tidewalker()

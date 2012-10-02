@@ -59,7 +59,7 @@ struct MANGOS_DLL_DECL npc_forest_frogAI : public ScriptedAI
         if (m_pInstance)
         {
             uint32 cEntry = 0;
-            switch (urand(0, 10))
+            switch(urand(0, 10))
             {
                 case 0: cEntry = 24024; break;              //Kraz      // wrong here?
                 case 1: cEntry = 24397; break;              //Mannuth
@@ -86,10 +86,10 @@ struct MANGOS_DLL_DECL npc_forest_frogAI : public ScriptedAI
                 m_creature->UpdateEntry(cEntry);
 
             if (cEntry == 24408)
-                m_pInstance->SetData(TYPE_RAND_VENDOR_1, DONE);
+                m_pInstance->SetData(TYPE_RAND_VENDOR_1,DONE);
 
             if (cEntry == 24409)
-                m_pInstance->SetData(TYPE_RAND_VENDOR_2, DONE);
+                m_pInstance->SetData(TYPE_RAND_VENDOR_2,DONE);
         }
     }
 
@@ -140,7 +140,7 @@ struct MANGOS_DLL_DECL npc_harrison_jones_zaAI : public npc_escortAI
         if (!m_pInstance)
             return;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 1:
                 DoScriptText(SAY_AT_GONG, m_creature);
@@ -187,7 +187,7 @@ bool GossipHello_npc_harrison_jones_za(Player* pPlayer, Creature* pCreature)
         pPlayer->PrepareQuestMenu(pCreature->GetObjectGuid());
 
     if (pInstance && pInstance->GetData(TYPE_EVENT_RUN) == NOT_STARTED)
-        pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_BEGIN, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_BEGIN, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
 
     pPlayer->SEND_GOSSIP_MENU(pPlayer->GetGossipTextId(pCreature), pCreature->GetObjectGuid());
     return true;
@@ -195,7 +195,7 @@ bool GossipHello_npc_harrison_jones_za(Player* pPlayer, Creature* pCreature)
 
 bool GossipSelect_npc_harrison_jones_za(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
 {
-    if (uiAction == GOSSIP_ACTION_INFO_DEF + 1)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF+1)
     {
         if (npc_harrison_jones_zaAI* pHarrisonAI = dynamic_cast<npc_harrison_jones_zaAI*>(pCreature->AI()))
             pHarrisonAI->StartEvent();

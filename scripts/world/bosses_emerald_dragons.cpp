@@ -424,7 +424,7 @@ struct MANGOS_DLL_DECL boss_taerarAI : public boss_emerald_dragonAI
         if (m_uiShadesTimeoutTimer)
         {
             if (m_uiShadesTimeoutTimer <= uiDiff)
-                DoUnbanishBoss();
+               DoUnbanishBoss();
             else
                 m_uiShadesTimeoutTimer -= uiDiff;
 
@@ -546,7 +546,7 @@ struct MANGOS_DLL_DECL boss_ysondreAI : public boss_emerald_dragonAI
     {
         DoScriptText(SAY_SUMMON_DRUIDS, m_creature);
 
-        for (int i = 0; i < 10; ++i)
+        for(int i = 0; i < 10; ++i)
             DoCastSpellIfCan(m_creature, SPELL_SUMMON_DRUIDS, CAST_TRIGGERED);
 
         return true;

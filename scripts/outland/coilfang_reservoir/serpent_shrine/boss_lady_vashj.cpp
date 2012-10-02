@@ -89,8 +89,8 @@ const float afElementPos[8][4] =
     {96.0f , -986.4f , 21.4f, 2.5f},
     {54.4f , -1010.6f, 22.0f, 1.8f},
     {9.8f  , -1012.0f, 21.7f, 1.4f},
-    { -35.0f, -987.6f , 21.5f, 0.8f},
-    { -58.9f, -901.6f , 21.5f, 6.0f}
+    {-35.0f, -987.6f , 21.5f, 0.8f},
+    {-58.9f, -901.6f , 21.5f, 6.0f}
 };
 
 const float afCoilfangElitePos[3][4] =
@@ -104,7 +104,7 @@ const float afCoilfangStriderPos[3][4] =
 {
     {66.427f, -948.778f, 41.262245f, 2.584f},
     {7.513f , -959.538f, 41.300422f, 1.0346f},
-    { -12.843f, -907.798f, 41.239620f, 6.087f}
+    {-12.843f, -907.798f, 41.239620f, 6.087f}
 };
 
 const float afShieldGeneratorChannelPos[4][4] =
@@ -175,7 +175,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
 
     void RemoveAllShieldGenerators()
     {
-        for (uint8 i = 0; i < MAX_SHIELD_GEN; ++i)
+        for(uint8 i = 0; i < MAX_SHIELD_GEN; ++i)
         {
             if (Creature* pTemp = m_creature->GetMap()->GetCreature(m_auiShieldGeneratorChannel[i]))
             {
@@ -189,7 +189,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
 
     void Aggro(Unit* pWho)
     {
-        switch (urand(0, 3))
+        switch(urand(0, 3))
         {
             case 0: DoScriptText(SAY_AGGRO1, m_creature); break;
             case 1: DoScriptText(SAY_AGGRO2, m_creature); break;
@@ -210,7 +210,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
         {
             m_creature->RemoveAllAuras();
 
-            for (uint8 i = 0; i < MAX_SHIELD_GEN; ++i)
+            for(uint8 i = 0; i < MAX_SHIELD_GEN; ++i)
             {
                 if (Creature* pCreature = m_creature->SummonCreature(NPC_SHIELD_GENERATOR, afShieldGeneratorChannelPos[i][0],  afShieldGeneratorChannelPos[i][1],  afShieldGeneratorChannelPos[i][2],  afShieldGeneratorChannelPos[i][3], TEMPSUMMON_CORPSE_DESPAWN, 0))
                     m_auiShieldGeneratorChannel[i] = pCreature->GetObjectGuid();
@@ -237,7 +237,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                 pSummoned->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
             }
 
-            pSummoned->CastSpell(m_creature, SPELL_MAGIC_BARRIER, true);
+            pSummoned->CastSpell(m_creature,SPELL_MAGIC_BARRIER,true);
         }
     }
 
@@ -253,7 +253,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
 
     void KilledUnit(Unit* pVictim)
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_SLAY1, m_creature); break;
             case 1: DoScriptText(SAY_SLAY2, m_creature); break;
@@ -273,10 +273,10 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
     {
         //Shoot: Used in m_uiPhases 1 and 3 after Entangle or while having nobody in melee range. A shot that hits her target for 4097-5543 Physical damage.
         //Multishot: Used in m_uiPhases 1 and 3 after Entangle or while having nobody in melee range. A shot that hits 1 person and 4 people around him for 6475-7525 physical damage.
-        DoCastSpellIfCan(m_creature->getVictim(), urand(0, 1) ? SPELL_SHOOT : SPELL_MULTI_SHOT);
+        DoCastSpellIfCan(m_creature->getVictim(), urand(0,1) ? SPELL_SHOOT : SPELL_MULTI_SHOT);
 
         if (urand(0, 2))
-            DoScriptText(urand(0, 1) ? SAY_BOWSHOT1 : SAY_BOWSHOT2, m_creature);
+            DoScriptText(urand(0,1) ? SAY_BOWSHOT1 : SAY_BOWSHOT2, m_creature);
     }
 
     void UpdateAI(const uint32 uiDiff)
@@ -294,8 +294,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                 DoCastSpellIfCan(m_creature->getVictim(), SPELL_SHOCK_BLAST);
 
                 m_uiShockBlast_Timer = urand(1000, 15000);  //random cooldown
-            }
-            else m_uiShockBlast_Timer -= uiDiff;
+            }else m_uiShockBlast_Timer -= uiDiff;
 
             //m_uiStaticCharge_Timer
             if (m_uiStaticCharge_Timer < uiDiff)
@@ -308,8 +307,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                     DoCastSpellIfCan(pTarget, SPELL_STATIC_CHARGE_TRIGGER);
 
                 m_uiStaticCharge_Timer = urand(10000, 30000);
-            }
-            else m_uiStaticCharge_Timer -= uiDiff;
+            }else m_uiStaticCharge_Timer -= uiDiff;
 
             //m_uiEntangle_Timer
             if (m_uiEntangle_Timer < uiDiff)
@@ -327,8 +325,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                     m_bEntangle = false;
                     m_uiEntangle_Timer = urand(20000, 25000);
                 }
-            }
-            else m_uiEntangle_Timer -= uiDiff;
+            }else m_uiEntangle_Timer -= uiDiff;
 
             //m_uiPhase 1
             if (m_uiPhase == PHASE_1)
@@ -358,16 +355,15 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                 if (m_uiSummonSporebat_Timer < uiDiff)
                 {
                     m_creature->SummonCreature(NPC_TOXIC_SPOREBAT,
-                                               afSporebatPos[0], afSporebatPos[1], afSporebatPos[2], afSporebatPos[3],
-                                               TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
+                        afSporebatPos[0], afSporebatPos[1], afSporebatPos[2], afSporebatPos[3],
+                        TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
 
                     //summon sporebats faster and faster
                     if (m_uiSummonSporebat_StaticTimer > 1000)
                         m_uiSummonSporebat_StaticTimer -= 1000;
 
                     m_uiSummonSporebat_Timer = m_uiSummonSporebat_StaticTimer;
-                }
-                else m_uiSummonSporebat_Timer -= uiDiff;
+                }else m_uiSummonSporebat_Timer -= uiDiff;
             }
 
             //Melee attack
@@ -381,8 +377,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                     CastShootOrMultishot();
 
                 m_uiCheck_Timer = 1500;
-            }
-            else m_uiCheck_Timer -= uiDiff;
+            }else m_uiCheck_Timer -= uiDiff;
         }
         //m_uiPhase PHASE_2
         else
@@ -399,8 +394,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                 DoCastSpellIfCan(pTarget, SPELL_FORKED_LIGHTNING);
 
                 m_uiForkedLightning_Timer = urand(3000, 9000);
-            }
-            else m_uiForkedLightning_Timer -= uiDiff;
+            }else m_uiForkedLightning_Timer -= uiDiff;
 
             //NPC_ENCHANTED_ELEMENTAL
             if (m_uiEnchantedElemental_Timer < uiDiff)
@@ -414,49 +408,45 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                     ++m_uiEnchantedElemental_Pos;
 
                 m_uiEnchantedElemental_Timer = urand(10000, 15000);
-            }
-            else m_uiEnchantedElemental_Timer -= uiDiff;
+            }else m_uiEnchantedElemental_Timer -= uiDiff;
 
             //NPC_TAINTED_ELEMENTAL
             if (m_uiTaintedElemental_Timer < uiDiff)
             {
-                uint32 uiPos = urand(0, 7);
+                uint32 uiPos = urand(0,7);
 
                 m_creature->SummonCreature(NPC_TAINTED_ELEMENTAL,
-                                           afElementPos[uiPos][0], afElementPos[uiPos][1], afElementPos[uiPos][2], afElementPos[uiPos][3],
-                                           TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 15000);
+                    afElementPos[uiPos][0], afElementPos[uiPos][1], afElementPos[uiPos][2], afElementPos[uiPos][3],
+                    TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 15000);
 
                 m_uiTaintedElemental_Timer = 120000;
-            }
-            else m_uiTaintedElemental_Timer -= uiDiff;
+            }else m_uiTaintedElemental_Timer -= uiDiff;
 
             //NPC_COILFANG_ELITE
             if (m_uiCoilfangElite_Timer < uiDiff)
             {
-                uint32 uiPos = urand(0, 2);
+                uint32 uiPos = urand(0,2);
 
                 m_creature->SummonCreature(NPC_COILFANG_ELITE,
-                                           afCoilfangElitePos[uiPos][0], afCoilfangElitePos[uiPos][1], afCoilfangElitePos[uiPos][2], afCoilfangElitePos[uiPos][3],
-                                           TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 45000);
+                    afCoilfangElitePos[uiPos][0], afCoilfangElitePos[uiPos][1], afCoilfangElitePos[uiPos][2], afCoilfangElitePos[uiPos][3],
+                    TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 45000);
 
                 //wowwiki says 50 seconds, bosskillers says 45
                 m_uiCoilfangElite_Timer = urand(45000, 50000);
-            }
-            else m_uiCoilfangElite_Timer -= uiDiff;
+            }else m_uiCoilfangElite_Timer -= uiDiff;
 
             //NPC_COILFANG_STRIDER
             if (m_uiCoilfangStrider_Timer < uiDiff)
             {
-                uint32 uiPos = urand(0, 2);
+                uint32 uiPos = urand(0,2);
 
                 m_creature->SummonCreature(NPC_COILFANG_STRIDER,
-                                           afCoilfangStriderPos[uiPos][0], afCoilfangStriderPos[uiPos][1], afCoilfangStriderPos[uiPos][2], afCoilfangStriderPos[uiPos][3],
-                                           TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
+                    afCoilfangStriderPos[uiPos][0], afCoilfangStriderPos[uiPos][1], afCoilfangStriderPos[uiPos][2], afCoilfangStriderPos[uiPos][3],
+                    TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
 
                 //wowwiki says 60 seconds, bosskillers says 60-70
                 m_uiCoilfangStrider_Timer = urand(60000, 70000);
-            }
-            else m_uiCoilfangStrider_Timer -= uiDiff;
+            }else m_uiCoilfangStrider_Timer -= uiDiff;
 
             //m_uiCheck_Timer
             if (m_uiCheck_Timer < uiDiff)
@@ -467,7 +457,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                     DoScriptText(SAY_PHASE3, m_creature);
 
                     //set life 50%, not correct. Must remove 5% for each generator switched off
-                    m_creature->SetHealth(m_creature->GetMaxHealth() / 2);
+                    m_creature->SetHealth(m_creature->GetMaxHealth()/2);
 
                     //m_creature->RemoveAurasDueToSpell(SPELL_MAGIC_BARRIER);
 
@@ -480,8 +470,7 @@ struct MANGOS_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                     m_uiPhase = PHASE_3;
                 }
                 m_uiCheck_Timer = 1000;
-            }
-            else m_uiCheck_Timer -= uiDiff;
+            }else m_uiCheck_Timer -= uiDiff;
         }
     }
 };
@@ -557,8 +546,7 @@ struct MANGOS_DLL_DECL mob_tainted_elementalAI : public ScriptedAI
                 DoCastSpellIfCan(pTarget, SPELL_POISON_BOLT);
 
             m_uiPoisonBolt_Timer = urand(5000, 10000);
-        }
-        else m_uiPoisonBolt_Timer -= uiDiff;
+        }else m_uiPoisonBolt_Timer -= uiDiff;
     }
 };
 
@@ -604,11 +592,11 @@ bool ItemUse_item_tainted_core(Player* pPlayer, Item* pItem, SpellCastTargets co
 
     if (pVashjAI && pVashjAI->m_uiPhase == 2)
     {
-        if (sctTargets.getGOTarget() && sctTargets.getGOTarget()->GetTypeId() == TYPEID_GAMEOBJECT)
+        if (sctTargets.getGOTarget() && sctTargets.getGOTarget()->GetTypeId()==TYPEID_GAMEOBJECT)
         {
             uint32 uiIdentifier;
             uint8 uiChannelIdentifier;
-            switch (sctTargets.getGOTarget()->GetEntry())
+            switch(sctTargets.getGOTarget()->GetEntry())
             {
                 case 185052:
                     uiIdentifier = TYPE_SHIELDGENERATOR1;

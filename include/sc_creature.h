@@ -57,184 +57,184 @@ enum SCEquip
 // Only list them here again to ensure that the interface between SD2 and the core is not changed unnoticed
 struct MANGOS_DLL_DECL ScriptedAI : public CreatureAI
 {
-public:
-    explicit ScriptedAI(Creature* pCreature);
-    ~ScriptedAI() {}
+    public:
+        explicit ScriptedAI(Creature* pCreature);
+        ~ScriptedAI() {}
 
-    // *************
-    // CreatureAI Functions
-    // *************
+        // *************
+        // CreatureAI Functions
+        // *************
 
-    // == Information about AI ========================
-    // Get information about the AI
-    void GetAIInformation(ChatHandler& reader) override;
+        // == Information about AI ========================
+        // Get information about the AI
+        void GetAIInformation(ChatHandler& reader) override;
 
-    // == Reactions At =================================
+        // == Reactions At =================================
 
-    // Called if IsVisible(Unit* pWho) is true at each relative pWho move
-    void MoveInLineOfSight(Unit* pWho) override;
+        // Called if IsVisible(Unit* pWho) is true at each relative pWho move
+        void MoveInLineOfSight(Unit* pWho) override;
 
-    // Called for reaction at enter to combat if not in combat yet (enemy can be NULL)
-    void EnterCombat(Unit* pEnemy) override;
+        // Called for reaction at enter to combat if not in combat yet (enemy can be NULL)
+        void EnterCombat(Unit* pEnemy) override;
 
-    // Called at stoping attack by any attacker
-    void EnterEvadeMode() override;
+        // Called at stoping attack by any attacker
+        void EnterEvadeMode() override;
 
-    // Called when reached home after MoveTargetHome (in evade)
-    void JustReachedHome() override {}
+        // Called when reached home after MoveTargetHome (in evade)
+        void JustReachedHome() override {}
 
-    // Called at any heal cast/item used (call non implemented in mangos)
-    // void HealBy(Unit* pHealer, uint32 uiAmountHealed) override {}
+        // Called at any heal cast/item used (call non implemented in mangos)
+        // void HealBy(Unit* pHealer, uint32 uiAmountHealed) override {}
 
-    // Called at any Damage to any victim (before damage apply)
-    void DamageDeal(Unit* pDoneTo, uint32& uiDamage) override {}
+        // Called at any Damage to any victim (before damage apply)
+        void DamageDeal(Unit* pDoneTo, uint32& uiDamage) override {}
 
-    // Called at any Damage from any attacker (before damage apply)
-    void DamageTaken(Unit* pDealer, uint32& uiDamage) override {}
+        // Called at any Damage from any attacker (before damage apply)
+        void DamageTaken(Unit* pDealer, uint32& uiDamage) override {}
 
-    // Called at creature death
-    void JustDied(Unit* pKiller) override {}
+        // Called at creature death
+        void JustDied(Unit* pKiller) override {}
 
-    // Called when the corpse of this creature gets removed
-    void CorpseRemoved(uint32& uiRespawnDelay) override {}
+        // Called when the corpse of this creature gets removed
+        void CorpseRemoved(uint32& uiRespawnDelay) override {}
 
-    // Called when a summoned creature is killed
-    void SummonedCreatureJustDied(Creature* pSummoned) {}
+        // Called when a summoned creature is killed
+        void SummonedCreatureJustDied(Creature* pSummoned) {}
 
-    // Called at creature killing another unit
-    void KilledUnit(Unit* pVictim) override {}
+        // Called at creature killing another unit
+        void KilledUnit(Unit* pVictim) override {}
 
-    // Called when owner of m_creature (if m_creature is PROTECTOR_PET) kills a unit
-    void OwnerKilledUnit(Unit* pVictim) override {}
+        // Called when owner of m_creature (if m_creature is PROTECTOR_PET) kills a unit
+        void OwnerKilledUnit(Unit* pVictim) override {}
 
-    // Called when the creature successfully summons a creature
-    void JustSummoned(Creature* pSummoned) override {}
+        // Called when the creature successfully summons a creature
+        void JustSummoned(Creature* pSummoned) override {}
 
-    // Called when the creature successfully summons a gameobject
-    void JustSummoned(GameObject* pGo) override {}
+        // Called when the creature successfully summons a gameobject
+        void JustSummoned(GameObject* pGo) override {}
 
-    // Called when a summoned creature gets TemporarySummon::UnSummon ed
-    void SummonedCreatureDespawn(Creature* pSummoned) override {}
+        // Called when a summoned creature gets TemporarySummon::UnSummon ed
+        void SummonedCreatureDespawn(Creature* pSummoned) override {}
 
-    // Called when hit by a spell
-    void SpellHit(Unit* pCaster, const SpellEntry* pSpell) override {}
+        // Called when hit by a spell
+        void SpellHit(Unit* pCaster, const SpellEntry* pSpell) override {}
 
-    // Called when spell hits creature's target
-    void SpellHitTarget(Unit* pTarget, const SpellEntry* pSpell) override {}
+        // Called when spell hits creature's target
+        void SpellHitTarget(Unit* pTarget, const SpellEntry* pSpell) override {}
 
-    // Called when the creature is target of hostile action: swing, hostile spell landed, fear/etc)
-    /// This will by default result in reattacking, if the creature has no victim
-    void AttackedBy(Unit* pAttacker) override { CreatureAI::AttackedBy(pAttacker); }
+        // Called when the creature is target of hostile action: swing, hostile spell landed, fear/etc)
+        /// This will by default result in reattacking, if the creature has no victim
+        void AttackedBy(Unit* pAttacker) override { CreatureAI::AttackedBy(pAttacker); }
 
-    // Called when creature is respawned (for reseting variables)
-    void JustRespawned() override;
+        // Called when creature is respawned (for reseting variables)
+        void JustRespawned() override;
 
-    // Called at waypoint reached or point movement finished
-    void MovementInform(uint32 uiMovementType, uint32 uiData) override {}
+        // Called at waypoint reached or point movement finished
+        void MovementInform(uint32 uiMovementType, uint32 uiData) override {}
 
-    // Called if a temporary summoned of m_creature reach a move point
-    void SummonedMovementInform(Creature* pSummoned, uint32 uiMotionType, uint32 uiData) override {}
+        // Called if a temporary summoned of m_creature reach a move point
+        void SummonedMovementInform(Creature* pSummoned, uint32 uiMotionType, uint32 uiData) override {}
 
-    // Called at text emote receive from player
-    void ReceiveEmote(Player* pPlayer, uint32 uiEmote) override {}
+        // Called at text emote receive from player
+        void ReceiveEmote(Player* pPlayer, uint32 uiEmote) override {}
 
-    // Called at each attack of m_creature by any victim
-    void AttackStart(Unit* pWho) override;
+        // Called at each attack of m_creature by any victim
+        void AttackStart(Unit* pWho) override;
 
-    // Called at World update tick
-    void UpdateAI(const uint32) override;
+        // Called at World update tick
+        void UpdateAI(const uint32) override;
 
-    // == State checks =================================
+        // == State checks =================================
 
-    // Check if unit is visible for MoveInLineOfSight
-    bool IsVisible(Unit* pWho) const override;
+        // Check if unit is visible for MoveInLineOfSight
+        bool IsVisible(Unit* pWho) const override;
 
-    // Called when victim entered water and creature can not enter water
-    bool canReachByRangeAttack(Unit* pWho) override { return CreatureAI::canReachByRangeAttack(pWho); }
+        // Called when victim entered water and creature can not enter water
+        bool canReachByRangeAttack(Unit* pWho) override { return CreatureAI::canReachByRangeAttack(pWho); }
 
-    // *************
-    // Variables
-    // *************
+        // *************
+        // Variables
+        // *************
 
-    // *************
-    // Pure virtual functions
-    // *************
+        // *************
+        // Pure virtual functions
+        // *************
 
-    /**
-     * This is a SD2 internal function, that every AI must implement
-     * Usally used to reset combat variables
-     * Called by default on creature evade and respawn
-     * In most scripts also called in the constructor of the AI
-     */
-    virtual void Reset() = 0;
+        /**
+         * This is a SD2 internal function, that every AI must implement
+         * Usally used to reset combat variables
+         * Called by default on creature evade and respawn
+         * In most scripts also called in the constructor of the AI
+         */
+        virtual void Reset() = 0;
 
-    /// Called at creature EnterCombat with an enemy
-    /**
-     * This is a SD2 internal function
-     * Called by default on creature EnterCombat with an enemy
-     */
-    virtual void Aggro(Unit*) {}
+        /// Called at creature EnterCombat with an enemy
+        /**
+         * This is a SD2 internal function
+         * Called by default on creature EnterCombat with an enemy
+         */
+        virtual void Aggro(Unit*) {}
 
-    // *************
-    // AI Helper Functions
-    // *************
+        // *************
+        // AI Helper Functions
+        // *************
 
-    // Start movement toward victim
-    void DoStartMovement(Unit* pVictim, float fDistance = 0, float fAngle = 0);
+        // Start movement toward victim
+        void DoStartMovement(Unit* pVictim, float fDistance = 0, float fAngle = 0);
 
-    // Start no movement on victim
-    void DoStartNoMovement(Unit* pVictim);
+        // Start no movement on victim
+        void DoStartNoMovement(Unit* pVictim);
 
-    // Stop attack of current victim
-    void DoStopAttack();
+        // Stop attack of current victim
+        void DoStopAttack();
 
-    // Cast spell by Id
-    void DoCast(Unit* pTarget, uint32 uiSpellId, bool bTriggered = false);
+        // Cast spell by Id
+        void DoCast(Unit* pTarget, uint32 uiSpellId, bool bTriggered = false);
 
-    // Cast spell by spell info
-    void DoCastSpell(Unit* pTarget, SpellEntry const* pSpellInfo, bool bTriggered = false);
+        // Cast spell by spell info
+        void DoCastSpell(Unit* pTarget, SpellEntry const* pSpellInfo, bool bTriggered = false);
 
-    // Plays a sound to all nearby players
-    void DoPlaySoundToSet(WorldObject* pSource, uint32 uiSoundId);
+        // Plays a sound to all nearby players
+        void DoPlaySoundToSet(WorldObject* pSource, uint32 uiSoundId);
 
-    // Drops all threat to 0%. Does not remove enemies from the threat list
-    void DoResetThreat();
+        // Drops all threat to 0%. Does not remove enemies from the threat list
+        void DoResetThreat();
 
-    // Teleports a player without dropping threat (only teleports to same map)
-    void DoTeleportPlayer(Unit* pUnit, float fX, float fY, float fZ, float fO);
+        // Teleports a player without dropping threat (only teleports to same map)
+        void DoTeleportPlayer(Unit* pUnit, float fX, float fY, float fZ, float fO);
 
-    // Returns friendly unit with the most amount of hp missing from max hp
-    Unit* DoSelectLowestHpFriendly(float fRange, uint32 uiMinHPDiff = 1);
+        // Returns friendly unit with the most amount of hp missing from max hp
+        Unit* DoSelectLowestHpFriendly(float fRange, uint32 uiMinHPDiff = 1);
 
-    // Returns a list of friendly CC'd units within range
-    std::list<Creature*> DoFindFriendlyCC(float fRange);
+        // Returns a list of friendly CC'd units within range
+        std::list<Creature*> DoFindFriendlyCC(float fRange);
 
-    // Returns a list of all friendly units missing a specific buff within range
-    std::list<Creature*> DoFindFriendlyMissingBuff(float fRange, uint32 uiSpellId);
+        // Returns a list of all friendly units missing a specific buff within range
+        std::list<Creature*> DoFindFriendlyMissingBuff(float fRange, uint32 uiSpellId);
 
-    // Return a player with at least minimumRange from m_creature
-    Player* GetPlayerAtMinimumRange(float fMinimumRange);
+        // Return a player with at least minimumRange from m_creature
+        Player* GetPlayerAtMinimumRange(float fMinimumRange);
 
-    // Spawns a creature relative to m_creature
-    Creature* DoSpawnCreature(uint32 uiId, float fX, float fY, float fZ, float fAngle, uint32 uiType, uint32 uiDespawntime);
+        // Spawns a creature relative to m_creature
+        Creature* DoSpawnCreature(uint32 uiId, float fX, float fY, float fZ, float fAngle, uint32 uiType, uint32 uiDespawntime);
 
-    // Returns spells that meet the specified criteria from the creatures spell list
-    SpellEntry const* SelectSpell(Unit* pTarget, int32 uiSchool, int32 iMechanic, SelectTarget selectTargets, uint32 uiPowerCostMin, uint32 uiPowerCostMax, float fRangeMin, float fRangeMax, SelectEffect selectEffect);
+        // Returns spells that meet the specified criteria from the creatures spell list
+        SpellEntry const* SelectSpell(Unit* pTarget, int32 uiSchool, int32 iMechanic, SelectTarget selectTargets, uint32 uiPowerCostMin, uint32 uiPowerCostMax, float fRangeMin, float fRangeMax, SelectEffect selectEffect);
 
-    // Checks if you can cast the specified spell
-    bool CanCast(Unit* pTarget, SpellEntry const* pSpell, bool bTriggered = false);
+        // Checks if you can cast the specified spell
+        bool CanCast(Unit* pTarget, SpellEntry const* pSpell, bool bTriggered = false);
 
-    void SetEquipmentSlots(bool bLoadDefault, int32 iMainHand = EQUIP_NO_CHANGE, int32 iOffHand = EQUIP_NO_CHANGE, int32 iRanged = EQUIP_NO_CHANGE);
+        void SetEquipmentSlots(bool bLoadDefault, int32 iMainHand = EQUIP_NO_CHANGE, int32 iOffHand = EQUIP_NO_CHANGE, int32 iRanged = EQUIP_NO_CHANGE);
 
-    // Generally used to control if MoveChase() is to be used or not in AttackStart(). Some creatures do not chase victims
-    void SetCombatMovement(bool bCombatMove);
-    bool IsCombatMovement() { return m_bCombatMovement; }
+        // Generally used to control if MoveChase() is to be used or not in AttackStart(). Some creatures do not chase victims
+        void SetCombatMovement(bool bCombatMove);
+        bool IsCombatMovement() { return m_bCombatMovement; }
 
-    bool EnterEvadeIfOutOfCombatArea(const uint32 uiDiff);
+        bool EnterEvadeIfOutOfCombatArea(const uint32 uiDiff);
 
-private:
-    bool   m_bCombatMovement;
-    uint32 m_uiEvadeCheckCooldown;
+    private:
+        bool   m_bCombatMovement;
+        uint32 m_uiEvadeCheckCooldown;
 };
 
 struct MANGOS_DLL_DECL Scripted_NoMovementAI : public ScriptedAI

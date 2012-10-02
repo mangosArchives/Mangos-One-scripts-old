@@ -94,43 +94,43 @@ enum
 
 class MANGOS_DLL_DECL instance_dire_maul : public ScriptedInstance
 {
-public:
-    instance_dire_maul(Map* pMap);
-    ~instance_dire_maul() {}
+    public:
+        instance_dire_maul(Map* pMap);
+        ~instance_dire_maul() {}
 
-    void Initialize();
+        void Initialize();
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    void OnCreatureEnterCombat(Creature* pCreature);
-    void OnCreatureDeath(Creature* pCreature);
+        void OnCreatureEnterCombat(Creature* pCreature);
+        void OnCreatureDeath(Creature* pCreature);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-protected:
-    bool CheckAllGeneratorsDestroyed();
-    void ProcessForceFieldOpening();
-    void SortPylonGuards();
-    void PylonGuardJustDied(Creature* pCreature);
+    protected:
+        bool CheckAllGeneratorsDestroyed();
+        void ProcessForceFieldOpening();
+        void SortPylonGuards();
+        void PylonGuardJustDied(Creature* pCreature);
 
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    // East
-    bool m_bWallDestroyed;
-    GuidList m_lFelvineShardGUIDs;
+        // East
+        bool m_bWallDestroyed;
+        GuidList m_lFelvineShardGUIDs;
 
-    // West
-    ObjectGuid m_aCrystalGeneratorGuid[MAX_GENERATORS];
+        // West
+        ObjectGuid m_aCrystalGeneratorGuid[MAX_GENERATORS];
 
-    GuidList m_luiHighborneSummonerGUIDs;
-    GuidList m_lGeneratorGuardGUIDs;
-    std::set<uint32> m_sSortedGeneratorGuards[MAX_GENERATORS];
+        GuidList m_luiHighborneSummonerGUIDs;
+        GuidList m_lGeneratorGuardGUIDs;
+        std::set<uint32> m_sSortedGeneratorGuards[MAX_GENERATORS];
 };
 
 #endif

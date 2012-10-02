@@ -47,7 +47,7 @@ struct MANGOS_DLL_DECL npc_ragged_johnAI : public ScriptedAI
         {
             if (who->GetTypeId() == TYPEID_PLAYER && m_creature->IsWithinDistInMap(who, 15) && who->isInAccessablePlaceFor(m_creature))
             {
-                DoCastSpellIfCan(who, 16472);
+                DoCastSpellIfCan(who,16472);
                 ((Player*)who)->AreaExploredOrEventHappens(4866);
             }
         }
@@ -86,7 +86,7 @@ bool GossipHello_npc_ragged_john(Player* pPlayer, Creature* pCreature)
 
 bool GossipSelect_npc_ragged_john(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
 {
-    switch (uiAction)
+    switch(uiAction)
     {
         case GOSSIP_ACTION_INFO_DEF:
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "So what did you do?", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
@@ -304,7 +304,7 @@ struct MANGOS_DLL_DECL npc_grark_lorkrubAI : public npc_escortAI, private Dialog
 
     void JustDidDialogueStep(int32 iEntry)
     {
-        switch (iEntry)
+        switch(iEntry)
         {
             case SAY_LEXLORT_1:
                 m_creature->SetStandState(UNIT_STAND_STATE_KNEEL);

@@ -90,8 +90,8 @@ struct MANGOS_DLL_DECL boss_emperor_dagran_thaurissanAI : public ScriptedAI
 
         if (m_uiHandOfThaurissan_Timer < uiDiff)
         {
-            if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
-                DoCastSpellIfCan(pTarget, SPELL_HANDOFTHAURISSAN);
+            if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM,0))
+                DoCastSpellIfCan(pTarget,SPELL_HANDOFTHAURISSAN);
 
             //3 Hands of Thaurissan will be casted
             //if (m_uiCounter < 3)
@@ -101,8 +101,8 @@ struct MANGOS_DLL_DECL boss_emperor_dagran_thaurissanAI : public ScriptedAI
             //}
             //else
             //{
-            m_uiHandOfThaurissan_Timer = 5000;
-            //m_uiCounter = 0;
+                m_uiHandOfThaurissan_Timer = 5000;
+                //m_uiCounter = 0;
             //}
         }
         else
@@ -111,7 +111,7 @@ struct MANGOS_DLL_DECL boss_emperor_dagran_thaurissanAI : public ScriptedAI
         //AvatarOfFlame_Timer
         if (m_uiAvatarOfFlame_Timer < uiDiff)
         {
-            DoCastSpellIfCan(m_creature->getVictim(), SPELL_AVATAROFFLAME);
+            DoCastSpellIfCan(m_creature->getVictim(),SPELL_AVATAROFFLAME);
             m_uiAvatarOfFlame_Timer = 18000;
         }
         else
@@ -199,7 +199,7 @@ struct MANGOS_DLL_DECL boss_moira_bronzebeardAI : public ScriptedAI
         //MindBlast_Timer
         if (m_uiMindBlast_Timer < uiDiff)
         {
-            DoCastSpellIfCan(m_creature->getVictim(), SPELL_MINDBLAST);
+            DoCastSpellIfCan(m_creature->getVictim(),SPELL_MINDBLAST);
             m_uiMindBlast_Timer = 14000;
         }
         else
@@ -208,7 +208,7 @@ struct MANGOS_DLL_DECL boss_moira_bronzebeardAI : public ScriptedAI
         //ShadowWordPain_Timer
         if (m_uiShadowWordPain_Timer < uiDiff)
         {
-            DoCastSpellIfCan(m_creature->getVictim(), SPELL_SHADOWWORDPAIN);
+            DoCastSpellIfCan(m_creature->getVictim(),SPELL_SHADOWWORDPAIN);
             m_uiShadowWordPain_Timer = 18000;
         }
         else
@@ -217,7 +217,7 @@ struct MANGOS_DLL_DECL boss_moira_bronzebeardAI : public ScriptedAI
         //Smite_Timer
         if (m_uiSmite_Timer < uiDiff)
         {
-            DoCastSpellIfCan(m_creature->getVictim(), SPELL_SMITE);
+            DoCastSpellIfCan(m_creature->getVictim(),SPELL_SMITE);
             m_uiSmite_Timer = 10000;
         }
         else

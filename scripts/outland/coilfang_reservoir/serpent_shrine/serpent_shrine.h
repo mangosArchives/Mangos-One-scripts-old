@@ -51,30 +51,30 @@ enum
 
 class MANGOS_DLL_DECL instance_serpentshrine_cavern : public ScriptedInstance
 {
-public:
-    instance_serpentshrine_cavern(Map* pMap);
+    public:
+        instance_serpentshrine_cavern(Map* pMap);
 
-    void Initialize();
-    bool IsEncounterInProgress() const;
+        void Initialize();
+        bool IsEncounterInProgress() const;
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnCreatureEnterCombat(Creature* pCreature);
-    void OnCreatureDeath(Creature* pCreature);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnCreatureEnterCombat(Creature* pCreature);
+        void OnCreatureDeath(Creature* pCreature);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-private:
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    uint32 m_auiShieldGenerator[MAX_GENERATOR];
-    std::string m_strInstData;
+    private:
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        uint32 m_auiShieldGenerator[MAX_GENERATOR];
+        std::string m_strInstData;
 
-    uint32 m_uiSpellBinderCount;
+        uint32 m_uiSpellBinderCount;
 
-    GuidList m_lSpellBindersGUIDList;
+        GuidList m_lSpellBindersGUIDList;
 };
 
 #endif

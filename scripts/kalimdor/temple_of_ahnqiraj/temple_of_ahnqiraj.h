@@ -81,36 +81,36 @@ enum
 
 class MANGOS_DLL_DECL instance_temple_of_ahnqiraj : public ScriptedInstance
 {
-public:
-    instance_temple_of_ahnqiraj(Map* pMap);
+    public:
+        instance_temple_of_ahnqiraj(Map* pMap);
 
-    void Initialize();
+        void Initialize();
 
-    bool IsEncounterInProgress() const;
+        bool IsEncounterInProgress() const;
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    void DoHandleTempleAreaTrigger(uint32 uiTriggerId);
+        void DoHandleTempleAreaTrigger(uint32 uiTriggerId);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-    void Update(uint32 uiDiff);
+        void Update(uint32 uiDiff);
 
-private:
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+    private:
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    uint8 m_uiBugTrioDeathCount;
-    uint32 m_uiCthunWhisperTimer;
+        uint8 m_uiBugTrioDeathCount;
+        uint32 m_uiCthunWhisperTimer;
 
-    bool m_bIsEmperorsIntroDone;
+        bool m_bIsEmperorsIntroDone;
 
-    DialogueHelper m_dialogueHelper;
+        DialogueHelper m_dialogueHelper;
 };
 
 #endif

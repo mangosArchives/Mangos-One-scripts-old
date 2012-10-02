@@ -46,10 +46,10 @@ enum
     MAX_COMPANIONS              = 8,
 };
 
-static const int32 aPlayerDeath[] = { -1585017, -1585018, -1585019, -1585020, -1585021};
+static const int32 aPlayerDeath[] = {-1585017, -1585018, -1585019, -1585020, -1585021};
 static const uint32 aDelrissaLackeys[MAX_COMPANIONS] = {NPC_KAGANI, NPC_ELLRYS, NPC_ERAMAS, NPC_YAZZAI, NPC_SALARIS, NPC_GARAXXAS, NPC_APOKO, NPC_ZELFAN};
 
-static const float aLackeyLocations[MAX_DELRISSA_ADDS][4] =
+static const float aLackeyLocations[MAX_DELRISSA_ADDS][4]=
 {
     {123.77f,  17.6007f, -19.921f, 4.98f},
     {131.731f, 15.0827f, -19.921f, 4.98f},

@@ -77,7 +77,7 @@ struct MANGOS_DLL_DECL npc_aged_dying_ancient_kodoAI : public ScriptedAI
 
             if (m_creature->IsWithinDistInMap(pWho, 10.0f))
             {
-                switch (urand(0, 2))
+                switch(urand(0, 2))
                 {
                     case 0: DoScriptText(SAY_SMEED_HOME_1, pWho); break;
                     case 1: DoScriptText(SAY_SMEED_HOME_2, pWho); break;
@@ -85,7 +85,7 @@ struct MANGOS_DLL_DECL npc_aged_dying_ancient_kodoAI : public ScriptedAI
                 }
 
                 //spell have no implemented effect (dummy), so useful to notify spellHit
-                m_creature->CastSpell(m_creature, SPELL_KODO_KOMBO_GOSSIP, true);
+                m_creature->CastSpell(m_creature,SPELL_KODO_KOMBO_GOSSIP,true);
             }
         }
     }
@@ -111,8 +111,7 @@ struct MANGOS_DLL_DECL npc_aged_dying_ancient_kodoAI : public ScriptedAI
                 m_creature->Respawn();
                 return;
             }
-        }
-        else m_uiDespawnTimer -= diff;
+        } else m_uiDespawnTimer -= diff;
 
         if (!m_creature->SelectHostileTarget() || !m_creature->getVictim())
             return;
@@ -139,10 +138,10 @@ bool EffectDummyCreature_npc_aged_dying_ancient_kodo(Unit *pCaster, uint32 spell
             pCreatureTarget->GetEntry() == NPC_DYING_KODO ||
             pCreatureTarget->GetEntry() == NPC_ANCIENT_KODO)
         {
-            pCaster->CastSpell(pCaster, SPELL_KODO_KOMBO_PLAYER_BUFF, true);
+            pCaster->CastSpell(pCaster,SPELL_KODO_KOMBO_PLAYER_BUFF,true);
 
             pCreatureTarget->UpdateEntry(NPC_TAMED_KODO);
-            pCreatureTarget->CastSpell(pCreatureTarget, SPELL_KODO_KOMBO_DESPAWN_BUFF, false);
+            pCreatureTarget->CastSpell(pCreatureTarget,SPELL_KODO_KOMBO_DESPAWN_BUFF,false);
 
             if (pCreatureTarget->GetMotionMaster()->GetCurrentMovementGeneratorType() == WAYPOINT_MOTION_TYPE)
                 pCreatureTarget->GetMotionMaster()->MoveIdle();
@@ -268,11 +267,11 @@ struct SummonLocation
 
 static const SummonLocation aMarauderSpawn[] =
 {
-    { -1291.492f, 2644.650f, 111.556f},
-    { -1306.730f, 2675.163f, 111.561f},
+    {-1291.492f, 2644.650f, 111.556f},
+    {-1306.730f, 2675.163f, 111.561f},
 };
 
-static const SummonLocation aWranglerSpawn[] = { -1393.194f, 2429.465f, 88.689f};
+static const SummonLocation aWranglerSpawn[] = {-1393.194f, 2429.465f, 88.689f};
 
 struct MANGOS_DLL_DECL npc_melizza_brimbuzzleAI : public npc_escortAI, private DialogueHelper
 {
@@ -303,7 +302,7 @@ struct MANGOS_DLL_DECL npc_melizza_brimbuzzleAI : public npc_escortAI, private D
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 1:
                 if (Player* pPlayer = GetPlayerForEscort())

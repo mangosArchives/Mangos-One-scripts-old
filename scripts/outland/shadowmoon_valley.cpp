@@ -331,7 +331,7 @@ struct MANGOS_DLL_DECL npc_dragonmaw_peonAI : public ScriptedAI
             m_uiEatTimer = 2000;
             m_uiPoisonTimer = 3000;
 
-            switch (urand(0, 4))
+            switch(urand(0, 4))
             {
                 case 0: DoScriptText(SAY_PEON_1, m_creature); break;
                 case 1: DoScriptText(SAY_PEON_2, m_creature); break;
@@ -360,7 +360,7 @@ struct MANGOS_DLL_DECL npc_dragonmaw_peonAI : public ScriptedAI
                         uint32 uiGameobjectEntry = pSpell->EffectMiscValue[EFFECT_INDEX_0];
 
                         // this can fail, but very low chance
-                        pMutton = GetClosestGameObjectWithEntry(pPlayer, uiGameobjectEntry, 2 * INTERACTION_DISTANCE);
+                        pMutton = GetClosestGameObjectWithEntry(pPlayer, uiGameobjectEntry, 2*INTERACTION_DISTANCE);
                     }
 
                     if (pMutton)
@@ -478,7 +478,7 @@ struct MANGOS_DLL_DECL npc_wildaAI : public npc_escortAI
         if (!pPlayer)
             return;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 13:
                 DoScriptText(SAY_WIL_PROGRESS1, m_creature, pPlayer);
@@ -539,7 +539,7 @@ struct MANGOS_DLL_DECL npc_wildaAI : public npc_escortAI
     //this is very unclear, random say without no real relevance to script/event
     void DoRandomSay()
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_WIL_PROGRESS2, m_creature); break;
             case 1: DoScriptText(SAY_WIL_PROGRESS4, m_creature); break;
@@ -566,7 +566,7 @@ struct MANGOS_DLL_DECL npc_wildaAI : public npc_escortAI
         if (pWho->GetTypeId() != TYPEID_PLAYER)
         {
             //appears to be random
-            switch (urand(0, 3))
+            switch(urand(0, 3))
             {
                 case 0: DoScriptText(SAY_WIL_AGGRO1, m_creature, pWho); break;
                 case 1: DoScriptText(SAY_WIL_AGGRO2, m_creature, pWho); break;
@@ -658,7 +658,7 @@ struct TorlothCinematic
     uint32 uiTimer;
 };
 
-static TorlothCinematic TorlothAnim[] =
+static TorlothCinematic TorlothAnim[]=
 {
     {SAY_TORLOTH_DIALOGUE1, TORLOTH, 2000},
     {SAY_ILLIDAN_DIALOGUE, LORD_ILLIDAN, 7000},
@@ -677,24 +677,24 @@ struct Location
     float fOrient;
 };
 
-static Location SpawnLocation[] =
+static Location SpawnLocation[]=
 {
-    { -4615.8556f, 1342.2532f, 139.9f, 1.612f},             // Illidari Soldier
-    { -4598.9365f, 1377.3182f, 139.9f, 3.917f},             // Illidari Soldier
-    { -4598.4697f, 1360.8999f, 139.9f, 2.427f},             // Illidari Soldier
-    { -4589.3599f, 1369.1061f, 139.9f, 3.165f},             // Illidari Soldier
-    { -4608.3477f, 1386.0076f, 139.9f, 4.108f},             // Illidari Soldier
-    { -4633.1889f, 1359.8033f, 139.9f, 0.949f},             // Illidari Soldier
-    { -4623.5791f, 1351.4574f, 139.9f, 0.971f},             // Illidari Soldier
-    { -4607.2988f, 1351.6099f, 139.9f, 2.416f},             // Illidari Soldier
-    { -4633.7764f, 1376.0417f, 139.9f, 5.608f},             // Illidari Soldier
-    { -4600.2461f, 1369.1240f, 139.9f, 3.056f},             // Illidari Mind Breaker
-    { -4631.7808f, 1367.9459f, 139.9f, 0.020f},             // Illidari Mind Breaker
-    { -4600.2461f, 1369.1240f, 139.9f, 3.056f},             // Illidari Highlord
-    { -4631.7808f, 1367.9459f, 139.9f, 0.020f},             // Illidari Highlord
-    { -4615.5586f, 1353.0031f, 139.9f, 1.540f},             // Illidari Highlord
-    { -4616.4736f, 1384.2170f, 139.9f, 4.971f},             // Illidari Highlord
-    { -4627.1240f, 1378.8752f, 139.9f, 2.544f}              // Torloth The Magnificent
+    {-4615.8556f, 1342.2532f, 139.9f, 1.612f},              // Illidari Soldier
+    {-4598.9365f, 1377.3182f, 139.9f, 3.917f},              // Illidari Soldier
+    {-4598.4697f, 1360.8999f, 139.9f, 2.427f},              // Illidari Soldier
+    {-4589.3599f, 1369.1061f, 139.9f, 3.165f},              // Illidari Soldier
+    {-4608.3477f, 1386.0076f, 139.9f, 4.108f},              // Illidari Soldier
+    {-4633.1889f, 1359.8033f, 139.9f, 0.949f},              // Illidari Soldier
+    {-4623.5791f, 1351.4574f, 139.9f, 0.971f},              // Illidari Soldier
+    {-4607.2988f, 1351.6099f, 139.9f, 2.416f},              // Illidari Soldier
+    {-4633.7764f, 1376.0417f, 139.9f, 5.608f},              // Illidari Soldier
+    {-4600.2461f, 1369.1240f, 139.9f, 3.056f},              // Illidari Mind Breaker
+    {-4631.7808f, 1367.9459f, 139.9f, 0.020f},              // Illidari Mind Breaker
+    {-4600.2461f, 1369.1240f, 139.9f, 3.056f},              // Illidari Highlord
+    {-4631.7808f, 1367.9459f, 139.9f, 0.020f},              // Illidari Highlord
+    {-4615.5586f, 1353.0031f, 139.9f, 1.540f},              // Illidari Highlord
+    {-4616.4736f, 1384.2170f, 139.9f, 4.971f},              // Illidari Highlord
+    {-4627.1240f, 1378.8752f, 139.9f, 2.544f}               // Torloth The Magnificent
 };
 
 struct WaveData
@@ -707,7 +707,7 @@ struct WaveData
     int32  iTextId;
 };
 
-static WaveData WavesInfo[] =
+static WaveData WavesInfo[]=
 {
     // Illidari Soldier
     {9, 0, NPC_ILLIDARI_SOLDIER, 10000, 7000, SAY_ILLIDAN_SUMMON1},
@@ -784,7 +784,7 @@ struct MANGOS_DLL_DECL mob_torlothAI : public ScriptedAI
 
         m_uiAnimationTimer = TorlothAnim[m_uiAnimationCount].uiTimer;
 
-        switch (m_uiAnimationCount)
+        switch(m_uiAnimationCount)
         {
             case 0:
                 m_creature->SetStandState(UNIT_STAND_STATE_KNEEL);
@@ -927,7 +927,7 @@ struct MANGOS_DLL_DECL npc_lord_illidan_stormrageAI : public Scripted_NoMovement
         uint8 uiFelguardCount = 0;
         uint8 uiDreadlordCount = 0;
 
-        for (uint8 i = 0; i < uiCount; ++i)
+        for(uint8 i = 0; i < uiCount; ++i)
         {
             float fLocX, fLocY, fLocZ, fOrient;
             fLocX = SpawnLocation[uiLocIndex + i].fLocX;
@@ -941,7 +941,7 @@ struct MANGOS_DLL_DECL npc_lord_illidan_stormrageAI : public Scripted_NoMovement
                 if (m_uiWaveCount)                          // only in first wave
                     continue;
 
-                if (!urand(0, 2) && uiFelguardCount < 2)
+                if (!urand(0,2) && uiFelguardCount < 2)
                 {
                     pSpawn->SetDisplayId(MODEL_ID_FELGUARD);
                     ++uiFelguardCount;
@@ -1012,7 +1012,7 @@ struct MANGOS_DLL_DECL npc_lord_illidan_stormrageAI : public Scripted_NoMovement
             uint8 uiDeadMemberCount = 0;
             uint8 uiFailedMemberCount = 0;
 
-            for (GroupReference* pRef = pEventGroup->GetFirstMember(); pRef != NULL; pRef = pRef->next())
+            for(GroupReference* pRef = pEventGroup->GetFirstMember(); pRef != NULL; pRef = pRef->next())
             {
                 if (Player* pMember = pRef->getSource())
                 {
@@ -1043,7 +1043,7 @@ struct MANGOS_DLL_DECL npc_lord_illidan_stormrageAI : public Scripted_NoMovement
 
             if (pEventGroup->GetMembersCount() == uiDeadMemberCount)
             {
-                for (GroupReference* pRef = pEventGroup->GetFirstMember(); pRef != NULL; pRef = pRef->next())
+                for(GroupReference* pRef = pEventGroup->GetFirstMember(); pRef != NULL; pRef = pRef->next())
                 {
                     if (Player* pMember = pRef->getSource())
                     {
@@ -1096,7 +1096,7 @@ struct MANGOS_DLL_DECL npc_lord_illidan_stormrageAI : public Scripted_NoMovement
     }
 };
 
-CreatureAI* GetAI_npc_lord_illidan_stormrage(Creature * (pCreature))
+CreatureAI* GetAI_npc_lord_illidan_stormrage(Creature* (pCreature))
 {
     return new npc_lord_illidan_stormrageAI(pCreature);
 }
@@ -1183,7 +1183,7 @@ bool EffectDummyCreature_npc_totem_of_spirits(Unit* pCaster, uint32 uiSpellId, S
     if (uiEffIndex != EFFECT_INDEX_0)
         return false;
 
-    switch (uiSpellId)
+    switch(uiSpellId)
     {
         case SPELL_EARTH_CAPTURED:
         {
@@ -1231,7 +1231,7 @@ bool EffectAuraDummy_npc_totem_of_spirits(const Aura* pAura, bool bApply)
         return true;
 
     // Need to expect the enraged elementals to be caster of aura
-    switch (pCaster->GetEntry())
+    switch(pCaster->GetEntry())
     {
         case NPC_EARTH_SPIRIT:
             pCreature->CastSpell(pCreature, SPELL_EARTH_CAPTURED, true);
@@ -1259,7 +1259,7 @@ bool ProcessEventId_event_spell_soul_captured_credit(uint32 uiEventId, Object* p
         if (!pOwner)
             return true;
 
-        switch (uiEventId)
+        switch(uiEventId)
         {
             case EVENT_EARTH:
                 pOwner->KilledMonsterCredit(NPC_CREDIT_MARKER_EARTH);
@@ -1355,13 +1355,13 @@ struct EventLocations
 
 const static EventLocations aDamnationLocations[] =
 {
-    { -3605.09f, 1885.47f, 47.24f, 1.81f},     // 0 fire spirit summon loc
-    { -3600.68f, 1886.58f, 47.24f, 1.81f},     // 1 earth spirit summon loc
-    { -3597.19f, 1887.46f, 47.24f, 1.77f},     // 2 water spirit summon loc
-    { -3593.18f, 1888.27f, 47.24f, 1.77f},     // 3 air spirit summon loc
-    { -3595.36f, 1869.78f, 47.24f},            // 4 fight ready move loc
-    { -3635.90f, 1860.94f, 52.93f},            // 5 elementals move loc
-    { -3599.71f, 1897.94f, 47.24f}             // 6 epilogue move loc
+    {-3605.09f, 1885.47f, 47.24f, 1.81f},      // 0 fire spirit summon loc
+    {-3600.68f, 1886.58f, 47.24f, 1.81f},      // 1 earth spirit summon loc
+    {-3597.19f, 1887.46f, 47.24f, 1.77f},      // 2 water spirit summon loc
+    {-3593.18f, 1888.27f, 47.24f, 1.77f},      // 3 air spirit summon loc
+    {-3595.36f, 1869.78f, 47.24f},             // 4 fight ready move loc
+    {-3635.90f, 1860.94f, 52.93f},             // 5 elementals move loc
+    {-3599.71f, 1897.94f, 47.24f}              // 6 epilogue move loc
 };
 
 struct MANGOS_DLL_DECL npc_spawned_oronok_tornheartAI : public ScriptedAI, private DialogueHelper
@@ -1399,7 +1399,7 @@ struct MANGOS_DLL_DECL npc_spawned_oronok_tornheartAI : public ScriptedAI, priva
 
     void JustDidDialogueStep(int32 iEntry)
     {
-        switch (iEntry)
+        switch(iEntry)
         {
             case NPC_CYRUKH_THE_FIRELORD:
                 // Set them in motion
@@ -1408,12 +1408,12 @@ struct MANGOS_DLL_DECL npc_spawned_oronok_tornheartAI : public ScriptedAI, priva
                 if (Creature* pBorak = GetClosestCreatureWithEntry(m_creature, NPC_BORAK_SON_OF_ORONOK, 10.0f))
                 {
                     m_borakGuid = pBorak->GetObjectGuid();
-                    pBorak->GetMotionMaster()->MoveFollow(m_creature, 5.0f, -M_PI_F / 2);
+                    pBorak->GetMotionMaster()->MoveFollow(m_creature, 5.0f, -M_PI_F/2);
                 }
                 if (Creature* pGromtor = GetClosestCreatureWithEntry(m_creature, NPC_GROMTOR_SON_OF_ORONOK, 10.0f))
                 {
                     m_gromtorGuid = pGromtor->GetObjectGuid();
-                    pGromtor->GetMotionMaster()->MoveFollow(m_creature, 5.0f, M_PI_F / 2);
+                    pGromtor->GetMotionMaster()->MoveFollow(m_creature, 5.0f, M_PI_F/2);
                 }
                 break;
             case NPC_EARTHMENDER_TORLOK:
@@ -1437,7 +1437,7 @@ struct MANGOS_DLL_DECL npc_spawned_oronok_tornheartAI : public ScriptedAI, priva
             case NPC_ORONOK_TORN_HEART:
                 if (GameObject* pMark = GetClosestGameObjectWithEntry(m_creature, GO_MARK_OF_KAELTHAS, 30.0f))
                 {
-                    pMark->SetRespawnTime(5 * MINUTE);
+                    pMark->SetRespawnTime(5*MINUTE);
                     pMark->Refresh();
                 }
                 if (Creature* pBorak = m_creature->GetMap()->GetCreature(m_borakGuid))
@@ -1598,7 +1598,7 @@ bool GossipHello_npc_spawned_oronok_tornheart(Player* pPlayer, Creature* pCreatu
 {
     if (pPlayer->GetQuestStatus(QUEST_CIPHER_OF_DAMNATION) == QUEST_STATUS_INCOMPLETE)
     {
-        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_FIGHT, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_FIGHT, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
         pPlayer->SEND_GOSSIP_MENU(GOSSIP_TEXT_ID_ORONOK, pCreature->GetObjectGuid());
     }
     else
@@ -1609,7 +1609,7 @@ bool GossipHello_npc_spawned_oronok_tornheart(Player* pPlayer, Creature* pCreatu
 
 bool GossipSelect_npc_spawned_oronok_tornheart(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
 {
-    if (uiAction == GOSSIP_ACTION_INFO_DEF + 1)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF+1)
     {
         // Note: this movement expects MMaps.
         DoScriptText(SAY_ORONOK_ELEMENTS, pCreature);

@@ -63,27 +63,27 @@ struct SpawnLocations
     float fX, fY, fZ, fAng;
 };
 
-static SpawnLocations aSpirits[] =
+static SpawnLocations aSpirits[]=
 {
-    { -12150.9f, -1956.24f, 133.407f, 2.57835f},
-    { -12157.1f, -1972.78f, 133.947f, 2.64903f},
-    { -12172.3f, -1982.63f, 134.061f, 1.48664f},
-    { -12194.0f, -1979.54f, 132.194f, 1.45916f},
-    { -12211.3f, -1978.49f, 133.580f, 1.35705f},
-    { -12228.4f, -1977.10f, 132.728f, 1.25495f},
-    { -12250.0f, -1964.78f, 135.066f, 0.92901f},
-    { -12264.0f, -1953.08f, 134.072f, 0.62663f},
-    { -12289.0f, -1924.00f, 132.620f, 5.37829f},
-    { -12267.3f, -1902.26f, 131.328f, 5.32724f},
-    { -12255.3f, -1893.53f, 134.026f, 5.06413f},
-    { -12229.9f, -1891.39f, 134.704f, 4.40047f},
-    { -12215.9f, -1889.09f, 137.273f, 4.70285f},
-    { -12200.5f, -1890.69f, 135.777f, 4.84422f},
-    { -12186.0f, -1890.12f, 134.261f, 4.36513f},
-    { -12246.3f, -1890.09f, 135.475f, 4.73427f},
-    { -12170.7f, -1894.85f, 133.852f, 3.51690f},
-    { -12279.0f, -1931.92f, 136.130f, 0.04151f},
-    { -12266.1f, -1940.72f, 132.606f, 0.70910f}
+    {-12150.9f, -1956.24f, 133.407f, 2.57835f},
+    {-12157.1f, -1972.78f, 133.947f, 2.64903f},
+    {-12172.3f, -1982.63f, 134.061f, 1.48664f},
+    {-12194.0f, -1979.54f, 132.194f, 1.45916f},
+    {-12211.3f, -1978.49f, 133.580f, 1.35705f},
+    {-12228.4f, -1977.10f, 132.728f, 1.25495f},
+    {-12250.0f, -1964.78f, 135.066f, 0.92901f},
+    {-12264.0f, -1953.08f, 134.072f, 0.62663f},
+    {-12289.0f, -1924.00f, 132.620f, 5.37829f},
+    {-12267.3f, -1902.26f, 131.328f, 5.32724f},
+    {-12255.3f, -1893.53f, 134.026f, 5.06413f},
+    {-12229.9f, -1891.39f, 134.704f, 4.40047f},
+    {-12215.9f, -1889.09f, 137.273f, 4.70285f},
+    {-12200.5f, -1890.69f, 135.777f, 4.84422f},
+    {-12186.0f, -1890.12f, 134.261f, 4.36513f},
+    {-12246.3f, -1890.09f, 135.475f, 4.73427f},
+    {-12170.7f, -1894.85f, 133.852f, 3.51690f},
+    {-12279.0f, -1931.92f, 136.130f, 0.04151f},
+    {-12266.1f, -1940.72f, 132.606f, 0.70910f}
 };
 
 struct MANGOS_DLL_DECL boss_mandokirAI : public ScriptedAI
@@ -126,7 +126,7 @@ struct MANGOS_DLL_DECL boss_mandokirAI : public ScriptedAI
     {
         DoScriptText(SAY_AGGRO, m_creature);
 
-        for (uint8 i = 0; i < countof(aSpirits); ++i)
+        for(uint8 i = 0; i < countof(aSpirits); ++i)
             m_creature->SummonCreature(NPC_CHAINED_SPIRIT, aSpirits[i].fX, aSpirits[i].fY, aSpirits[i].fZ, aSpirits[i].fAng, TEMPSUMMON_CORPSE_DESPAWN, 0);
 
         //At combat start Mandokir is mounted so we must unmount it first
@@ -257,7 +257,7 @@ struct MANGOS_DLL_DECL boss_mandokirAI : public ScriptedAI
             {
                 Player* pWatchTarget = m_creature->GetMap()->GetPlayer(m_watchTargetGuid);
 
-                //If threat is higher that previously saved, mandokir will act
+                 //If threat is higher that previously saved, mandokir will act
                 if (pWatchTarget && pWatchTarget->isAlive() && m_creature->getThreatManager().getThreat(pWatchTarget) > m_fTargetThreat)
                 {
                     if (!m_creature->IsWithinLOSInMap(pWatchTarget))
@@ -308,7 +308,7 @@ struct MANGOS_DLL_DECL boss_mandokirAI : public ScriptedAI
                 uint8 uiTargetInRangeCount = 0;
 
                 ThreatList const& tList = m_creature->getThreatManager().getThreatList();
-                for (ThreatList::const_iterator i = tList.begin(); i != tList.end(); ++i)
+                for (ThreatList::const_iterator i = tList.begin();i != tList.end(); ++i)
                 {
                     Unit* pTarget = m_creature->GetMap()->GetUnit((*i)->getUnitGuid());
 

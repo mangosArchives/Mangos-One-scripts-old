@@ -54,8 +54,8 @@ bool GossipHello_npc_erozion(Player* pPlayer, Creature* pCreature)
 
     ScriptedInstance* pInstance = (ScriptedInstance*)pCreature->GetInstanceData();
 
-    if (pInstance && pInstance->GetData(TYPE_BARREL_DIVERSION) != DONE && !pPlayer->HasItemCount(ITEM_ENTRY_BOMBS, 1))
-        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_NEED_BOMBS, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+    if (pInstance && pInstance->GetData(TYPE_BARREL_DIVERSION) != DONE && !pPlayer->HasItemCount(ITEM_ENTRY_BOMBS,1))
+        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_NEED_BOMBS, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
 
     // Need info, should have option to teleport or not
     /*if (!pPlayer->GetQuestRewardStatus(QUEST_ENTRY_RETURN) && pPlayer->GetQuestStatus(QUEST_ENTRY_RETURN) == QUEST_STATUS_COMPLETE)
@@ -68,7 +68,7 @@ bool GossipHello_npc_erozion(Player* pPlayer, Creature* pCreature)
 
 bool GossipSelect_npc_erozion(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
 {
-    if (uiAction == GOSSIP_ACTION_INFO_DEF + 1)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF+1)
     {
         if (Item* pItem = pPlayer->StoreNewItemInInventorySlot(ITEM_ENTRY_BOMBS, 1))
             pPlayer->SendNewItem(pItem, 1, true, false);
@@ -76,7 +76,7 @@ bool GossipSelect_npc_erozion(Player* pPlayer, Creature* pCreature, uint32 uiSen
         pPlayer->SEND_GOSSIP_MENU(TEXT_ID_GOT_ITEM, pCreature->GetObjectGuid());
     }
 
-    if (uiAction == GOSSIP_ACTION_INFO_DEF + 2)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF+2)
         pPlayer->CLOSE_GOSSIP_MENU();
 
     return true;
@@ -291,7 +291,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
 
     void Aggro(Unit* pWho)
     {
-        switch (urand(0, 3))
+        switch(urand(0, 3))
         {
             case 0: DoScriptText(SAY_TH_RANDOM_AGGRO1, m_creature); break;
             case 1: DoScriptText(SAY_TH_RANDOM_AGGRO2, m_creature); break;
@@ -308,7 +308,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
 
     void KilledUnit(Unit* pVictim)
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_TH_RANDOM_KILL1, m_creature); break;
             case 1: DoScriptText(SAY_TH_RANDOM_KILL2, m_creature); break;
@@ -424,7 +424,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
     {
         if (HasEscortState(STATE_ESCORT_ESCORTING))
         {
-            switch (urand(0, 2))
+            switch(urand(0, 2))
             {
                 case 0: DoScriptText(SAY_TH_LEAVE_COMBAT1, m_creature); break;
                 case 1: DoScriptText(SAY_TH_LEAVE_COMBAT2, m_creature); break;
@@ -437,9 +437,9 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
 
     void JustSummoned(Creature* pSummoned)
     {
-        switch (pSummoned->GetEntry())
+        switch(pSummoned->GetEntry())
         {
-                // Barn soldiers - also used for the first wave of Epoch adds
+            // Barn soldiers - also used for the first wave of Epoch adds
             case NPC_TARREN_MILL_GUARDSMAN:
             case NPC_TARREN_MILL_PROTECTOR:
             case NPC_TARREN_MILL_LOOKOUT:
@@ -454,7 +454,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                         m_uiEpochAttackTimer = 7000;
                 }
                 break;
-                // Epoch wave spawns
+            // Epoch wave spawns
             case NPC_INFINITE_DEFILER:
             case NPC_INFINITE_SABOTEOR:
             case NPC_INFINITE_SLAYER:
@@ -475,7 +475,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
             case NPC_SKARLOC_MOUNT:
                 m_skarlocMountGuid = pSummoned->GetObjectGuid();
                 break;
-                // Church solider - used to yell
+            // Church solider - used to yell
             case NPC_CHURCH_LOOKOUT:
                 if (!m_bHasChurchYelled)
                 {
@@ -484,7 +484,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 }
                 pSummoned->AI()->AttackStart(m_creature);
                 break;
-                // Inn soldier - used to yell
+            // Inn soldier - used to yell
             case NPC_INN_LOOKOUT:
                 if (!m_bHasInnYelled)
                 {
@@ -493,7 +493,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 }
                 pSummoned->AI()->AttackStart(m_creature);
                 break;
-                // Spawned when Thrall is dead
+            // Spawned when Thrall is dead
             case NPC_IMAGE_OF_ERONZION:
                 if (m_pInstance)
                     DoScriptText(m_pInstance->GetThrallEventCount() < MAX_WIPE_COUNTER ? SAY_ERONZION_RESET_THRALL : SAY_ERONZION_RESET_LAST, pSummoned);
@@ -508,7 +508,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 pSummoned->SetLevitate(true);
                 DoScriptText(SAY_EPOCH_ENTER1, pSummoned);
                 break;
-                // Skarloc helpers - they have special behavior
+            // Skarloc helpers - they have special behavior
             case NPC_WARDEN:
             case NPC_VETERAN:
                 if (m_pInstance && m_pInstance->GetData(TYPE_SKARLOC) == IN_PROGRESS)
@@ -599,9 +599,9 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
 
         switch (pSummoned->GetEntry())
         {
-                // Handle Skarloc movement for the intro part
+            // Handle Skarloc movement for the intro part
             case NPC_SKARLOC:
-                switch (uiPointId)
+                switch(uiPointId)
                 {
                     case 1:
                         // summon mount
@@ -617,7 +617,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                         break;
                 }
                 break;
-                // Handle infinite dragons transform on point reaches
+            // Handle infinite dragons transform on point reaches
             case NPC_TARREN_MILL_GUARDSMAN:
                 if (uiPointId)
                 {
@@ -647,7 +647,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
         if (!m_pInstance)
             return;
 
-        switch (iEntry)
+        switch(iEntry)
         {
             case NPC_YOUNG_BLANCHY:
                 // ToDo: deal with the horse animation!
@@ -697,9 +697,9 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
         if (!m_pInstance)
             return;
 
-        switch (uiPoint)
+        switch(uiPoint)
         {
-                // *** Escort event - Part I - inside the keep ***
+            // *** Escort event - Part I - inside the keep ***
             case 0:
                 m_pInstance->DoUseDoorOrButton(GO_PRISON_DOOR);
                 break;
@@ -731,7 +731,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                     m_creature->SetFacingToObject(pArmorer);
                 DoScriptText(SAY_TH_ARMORY_2, m_creature);
                 break;
-                // *** Escort event - Part I - outside the keep ***
+            // *** Escort event - Part I - outside the keep ***
             case 17:
                 m_creature->SummonCreature(NPC_MAGE,    2186.909f, 139.8108f, 88.21628f, 5.75f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
                 m_creature->SummonCreature(NPC_WARDEN,  2187.943f, 141.6124f, 88.21628f, 5.73f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
@@ -756,7 +756,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 m_creature->SummonCreature(NPC_VETERAN, 2108.486f, 189.9346f, 66.30494f, 2.68f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
                 m_creature->SummonCreature(NPC_VETERAN, 2112.387f, 195.4947f, 66.30494f, 2.39f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
                 break;
-                // *** Escort event - Part I - meet Skarloc ***
+            // *** Escort event - Part I - meet Skarloc ***
             case 31:
                 m_pInstance->SetData(TYPE_SKARLOC, IN_PROGRESS);
                 m_creature->SummonCreature(NPC_SKARLOC, 2000.201f, 277.9190f, 66.4911f, 6.11f, TEMPSUMMON_DEAD_DESPAWN, 0);
@@ -790,7 +790,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 SetEscortPaused(true);
                 m_creature->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
                 break;
-                // *** Escort event - Part II - road ***
+            // *** Escort event - Part II - road ***
             case 35:
                 if (Creature* pMount = m_creature->GetMap()->GetCreature(m_skarlocMountGuid))
                 {
@@ -803,7 +803,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 m_creature->SetFacingTo(5.33f);
                 m_creature->Mount(MODEL_SKARLOC_MOUNT);
                 break;
-                // *** Escort event - Part II - reached barn ***
+            // *** Escort event - Part II - reached barn ***
             case 64:
                 m_creature->SummonCreature(NPC_SKARLOC_MOUNT, 2488.779f, 623.9724f, 58.07383f, 1.37f, TEMPSUMMON_TIMED_DESPAWN, 30000);
                 m_creature->Unmount();
@@ -826,7 +826,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 m_creature->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
                 m_pInstance->SetData(TYPE_ESCORT_BARN, DONE);
                 break;
-                // *** Escort event - Part III - barn ***
+            // *** Escort event - Part III - barn ***
             case 70:
                 SetRun(false);
                 break;
@@ -836,7 +836,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 m_creature->SummonCreature(NPC_TARREN_MILL_GUARDSMAN, 2500.55f, 693.64f, 55.50f, 3.14f, TEMPSUMMON_DEAD_DESPAWN, 0);
                 m_creature->SummonCreature(NPC_TARREN_MILL_GUARDSMAN, 2500.94f, 695.81f, 55.50f, 3.14f, TEMPSUMMON_DEAD_DESPAWN, 0);
                 break;
-                // *** Escort event - Part III - start barn dialogue ***
+            // *** Escort event - Part III - start barn dialogue ***
             case 74:
                 StartNextDialogueText(SAY_LOOKOUT_BARN_1);
                 SetEscortPaused(true);
@@ -844,7 +844,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
             case 75:
                 DoScriptText(SAY_TH_HEAD_TOWN, m_creature);
                 break;
-                // *** Escort event - Part III - church ***
+            // *** Escort event - Part III - church ***
             case 92:
                 DoScriptText(SAY_TH_CHURCH_ENTER, m_creature);
                 m_creature->SetFacingTo(1.0f);
@@ -858,7 +858,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
             case 94:
                 DoScriptText(SAY_TH_CHURCH_END, m_creature);
                 break;
-                // *** Escort event - Part III - inside the inn ***
+            // *** Escort event - Part III - inside the inn ***
             case 105:
                 m_creature->SummonCreature(NPC_INN_PROTECTOR, 2652.71f, 660.31f, 61.93f, 1.67f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
                 m_creature->SummonCreature(NPC_INN_LOOKOUT,   2648.96f, 662.59f, 61.93f, 0.79f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
@@ -866,7 +866,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 m_creature->SummonCreature(NPC_INN_GUARDSMAN, 2656.39f, 659.77f, 61.93f, 2.61f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
                 SetRun(false);
                 break;
-                // *** Escort event - Part III - meet Taretha ***
+            // *** Escort event - Part III - meet Taretha ***
             case 106:
                 if (Creature* pTaretha = m_pInstance->GetSingleCreatureFromStorage(NPC_TARETHA))
                     DoScriptText(SAY_TA_ESCAPED, pTaretha, m_creature);
@@ -880,13 +880,13 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                     pTaretha->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
                 SetEscortPaused(true);
                 break;
-                // *** Escort event - Part IV - Epoch ***
+            // *** Escort event - Part IV - Epoch ***
             case 108:
                 m_creature->SummonCreature(NPC_EPOCH, 2639.92f, 700.2587f, 65.13583f, 4.74f, TEMPSUMMON_DEAD_DESPAWN, 0);
                 StartNextDialogueText(NPC_EPOCH);
                 SetEscortPaused(true);
                 break;
-                // *** Escort event - Part IV - Epoch - begin fight ***
+            // *** Escort event - Part IV - Epoch - begin fight ***
             case 116:
                 if (Creature* pEpoch = m_pInstance->GetSingleCreatureFromStorage(NPC_EPOCH))
                 {
@@ -903,7 +903,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
                 ++m_uiEpochWaveId;
                 SetEscortPaused(true);
                 break;
-                // *** Escort event - Epilogue - run off ***
+             // *** Escort event - Epilogue - run off ***
             case 118:
                 // return to position
                 SetEscortPaused(true);
@@ -928,7 +928,7 @@ struct MANGOS_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI, private
 
         if (!lPlayerList.isEmpty())
         {
-            for (Map::PlayerList::const_iterator itr = lPlayerList.begin(); itr != lPlayerList.end(); ++itr)
+            for(Map::PlayerList::const_iterator itr = lPlayerList.begin(); itr != lPlayerList.end(); ++itr)
             {
                 if (Player* pPlayer = itr->getSource())
                     pPlayer->KilledMonsterCredit(NPC_THRALL_QUEST_TRIGGER, m_creature->GetObjectGuid());
@@ -1029,19 +1029,19 @@ bool GossipHello_npc_thrall_old_hillsbrad(Player* pPlayer, Creature* pCreature)
         // Escort - barn to inn
         else if (pInstance->GetData(TYPE_ESCORT_BARN) == DONE)
         {
-            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_TARREN_1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_TARREN_1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+3);
             pPlayer->SEND_GOSSIP_MENU(TEXT_ID_TARREN, pCreature->GetObjectGuid());
         }
         // Escort - after Skarloc is defeated
         else if (pInstance->GetData(TYPE_SKARLOC) == DONE)
         {
-            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_SKARLOC_1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_SKARLOC_1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
             pPlayer->SEND_GOSSIP_MENU(TEXT_ID_SKARLOC_1, pCreature->GetObjectGuid());
         }
         // Event start - after Drake is defeated
         else if (pInstance->GetData(TYPE_DRAKE) == DONE)
         {
-            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_START, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_START, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
             pPlayer->SEND_GOSSIP_MENU(TEXT_ID_START, pCreature->GetObjectGuid());
         }
     }
@@ -1052,9 +1052,9 @@ bool GossipSelect_npc_thrall_old_hillsbrad(Player* pPlayer, Creature* pCreature,
 {
     instance_old_hillsbrad* pInstance = (instance_old_hillsbrad*)pCreature->GetInstanceData();
 
-    switch (uiAction)
+    switch(uiAction)
     {
-            // Event start
+        // Event start
         case GOSSIP_ACTION_INFO_DEF+1:
         {
             pPlayer->CLOSE_GOSSIP_MENU();
@@ -1072,13 +1072,13 @@ bool GossipSelect_npc_thrall_old_hillsbrad(Player* pPlayer, Creature* pCreature,
         // Escort - after Skarloc
         case GOSSIP_ACTION_INFO_DEF+2:
         {
-            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_SKARLOC_2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 20);
+            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_SKARLOC_2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+20);
             pPlayer->SEND_GOSSIP_MENU(TEXT_ID_SKARLOC_2, pCreature->GetObjectGuid());
             break;
         }
         case GOSSIP_ACTION_INFO_DEF+20:
         {
-            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_SKARLOC_3, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 21);
+            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_SKARLOC_3, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+21);
             pPlayer->SEND_GOSSIP_MENU(TEXT_ID_SKARLOC_3, pCreature->GetObjectGuid());
             break;
         }
@@ -1212,10 +1212,10 @@ struct MANGOS_DLL_DECL npc_tarethaAI : public npc_escortAI, private DialogueHelp
         if (!m_pInstance)
             return;
 
-        switch (iEntry)
+        switch(iEntry)
         {
             case SAY_TR_THEN_WHO:
-                m_creature->SummonCreature(NPC_EROZION, 2646.47f, 680.416f, 55.38f, 4.16f, TEMPSUMMON_TIMED_DESPAWN, 5 * MINUTE * IN_MILLISECONDS);
+                m_creature->SummonCreature(NPC_EROZION, 2646.47f, 680.416f, 55.38f, 4.16f, TEMPSUMMON_TIMED_DESPAWN, 5*MINUTE*IN_MILLISECONDS);
                 break;
             case SPELL_MEMORY_WIPE:
                 if (Creature* pErozion = m_pInstance->GetSingleCreatureFromStorage(NPC_EROZION))
@@ -1280,7 +1280,7 @@ bool GossipHello_npc_taretha(Player* pPlayer, Creature* pCreature)
 
     if (pInstance && pInstance->GetData(TYPE_ESCORT_INN) == DONE && pInstance->GetData(TYPE_EPOCH) != DONE)
     {
-        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_EPOCH_1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_EPOCH_1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
         pPlayer->SEND_GOSSIP_MENU(TEXT_ID_EPOCH_1, pCreature->GetObjectGuid());
     }
 
@@ -1291,13 +1291,13 @@ bool GossipSelect_npc_taretha(Player* pPlayer, Creature* pCreature, uint32 uiSen
 {
     instance_old_hillsbrad* pInstance = (instance_old_hillsbrad*)pCreature->GetInstanceData();
 
-    if (uiAction == GOSSIP_ACTION_INFO_DEF + 1)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF+1)
     {
-        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_EPOCH_2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_EPOCH_2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
         pPlayer->SEND_GOSSIP_MENU(TEXT_ID_EPOCH_2, pCreature->GetObjectGuid());
     }
 
-    if (uiAction == GOSSIP_ACTION_INFO_DEF + 2)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF+2)
     {
         pPlayer->CLOSE_GOSSIP_MENU();
 

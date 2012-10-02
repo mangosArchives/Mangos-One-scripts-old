@@ -50,31 +50,31 @@ enum
 
 class MANGOS_DLL_DECL instance_magtheridons_lair : public ScriptedInstance
 {
-public:
-    instance_magtheridons_lair(Map* pMap);
+    public:
+        instance_magtheridons_lair(Map* pMap);
 
-    void Initialize();
+        void Initialize();
 
-    bool IsEncounterInProgress() const;
+        bool IsEncounterInProgress() const;
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    void AttackNearestTarget(Creature* pCreature);
+        void AttackNearestTarget(Creature* pCreature);
 
-    void Update(uint32 uiDiff);
+        void Update(uint32 uiDiff);
 
-private:
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    private:
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
 
-    GuidSet m_sChannelerGuid;
-    GuidSet m_sColumnGuid;
+        GuidSet m_sChannelerGuid;
+        GuidSet m_sColumnGuid;
 
-    uint32 m_uiCageTimer;
-    uint32 m_uiRespawnTimer;
+        uint32 m_uiCageTimer;
+        uint32 m_uiRespawnTimer;
 };
 
 #endif

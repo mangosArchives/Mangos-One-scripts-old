@@ -65,8 +65,8 @@ enum
     NPC_NAZAN               = 17536,
 };
 
-const float afCenterPos[3] = { -1399.401f, 1736.365f, 87.008f}; //moves here to drop off nazan
-const float afCombatPos[3] = { -1413.848f, 1754.019f, 83.146f}; //moves here when decending
+const float afCenterPos[3] = {-1399.401f, 1736.365f, 87.008f}; //moves here to drop off nazan
+const float afCombatPos[3] = {-1413.848f, 1754.019f, 83.146f}; //moves here when decending
 
 struct MANGOS_DLL_DECL boss_vazrudenAI : public ScriptedAI
 {
@@ -91,7 +91,7 @@ struct MANGOS_DLL_DECL boss_vazrudenAI : public ScriptedAI
 
     void Aggro(Unit* pWho)
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_AGGRO1, m_creature); break;
             case 1: DoScriptText(SAY_AGGRO2, m_creature); break;

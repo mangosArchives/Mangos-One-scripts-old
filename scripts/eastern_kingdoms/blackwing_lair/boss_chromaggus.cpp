@@ -175,7 +175,7 @@ struct MANGOS_DLL_DECL boss_chromaggusAI : public ScriptedAI
         {
             uint32 m_uiSpellAfflict = 0;
 
-            switch (urand(0, 4))
+            switch(urand(0, 4))
             {
                 case 0: m_uiSpellAfflict = SPELL_BROODAF_BLUE; break;
                 case 1: m_uiSpellAfflict = SPELL_BROODAF_BLACK; break;

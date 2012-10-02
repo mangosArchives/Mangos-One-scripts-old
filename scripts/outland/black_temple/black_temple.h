@@ -60,31 +60,31 @@ enum
 
 class MANGOS_DLL_DECL instance_black_temple : public ScriptedInstance
 {
-public:
-    instance_black_temple(Map* pMap);
+    public:
+        instance_black_temple(Map* pMap);
 
-    void Initialize();
+        void Initialize();
 
-    bool IsEncounterInProgress() const;
+        bool IsEncounterInProgress() const;
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
-    uint64 GetData64(uint32 uiData);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
+        uint64 GetData64(uint32 uiData);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-private:
-    bool CanPreMotherDoorOpen();
+    private:
+        bool CanPreMotherDoorOpen();
 
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    ObjectGuid m_akamaGuid;                             // This is the Akama that starts the Illidan encounter.
-    ObjectGuid m_illidanStormrageGuid;
+        ObjectGuid m_akamaGuid;                             // This is the Akama that starts the Illidan encounter.
+        ObjectGuid m_illidanStormrageGuid;
 };
 
 #endif

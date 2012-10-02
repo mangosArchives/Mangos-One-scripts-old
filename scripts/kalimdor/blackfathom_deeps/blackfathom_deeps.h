@@ -43,23 +43,23 @@ enum
     GO_SHRINE_4                 = 21121,
 };
 
-/* This is the spawn pattern for the event mobs
-*     D
-* 0        3
-* 1   S    4
-* 2        5
-*     E
+    /* This is the spawn pattern for the event mobs
+    *     D
+    * 0        3
+    * 1   S    4
+    * 2        5
+    *     E
 
-* This event spawns 4 sets of mobs
-* The order in whitch the fires are lit doesn't matter
+    * This event spawns 4 sets of mobs
+    * The order in whitch the fires are lit doesn't matter
 
-* First:    3 Snapjaws:     Positions 0, 1, 5
-* Second:   2 Servants:     Positions 1, 4
-* Third:    4 Crabs:        Positions 0, 2, 3, 4
-* Fourth:  10 Murkshallows: Positions 2*0, 1, 2*2; 3, 2*4, 2*5
+    * First:    3 Snapjaws:     Positions 0, 1, 5
+    * Second:   2 Servants:     Positions 1, 4
+    * Third:    4 Crabs:        Positions 0, 2, 3, 4
+    * Fourth:  10 Murkshallows: Positions 2*0, 1, 2*2; 3, 2*4, 2*5
 
-* On wipe the mobs don't despawn; they stay there until player returns
-*/
+    * On wipe the mobs don't despawn; they stay there until player returns
+    */
 
 struct Locations
 {
@@ -68,12 +68,12 @@ struct Locations
 
 static const Locations aSpawnLocations[6] =                 // Should be near the correct positions
 {
-    { -768.949f, -174.413f, -25.87f, 3.09f},                // Left side
-    { -768.888f, -164.238f, -25.87f, 3.09f},
-    { -768.951f, -153.911f, -25.88f, 3.09f},
-    { -867.782f, -174.352f, -25.87f, 6.27f},                // Right side
-    { -867.875f, -164.089f, -25.87f, 6.27f},
-    { -867.859f, -153.927f, -25.88f, 6.27f}
+    {-768.949f, -174.413f, -25.87f, 3.09f},                 // Left side
+    {-768.888f, -164.238f, -25.87f, 3.09f},
+    {-768.951f, -153.911f, -25.88f, 3.09f},
+    {-867.782f, -174.352f, -25.87f, 6.27f},                 // Right side
+    {-867.875f, -164.089f, -25.87f, 6.27f},
+    {-867.859f, -153.927f, -25.88f, 6.27f}
 };
 
 struct PosCount
@@ -101,35 +101,35 @@ static const SummonInformation aWaveSummonInformation[] =
 
 class MANGOS_DLL_DECL instance_blackfathom_deeps : public ScriptedInstance
 {
-public:
-    instance_blackfathom_deeps(Map* pMap);
-    ~instance_blackfathom_deeps() {}
+    public:
+        instance_blackfathom_deeps(Map* pMap);
+        ~instance_blackfathom_deeps() {}
 
-    void Initialize();
+        void Initialize();
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
-    void OnCreatureDeath(Creature* pCreature);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
+        void OnCreatureDeath(Creature* pCreature);
 
-    void Update(uint32 uiDiff);
+        void Update(uint32 uiDiff);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-protected:
-    void DoSpawnMobs(uint8 uiWaveIndex);
-    bool IsWaveEventFinished();
+    protected:
+        void DoSpawnMobs(uint8 uiWaveIndex);
+        bool IsWaveEventFinished();
 
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    uint32 m_uiSpawnMobsTimer[MAX_FIRES];
-    uint8 m_uiWaveCounter;
+        uint32 m_uiSpawnMobsTimer[MAX_FIRES];
+        uint8 m_uiWaveCounter;
 
-    std::list<uint32> m_lWaveMobsGuids[MAX_FIRES];
+        std::list<uint32> m_lWaveMobsGuids[MAX_FIRES];
 };
 
 #endif

@@ -37,20 +37,20 @@ enum
 
 class MANGOS_DLL_DECL instance_scarlet_monastery : public ScriptedInstance
 {
-public:
-    instance_scarlet_monastery(Map* pMap);
+    public:
+        instance_scarlet_monastery(Map* pMap);
 
-    void Initialize();
+        void Initialize();
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnCreatureDeath(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnCreatureDeath(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiData);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiData);
 
-private:
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
+    private:
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
 };
 
 #endif

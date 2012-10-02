@@ -147,7 +147,7 @@ struct MANGOS_DLL_DECL npc_eris_havenfireAI : public ScriptedAI
             if (m_uiSaveCounter >= 50 && m_uiCurrentWave == 5)
                 DoBalanceEventEnd();
             // Phase ended
-            else if (m_uiSaveCounter + m_uiKillCounter == m_uiCurrentWave * MAX_PEASANTS)
+            else if (m_uiSaveCounter + m_uiKillCounter == m_uiCurrentWave*MAX_PEASANTS)
                 DoHandlePhaseEnd();
         }
     }
@@ -167,7 +167,7 @@ struct MANGOS_DLL_DECL npc_eris_havenfireAI : public ScriptedAI
                 DoScriptText(SAY_EVENT_FAIL_1, m_creature);
                 m_uiSadEndTimer = 4000;
             }
-            else if (m_uiSaveCounter + m_uiKillCounter == m_uiCurrentWave * MAX_PEASANTS)
+            else if (m_uiSaveCounter + m_uiKillCounter == m_uiCurrentWave*MAX_PEASANTS)
                 DoHandlePhaseEnd();
         }
     }
@@ -257,7 +257,7 @@ struct MANGOS_DLL_DECL npc_eris_havenfireAI : public ScriptedAI
         {
             if (m_uiEventTimer <= uiDiff)
             {
-                switch (m_uiPhase)
+                switch(m_uiPhase)
                 {
                     case 0:
                         DoSummonWave(NPC_SCOURGE_ARCHER);

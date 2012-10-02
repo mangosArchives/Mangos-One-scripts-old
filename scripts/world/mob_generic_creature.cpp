@@ -44,10 +44,10 @@ struct MANGOS_DLL_DECL generic_creatureAI : public ScriptedAI
 
     void Aggro(Unit *who)
     {
-        if (!m_creature->CanReachWithMeleeAttack(who))
-        {
-            IsSelfRooted = true;
-        }
+            if (!m_creature->CanReachWithMeleeAttack(who))
+            {
+                IsSelfRooted = true;
+            }
     }
 
     void UpdateAI(const uint32 diff)
@@ -76,8 +76,7 @@ struct MANGOS_DLL_DECL generic_creatureAI : public ScriptedAI
                     BuffTimer = 600000;
                 }//Try agian in 30 seconds
                 else BuffTimer = 30000;
-            }
-            else BuffTimer -= diff;
+            }else BuffTimer -= diff;
 
         //Return since we have no target
         if (!m_creature->SelectHostileTarget() || !m_creature->getVictim())
@@ -128,11 +127,11 @@ struct MANGOS_DLL_DECL generic_creatureAI : public ScriptedAI
             if (m_creature->GetHealthPercent() < 30.0f && !urand(0, 2))
                 info = SelectSpell(m_creature, -1, -1, SELECT_TARGET_ANY_FRIEND, 0, 0, 0, 0, SELECT_EFFECT_HEALING);
 
-            //No healing spell available, See if we can cast a ranged spell (Range must be greater than ATTACK_DISTANCE)
+                //No healing spell available, See if we can cast a ranged spell (Range must be greater than ATTACK_DISTANCE)
             if (info) Healing = true;
             else info = SelectSpell(m_creature->getVictim(), -1, -1, SELECT_TARGET_ANY_ENEMY, 0, 0, ATTACK_DISTANCE, 0, SELECT_EFFECT_DONTCARE);
 
-            //Found a spell, check if we arn't on cooldown
+                //Found a spell, check if we arn't on cooldown
             if (info && !GlobalCooldown)
             {
                 //If we are currently moving stop us and set the movement generator
@@ -142,8 +141,8 @@ struct MANGOS_DLL_DECL generic_creatureAI : public ScriptedAI
                 }
 
                 //Cast spell
-                if (Healing) DoCastSpell(m_creature, info);
-                else DoCastSpell(m_creature->getVictim(), info);
+                if (Healing) DoCastSpell(m_creature,info);
+                else DoCastSpell(m_creature->getVictim(),info);
 
                 //Set our global cooldown
                 GlobalCooldown = GENERIC_CREATURE_COOLDOWN;

@@ -91,9 +91,9 @@ struct SpawnLocation
 // at first spawn portals got fixed coords, should be shuffled in subsequent beam phases
 static const SpawnLocation aPortalCoordinates[MAX_PORTALS] =
 {
-    { -11195.14f, -1616.375f, 278.3217f, 6.230825f},
-    { -11108.13f, -1602.839f, 280.0323f, 3.717551f},
-    { -11139.78f, -1681.278f, 278.3217f, 1.396263f},
+    {-11195.14f, -1616.375f, 278.3217f, 6.230825f},
+    {-11108.13f, -1602.839f, 280.0323f, 3.717551f},
+    {-11139.78f, -1681.278f, 278.3217f, 1.396263f},
 };
 
 enum NetherspitePhases
@@ -134,9 +134,9 @@ struct MANGOS_DLL_DECL boss_netherspiteAI : public ScriptedAI
         m_uiActivePhase       = BEAM_PHASE;
 
         m_uiEmpowermentTimer  = 10000;
-        m_uiEnrageTimer       = 9 * MINUTE * IN_MILLISECONDS;
+        m_uiEnrageTimer       = 9*MINUTE*IN_MILLISECONDS;
         m_uiVoidZoneTimer     = 15000;
-        m_uiPhaseSwitchTimer  = MINUTE * IN_MILLISECONDS;
+        m_uiPhaseSwitchTimer  = MINUTE*IN_MILLISECONDS;
 
         SetCombatMovement(true);
 
@@ -199,7 +199,7 @@ struct MANGOS_DLL_DECL boss_netherspiteAI : public ScriptedAI
 
             DoSummonPortals();
             m_uiEmpowermentTimer  = 10000;
-            m_uiPhaseSwitchTimer  = MINUTE * IN_MILLISECONDS;
+            m_uiPhaseSwitchTimer  = MINUTE*IN_MILLISECONDS;
         }
 
         //reset threat every phase switch

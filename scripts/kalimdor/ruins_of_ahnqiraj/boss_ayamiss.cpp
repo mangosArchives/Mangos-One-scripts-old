@@ -56,10 +56,10 @@ struct SummonLocation
 // Spawn locations
 static const SummonLocation aAyamissSpawnLocs[] =
 {
-    { -9674.4707f, 1528.4133f, 22.457f},        // larva
-    { -9701.6005f, 1566.9993f, 24.118f},        // larva
-    { -9647.352f, 1578.062f, 55.32f},           // anchor point for swarmers
-    { -9717.18f, 1517.72f, 27.4677f},           // teleport location - need to be hardcoded because the player is teleported after the larva is summoned
+    {-9674.4707f, 1528.4133f, 22.457f},         // larva
+    {-9701.6005f, 1566.9993f, 24.118f},         // larva
+    {-9647.352f, 1578.062f, 55.32f},            // anchor point for swarmers
+    {-9717.18f, 1517.72f, 27.4677f},            // teleport location - need to be hardcoded because the player is teleported after the larva is summoned
 };
 
 struct MANGOS_DLL_DECL boss_ayamissAI : public ScriptedAI

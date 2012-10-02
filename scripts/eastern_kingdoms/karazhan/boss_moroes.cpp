@@ -48,10 +48,10 @@ enum
 
 static const float afLocations[MAX_ACTIVE_GUESTS][4] =
 {
-    { -10991.0f, -1884.33f, 81.73f, 0.614315f},
-    { -10989.4f, -1885.88f, 81.73f, 0.904913f},
-    { -10978.1f, -1887.07f, 81.73f, 2.035550f},
-    { -10975.9f, -1885.81f, 81.73f, 2.253890f}
+    {-10991.0f, -1884.33f, 81.73f, 0.614315f},
+    {-10989.4f, -1885.88f, 81.73f, 0.904913f},
+    {-10978.1f, -1887.07f, 81.73f, 2.035550f},
+    {-10975.9f, -1885.81f, 81.73f, 2.253890f}
 };
 
 static const uint32 auiGuests[MAX_GUESTS] =
@@ -105,7 +105,7 @@ struct MANGOS_DLL_DECL boss_moroesAI : public ScriptedAI
 
     void KilledUnit(Unit* pVictim)
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_KILL_1, m_creature); break;
             case 1: DoScriptText(SAY_KILL_2, m_creature); break;

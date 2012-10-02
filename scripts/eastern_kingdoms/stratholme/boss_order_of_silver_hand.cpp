@@ -118,7 +118,7 @@ struct MANGOS_DLL_DECL boss_silver_hand_bossesAI : public ScriptedAI
     {
         Unit* pTarget = NULL;
 
-        switch (m_aSilverHandAbility[uiIndex].m_uiTargetType)
+        switch(m_aSilverHandAbility[uiIndex].m_uiTargetType)
         {
             case TARGET_TYPE_SELF:
                 pTarget = m_creature;

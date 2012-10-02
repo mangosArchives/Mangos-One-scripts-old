@@ -113,7 +113,7 @@ struct MANGOS_DLL_DECL boss_alarAI : public ScriptedAI
         m_uiPlatformMoveTimer   = 35000;
         m_uiFlameQuillsTimer    = 170000;                       // at the 5th platform
 
-        m_uiBerserkTimer        = 10 * MINUTE * IN_MILLISECONDS; // only after phase 2 starts
+        m_uiBerserkTimer        = 10*MINUTE*IN_MILLISECONDS;    // only after phase 2 starts
         m_uiFlamePatchTimer     = 20000;
         m_uiDiveBombTimer       = 30000;
         m_uiMeltArmorTimer      = 10000;
@@ -121,9 +121,9 @@ struct MANGOS_DLL_DECL boss_alarAI : public ScriptedAI
         m_bCanSummonEmber       = true;
     }
 
-    void Aggro(Unit* pWho)
+    void Aggro (Unit* pWho)
     {
-        if (m_pInstance)
+        if(m_pInstance)
             m_pInstance->SetData(TYPE_ALAR, IN_PROGRESS);
 
         // The boss will always move to the first platform from the left side; also set the movement to idle to stop the DB movement
@@ -133,13 +133,13 @@ struct MANGOS_DLL_DECL boss_alarAI : public ScriptedAI
 
     void JustReachedHome()
     {
-        if (m_pInstance)
+        if(m_pInstance)
             m_pInstance->SetData(TYPE_ALAR, FAIL);
     }
 
     void JustDied(Unit* pKiller)
     {
-        if (m_pInstance)
+        if(m_pInstance)
             m_pInstance->SetData(TYPE_ALAR, DONE);
     }
 
@@ -255,7 +255,7 @@ struct MANGOS_DLL_DECL boss_alarAI : public ScriptedAI
 
     void UpdateAI(const uint32 uiDiff)
     {
-        if (!m_creature->SelectHostileTarget() || !m_creature->getVictim())
+        if(!m_creature->SelectHostileTarget() || !m_creature->getVictim())
             return;
 
         // Platform phase
@@ -302,7 +302,7 @@ struct MANGOS_DLL_DECL boss_alarAI : public ScriptedAI
             if (m_uiBerserkTimer < uiDiff)
             {
                 if (DoCastSpellIfCan(m_creature, SPELL_BERSERK) == CAST_OK)
-                    m_uiBerserkTimer = 10 * MINUTE * IN_MILLISECONDS;
+                    m_uiBerserkTimer = 10*MINUTE*IN_MILLISECONDS;
             }
             else
                 m_uiBerserkTimer -= uiDiff;
@@ -346,7 +346,7 @@ struct MANGOS_DLL_DECL boss_alarAI : public ScriptedAI
 
 CreatureAI* GetAI_boss_alar(Creature *pCreature)
 {
-    return new boss_alarAI(pCreature);
+    return new boss_alarAI (pCreature);
 }
 
 void AddSC_boss_alar()

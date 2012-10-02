@@ -55,7 +55,7 @@ bool instance_zulaman::IsEncounterInProgress() const
 
 void instance_zulaman::OnCreatureCreate(Creature* pCreature)
 {
-    switch (pCreature->GetEntry())
+    switch(pCreature->GetEntry())
     {
         case NPC_AKILZON:
         case NPC_HALAZZI:
@@ -67,7 +67,7 @@ void instance_zulaman::OnCreatureCreate(Creature* pCreature)
         case NPC_EAGLE_SPIRIT:
         case NPC_LYNX_SPIRIT:
         case NPC_DRAGONHAWK_SPIRIT:
-            // Insert Malacrass companions here for better handling
+        // Insert Malacrass companions here for better handling
         case NPC_ALYSON:
         case NPC_THURG:
         case NPC_SLITHER:
@@ -102,7 +102,7 @@ void instance_zulaman::OnCreatureCreate(Creature* pCreature)
 
 void instance_zulaman::OnCreatureDeath(Creature* pCreature)
 {
-    switch (pCreature->GetEntry())
+    switch(pCreature->GetEntry())
     {
         case NPC_MEDICINE_MAN:
         case NPC_TRIBES_MAN:
@@ -132,7 +132,7 @@ void instance_zulaman::OnCreatureDeath(Creature* pCreature)
 
 void instance_zulaman::OnCreatureEvade(Creature* pCreature)
 {
-    switch (pCreature->GetEntry())
+    switch(pCreature->GetEntry())
     {
         case NPC_MEDICINE_MAN:
         case NPC_TRIBES_MAN:
@@ -152,7 +152,7 @@ void instance_zulaman::OnCreatureEvade(Creature* pCreature)
 
 void instance_zulaman::OnObjectCreate(GameObject* pGo)
 {
-    switch (pGo->GetEntry())
+    switch(pGo->GetEntry())
     {
         case GO_STRANGE_GONG:
             break;
@@ -187,7 +187,7 @@ void instance_zulaman::OnObjectCreate(GameObject* pGo)
 
 void instance_zulaman::SetData(uint32 uiType, uint32 uiData)
 {
-    debug_log("SD2: Instance Zulaman: SetData received for type %u with data %u", uiType, uiData);
+    debug_log("SD2: Instance Zulaman: SetData received for type %u with data %u",uiType,uiData);
 
     switch (uiType)
     {
@@ -314,8 +314,8 @@ void instance_zulaman::SetData(uint32 uiType, uint32 uiData)
 
         std::ostringstream saveStream;
         saveStream << m_auiEncounter[0] << " " << m_auiEncounter[1] << " " << m_auiEncounter[2] << " "
-                   << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5] << " "
-                   << m_auiEncounter[6] << " " << m_auiEncounter[7];
+            << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5] << " "
+            << m_auiEncounter[6] << " " << m_auiEncounter[7];
 
         m_strInstData = saveStream.str();
 
@@ -336,7 +336,7 @@ void instance_zulaman::Load(const char* chrIn)
 
     std::istringstream loadStream(chrIn);
     loadStream >> m_auiEncounter[0] >> m_auiEncounter[1] >> m_auiEncounter[2] >> m_auiEncounter[3]
-               >> m_auiEncounter[4] >> m_auiEncounter[5] >> m_auiEncounter[6] >> m_auiEncounter[7];
+        >> m_auiEncounter[4] >> m_auiEncounter[5] >> m_auiEncounter[6] >> m_auiEncounter[7];
 
     // Skip m_auiEncounter[7], to start the time event properly if needed
     for (uint8 i = 0; i < MAX_ENCOUNTER - 1; ++i)
@@ -461,7 +461,7 @@ void instance_zulaman::Update(uint32 uiDiff)
             SetData(TYPE_RUN_EVENT_TIME, m_auiEncounter[TYPE_RUN_EVENT_TIME]);
             debug_log("SD2: Instance Zulaman: minute decrease to %u.", m_auiEncounter[TYPE_RUN_EVENT_TIME]);
 
-            m_uiEventTimer = MINUTE * IN_MILLISECONDS;
+            m_uiEventTimer = MINUTE*IN_MILLISECONDS;
         }
         else
             m_uiEventTimer -= uiDiff;

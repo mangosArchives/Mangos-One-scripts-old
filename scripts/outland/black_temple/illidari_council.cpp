@@ -60,21 +60,21 @@ struct CouncilYells
     uint32 timer;
 };
 
-static const CouncilYells CouncilAggro[] =
+static const CouncilYells CouncilAggro[]=
 {
-    { -1564069, 5000},                                      // Gathios
-    { -1564070, 5500},                                      // Veras
-    { -1564071, 5000},                                      // Malande
-    { -1564072, 0},                                         // Zerevor
+    {-1564069, 5000},                                       // Gathios
+    {-1564070, 5500},                                       // Veras
+    {-1564071, 5000},                                       // Malande
+    {-1564072, 0},                                          // Zerevor
 };
 
 // Need to get proper timers for this later
-static const CouncilYells CouncilEnrage[] =
+static const CouncilYells CouncilEnrage[]=
 {
-    { -1564073, 2000},                                      // Gathios
-    { -1564074, 6000},                                      // Veras
-    { -1564075, 5000},                                      // Malande
-    { -1564076, 0},                                         // Zerevor
+    {-1564073, 2000},                                       // Gathios
+    {-1564074, 6000},                                       // Veras
+    {-1564075, 5000},                                       // Malande
+    {-1564076, 0},                                          // Zerevor
 };
 
 enum
@@ -139,7 +139,7 @@ struct MANGOS_DLL_DECL mob_blood_elf_council_voice_triggerAI : public ScriptedAI
 
     void Reset()
     {
-        m_uiEnrageTimer = 15 * MINUTE * IN_MILLISECONDS;    // 15 minutes
+        m_uiEnrageTimer = 15*MINUTE*IN_MILLISECONDS;        // 15 minutes
         m_uiAggroYellTimer = 500;
         m_uiYellCounter = 0;
 
@@ -234,7 +234,7 @@ struct MANGOS_DLL_DECL mob_illidari_councilAI : public ScriptedAI
 
             m_pInstance->SetData(TYPE_COUNCIL, NOT_STARTED);
 
-            for (uint8 i = 0; i < 4; ++i)
+            for(uint8 i = 0; i < 4; ++i)
             {
                 if (Creature* pMember = m_pInstance->GetSingleCreatureFromStorage(aCouncilMember[i]))
                 {
@@ -269,7 +269,7 @@ struct MANGOS_DLL_DECL mob_illidari_councilAI : public ScriptedAI
                     pVoiceAI->StartVoiceEvent();
             }
 
-            for (uint8 i = 0; i < 4; ++i)
+            for(uint8 i = 0; i < 4; ++i)
             {
                 Creature* pMember = m_pInstance->GetSingleCreatureFromStorage(aCouncilMember[i]);
                 if (pMember && pMember->isAlive() && !pMember->isInCombat())
@@ -317,7 +317,7 @@ struct MANGOS_DLL_DECL mob_illidari_councilAI : public ScriptedAI
             if (m_uiCheckTimer <= diff)
             {
                 uint8 EvadeCheck = 0;
-                for (uint8 i = 0; i < 4; ++i)
+                for(uint8 i = 0; i < 4; ++i)
                 {
                     if (Creature* Member = m_pInstance->GetSingleCreatureFromStorage(aCouncilMember[i]))
                     {
@@ -379,7 +379,7 @@ struct MANGOS_DLL_DECL boss_illidari_councilAI : public ScriptedAI
         if (!m_pInstance)
             return;
 
-        for (uint8 i = 0; i < 4; ++i)
+        for(uint8 i = 0; i < 4; ++i)
         {
             if (Creature* pCouncil = m_pInstance->GetSingleCreatureFromStorage(aCouncilMember[i]))
             {
@@ -442,7 +442,7 @@ struct MANGOS_DLL_DECL boss_gathios_the_shattererAI : public boss_illidari_counc
     void CastAuraOnCouncil()
     {
         uint32 uiSpellid = 0;
-        switch (urand(0, 1))
+        switch(urand(0, 1))
         {
             case 0: uiSpellid = SPELL_DEVOTION_AURA;   break;
             case 1: uiSpellid = SPELL_CHROMATIC_AURA;  break;
@@ -451,7 +451,7 @@ struct MANGOS_DLL_DECL boss_gathios_the_shattererAI : public boss_illidari_counc
         if (!m_pInstance)
             return;
 
-        for (uint8 i = 0; i < 4; ++i)
+        for(uint8 i = 0; i < 4; ++i)
         {
             if (Creature* pCouncil = m_pInstance->GetSingleCreatureFromStorage(aCouncilMember[i]))
                 pCouncil->CastSpell(pCouncil, uiSpellid, true, NULL, NULL, m_creature->GetObjectGuid());
@@ -753,12 +753,12 @@ struct MANGOS_DLL_DECL boss_veras_darkshadowAI : public boss_illidari_councilAI
                 if (Unit* pTarget = m_creature->SelectAttackingTarget(ATTACKING_TARGET_RANDOM, 0))
                 {
                     m_uiVanishTimer = 30000;
-                    m_uiAppearEnvenomTimer = 28000;
+                    m_uiAppearEnvenomTimer= 28000;
                     m_bHasVanished = true;
                     m_creature->SetVisibility(VISIBILITY_OFF);
                     m_creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                     DoResetThreat();
-                    // Chase a unit. Check before DoMeleeAttackIfReady prevents from attacking
+                                                            // Chase a unit. Check before DoMeleeAttackIfReady prevents from attacking
                     m_creature->AddThreat(pTarget, 500000.0f);
                     m_creature->GetMotionMaster()->MoveChase(pTarget);
                 }

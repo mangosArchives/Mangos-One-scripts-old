@@ -108,7 +108,7 @@ struct MANGOS_DLL_DECL boss_high_king_maulgarAI : public ScriptedAI
 
     void KilledUnit(Unit* pVictim)
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_SLAY1, m_creature); break;
             case 1: DoScriptText(SAY_SLAY2, m_creature); break;
@@ -135,7 +135,7 @@ struct MANGOS_DLL_DECL boss_high_king_maulgarAI : public ScriptedAI
 
     void EventCouncilDeath()
     {
-        switch (++m_uiCouncilDeathCount)
+        switch(++m_uiCouncilDeathCount)
         {
             case 1: DoScriptText(SAY_OGRE_DEATH1, m_creature); break;
             case 2: DoScriptText(SAY_OGRE_DEATH2, m_creature); break;
@@ -311,7 +311,7 @@ struct MANGOS_DLL_DECL boss_kiggler_the_crazedAI : public Council_Base_AI
             if (pVictim->GetTypeId() != TYPEID_PLAYER)
                 return;
 
-            m_creature->getThreatManager().modifyThreatPercent(pVictim, -75);
+            m_creature->getThreatManager().modifyThreatPercent(pVictim,-75);
         }
     }
 

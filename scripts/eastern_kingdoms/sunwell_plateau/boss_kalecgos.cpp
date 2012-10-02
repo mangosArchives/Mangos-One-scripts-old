@@ -62,7 +62,7 @@ enum
     SPELL_HEROIC_STRIKE             = 45026,
     SPELL_REVITALIZE                = 45027,
 
-    //Sathrovarr
+     //Sathrovarr
     SPELL_SPECTRAL_INVISIBILITY     = 44801,
     SPELL_CORRUPTING_STRIKE         = 45029,
     SPELL_CURSE_OF_BOUNDLESS_AGONY  = 45032,
@@ -76,7 +76,7 @@ enum
     SPELL_BANISH                    = 44836
 };
 
-static const uint32 aWildMagicSpells[6] = {44978, 45001, 45002, 45004, 45006, 45010};
+static const uint32 aWildMagicSpells[6]= {44978, 45001, 45002, 45004, 45006, 45010};
 
 struct MANGOS_DLL_DECL boss_kalecgosAI : public ScriptedAI
 {

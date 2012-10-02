@@ -72,7 +72,7 @@ struct MANGOS_DLL_DECL boss_doomlordkazzakAI : public ScriptedAI
         m_uiVoidBoltTimer           = 30000;
         m_uiMarkOfKazzakTimer       = 25000;
         m_uiEnrageTimer             = 60000;
-        m_uiGreatEnrageTimer        = 3 * MINUTE * IN_MILLISECONDS;
+        m_uiGreatEnrageTimer        = 3*MINUTE*IN_MILLISECONDS;
         m_uiTwistedReflectionTimer  = 33000;                   // Timer may be incorrect
     }
 
@@ -93,7 +93,7 @@ struct MANGOS_DLL_DECL boss_doomlordkazzakAI : public ScriptedAI
         if (pVictim->GetTypeId() != TYPEID_PLAYER)
             return;
 
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_KILL1, m_creature); break;
             case 1: DoScriptText(SAY_KILL2, m_creature); break;

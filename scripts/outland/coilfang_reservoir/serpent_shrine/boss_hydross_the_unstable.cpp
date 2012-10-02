@@ -70,8 +70,8 @@ enum
 const float afSpawnDiffs[4][2] =
 {
     {6.934003f  , -11.255012f},                             // diff 1
-    { -6.934003f , 11.255012f },                            // diff 2
-    { -12.577011f, -4.72702f  },                            // diff 3
+    {-6.934003f , 11.255012f },                             // diff 2
+    {-12.577011f, -4.72702f  },                             // diff 3
     {12.577011f , 4.72702f   }                              // diff 4
 };
 
@@ -129,9 +129,9 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
     void KilledUnit(Unit* pVictim)
     {
         if (m_bCorruptedForm)
-            DoScriptText(urand(0, 1) ? SAY_CORRUPT_SLAY1 : SAY_CORRUPT_SLAY2, m_creature);
+            DoScriptText(urand(0,1) ? SAY_CORRUPT_SLAY1 : SAY_CORRUPT_SLAY2, m_creature);
         else
-            DoScriptText(urand(0, 1) ? SAY_CLEAN_SLAY1 : SAY_CLEAN_SLAY2, m_creature);
+            DoScriptText(urand(0,1) ? SAY_CLEAN_SLAY1 : SAY_CLEAN_SLAY2, m_creature);
     }
 
     void JustSummoned(Creature* pSummoned)
@@ -154,9 +154,9 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
 
     void SpawnAdds()
     {
-        for (uint8 i = 0; i < 4; ++i)
+        for(uint8 i = 0; i < 4; ++i)
             DoSpawnCreature(m_bCorruptedForm ? NPC_TAINTED_SPAWN : NPC_PURE_SPAWN,
-                            afSpawnDiffs[i][0], afSpawnDiffs[i][1], 0.0f, 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 10000);
+                afSpawnDiffs[i][0], afSpawnDiffs[i][1], 0.0f, 0.0f, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 10000);
     }
 
     void UpdateAI(const uint32 uiDiff)
@@ -175,7 +175,7 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
                 {
                     uint32 uiMarkSpell = 0;
 
-                    switch (m_uiMarkOfCorruption_Count)
+                    switch(m_uiMarkOfCorruption_Count)
                     {
                         case 0: uiMarkSpell = SPELL_MARK_OF_CORRUPTION1; break;
                         case 1: uiMarkSpell = SPELL_MARK_OF_CORRUPTION2; break;
@@ -192,8 +192,7 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
                 }
 
                 m_uiMarkOfCorruption_Timer = 15000;
-            }
-            else m_uiMarkOfCorruption_Timer -= uiDiff;
+            }else m_uiMarkOfCorruption_Timer -= uiDiff;
 
             //VileSludge_Timer
             if (m_uiVileSludge_Timer < uiDiff)
@@ -202,8 +201,7 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
                     DoCastSpellIfCan(pTarget, SPELL_VILE_SLUDGE);
 
                 m_uiVileSludge_Timer = 15000;
-            }
-            else m_uiVileSludge_Timer -= uiDiff;
+            }else m_uiVileSludge_Timer -= uiDiff;
 
             //PosCheck_Timer
             if (m_uiPosCheck_Timer < uiDiff)
@@ -231,8 +229,7 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
                 }
 
                 m_uiPosCheck_Timer = 2500;
-            }
-            else m_uiPosCheck_Timer -= uiDiff;
+            }else m_uiPosCheck_Timer -=uiDiff;
         }
         // clean form
         else
@@ -244,7 +241,7 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
                 {
                     uint32 uiMarkSpell = 0;
 
-                    switch (m_uiMarkOfHydross_Count)
+                    switch(m_uiMarkOfHydross_Count)
                     {
                         case 0: uiMarkSpell = SPELL_MARK_OF_HYDROSS1; break;
                         case 1: uiMarkSpell = SPELL_MARK_OF_HYDROSS2; break;
@@ -261,8 +258,7 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
                 }
 
                 m_uiMarkOfHydross_Timer = 15000;
-            }
-            else m_uiMarkOfHydross_Timer -= uiDiff;
+            }else m_uiMarkOfHydross_Timer -= uiDiff;
 
             //WaterTomb_Timer
             if (m_uiWaterTomb_Timer < uiDiff)
@@ -271,8 +267,7 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
                     DoCastSpellIfCan(pTarget, SPELL_WATER_TOMB);
 
                 m_uiWaterTomb_Timer = 7000;
-            }
-            else m_uiWaterTomb_Timer -= uiDiff;
+            }else m_uiWaterTomb_Timer -= uiDiff;
 
             //PosCheck_Timer
             if (m_uiPosCheck_Timer < uiDiff)
@@ -300,8 +295,7 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
                 }
 
                 m_uiPosCheck_Timer = 2500;
-            }
-            else m_uiPosCheck_Timer -= uiDiff;
+            }else m_uiPosCheck_Timer -=uiDiff;
         }
 
         //EnrageTimer
@@ -309,8 +303,7 @@ struct MANGOS_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
         {
             DoCastSpellIfCan(m_creature, SPELL_ENRAGE);
             m_uiEnrageTimer = 60000;
-        }
-        else m_uiEnrageTimer -= uiDiff;
+        }else m_uiEnrageTimer -= uiDiff;
 
         DoMeleeAttackIfReady();
     }

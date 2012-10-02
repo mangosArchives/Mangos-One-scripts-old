@@ -97,7 +97,7 @@ struct MANGOS_DLL_DECL boss_scarlet_commander_mograineAI : public ScriptedAI
     void Aggro(Unit* pWho)
     {
         DoScriptText(SAY_MO_AGGRO, m_creature);
-        DoCastSpellIfCan(m_creature, SPELL_RETRIBUTIONAURA);
+        DoCastSpellIfCan(m_creature,SPELL_RETRIBUTIONAURA);
 
         m_creature->CallForHelp(VISIBLE_RANGE);
     }
@@ -265,7 +265,7 @@ struct MANGOS_DLL_DECL boss_high_inquisitor_whitemaneAI : public ScriptedAI
         if (!m_bCanResurrectCheck || m_bCanResurrect)
         {
             // prevent killing blow before rezzing commander
-            m_creature->SetHealth(uiDamage + 1);
+            m_creature->SetHealth(uiDamage+1);
         }
     }
 

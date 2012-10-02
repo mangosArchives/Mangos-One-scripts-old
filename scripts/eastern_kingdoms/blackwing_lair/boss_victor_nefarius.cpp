@@ -79,10 +79,10 @@ struct SpawnLocation
 
 static const SpawnLocation aNefarianLocs[4] =
 {
-    { -7599.32f, -1191.72f, 475.545f},                      // opening where red/blue/black darknid spawner appear (ori 3.05433)
-    { -7526.27f, -1135.04f, 473.445f},                      // same as above, closest to door (ori 5.75959)
-    { -7498.177f, -1273.277f, 481.649f},                    // nefarian spawn location (ori 1.798)
-    { -7502.002f, -1256.503f, 476.758f},                    // nefarian fly to this position
+    {-7599.32f, -1191.72f, 475.545f},                       // opening where red/blue/black darknid spawner appear (ori 3.05433)
+    {-7526.27f, -1135.04f, 473.445f},                       // same as above, closest to door (ori 5.75959)
+    {-7498.177f, -1273.277f, 481.649f},                     // nefarian spawn location (ori 1.798)
+    {-7502.002f, -1256.503f, 476.758f},                     // nefarian fly to this position
 };
 
 static const uint32 aPossibleDrake[MAX_DRAKES] = {NPC_BRONZE_DRAKANOID, NPC_BLUE_DRAKANOID, NPC_RED_DRAKANOID, NPC_GREEN_DRAKANOID, NPC_BLACK_DRAKANOID};
@@ -374,7 +374,7 @@ bool GossipHello_boss_victor_nefarius(Player* pPlayer, Creature* pCreature)
     if (pCreature->GetMapId() != MAP_ID_BWL)
         return true;
 
-    pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_NEFARIUS_1 , GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+    pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_NEFARIUS_1 , GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
     pPlayer->SEND_GOSSIP_MENU(GOSSIP_TEXT_NEFARIUS_1, pCreature->GetObjectGuid());
     return true;
 }
@@ -384,16 +384,16 @@ bool GossipSelect_boss_victor_nefarius(Player* pPlayer, Creature* pCreature, uin
     if (pCreature->GetMapId() != MAP_ID_BWL)
         return true;
 
-    switch (uiAction)
+    switch(uiAction)
     {
         case GOSSIP_ACTION_INFO_DEF+1:
             pCreature->HandleEmote(EMOTE_ONESHOT_TALK);
-            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_NEFARIUS_2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_NEFARIUS_2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
             pPlayer->SEND_GOSSIP_MENU(GOSSIP_TEXT_NEFARIUS_2, pCreature->GetObjectGuid());
             break;
         case GOSSIP_ACTION_INFO_DEF+2:
             pCreature->HandleEmote(EMOTE_ONESHOT_TALK);
-            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_NEFARIUS_3, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 3);
+            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_NEFARIUS_3, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+3);
             pPlayer->SEND_GOSSIP_MENU(GOSSIP_TEXT_NEFARIUS_3, pCreature->GetObjectGuid());
             break;
         case GOSSIP_ACTION_INFO_DEF+3:

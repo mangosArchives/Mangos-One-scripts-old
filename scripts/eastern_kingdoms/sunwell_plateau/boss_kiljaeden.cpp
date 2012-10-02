@@ -259,7 +259,7 @@ struct MANGOS_DLL_DECL npc_kiljaeden_controllerAI : public Scripted_NoMovementAI
                 m_creature->SummonCreature(NPC_VELEN, aOutroLocations[1].m_fX, aOutroLocations[1].m_fY, aOutroLocations[1].m_fZ, aOutroLocations[1].m_fO, TEMPSUMMON_CORPSE_DESPAWN, 0);
                 break;
             case NPC_LIADRIN:
-                m_creature->SummonCreature(NPC_LIADRIN, aOutroLocations[2].m_fX, aOutroLocations[2].m_fY, aOutroLocations[2].m_fZ, aOutroLocations[2].m_fO, TEMPSUMMON_TIMED_DESPAWN, 4 * MINUTE * IN_MILLISECONDS);
+                m_creature->SummonCreature(NPC_LIADRIN, aOutroLocations[2].m_fX, aOutroLocations[2].m_fY, aOutroLocations[2].m_fZ, aOutroLocations[2].m_fO, TEMPSUMMON_TIMED_DESPAWN, 4*MINUTE*IN_MILLISECONDS);
                 break;
             case SPELL_CALL_ENTROPIUS:
                 if (Creature* pVelen = m_pInstance->GetSingleCreatureFromStorage(NPC_VELEN))
@@ -294,7 +294,7 @@ struct MANGOS_DLL_DECL npc_kiljaeden_controllerAI : public Scripted_NoMovementAI
 
     void JustSummoned(Creature* pSummoned)
     {
-        switch (pSummoned->GetEntry())
+        switch(pSummoned->GetEntry())
         {
             case NPC_VELEN:
                 pSummoned->GetMotionMaster()->MovePoint(0, aOutroLocations[3].m_fX, aOutroLocations[3].m_fY, aOutroLocations[3].m_fZ);
@@ -673,13 +673,13 @@ void AddSC_boss_kiljaeden()
     Script* pNewScript;
 
     pNewScript = new Script;
-    pNewScript->Name = "boss_kiljaeden";
+    pNewScript->Name="boss_kiljaeden";
     pNewScript->GetAI = &GetAI_boss_kiljaeden;
     pNewScript->pEffectAuraDummy = &EffectAuraDummy_spell_aura_dummy_darkness_of_souls;
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;
-    pNewScript->Name = "npc_kiljaeden_controller";
+    pNewScript->Name="npc_kiljaeden_controller";
     pNewScript->GetAI = &GetAI_npc_kiljaeden_controller;
     pNewScript->RegisterSelf();
 }

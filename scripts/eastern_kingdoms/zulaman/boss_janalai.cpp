@@ -76,10 +76,10 @@ enum
 
 static const float afFireWallCoords[4][4] =
 {
-    { -10.13f, 1149.27f, 19.0f, M_PI_F},
-    { -33.93f, 1123.90f, 19.0f, 0.5f * M_PI_F},
-    { -54.80f, 1150.08f, 19.0f, 0.0f},
-    { -33.93f, 1175.68f, 19.0f, 1.5f * M_PI_F}
+    {-10.13f, 1149.27f, 19.0f, M_PI_F},
+    {-33.93f, 1123.90f, 19.0f, 0.5f*M_PI_F},
+    {-54.80f, 1150.08f, 19.0f, 0.0f},
+    {-33.93f, 1175.68f, 19.0f, 1.5f*M_PI_F}
 };
 
 struct WaypointDef
@@ -87,24 +87,24 @@ struct WaypointDef
     float m_fX, m_fY, m_fZ;
 };
 
-static const WaypointDef m_aHatcherRight[] =
+static const WaypointDef m_aHatcherRight[]=
 {
-    { -74.783f, 1145.827f, 5.420f},
-    { -54.476f, 1146.934f, 18.705f},
-    { -56.957f, 1146.713f, 18.725f},
-    { -45.428f, 1141.697f, 18.709f},
-    { -34.002f, 1124.427f, 18.711f},
-    { -34.085f, 1106.158f, 18.711f}
+    {-74.783f, 1145.827f, 5.420f},
+    {-54.476f, 1146.934f, 18.705f},
+    {-56.957f, 1146.713f, 18.725f},
+    {-45.428f, 1141.697f, 18.709f},
+    {-34.002f, 1124.427f, 18.711f},
+    {-34.085f, 1106.158f, 18.711f}
 };
 
-static const WaypointDef m_aHatcherLeft[] =
+static const WaypointDef m_aHatcherLeft[]=
 {
-    { -73.569f, 1154.960f, 5.510f},
-    { -54.264f, 1153.968f, 18.705f},
-    { -56.985f, 1153.373f, 18.608f},
-    { -45.515f, 1158.356f, 18.709f},
-    { -33.314f, 1174.816f, 18.709f},
-    { -33.097f, 1195.359f, 18.709f}
+    {-73.569f, 1154.960f, 5.510f},
+    {-54.264f, 1153.968f, 18.705f},
+    {-56.985f, 1153.373f, 18.608f},
+    {-45.515f, 1158.356f, 18.709f},
+    {-33.314f, 1174.816f, 18.709f},
+    {-33.097f, 1195.359f, 18.709f}
 };
 
 struct MANGOS_DLL_DECL boss_janalaiAI : public ScriptedAI
@@ -138,15 +138,15 @@ struct MANGOS_DLL_DECL boss_janalaiAI : public ScriptedAI
     void Reset()
     {
         m_uiFireBreathTimer = 8000;
-        m_uiEnrageTimer     = 5 * MINUTE * IN_MILLISECONDS;
+        m_uiEnrageTimer     = 5*MINUTE*IN_MILLISECONDS;
         m_uiHatcherTimer    = 10000;
-        m_uiBerserkTimer    = 10 * MINUTE * IN_MILLISECONDS;
+        m_uiBerserkTimer    = 10*MINUTE*IN_MILLISECONDS;
         m_uiBombTimer       = 30000;
         m_uiBombAuraTimer   = 0;
         m_uiExplodeTimer    = 0;
 
         m_uiEggsHatchedLeft = 0;
-        m_uiEggsHatchedRight = 0;
+        m_uiEggsHatchedRight= 0;
 
         m_bHasHatchedEggs   = false;
         m_bIsEnraged        = false;
@@ -182,7 +182,7 @@ struct MANGOS_DLL_DECL boss_janalaiAI : public ScriptedAI
 
     void JustSummoned(Creature* pSummoned)
     {
-        switch (pSummoned->GetEntry())
+        switch(pSummoned->GetEntry())
         {
             case NPC_AMANI_HATCHER_1:
                 m_hatcherOneGuid = pSummoned->GetObjectGuid();

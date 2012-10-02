@@ -47,7 +47,7 @@ void instance_ruins_of_ahnqiraj::OnPlayerEnter(Player* pPlayer)
 
 void instance_ruins_of_ahnqiraj::OnCreatureCreate(Creature* pCreature)
 {
-    switch (pCreature->GetEntry())
+    switch(pCreature->GetEntry())
     {
         case NPC_OSSIRIAN_TRIGGER:
             // Only store static spawned
@@ -149,7 +149,7 @@ void instance_ruins_of_ahnqiraj::OnCreatureDeath(Creature* pCreature)
 
 void instance_ruins_of_ahnqiraj::SetData(uint32 uiType, uint32 uiData)
 {
-    switch (uiType)
+    switch(uiType)
     {
         case TYPE_KURINNAXX:
             if (uiData == DONE)
@@ -188,7 +188,7 @@ void instance_ruins_of_ahnqiraj::SetData(uint32 uiType, uint32 uiData)
 
         std::ostringstream saveStream;
         saveStream << m_auiEncounter[0] << " " << m_auiEncounter[1] << " " << m_auiEncounter[2]
-                   << " " << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5];
+            << " " << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5];
 
         m_strInstData = saveStream.str();
 
@@ -199,7 +199,7 @@ void instance_ruins_of_ahnqiraj::SetData(uint32 uiType, uint32 uiData)
 
 uint32 instance_ruins_of_ahnqiraj::GetData(uint32 uiType)
 {
-    if (uiType < MAX_ENCOUNTER)
+   if (uiType < MAX_ENCOUNTER)
         return m_auiEncounter[uiType];
 
     return 0;
@@ -233,7 +233,7 @@ void instance_ruins_of_ahnqiraj::Load(const char* chrIn)
     loadStream >> m_auiEncounter[0] >> m_auiEncounter[1] >> m_auiEncounter[2]
                >> m_auiEncounter[3] >> m_auiEncounter[4] >> m_auiEncounter[5];
 
-    for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+    for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
     {
         if (m_auiEncounter[i] == IN_PROGRESS)
             m_auiEncounter[i] = NOT_STARTED;
@@ -251,7 +251,7 @@ void instance_ruins_of_ahnqiraj::Update(uint32 uiDiff)
             if (m_uiArmyDelayTimer <= uiDiff)
             {
                 DoSendNextArmyWave();
-                m_uiArmyDelayTimer = 2 * MINUTE * IN_MILLISECONDS;
+                m_uiArmyDelayTimer = 2*MINUTE*IN_MILLISECONDS;
             }
             else
                 m_uiArmyDelayTimer -= uiDiff;
@@ -336,7 +336,7 @@ void instance_ruins_of_ahnqiraj::DoSendNextArmyWave()
     }
 
     // on wowwiki it states that there were 3 min between the waves, but this was reduced in later patches
-    m_uiArmyDelayTimer = 2 * MINUTE * IN_MILLISECONDS;
+    m_uiArmyDelayTimer = 2*MINUTE*IN_MILLISECONDS;
     ++m_uiCurrentArmyWave;
 }
 

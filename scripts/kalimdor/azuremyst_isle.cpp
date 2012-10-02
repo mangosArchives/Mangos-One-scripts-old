@@ -89,7 +89,7 @@ struct MANGOS_DLL_DECL npc_draenei_survivorAI : public ScriptedAI
             m_creature->IsWithinDistInMap(pWho, 25.0f))
         {
             //Random switch between 4 texts
-            switch (urand(0, 3))
+            switch(urand(0, 3))
             {
                 case 0: DoScriptText(SAY_HELP1, m_creature, pWho); break;
                 case 1: DoScriptText(SAY_HELP2, m_creature, pWho); break;
@@ -130,7 +130,7 @@ struct MANGOS_DLL_DECL npc_draenei_survivorAI : public ScriptedAI
                     if (pPlayer->GetTypeId() != TYPEID_PLAYER)
                         return;
 
-                    switch (urand(0, 3))
+                    switch(urand(0, 3))
                     {
                         case 0: DoScriptText(SAY_HEAL1, m_creature, pPlayer); break;
                         case 1: DoScriptText(SAY_HEAL2, m_creature, pPlayer); break;
@@ -146,8 +146,7 @@ struct MANGOS_DLL_DECL npc_draenei_survivorAI : public ScriptedAI
 
                 m_uiRunAwayTimer = 10000;
                 m_uiSayThanksTimer = 0;
-            }
-            else m_uiSayThanksTimer -= uiDiff;
+            }else m_uiSayThanksTimer -= uiDiff;
 
             return;
         }
@@ -166,8 +165,7 @@ struct MANGOS_DLL_DECL npc_draenei_survivorAI : public ScriptedAI
         {
             m_bCanSayHelp = true;
             m_uiSayHelpTimer = 20000;
-        }
-        else m_uiSayHelpTimer -= uiDiff;
+        }else m_uiSayHelpTimer -= uiDiff;
     }
 };
 
@@ -300,7 +298,7 @@ struct MANGOS_DLL_DECL npc_injured_draeneiAI : public ScriptedAI
     {
         m_creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IN_COMBAT);
         m_creature->SetHealth(int(m_creature->GetMaxHealth()*.15));
-        switch (urand(0, 1))
+        switch(urand(0, 1))
         {
             case 0: m_creature->SetStandState(UNIT_STAND_STATE_SIT); break;
             case 1: m_creature->SetStandState(UNIT_STAND_STATE_SLEEP); break;
@@ -344,7 +342,7 @@ struct MANGOS_DLL_DECL npc_magwinAI : public npc_escortAI
         if (!pPlayer)
             return;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 0:
                 DoScriptText(SAY_START, m_creature, pPlayer);

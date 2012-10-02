@@ -187,62 +187,62 @@ struct GothTrigger
 
 class MANGOS_DLL_DECL instance_naxxramas : public ScriptedInstance
 {
-public:
-    instance_naxxramas(Map* pMap);
-    ~instance_naxxramas() {}
+    public:
+        instance_naxxramas(Map* pMap);
+        ~instance_naxxramas() {}
 
-    void Initialize();
+        void Initialize();
 
-    bool IsEncounterInProgress() const;
+        bool IsEncounterInProgress() const;
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
 
-    void OnCreatureDeath(Creature* pCreature);
+        void OnCreatureDeath(Creature* pCreature);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-    void Update(uint32 uiDiff);
+        void Update(uint32 uiDiff);
 
-    // Heigan
-    void DoTriggerHeiganTraps(Creature* pHeigan, uint32 uiAreaIndex);
+        // Heigan
+        void DoTriggerHeiganTraps(Creature* pHeigan, uint32 uiAreaIndex);
 
-    // goth
-    void SetGothTriggers();
-    Creature* GetClosestAnchorForGoth(Creature* pSource, bool bRightSide);
-    void GetGothSummonPointCreatures(std::list<Creature*> &lList, bool bRightSide);
-    bool IsInRightSideGothArea(Unit* pUnit);
+        // goth
+        void SetGothTriggers();
+        Creature* GetClosestAnchorForGoth(Creature* pSource, bool bRightSide);
+        void GetGothSummonPointCreatures(std::list<Creature*> &lList, bool bRightSide);
+        bool IsInRightSideGothArea(Unit* pUnit);
 
-    // thaddius
-    void GetThadTeslaCreatures(GuidList &lList) { lList = m_lThadTeslaCoilList; };
+        // thaddius
+        void GetThadTeslaCreatures(GuidList &lList){ lList = m_lThadTeslaCoilList; };
 
-    // kel
-    void SetChamberCenterCoords(float fX, float fY, float fZ);
-    void GetChamberCenterCoords(float &fX, float &fY, float &fZ) { fX = m_fChamberCenterX; fY = m_fChamberCenterY; fZ = m_fChamberCenterZ; }
-    void DoTaunt();
+        // kel
+        void SetChamberCenterCoords(float fX, float fY, float fZ);
+        void GetChamberCenterCoords(float &fX, float &fY, float &fZ) { fX = m_fChamberCenterX; fY = m_fChamberCenterY; fZ = m_fChamberCenterZ; }
+        void DoTaunt();
 
-protected:
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+    protected:
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    GuidList m_lThadTeslaCoilList;
-    GuidList m_lGothTriggerList;
+        GuidList m_lThadTeslaCoilList;
+        GuidList m_lGothTriggerList;
 
-    UNORDERED_MAP<ObjectGuid, GothTrigger> m_mGothTriggerMap;
-    GuidList m_alHeiganTrapGuids[MAX_HEIGAN_TRAP_AREAS];
+        UNORDERED_MAP<ObjectGuid, GothTrigger> m_mGothTriggerMap;
+        GuidList m_alHeiganTrapGuids[MAX_HEIGAN_TRAP_AREAS];
 
-    float m_fChamberCenterX;
-    float m_fChamberCenterY;
-    float m_fChamberCenterZ;
+        float m_fChamberCenterX;
+        float m_fChamberCenterY;
+        float m_fChamberCenterZ;
 
-    uint32 m_uiTauntTimer;
-    uint8 m_uiHorseMenKilled;
+        uint32 m_uiTauntTimer;
+        uint8 m_uiHorseMenKilled;
 
-    DialogueHelper m_dialogueHelper;
+        DialogueHelper m_dialogueHelper;
 };
 
 #endif

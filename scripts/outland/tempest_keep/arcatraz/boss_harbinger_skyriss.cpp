@@ -109,7 +109,7 @@ struct MANGOS_DLL_DECL boss_harbinger_skyrissAI : public ScriptedAI
             return;
 
         // Check if creature is below 66% or 33%; Also don't allow it to split the third time
-        if (m_creature->GetHealthPercent() < 100 - 33 * m_uiSplitPhase && m_creature->GetHealthPercent() > 5.0f)
+        if (m_creature->GetHealthPercent() < 100-33*m_uiSplitPhase && m_creature->GetHealthPercent() > 5.0f)
         {
             DoCastSpellIfCan(m_creature, m_uiSplitPhase == 1 ? SPELL_66_ILLUSION : SPELL_33_ILLUSION, CAST_INTERRUPT_PREVIOUS);
             DoScriptText(SAY_IMAGE, m_creature);
@@ -126,7 +126,7 @@ struct MANGOS_DLL_DECL boss_harbinger_skyrissAI : public ScriptedAI
                 m_uiMindRendTimer = 8000;
         }
         else
-            m_uiMindRendTimer -= uiDiff;
+            m_uiMindRendTimer -=uiDiff;
 
         if (m_uiFearTimer < uiDiff)
         {
@@ -141,7 +141,7 @@ struct MANGOS_DLL_DECL boss_harbinger_skyrissAI : public ScriptedAI
             }
         }
         else
-            m_uiFearTimer -= uiDiff;
+            m_uiFearTimer -=uiDiff;
 
         if (m_uiDominationTimer < uiDiff)
         {
@@ -155,7 +155,7 @@ struct MANGOS_DLL_DECL boss_harbinger_skyrissAI : public ScriptedAI
             }
         }
         else
-            m_uiDominationTimer -= uiDiff;
+            m_uiDominationTimer -=uiDiff;
 
         if (!m_bIsRegularMode)
         {
@@ -169,7 +169,7 @@ struct MANGOS_DLL_DECL boss_harbinger_skyrissAI : public ScriptedAI
                     m_uiManaBurnTimer = urand(16000, 32000);
             }
             else
-                m_uiManaBurnTimer -= uiDiff;
+                m_uiManaBurnTimer -=uiDiff;
         }
 
         DoMeleeAttackIfReady();

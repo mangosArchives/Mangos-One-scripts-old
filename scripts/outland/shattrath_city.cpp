@@ -152,7 +152,7 @@ struct MANGOS_DLL_DECL npc_dirty_larryAI : public ScriptedAI
             return 0;
         }
 
-        switch (uiStep)
+        switch(uiStep)
         {
             case 1:
                 DoScriptText(SAY_START, m_creature, pPlayer);
@@ -232,7 +232,7 @@ bool GossipHello_npc_dirty_larry(Player* pPlayer, Creature* pCreature)
         pPlayer->PrepareQuestMenu(pCreature->GetObjectGuid());
 
     if (pPlayer->GetQuestStatus(QUEST_WHAT_BOOK) == QUEST_STATUS_INCOMPLETE)
-        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_BOOK, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_BOOK, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
 
     pPlayer->SEND_GOSSIP_MENU(pPlayer->GetGossipTextId(pCreature), pCreature->GetObjectGuid());
     return true;
@@ -240,7 +240,7 @@ bool GossipHello_npc_dirty_larry(Player* pPlayer, Creature* pCreature)
 
 bool GossipSelect_npc_dirty_larry(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
 {
-    if (uiAction == GOSSIP_ACTION_INFO_DEF + 1)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF+1)
     {
         if (npc_dirty_larryAI* pLarryAI = dynamic_cast<npc_dirty_larryAI*>(pCreature->AI()))
             pLarryAI->StartEvent(pPlayer);
@@ -339,7 +339,7 @@ struct MANGOS_DLL_DECL npc_khadgars_servantAI : public npc_escortAI
     {
         if (!m_uiRandomTalkCooldown && pWho->GetTypeId() == TYPEID_UNIT && m_creature->IsWithinDistInMap(pWho, 10.0f))
         {
-            switch (pWho->GetEntry())
+            switch(pWho->GetEntry())
             {
                 case NPC_HAGGARD:
                     if (Player* pPlayer = GetPlayerForEscort())
@@ -370,7 +370,7 @@ struct MANGOS_DLL_DECL npc_khadgars_servantAI : public npc_escortAI
     {
         m_uiPointId = uiPointId;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 0:
                 if (Creature* pKhadgar = GetClosestCreatureWithEntry(m_creature, NPC_KHADGAR, 10.0f))
@@ -417,11 +417,11 @@ struct MANGOS_DLL_DECL npc_khadgars_servantAI : public npc_escortAI
                 if (!pPlayer)
                     return;
 
-                switch (m_uiPointId)
+                switch(m_uiPointId)
                 {
                     case 5:                                 //to lower city
                     {
-                        switch (m_uiTalkCount)
+                        switch(m_uiTalkCount)
                         {
                             case 1:
                                 DoScriptText(SAY_KHAD_SERV_1, m_creature, pPlayer);
@@ -441,7 +441,7 @@ struct MANGOS_DLL_DECL npc_khadgars_servantAI : public npc_escortAI
                     }
                     case 24:                                //in lower city
                     {
-                        switch (m_uiTalkCount)
+                        switch(m_uiTalkCount)
                         {
                             case 5:
                                 if (Creature* pShanir = GetClosestCreatureWithEntry(m_creature, NPC_SHANIR, 15.0f))
@@ -461,7 +461,7 @@ struct MANGOS_DLL_DECL npc_khadgars_servantAI : public npc_escortAI
                     }
                     case 50:                                //outside
                     {
-                        switch (m_uiTalkCount)
+                        switch(m_uiTalkCount)
                         {
                             case 8:
                                 DoScriptText(SAY_KHAD_SERV_8, m_creature, pPlayer);
@@ -481,7 +481,7 @@ struct MANGOS_DLL_DECL npc_khadgars_servantAI : public npc_escortAI
                     }
                     case 63:                                //scryer
                     {
-                        switch (m_uiTalkCount)
+                        switch(m_uiTalkCount)
                         {
                             case 12:
                                 DoScriptText(SAY_KHAD_SERV_12, m_creature, pPlayer);
@@ -495,7 +495,7 @@ struct MANGOS_DLL_DECL npc_khadgars_servantAI : public npc_escortAI
                     }
                     case 74:                                //aldor
                     {
-                        switch (m_uiTalkCount)
+                        switch(m_uiTalkCount)
                         {
                             case 14:
                                 DoScriptText(SAY_KHAD_SERV_14, m_creature, pPlayer);
@@ -515,7 +515,7 @@ struct MANGOS_DLL_DECL npc_khadgars_servantAI : public npc_escortAI
                     }
                     case 75:                                //a'dal
                     {
-                        switch (m_uiTalkCount)
+                        switch(m_uiTalkCount)
                         {
                             case 18:
                                 DoScriptText(SAY_KHAD_SERV_18, m_creature, pPlayer);
@@ -576,7 +576,7 @@ struct MANGOS_DLL_DECL npc_salsalabimAI : public ScriptedAI
         {
             if (m_creature->GetHealthPercent() < 20.0f)
             {
-                ((Player*)pDoneBy)->GroupEventHappens(QUEST_10004, m_creature);
+                ((Player*)pDoneBy)->GroupEventHappens(QUEST_10004,m_creature);
                 uiDamage = 0;
                 EnterEvadeMode();
             }

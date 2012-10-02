@@ -48,7 +48,7 @@ bool GossipHello_npc_beaten_corpse(Player* pPlayer, Creature* pCreature)
 {
     if (pPlayer->GetQuestStatus(QUEST_LOST_IN_BATTLE) == QUEST_STATUS_INCOMPLETE ||
         pPlayer->GetQuestStatus(QUEST_LOST_IN_BATTLE) == QUEST_STATUS_COMPLETE)
-        pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Examine corpse in detail...", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT,"Examine corpse in detail...",GOSSIP_SENDER_MAIN,GOSSIP_ACTION_INFO_DEF+1);
 
     pPlayer->SEND_GOSSIP_MENU(3557, pCreature->GetObjectGuid());
     return true;
@@ -56,7 +56,7 @@ bool GossipHello_npc_beaten_corpse(Player* pPlayer, Creature* pCreature)
 
 bool GossipSelect_npc_beaten_corpse(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
 {
-    if (uiAction == GOSSIP_ACTION_INFO_DEF + 1)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF +1)
     {
         pPlayer->SEND_GOSSIP_MENU(3558, pCreature->GetObjectGuid());
         pPlayer->TalkedToCreature(pCreature->GetEntry(), pCreature->GetObjectGuid());
@@ -99,7 +99,7 @@ struct MANGOS_DLL_DECL npc_giltharesAI : public npc_escortAI
         if (!pPlayer)
             return;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 16:
                 DoScriptText(SAY_GIL_AT_LAST, m_creature, pPlayer);
@@ -133,7 +133,7 @@ struct MANGOS_DLL_DECL npc_giltharesAI : public npc_escortAI
         if (pWho->GetTypeId() != TYPEID_PLAYER && m_creature->GetAreaId() == AREA_MERCHANT_COAST)
         {
             //appears to be pretty much random (possible only if escorter not in combat with pWho yet?)
-            switch (urand(0, 3))
+            switch(urand(0, 3))
             {
                 case 0: DoScriptText(SAY_GIL_AGGRO_1, m_creature, pWho); break;
                 case 1: DoScriptText(SAY_GIL_AGGRO_2, m_creature, pWho); break;
@@ -276,16 +276,16 @@ enum
     MAX_CHALLENGERS                     = 6,
 };
 
-static const float aAffrayChallengerLoc[8][4] =
+static const float aAffrayChallengerLoc[8][4]=
 {
-    { -1683.0f, -4326.0f, 2.79f, 0.00f},
-    { -1682.0f, -4329.0f, 2.79f, 0.00f},
-    { -1683.0f, -4330.0f, 2.79f, 0.00f},
-    { -1680.0f, -4334.0f, 2.79f, 1.49f},
-    { -1674.0f, -4326.0f, 2.79f, 3.49f},
-    { -1677.0f, -4334.0f, 2.79f, 1.66f},
-    { -1713.79f, -4342.09f, 6.05f, 6.15f},          // Big Will spawn loc
-    { -1682.31f, -4329.68f, 2.78f, 0.0f},           // Big Will move loc
+    {-1683.0f, -4326.0f, 2.79f, 0.00f},
+    {-1682.0f, -4329.0f, 2.79f, 0.00f},
+    {-1683.0f, -4330.0f, 2.79f, 0.00f},
+    {-1680.0f, -4334.0f, 2.79f, 1.49f},
+    {-1674.0f, -4326.0f, 2.79f, 3.49f},
+    {-1677.0f, -4334.0f, 2.79f, 1.66f},
+    {-1713.79f, -4342.09f, 6.05f, 6.15f},           // Big Will spawn loc
+    {-1682.31f, -4329.68f, 2.78f, 0.0f},            // Big Will move loc
 };
 
 struct MANGOS_DLL_DECL npc_twiggy_flatheadAI : public ScriptedAI
@@ -516,7 +516,7 @@ struct MANGOS_DLL_DECL npc_wizzlecranks_shredderAI : public npc_escortAI
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 0:
                 if (Player* pPlayer = GetPlayerForEscort())
@@ -540,7 +540,7 @@ struct MANGOS_DLL_DECL npc_wizzlecranks_shredderAI : public npc_escortAI
 
     void WaypointStart(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 9:
                 if (Player* pPlayer = GetPlayerForEscort())
@@ -571,7 +571,7 @@ struct MANGOS_DLL_DECL npc_wizzlecranks_shredderAI : public npc_escortAI
             {
                 if (m_uiPostEventTimer < uiDiff)
                 {
-                    switch (m_uiPostEventCount)
+                    switch(m_uiPostEventCount)
                     {
                         case 0:
                             DoScriptText(SAY_PROGRESS_2, m_creature);

@@ -68,7 +68,7 @@ struct MANGOS_DLL_DECL npc_kalecgosAI : public ScriptedAI
         {
             m_creature->SetLevitate(false);
             m_creature->SetFacingTo(afKaelLandPoint[4]);
-            m_uiTransformTimer = MINUTE * IN_MILLISECONDS;
+            m_uiTransformTimer = MINUTE*IN_MILLISECONDS;
         }
     }
 

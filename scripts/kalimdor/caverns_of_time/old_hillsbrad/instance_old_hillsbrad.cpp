@@ -56,7 +56,7 @@ void instance_old_hillsbrad::OnPlayerEnter(Player* pPlayer)
 
 void instance_old_hillsbrad::OnCreatureCreate(Creature* pCreature)
 {
-    switch (pCreature->GetEntry())
+    switch(pCreature->GetEntry())
     {
         case NPC_THRALL:
         case NPC_TARETHA:
@@ -153,7 +153,7 @@ void instance_old_hillsbrad::HandleThrallRelocation()
 
 void instance_old_hillsbrad::SetData(uint32 uiType, uint32 uiData)
 {
-    switch (uiType)
+    switch(uiType)
     {
         case TYPE_BARREL_DIVERSION:
             m_auiEncounter[uiType] = uiData;
@@ -179,7 +179,7 @@ void instance_old_hillsbrad::SetData(uint32 uiType, uint32 uiData)
 
                         // set the houses on fire
                         for (GuidList::const_iterator itr = m_lRoaringFlamesList.begin(); itr != m_lRoaringFlamesList.end(); ++itr)
-                            DoRespawnGameObject(*itr, 30 * MINUTE);
+                            DoRespawnGameObject(*itr, 30*MINUTE);
 
                         // move the orcs outside the houses
                         float fX, fY, fZ;
@@ -251,8 +251,8 @@ void instance_old_hillsbrad::SetData(uint32 uiType, uint32 uiData)
 
         std::ostringstream saveStream;
         saveStream << m_auiEncounter[0] << " " << m_auiEncounter[1] << " " << m_auiEncounter[2] << " "
-                   << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5] << " "
-                   << m_auiEncounter[6];
+            << m_auiEncounter[3] << " " << m_auiEncounter[4] << " " << m_auiEncounter[5] << " "
+            << m_auiEncounter[6];
 
         m_strInstData = saveStream.str();
 
@@ -281,9 +281,9 @@ void instance_old_hillsbrad::Load(const char* chrIn)
 
     std::istringstream loadStream(chrIn);
     loadStream >> m_auiEncounter[0] >> m_auiEncounter[1] >> m_auiEncounter[2] >> m_auiEncounter[3]
-               >> m_auiEncounter[4] >> m_auiEncounter[5] >> m_auiEncounter[6];
+        >> m_auiEncounter[4] >> m_auiEncounter[5] >> m_auiEncounter[6];
 
-    for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+    for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
     {
         if (m_auiEncounter[i] == IN_PROGRESS)
             m_auiEncounter[i] = NOT_STARTED;
@@ -307,7 +307,7 @@ void instance_old_hillsbrad::UpdateLodgeQuestCredit()
 
     if (!players.isEmpty())
     {
-        for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
+        for(Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
         {
             if (Player* pPlayer = itr->getSource())
                 pPlayer->KilledMonsterCredit(NPC_LODGE_QUEST_TRIGGER);

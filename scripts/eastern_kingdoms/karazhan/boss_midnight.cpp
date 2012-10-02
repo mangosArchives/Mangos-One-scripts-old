@@ -44,7 +44,7 @@ enum
     SPELL_MOUNT                 = 29770,
     SPELL_KNOCKDOWN             = 29711,
     SPELL_SUMMON_ATTUMEN        = 29714,
-    SPELL_SUMMON_ATTUMEN_MOUNTED = 29799,
+    SPELL_SUMMON_ATTUMEN_MOUNTED= 29799,
 
     // Attumen
     SPELL_SHADOWCLEAVE          = 29832,

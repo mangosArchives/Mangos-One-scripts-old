@@ -82,7 +82,7 @@ struct MANGOS_DLL_DECL npc_kerlonianAI : public FollowerAI
 
         if (!m_creature->getVictim() && !HasFollowState(STATE_FOLLOW_COMPLETE) && pWho->GetEntry() == NPC_LILADRIS)
         {
-            if (m_creature->IsWithinDistInMap(pWho, INTERACTION_DISTANCE * 5))
+            if (m_creature->IsWithinDistInMap(pWho, INTERACTION_DISTANCE*5))
             {
                 if (Player* pPlayer = GetLeaderForFollower())
                 {
@@ -107,14 +107,14 @@ struct MANGOS_DLL_DECL npc_kerlonianAI : public FollowerAI
     {
         SetFollowPaused(true);
 
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(EMOTE_KER_SLEEP_1, m_creature); break;
             case 1: DoScriptText(EMOTE_KER_SLEEP_2, m_creature); break;
             case 2: DoScriptText(EMOTE_KER_SLEEP_3, m_creature); break;
         }
 
-        switch (urand(0, 3))
+        switch(urand(0, 3))
         {
             case 0: DoScriptText(SAY_KER_SLEEP_1, m_creature); break;
             case 1: DoScriptText(SAY_KER_SLEEP_2, m_creature); break;
@@ -218,7 +218,7 @@ struct MANGOS_DLL_DECL npc_prospector_remtravelAI : public npc_escortAI
         if (!pPlayer)
             return;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 0:
                 DoScriptText(SAY_REM_START, m_creature, pPlayer);
@@ -361,7 +361,7 @@ CreatureAI* GetAI_npc_threshwackonator(Creature* pCreature)
 bool GossipHello_npc_threshwackonator(Player* pPlayer, Creature* pCreature)
 {
     if (pPlayer->GetQuestStatus(QUEST_GYROMAST_REV) == QUEST_STATUS_INCOMPLETE)
-        pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_INSERT_KEY, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_INSERT_KEY, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
 
     pPlayer->SEND_GOSSIP_MENU(pPlayer->GetGossipTextId(pCreature), pCreature->GetObjectGuid());
     return true;
@@ -369,7 +369,7 @@ bool GossipHello_npc_threshwackonator(Player* pPlayer, Creature* pCreature)
 
 bool GossipSelect_npc_threshwackonator(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
 {
-    if (uiAction == GOSSIP_ACTION_INFO_DEF + 1)
+    if (uiAction == GOSSIP_ACTION_INFO_DEF+1)
     {
         pPlayer->CLOSE_GOSSIP_MENU();
 
@@ -441,7 +441,7 @@ struct MANGOS_DLL_DECL npc_volcorAI : public npc_escortAI
     void Aggro(Unit* pWho)
     {
         // shouldn't always use text on agro
-        switch (urand(0, 4))
+        switch(urand(0, 4))
         {
             case 0: DoScriptText(SAY_AGGRO_1, m_creature); break;
             case 1: DoScriptText(SAY_AGGRO_2, m_creature); break;
@@ -492,15 +492,15 @@ struct MANGOS_DLL_DECL npc_volcorAI : public npc_escortAI
                 DoScriptText(SAY_START, m_creature);
                 break;
             case 5:
-                m_creature->SummonCreature(NPC_BLACKWOOD_SHAMAN, aVolcorSpawnLocs[0].m_fX, aVolcorSpawnLocs[0].m_fY, aVolcorSpawnLocs[0].m_fZ, aVolcorSpawnLocs[0].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 20000);
-                m_creature->SummonCreature(NPC_BLACKWOOD_URSA, aVolcorSpawnLocs[1].m_fX, aVolcorSpawnLocs[1].m_fY, aVolcorSpawnLocs[1].m_fZ, aVolcorSpawnLocs[1].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 20000);
+                m_creature->SummonCreature(NPC_BLACKWOOD_SHAMAN, aVolcorSpawnLocs[0].m_fX, aVolcorSpawnLocs[0].m_fY, aVolcorSpawnLocs[0].m_fZ, aVolcorSpawnLocs[0].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT,20000);
+                m_creature->SummonCreature(NPC_BLACKWOOD_URSA, aVolcorSpawnLocs[1].m_fX, aVolcorSpawnLocs[1].m_fY, aVolcorSpawnLocs[1].m_fZ, aVolcorSpawnLocs[1].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT,20000);
                 break;
             case 6:
                 DoScriptText(SAY_FIRST_AMBUSH, m_creature);
                 break;
             case 11:
-                m_creature->SummonCreature(NPC_BLACKWOOD_SHAMAN, aVolcorSpawnLocs[2].m_fX, aVolcorSpawnLocs[2].m_fY, aVolcorSpawnLocs[2].m_fZ, aVolcorSpawnLocs[2].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 20000);
-                m_creature->SummonCreature(NPC_BLACKWOOD_URSA, aVolcorSpawnLocs[3].m_fX, aVolcorSpawnLocs[3].m_fY, aVolcorSpawnLocs[3].m_fZ, aVolcorSpawnLocs[3].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 20000);
+                m_creature->SummonCreature(NPC_BLACKWOOD_SHAMAN, aVolcorSpawnLocs[2].m_fX, aVolcorSpawnLocs[2].m_fY, aVolcorSpawnLocs[2].m_fZ, aVolcorSpawnLocs[2].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT,20000);
+                m_creature->SummonCreature(NPC_BLACKWOOD_URSA, aVolcorSpawnLocs[3].m_fX, aVolcorSpawnLocs[3].m_fY, aVolcorSpawnLocs[3].m_fZ, aVolcorSpawnLocs[3].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT,20000);
             case 13:
                 m_creature->SummonCreature(NPC_BLACKWOOD_URSA, aVolcorSpawnLocs[4].m_fX, aVolcorSpawnLocs[4].m_fY, aVolcorSpawnLocs[4].m_fZ, aVolcorSpawnLocs[4].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 20000);
                 m_creature->SummonCreature(NPC_BLACKWOOD_URSA, aVolcorSpawnLocs[5].m_fX, aVolcorSpawnLocs[5].m_fY, aVolcorSpawnLocs[5].m_fZ, aVolcorSpawnLocs[5].m_fO, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 20000);

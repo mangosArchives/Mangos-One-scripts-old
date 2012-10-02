@@ -155,7 +155,7 @@ enum
     MAX_MIND_CONTROL                    = 3,
 };
 
-static const uint32 m_auiSpellSummonWeapon[MAX_WEAPONS] =
+static const uint32 m_auiSpellSummonWeapon[MAX_WEAPONS]=
 {
     SPELL_SUMMON_WEAPONA, SPELL_SUMMON_WEAPONB, SPELL_SUMMON_WEAPONC, SPELL_SUMMON_WEAPOND,
     SPELL_SUMMON_WEAPONE, SPELL_SUMMON_WEAPONF, SPELL_SUMMON_WEAPONG
@@ -164,8 +164,8 @@ static const uint32 m_auiSpellSummonWeapon[MAX_WEAPONS] =
 // teleport spells for gravity lapse event
 static const uint32 m_auiSpellGravityLapseTeleport[] =
 {
-    35966, 35967, 35968, 35969, 35970, 35971, 35972, 35973, 35974, 35975, 35976, 35977, 35978, 35979, 35980,
-    35981, 35982, 35983, 35984, 35985, 35986, 35987, 35988, 35989, 35990
+    35966,35967,35968,35969,35970,35971,35972,35973,35974,35975,35976,35977,35978,35979,35980,
+    35981,35982,35983,35984,35985,35986,35987,35988,35989,35990
 };
 
 static const float aCenterPos[3] = {795.00f, -0.46f, 48.72f};
@@ -269,7 +269,7 @@ struct MANGOS_DLL_DECL boss_kaelthasAI : public ScriptedAI
 
     void KilledUnit(Unit* pUnit)
     {
-        switch (urand(0, 2))
+        switch(urand(0, 2))
         {
             case 0: DoScriptText(SAY_SLAY1, m_creature); break;
             case 1: DoScriptText(SAY_SLAY2, m_creature); break;
@@ -383,7 +383,7 @@ struct MANGOS_DLL_DECL boss_kaelthasAI : public ScriptedAI
     {
         switch (m_uiPhase)
         {
-                // ***** Advisors phase ********
+            // ***** Advisors phase ********
             case PHASE_1_ADVISOR:
             {
                 if (!m_uiPhaseTimer)
@@ -394,7 +394,7 @@ struct MANGOS_DLL_DECL boss_kaelthasAI : public ScriptedAI
                     if (!m_pInstance)
                         return;
 
-                    switch (m_uiPhaseSubphase)
+                    switch(m_uiPhaseSubphase)
                     {
                         case 0:
                             DoScriptText(SAY_INTRO_THALADRED, m_creature);
@@ -451,7 +451,7 @@ struct MANGOS_DLL_DECL boss_kaelthasAI : public ScriptedAI
                             }
                             m_uiPhaseTimer = 0;
                             break;
-                    }
+                        }
 
                     ++m_uiPhaseSubphase;
                 }
@@ -664,7 +664,7 @@ struct MANGOS_DLL_DECL boss_kaelthasAI : public ScriptedAI
             case PHASE_5_WAITING:
                 // Nothing here; wait for boss to arive at point
                 break;
-                // ***** Phase 6 - explode the bridge ********
+            // ***** Phase 6 - explode the bridge ********
             case PHASE_6_FLYING:
                 if (m_uiExplodeTimer)
                 {

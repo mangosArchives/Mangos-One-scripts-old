@@ -66,7 +66,7 @@ struct MANGOS_DLL_DECL npc_clintar_dw_spiritAI : public npc_escortAI
             return;
 
         //visual details here probably need refinement
-        switch (i)
+        switch(i)
         {
             case 0:
                 DoScriptText(SAY_START, m_creature, pPlayer);
@@ -340,7 +340,7 @@ struct MANGOS_DLL_DECL npc_keeper_remulosAI : public npc_escortAI, private Dialo
 
     void JustSummoned(Creature* pSummoned)
     {
-        switch (pSummoned->GetEntry())
+        switch(pSummoned->GetEntry())
         {
             case NPC_ERANIKUS_TYRANT:
                 m_eranikusGuid = pSummoned->GetObjectGuid();
@@ -363,7 +363,7 @@ struct MANGOS_DLL_DECL npc_keeper_remulosAI : public npc_escortAI, private Dialo
         if (uiType != POINT_MOTION_TYPE || pSummoned->GetEntry() != NPC_ERANIKUS_TYRANT)
             return;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case POINT_ID_ERANIKUS_FLIGHT:
                 // Set Eranikus to face Remulos
@@ -389,7 +389,7 @@ struct MANGOS_DLL_DECL npc_keeper_remulosAI : public npc_escortAI, private Dialo
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 0:
                 if (Player* pPlayer = GetPlayerForEscort())
@@ -426,7 +426,7 @@ struct MANGOS_DLL_DECL npc_keeper_remulosAI : public npc_escortAI, private Dialo
 
     void JustDidDialogueStep(int32 iEntry)
     {
-        switch (iEntry)
+        switch(iEntry)
         {
             case NPC_REMULOS:
                 if (Player* pPlayer = GetPlayerForEscort())
@@ -473,7 +473,7 @@ struct MANGOS_DLL_DECL npc_keeper_remulosAI : public npc_escortAI, private Dialo
         {
             if (m_uiOutroTimer <= uiDiff)
             {
-                switch (m_uiOutroPhase)
+                switch(m_uiOutroPhase)
                 {
                     case 0:
                         DoScriptText(SAY_REMULOS_OUTRO_1, m_creature);
@@ -482,7 +482,7 @@ struct MANGOS_DLL_DECL npc_keeper_remulosAI : public npc_escortAI, private Dialo
                     case 1:
                         // Despawn Remulos after the outro is finished - he will respawn automatically at his home position after a few min
                         DoScriptText(SAY_REMULOS_OUTRO_2, m_creature);
-                        m_creature->SetRespawnDelay(1 * MINUTE);
+                        m_creature->SetRespawnDelay(1*MINUTE);
                         m_creature->ForcedDespawn(3000);
                         m_uiOutroTimer = 0;
                         break;
@@ -503,7 +503,7 @@ struct MANGOS_DLL_DECL npc_keeper_remulosAI : public npc_escortAI, private Dialo
                 {
                     // summon 3 shades inside the house
                     for (uint8 i = 0; i < MAX_SHADOWS; ++i)
-                        m_creature->SummonCreature(NPC_NIGHTMARE_PHANTASM, aShadowsLocations[i].m_fX, aShadowsLocations[i].m_fY, aShadowsLocations[i].m_fZ, 0, TEMPSUMMON_DEAD_DESPAWN, 0);
+                        m_creature->SummonCreature(NPC_NIGHTMARE_PHANTASM, aShadowsLocations[i].m_fX, aShadowsLocations[i].m_fY, aShadowsLocations[i].m_fZ, 0,TEMPSUMMON_DEAD_DESPAWN, 0);
 
                     if (Creature* pEranikus = m_creature->GetMap()->GetCreature(m_eranikusGuid))
                         DoScriptText(SAY_ERANIKUS_ATTACK_1, pEranikus);
@@ -557,7 +557,7 @@ struct MANGOS_DLL_DECL npc_keeper_remulosAI : public npc_escortAI, private Dialo
         {
             if (Unit* pTarget = DoSelectLowestHpFriendly(DEFAULT_VISIBILITY_DISTANCE))
             {
-                switch (urand(0, 2))
+                switch(urand(0, 2))
                 {
                     case 0: DoCastSpellIfCan(pTarget, SPELL_HEALING_TOUCH); break;
                     case 1: DoCastSpellIfCan(pTarget, SPELL_REJUVENATION);  break;
@@ -730,7 +730,7 @@ struct MANGOS_DLL_DECL boss_eranikusAI : public ScriptedAI
 
     void JustSummoned(Creature* pSummoned)
     {
-        switch (pSummoned->GetEntry())
+        switch(pSummoned->GetEntry())
         {
             case NPC_TYRANDE_WHISPERWIND:
                 m_tyrandeGuid = pSummoned->GetObjectGuid();
@@ -749,7 +749,7 @@ struct MANGOS_DLL_DECL boss_eranikusAI : public ScriptedAI
 
     void DoDespawnSummoned()
     {
-        for (GuidList::const_iterator itr = m_lPriestessList.begin(); itr != m_lPriestessList.end(); ++itr)
+        for(GuidList::const_iterator itr = m_lPriestessList.begin(); itr != m_lPriestessList.end(); ++itr)
         {
             if (Creature* pTemp = m_creature->GetMap()->GetCreature(*itr))
                 pTemp->ForcedDespawn();
@@ -761,7 +761,7 @@ struct MANGOS_DLL_DECL boss_eranikusAI : public ScriptedAI
         if (uiType != POINT_MOTION_TYPE)
             return;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case POINT_ID_TYRANDE_HEAL:
                 if (pSummoned->GetEntry() == NPC_TYRANDE_WHISPERWIND)
@@ -800,7 +800,7 @@ struct MANGOS_DLL_DECL boss_eranikusAI : public ScriptedAI
         {
             if (m_uiEventTimer <= uiDiff)
             {
-                switch (m_uiEventPhase)
+                switch(m_uiEventPhase)
                 {
                     case 0:
                         // Eranikus is redeemed - make Tyrande kneel and stop casting
@@ -886,7 +886,7 @@ struct MANGOS_DLL_DECL boss_eranikusAI : public ScriptedAI
         // Not sure if this should be handled by health percent, but this is the only reasonable way
         if (m_creature->GetHealthPercent() < m_uiHealthCheck)
         {
-            switch (m_uiHealthCheck)
+            switch(m_uiHealthCheck)
             {
                 case 85:
                     DoScriptText(SAY_ERANIKUS_ATTACK_3, m_creature);

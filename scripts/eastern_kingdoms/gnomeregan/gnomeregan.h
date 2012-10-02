@@ -67,35 +67,35 @@ struct sBombFace
 
 class MANGOS_DLL_DECL instance_gnomeregan : public ScriptedInstance
 {
-public:
-    instance_gnomeregan(Map* pMap);
-    ~instance_gnomeregan() {}
+    public:
+        instance_gnomeregan(Map* pMap);
+        ~instance_gnomeregan() {}
 
-    void Initialize();
+        void Initialize();
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    sBombFace* GetBombFaces();
-    void DoActivateBombFace(uint8 uiIndex);
-    void DoDeactivateBombFace(uint8 uiIndex);
+        sBombFace* GetBombFaces();
+        void DoActivateBombFace(uint8 uiIndex);
+        void DoDeactivateBombFace(uint8 uiIndex);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-protected:
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+    protected:
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    sBombFace m_asBombFaces[MAX_GNOME_FACES];
-    ObjectGuid m_aExplosiveSortedGuids[2][MAX_EXPLOSIVES_PER_SIDE];
+        sBombFace m_asBombFaces[MAX_GNOME_FACES];
+        ObjectGuid m_aExplosiveSortedGuids[2][MAX_EXPLOSIVES_PER_SIDE];
 
-    GuidList m_luiExplosiveChargeGUIDs;
-    GuidList m_luiSpawnedExplosiveChargeGUIDs;
-    GuidList m_lRedRocketGUIDs;
+        GuidList m_luiExplosiveChargeGUIDs;
+        GuidList m_luiSpawnedExplosiveChargeGUIDs;
+        GuidList m_lRedRocketGUIDs;
 };
 
 #endif

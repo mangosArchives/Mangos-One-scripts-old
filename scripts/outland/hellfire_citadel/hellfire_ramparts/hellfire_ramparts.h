@@ -36,26 +36,26 @@ enum
 
 class MANGOS_DLL_DECL instance_ramparts : public ScriptedInstance
 {
-public:
-    instance_ramparts(Map* pMap);
+    public:
+        instance_ramparts(Map* pMap);
 
-    void Initialize();
+        void Initialize();
 
-    void OnCreatureCreate(Creature* pCreature);
-    void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    // No need to save and load this instance (only one encounter needs special handling, no doors used)
+        // No need to save and load this instance (only one encounter needs special handling, no doors used)
 
-private:
-    void DoFailVazruden();
+    private:
+        void DoFailVazruden();
 
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
 
-    uint32 m_uiSentryCounter;
-    GuidList m_lSentryGUIDs;
+        uint32 m_uiSentryCounter;
+        GuidList m_lSentryGUIDs;
 };
 
 #endif

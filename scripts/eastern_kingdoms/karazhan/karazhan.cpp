@@ -126,7 +126,7 @@ struct MANGOS_DLL_DECL npc_barnesAI : public npc_escortAI, private DialogueHelpe
         if (!m_pInstance)
             return;
 
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 0:
                 DoCastSpellIfCan(m_creature, SPELL_TUXEDO);
@@ -212,10 +212,10 @@ bool GossipHello_npc_barnes(Player* pPlayer, Creature* pCreature)
 
 bool GossipSelect_npc_barnes(Player* pPlayer, Creature* pCreature, uint32 uiSender, uint32 uiAction)
 {
-    switch (uiAction)
+    switch(uiAction)
     {
         case GOSSIP_ACTION_INFO_DEF+1:
-            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_OPERA_2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
+            pPlayer->ADD_GOSSIP_ITEM_ID(GOSSIP_ICON_CHAT, GOSSIP_ITEM_OPERA_2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
             pPlayer->SEND_GOSSIP_MENU(TEXT_ID_OPERA_2, pCreature->GetObjectGuid());
             break;
         case GOSSIP_ACTION_INFO_DEF+2:
@@ -225,7 +225,7 @@ bool GossipSelect_npc_barnes(Player* pPlayer, Creature* pCreature, uint32 uiSend
             if (npc_barnesAI* pBarnesAI = dynamic_cast<npc_barnesAI*>(pCreature->AI()))
                 pBarnesAI->Start(false, NULL, NULL, true);
             break;
-            // GM gossip options
+        // GM gossip options
         case GOSSIP_ACTION_INFO_DEF+3:
             pPlayer->CLOSE_GOSSIP_MENU();
             if (ScriptedInstance* pInstance = (ScriptedInstance*)pCreature->GetInstanceData())
@@ -334,12 +334,12 @@ enum
  * the dummy spells usage is unk; for the moment they are not used
  * also all coords are guesswork
  */
-static const float afMedivhSpawnLoc[4] = { -11153.18f, -1889.65f, 91.47f, 2.07f};
-static const float afMedivhExitLoc[3] = { -11121.81f, -1881.24f, 91.47f};
+static const float afMedivhSpawnLoc[4] = {-11153.18f, -1889.65f, 91.47f, 2.07f};
+static const float afMedivhExitLoc[3] = {-11121.81f, -1881.24f, 91.47f};
 
-static const float afArcanagosSpawnLoc[4] = { -11242.66f, -1778.55f, 125.35f, 0.0f};
-static const float afArcanagosMoveLoc[3] = { -11170.28f, -1865.09f, 125.35f};
-static const float afArcanagosFleeLoc[3] = { -11003.70f, -1760.18f, 180.25f};
+static const float afArcanagosSpawnLoc[4] = {-11242.66f, -1778.55f, 125.35f, 0.0f};
+static const float afArcanagosMoveLoc[3] = {-11170.28f, -1865.09f, 125.35f};
+static const float afArcanagosFleeLoc[3] = {-11003.70f, -1760.18f, 180.25f};
 
 static const DialogueEntry aMedivhDialogue[] =
 {
@@ -479,7 +479,7 @@ struct MANGOS_DLL_DECL npc_image_arcanagosAI : public ScriptedAI
 
     void AttackStart(Unit* pWho) { }
     void MoveInLineOfSight(Unit* pWho) { }
-    void UpdateAI(const uint32 uiDiff) { }
+    void UpdateAI (const uint32 uiDiff) { }
 };
 
 CreatureAI* GetAI_npc_image_arcanagosAI(Creature* pCreature)

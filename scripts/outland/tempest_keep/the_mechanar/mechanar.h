@@ -100,35 +100,35 @@ static const SpawnLocation aBridgeEventLocs[MAX_BRIDGE_LOCATIONS][4] =
 
 class MANGOS_DLL_DECL instance_mechanar : public ScriptedInstance
 {
-public:
-    instance_mechanar(Map* pMap);
+    public:
+        instance_mechanar(Map* pMap);
 
-    void Initialize();
+        void Initialize();
 
-    void OnPlayerEnter(Player* pPlayer);
-    void OnObjectCreate(GameObject* pGo);
-    void OnCreatureCreate(Creature* pCreature);
+        void OnPlayerEnter(Player* pPlayer);
+        void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
 
-    void OnCreatureDeath(Creature* pCreature);
+        void OnCreatureDeath(Creature* pCreature);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-    void Update(uint32 uiDiff);
+        void Update(uint32 uiDiff);
 
-private:
-    void DoSpawnBridgeWave();
+    private:
+        void DoSpawnBridgeWave();
 
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    uint32 m_uiBridgeEventTimer;
-    uint8 m_uiBridgeEventPhase;
+        uint32 m_uiBridgeEventTimer;
+        uint8 m_uiBridgeEventPhase;
 
-    GuidSet m_sBridgeTrashGuidSet;
+        GuidSet m_sBridgeTrashGuidSet;
 };
 
 #endif

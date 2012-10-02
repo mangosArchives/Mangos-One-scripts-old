@@ -232,7 +232,7 @@ struct MANGOS_DLL_DECL mob_nether_wraithAI : public ScriptedAI
             }
         }
         else
-            m_uiArcaneMissilesTimer -= uiDiff;
+            m_uiArcaneMissilesTimer -=uiDiff;
 
         if (!m_bHasDetonated && m_creature->GetHealthPercent() < 10.0f)
         {

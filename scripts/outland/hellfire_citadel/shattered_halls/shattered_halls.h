@@ -75,37 +75,37 @@ static SpawnLocation aSoldiersLocs[] =
 
 class MANGOS_DLL_DECL instance_shattered_halls : public ScriptedInstance
 {
-public:
-    instance_shattered_halls(Map* pMap);
+    public:
+        instance_shattered_halls(Map* pMap);
 
-    void Initialize();
+        void Initialize();
 
-    void OnPlayerEnter(Player* pPlayer);
+        void OnPlayerEnter(Player* pPlayer);
 
-    void OnObjectCreate(GameObject* pGo);
-    void OnCreatureCreate(Creature* pCreature);
+        void OnObjectCreate(GameObject* pGo);
+        void OnCreatureCreate(Creature* pCreature);
 
-    void OnCreatureDeath(Creature* pCreature);
-    void OnCreatureEvade(Creature* pCreature);
-    void OnCreatureEnterCombat(Creature* pCreature);
+        void OnCreatureDeath(Creature* pCreature);
+        void OnCreatureEvade(Creature* pCreature);
+        void OnCreatureEnterCombat(Creature* pCreature);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-    void Update(uint32 uiDiff);
+        void Update(uint32 uiDiff);
 
-    void DoCastGroupDebuff(uint32 uiSpellId);
+        void DoCastGroupDebuff(uint32 uiSpellId);
 
-private:
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+    private:
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    uint32 m_uiExecutionTimer;
-    uint32 m_uiTeam;
-    uint8 m_uiExecutionStage;
+        uint32 m_uiExecutionTimer;
+        uint32 m_uiTeam;
+        uint8 m_uiExecutionStage;
 };
 
 #endif

@@ -99,64 +99,64 @@ struct PortalData
     float fX, fY, fZ, fOrient;
 };
 
-static const PortalData afPortalLocation[] =
+static const PortalData afPortalLocation[]=
 {
-    { -2030.832f, 7024.944f, 23.07182f, 3.141593f},
-    { -1961.734f, 7029.528f, 21.8114f,  2.129302f},
-    { -1887.695f, 7106.557f, 22.0495f,  4.956735f},
-    { -1930.911f, 7183.597f, 23.00764f, 3.595378f}
+    {-2030.832f, 7024.944f, 23.07182f, 3.141593f},
+    {-1961.734f, 7029.528f, 21.8114f,  2.129302f},
+    {-1887.695f, 7106.557f, 22.0495f,  4.956735f},
+    {-1930.911f, 7183.597f, 23.00764f, 3.595378f}
 };
 
 // Dark Crystal summon location
-static const float fDarkPortalCrystalLoc[3] = { -2024.31f, 7127.75f, 22.65419f};
+static const float fDarkPortalCrystalLoc[3] = {-2024.31f, 7127.75f, 22.65419f};
 
 static const int32 uiMedivhWeakYell[3] = {SAY_MEDIVH_WEAK75, SAY_MEDIVH_WEAK50, SAY_MEDIVH_WEAK25};
 
 class MANGOS_DLL_DECL instance_dark_portal : public ScriptedInstance
 {
-public:
-    instance_dark_portal(Map* pMap);
+    public:
+        instance_dark_portal(Map* pMap);
 
-    void Initialize();
+        void Initialize();
 
-    void OnPlayerEnter(Player* pPlayer);
-    void OnCreatureCreate(Creature* pCreature);
+        void OnPlayerEnter(Player* pPlayer);
+        void OnCreatureCreate(Creature* pCreature);
 
-    void OnCreatureEnterCombat(Creature* pCreature);
-    void OnCreatureEvade(Creature* pCreature);
-    void OnCreatureDeath(Creature* pCreature);
+        void OnCreatureEnterCombat(Creature* pCreature);
+        void OnCreatureEvade(Creature* pCreature);
+        void OnCreatureDeath(Creature* pCreature);
 
-    void SetData(uint32 uiType, uint32 uiData);
-    uint32 GetData(uint32 uiType);
+        void SetData(uint32 uiType, uint32 uiData);
+        uint32 GetData(uint32 uiType);
 
-    const char* Save() { return m_strInstData.c_str(); }
-    void Load(const char* chrIn);
+        const char* Save() { return m_strInstData.c_str(); }
+        void Load(const char* chrIn);
 
-    void DoHandleAreaTrigger(uint32 uiTriggerId);
+        void DoHandleAreaTrigger(uint32 uiTriggerId);
 
-    uint32 GetCurrentRiftId() { return m_uiWorldStateRiftCount; }
+        uint32 GetCurrentRiftId() { return m_uiWorldStateRiftCount; }
 
-    void Update(uint32 uiDiff);
+        void Update(uint32 uiDiff);
 
-private:
-    bool IsBossTimeRift() { return m_uiWorldStateRiftCount == 6 || m_uiWorldStateRiftCount == 12; }
-    void UpdateWorldState(bool bEnable = true);
-    void DoSpawnNextPortal();
-    void DoResetEvent();
+    private:
+        bool IsBossTimeRift() { return m_uiWorldStateRiftCount == 6 || m_uiWorldStateRiftCount == 12; }
+        void UpdateWorldState(bool bEnable = true);
+        void DoSpawnNextPortal();
+        void DoResetEvent();
 
-    uint32 m_auiEncounter[MAX_ENCOUNTER];
-    std::string m_strInstData;
+        uint32 m_auiEncounter[MAX_ENCOUNTER];
+        std::string m_strInstData;
 
-    uint32 m_uiWorldState;
-    uint32 m_uiWorldStateRiftCount;
-    uint32 m_uiWorldStateShieldCount;
+        uint32 m_uiWorldState;
+        uint32 m_uiWorldStateRiftCount;
+        uint32 m_uiWorldStateShieldCount;
 
-    bool m_bHasIntroYelled;
+        bool m_bHasIntroYelled;
 
-    uint32 m_uiNextPortalTimer;
-    uint8 m_uiCurrentRiftId;
+        uint32 m_uiNextPortalTimer;
+        uint8 m_uiCurrentRiftId;
 
-    uint32 m_uiMedivhYellCount;
+        uint32 m_uiMedivhYellCount;
 };
 
 #endif

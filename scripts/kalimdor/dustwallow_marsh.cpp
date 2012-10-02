@@ -94,7 +94,7 @@ struct MANGOS_DLL_DECL mobs_risen_husk_spiritAI : public ScriptedAI
         if (m_uiConsumeFlesh_Timer < uiDiff)
         {
             if (m_creature->GetEntry() == NPC_RISEN_HUSK)
-                DoCastSpellIfCan(m_creature->getVictim(), SPELL_CONSUME_FLESH);
+                DoCastSpellIfCan(m_creature->getVictim(),SPELL_CONSUME_FLESH);
 
             m_uiConsumeFlesh_Timer = 15000;
         }
@@ -104,7 +104,7 @@ struct MANGOS_DLL_DECL mobs_risen_husk_spiritAI : public ScriptedAI
         if (m_uiIntangiblePresence_Timer < uiDiff)
         {
             if (m_creature->GetEntry() == NPC_RISEN_SPIRIT)
-                DoCastSpellIfCan(m_creature->getVictim(), SPELL_INTANGIBLE_PRESENCE);
+                DoCastSpellIfCan(m_creature->getVictim(),SPELL_INTANGIBLE_PRESENCE);
 
             m_uiIntangiblePresence_Timer = 20000;
         }
@@ -154,7 +154,7 @@ struct MANGOS_DLL_DECL npc_restless_apparitionAI : public ScriptedAI
 
         if (m_uiTalk_Timer <= uiDiff)
         {
-            switch (urand(0, 7))
+            switch(urand(0, 7))
             {
                 case 0: DoScriptText(SAY_RAND_1, m_creature); break;
                 case 1: DoScriptText(SAY_RAND_2, m_creature); break;
@@ -207,7 +207,7 @@ struct MANGOS_DLL_DECL npc_morokkAI : public npc_escortAI
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 0:
                 SetEscortPaused(true);
@@ -341,8 +341,8 @@ enum
     PHASE_COMPLETE                      = 3
 };
 
-static float m_afSpawn[] = { -3383.501953f, -3203.383301f, 36.149f};
-static float m_afMoveTo[] = { -3371.414795f, -3212.179932f, 34.210f};
+static float m_afSpawn[] = {-3383.501953f, -3203.383301f, 36.149f};
+static float m_afMoveTo[] = {-3371.414795f, -3212.179932f, 34.210f};
 
 struct MANGOS_DLL_DECL npc_ogronAI : public npc_escortAI
 {
@@ -387,7 +387,7 @@ struct MANGOS_DLL_DECL npc_ogronAI : public npc_escortAI
     {
         if (!lCreatureList.empty())
         {
-            for (std::list<Creature*>::iterator itr = lCreatureList.begin(); itr != lCreatureList.end(); ++itr)
+            for(std::list<Creature*>::iterator itr = lCreatureList.begin(); itr != lCreatureList.end(); ++itr)
             {
                 if ((*itr)->GetEntry() == uiCreatureEntry && (*itr)->isAlive())
                     return (*itr);
@@ -399,7 +399,7 @@ struct MANGOS_DLL_DECL npc_ogronAI : public npc_escortAI
 
     void WaypointReached(uint32 uiPointId)
     {
-        switch (uiPointId)
+        switch(uiPointId)
         {
             case 9:
                 DoScriptText(SAY_OGR_SPOT, m_creature);
@@ -428,7 +428,7 @@ struct MANGOS_DLL_DECL npc_ogronAI : public npc_escortAI
             {
                 //will this conversion work without compile warning/error?
                 size_t iSize = lCreatureList.size();
-                pSummoned->GetMotionMaster()->MoveFollow(pCaldwell, 0.5f, (M_PI / 2) * (int)iSize);
+                pSummoned->GetMotionMaster()->MoveFollow(pCaldwell, 0.5f, (M_PI/2)*(int)iSize);
             }
         }
     }
@@ -437,7 +437,7 @@ struct MANGOS_DLL_DECL npc_ogronAI : public npc_escortAI
     {
         if (!lCreatureList.empty())
         {
-            for (std::list<Creature*>::iterator itr = lCreatureList.begin(); itr != lCreatureList.end(); ++itr)
+            for(std::list<Creature*>::iterator itr = lCreatureList.begin(); itr != lCreatureList.end(); ++itr)
             {
                 if ((*itr)->GetEntry() == NPC_REETHE)
                     continue;
@@ -461,11 +461,11 @@ struct MANGOS_DLL_DECL npc_ogronAI : public npc_escortAI
                 {
                     m_uiGlobalTimer = 5000;
 
-                    switch (m_uiPhase)
+                    switch(m_uiPhase)
                     {
                         case PHASE_INTRO:
                         {
-                            switch (m_uiPhaseCounter)
+                            switch(m_uiPhaseCounter)
                             {
                                 case 0:
                                     if (Creature* pReethe = GetCreature(NPC_REETHE))
@@ -503,7 +503,7 @@ struct MANGOS_DLL_DECL npc_ogronAI : public npc_escortAI
                         }
                         case PHASE_GUESTS:
                         {
-                            switch (m_uiPhaseCounter)
+                            switch(m_uiPhaseCounter)
                             {
                                 case 6:
                                     if (Creature* pCaldwell = GetCreature(NPC_CALDWELL))
@@ -544,7 +544,7 @@ struct MANGOS_DLL_DECL npc_ogronAI : public npc_escortAI
                         }
                         case PHASE_COMPLETE:
                         {
-                            switch (m_uiPhaseCounter)
+                            switch(m_uiPhaseCounter)
                             {
                                 case 12:
                                     if (Player* pPlayer = GetPlayerForEscort())

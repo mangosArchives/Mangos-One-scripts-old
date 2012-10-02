@@ -83,13 +83,13 @@ struct MANGOS_DLL_DECL mob_shadowy_constructAI : public ScriptedAI
         ScriptedAI::MoveInLineOfSight(pWho);
     }
 
-    /* Comment it out for now. NOTE TO FUTURE DEV: UNCOMMENT THIS OUT ONLY AFTER MIND CONTROL IS IMPLEMENTED
-        void DamageTaken(Unit* done_by, uint32 &damage)
-        {
-            if (done_by->GetObjectGuid() != m_ghostGuid)
-            damage = 0;                                         // Only the ghost can deal damage.
-        }
-     */
+/* Comment it out for now. NOTE TO FUTURE DEV: UNCOMMENT THIS OUT ONLY AFTER MIND CONTROL IS IMPLEMENTED
+    void DamageTaken(Unit* done_by, uint32 &damage)
+    {
+        if (done_by->GetObjectGuid() != m_ghostGuid)
+        damage = 0;                                         // Only the ghost can deal damage.
+    }
+ */
 
     void CheckPlayers()
     {
@@ -167,7 +167,7 @@ struct MANGOS_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
     {
         m_uiIncinerateTimer = urand(20000, 30000);
         m_uiSummonDoomBlossomTimer = 12000;
-        m_uiEnrageTimer = MINUTE * 10 * IN_MILLISECONDS;
+        m_uiEnrageTimer = MINUTE*10*IN_MILLISECONDS;
         m_uiCrushingShadowsTimer = 22000;
         m_uiSummonShadowsTimer = 60000;
         m_uiRandomYellTimer = 50000;
@@ -189,7 +189,7 @@ struct MANGOS_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
 
     void MoveInLineOfSight(Unit* pWho)
     {
-        if (m_pInstance && m_pInstance->GetData(TYPE_GOREFIEND) != IN_PROGRESS && !m_bIntro && pWho->GetTypeId() == TYPEID_PLAYER && pWho->isTargetableForAttack() &&
+        if (m_pInstance && m_pInstance->GetData(TYPE_GOREFIEND)!= IN_PROGRESS && !m_bIntro && pWho->GetTypeId() == TYPEID_PLAYER && pWho->isTargetableForAttack() &&
             m_creature->IsHostileTo(pWho) && pWho->isInAccessablePlaceFor(m_creature))
         {
             if (m_creature->IsWithinDistInMap(pWho, VISIBLE_RANGE) && m_creature->IsWithinLOSInMap(pWho))
@@ -225,7 +225,7 @@ struct MANGOS_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
 
     float CalculateRandomLocation(float fLoc, uint32 uiRadius)
     {
-        return fLoc + urand(0, 1) ? -rand() % uiRadius : rand() % uiRadius;
+        return fLoc + urand(0, 1) ? -rand()%uiRadius : rand()%uiRadius;
     }
 
     void SetThreatList(Creature* pCreature)
@@ -234,7 +234,7 @@ struct MANGOS_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
             return;
 
         ThreatList const& tList = m_creature->getThreatManager().getThreatList();
-        for (ThreatList::const_iterator i = tList.begin(); i != tList.end(); ++i)
+        for (ThreatList::const_iterator i = tList.begin();i != tList.end(); ++i)
         {
             Unit* pUnit = m_creature->GetMap()->GetUnit((*i)->getUnitGuid());
 
@@ -270,7 +270,7 @@ struct MANGOS_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
                 pGhost->DealDamage(pGhost, pGhost->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL,
             false);
             }*/
-            for (uint8 i = 0; i < 4; ++i)
+            for(uint8 i = 0; i < 4; ++i)
             {
                 float fX = CalculateRandomLocation(pGhost->GetPositionX(), 10);
                 float fY = CalculateRandomLocation(pGhost->GetPositionY(), 10);
@@ -323,7 +323,7 @@ struct MANGOS_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
         if (m_uiSummonShadowsTimer < uiDiff)
         {
             //MindControlGhost();
-            for (uint8 i = 0; i < 2; ++i)
+            for(uint8 i = 0; i < 2; ++i)
             {
                 float fX = CalculateRandomLocation(m_creature->GetPositionX(), 10);
 

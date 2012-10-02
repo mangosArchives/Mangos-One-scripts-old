@@ -87,10 +87,10 @@ struct MANGOS_DLL_DECL boss_muruAI : public Scripted_NoMovementAI
 
     void Reset()
     {
-        m_uiDarknessTimer          = 45000;
-        m_uiSummonHumanoidsTimer   = 15000;
-        m_uiDarkFiendsTimer        = 0;
-        m_bIsTransition            = false;
+         m_uiDarknessTimer          = 45000;
+         m_uiSummonHumanoidsTimer   = 15000;
+         m_uiDarkFiendsTimer        = 0;
+         m_bIsTransition            = false;
     }
 
     void Aggro(Unit* pWho)
@@ -204,7 +204,7 @@ struct MANGOS_DLL_DECL boss_muruAI : public Scripted_NoMovementAI
         if (m_uiSummonHumanoidsTimer < uiDiff)
         {
             DoSummonHumanoids();
-            m_uiSummonHumanoidsTimer = 1 * MINUTE * IN_MILLISECONDS;
+            m_uiSummonHumanoidsTimer = 1*MINUTE*IN_MILLISECONDS;
         }
         else
             m_uiSummonHumanoidsTimer -= uiDiff;
@@ -344,11 +344,11 @@ struct MANGOS_DLL_DECL npc_portal_targetAI : public Scripted_NoMovementAI
         // They could use the EffectDummyCreature to handle this, but this makes code easier
         switch (pSpell->Id)
         {
-                // Init sentinel summon timer
+            // Init sentinel summon timer
             case SPELL_OPEN_PORTAL:
                 m_uiSentinelTimer = 5000;
                 break;
-                // Start transition effect
+            // Start transition effect
             case SPELL_OPEN_ALL_PORTALS:
                 m_uiTransformTimer = 2000;
                 break;
@@ -386,7 +386,7 @@ struct MANGOS_DLL_DECL npc_portal_targetAI : public Scripted_NoMovementAI
                 }
 
                 // Summon Entropius when reached half of the transition
-                if (m_uiTransformCount == MAX_TRANSFORM_CASTS / 2)
+                if (m_uiTransformCount == MAX_TRANSFORM_CASTS/2)
                 {
                     if (Creature* pMuru = m_pInstance->GetSingleCreatureFromStorage(NPC_MURU))
                         pMuru->CastSpell(pMuru, SPELL_SUMMON_ENTROPIUS, false);
@@ -451,22 +451,22 @@ void AddSC_boss_muru()
     Script* pNewScript;
 
     pNewScript = new Script;
-    pNewScript->Name = "boss_muru";
+    pNewScript->Name="boss_muru";
     pNewScript->GetAI = &GetAI_boss_muru;
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;
-    pNewScript->Name = "boss_entropius";
+    pNewScript->Name="boss_entropius";
     pNewScript->GetAI = &GetAI_boss_entropius;
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;
-    pNewScript->Name = "npc_portal_target";
+    pNewScript->Name="npc_portal_target";
     pNewScript->GetAI = &GetAI_npc_portal_target;
     pNewScript->RegisterSelf();
 
     pNewScript = new Script;
-    pNewScript->Name = "npc_void_sentinel_summoner";
+    pNewScript->Name="npc_void_sentinel_summoner";
     pNewScript->GetAI = &GetAI_npc_void_sentinel_summoner;
     pNewScript->RegisterSelf();
 }

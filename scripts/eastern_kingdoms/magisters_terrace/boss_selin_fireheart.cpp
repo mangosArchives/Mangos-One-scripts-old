@@ -178,7 +178,7 @@ struct MANGOS_DLL_DECL boss_selin_fireheartAI : public ScriptedAI
 
         if (!m_bDrainingCrystal)
         {
-            if (m_creature->GetPower(POWER_MANA) * 100 / m_creature->GetMaxPower(POWER_MANA) < 10)
+            if (m_creature->GetPower(POWER_MANA)*100 / m_creature->GetMaxPower(POWER_MANA) < 10)
             {
                 if (m_uiDrainLifeTimer < uiDiff)
                 {
