@@ -185,7 +185,7 @@ struct MANGOS_DLL_DECL boss_nightbaneAI : public npc_escortAI
         if (!m_pInstance)
             return;
 
-        Unit* pChosenTrigger;
+        Unit* pChosenTrigger = NULL;
         GuidList lTriggersList;
         float fX, fY, fZ;
 
