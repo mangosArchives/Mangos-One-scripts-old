@@ -1,0 +1,11 @@
+diff --git a/src/bindings/CMakeLists.txt b/src/bindings/CMakeLists.txt
+index 3555d09..3d488f4 100644
+--- a/src/bindings/CMakeLists.txt
++++ b/src/bindings/CMakeLists.txt
+@@ -18,5 +18,5 @@
+ 
+ # Uncomment once you have cloned https://github.com/mangos-one/scripts
+ # into the scripts subdirectory.
+-#add_subdirectory(scripts)
++add_subdirectory(scripts)
+ 
