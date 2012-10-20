@@ -114,6 +114,10 @@ struct MANGOS_DLL_DECL boss_midnightAI : public ScriptedAI
         }
         else if (pSummoned->GetEntry() == NPC_ATTUMEN_MOUNTED)
             DoScriptText(SAY_MOUNT, pSummoned);
+            Creature* pAttumen = m_pInstance->GetSingleCreatureFromStorage(NPC_ATTUMEN);
+            Creature* pMidnight = m_pInstance->GetSingleCreatureFromStorage(NPC_MIDNIGHT);
+            float Greater_Health = pAttumen->GetHealth() > pMidnight->GetHealth() ? pAttumen->GetHealth() : pMidnight->GetHealth();
+            pSummoned->SetHealth(Greater_Health);
     }
 
     void MovementInform(uint32 uiMoveType, uint32 uiPointId)
